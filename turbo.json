@@ -7,14 +7,16 @@
     "SANITY_*",
     "NEXT_PREVIEW_TOKEN",
     "NODE_ENV",
-    "VERCEL_ENV"
+    "VERCEL_ENV",
+    "VERCEL_REDEPLOY_HOOK_URL"
   ],
   "tasks": {
     "build": {
       "cache": true,
       "persistent": true,
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": ["VERCEL_REDEPLOY_HOOK_URL"]
     },
     "start": {
       "dependsOn": ["^build"]
