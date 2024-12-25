@@ -1,12 +1,12 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
-
 import logos from "./logos.json";
 
 export const logosTemplates = [
-  createTemplate({
-    json: logos,
+  {
+    name: "logos",
     title: "Logos list",
     description: "wdwefewfwefwef",
+    json: logos,
     category: "logos",
-  }),
+    template: logos,
+  },
 ];

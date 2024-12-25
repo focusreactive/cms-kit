@@ -1,12 +1,12 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
-
 import centeredDark from "./image-cards-grid.json";
 
 export const copyTemplates = [
-  createTemplate({
-    json: centeredDark,
+  {
+    name: "imageCardsGrid",
     title: "Text, cards grid and an image",
-    description: "dak",
+    description: "dark",
+    json: centeredDark,
     category: "copy",
-  }),
+    template: centeredDark,
+  },
 ];

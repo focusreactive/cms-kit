@@ -1,13 +1,10 @@
 import { CommonGroup } from "@/contentSections/commonFields";
-// import { sectionsPresets } from "@/contentSections/presets";
+import { sectionsPresets } from "@/contentSections/presets";
+import { defineBlocksField } from "@focus-reactive/sanity-plugin-cms-kit";
 import { definePathname } from "@tinloof/sanity-studio";
 import { defineField, defineType } from "sanity";
 
 import sections from "@/lib/schemas/sections";
-import { sectionsPresets } from "@/contentSections/presets";
-import { defineBlocksField } from '@focus-reactive/sanity-plugin-cms-kit';
-
-// import { componentsWithBlocksInput } from "@/lib/templateSelectorInput";
 
 export default defineType({
   type: "document",
@@ -43,9 +40,6 @@ export default defineType({
       of: sections.map((section) => ({
         type: section.name,
       })),
-      // components: componentsWithBlocksInput({
-      //   presets: Object.values(sectionsPresets).flat(),
-      // }),
       options: {
         presets: Object.values(sectionsPresets).flat(),
       },

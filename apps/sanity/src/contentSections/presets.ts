@@ -6,8 +6,8 @@ import { logosTemplates } from "./Logos/templates";
 
 export const sectionsPresets = {
   blog: blogTemplates,
-  cardsGrids: cardsGridsTemplates,
-  copy: copyTemplates,
-  linksList: linksListTemplates,
-  logos: logosTemplates,
+  // cardsGrids: cardsGridsTemplates,
+  // copy: copyTemplates,
+  // linksList: linksListTemplates,
+  // logos: logosTemplates,
 };
