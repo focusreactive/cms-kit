@@ -6,7 +6,6 @@ import * as queryStore from "@sanity/react-loader";
 import config from "@/config";
 import { client } from "@/lib/api/client";
 import { PAGE_BY_SLUG_QUERY } from "@/lib/api/queries";
-import type { IPageWithReference } from "@/components/Page/types";
 
 const serverClient = client.withConfig({
   token: config.sanity.token,
@@ -24,10 +23,14 @@ queryStore.setServerClient(serverClient);
 
 const usingCdn = serverClient.config().useCdn;
 // Automatically handle draft mode
-export const loadQuery = ((query, params = {}, options = {}) => {
+export async function loadQuery(
+  query: string,
+  params = {} as any,
+  options = {} as any,
+): Promise<any> {
   const isDev = process.env.NODE_ENV === "development";
   const {
-    perspective = draftMode().isEnabled || isDev
+    perspective = (await draftMode()).isEnabled || isDev
       ? "previewDrafts"
       : "published",
   } = options;
@@ -47,16 +50,16 @@ export const loadQuery = ((query, params = {}, options = {}) => {
     },
     perspective,
     // Enable stega if in Draft Mode, to enable overlays when outside Sanity Studio
-    stega: draftMode().isEnabled,
+    stega: (await draftMode()).isEnabled,
   });
-}) satisfies typeof queryStore.loadQuery;
+}
 
 /**
  * Loaders that are used in more than one place are declared here, otherwise they're colocated with the component
  */
 
-export function loadPage(slug: string) {
-  return loadQuery<IPageWithReference | null>(
+export async function loadPage(slug: string) {
+  return await loadQuery(
     PAGE_BY_SLUG_QUERY,
     { slug },
     { next: { tags: [`page:${slug}`] } },

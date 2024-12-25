@@ -12,17 +12,18 @@ import Page from "@/components/Page";
 const PagePreview = dynamic(() => import("@/components/Page/PagePreview"));
 
 type Props = {
-  params: { slug: string[] | undefined };
+  params: Promise<{ slug: string[] | undefined }>;
 };
 
-const getSlug = (params: Props["params"]) => {
+const getSlug = (params: { slug: string[] | undefined }) => {
   // TODO: check why this happens
   if (params.slug?.[0] === "_next") return null;
 
   return params.slug ? `/${params.slug.join("/")}` : "/";
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const slug = getSlug(params);
 
   if (!slug) {
@@ -59,7 +60,8 @@ export async function generateStaticParams() {
   return generateStaticSlugs("page");
 }
 
-export default async function PageSlugRoute({ params }: Props) {
+export default async function PageSlugRoute(props: Props) {
+  const params = await props.params;
   const slug = getSlug(params);
 
   if (!slug) {
@@ -68,7 +70,7 @@ export default async function PageSlugRoute({ params }: Props) {
 
   const initial = await loadPage(slug);
 
-  if (draftMode().isEnabled) {
+  if ((await draftMode()).isEnabled) {
     return <PagePreview params={{ slug }} initial={initial} />;
   }
 
