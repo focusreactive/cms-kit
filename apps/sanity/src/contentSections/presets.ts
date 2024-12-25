@@ -6,10 +6,10 @@ import { linksListTemplates } from "./LinksList/templates";
 import { logosTemplates } from "./Logos/templates";
 
 export const sectionsPresets = {
+  logos: logosTemplates,
   blog: blogTemplates,
   cardsGrids: cardsGridsTemplates,
   copy: copyTemplates,
   linksList: linksListTemplates,
-  logos: logosTemplates,
   hero: heroTemplates,
 };

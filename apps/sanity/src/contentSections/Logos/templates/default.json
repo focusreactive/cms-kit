@@ -1,0 +1,146 @@
+{
+  "maxWidth": "base​​​​‌‌",
+  "backgroundColor": "none‍",
+  "_type": "section.logos",
+  "alignVariant": "center​​​​‌",
+  "marginBottom": "base​​​​‌",
+  "_key": "92db570ae9c5",
+  "items": [
+    {
+      "_key": "48f5d8c30794",
+      "type": "logo",
+      "image": {
+        "aspectRatio": "3/1",
+        "height": 300,
+        "image": {
+          "_type": "image",
+          "alt": "prismic",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-ea3ba2b076652df8c4cdff0fcbc222e1629398d8-1024x264-webp"
+          }
+        },
+        "_type": "customImage"
+      },
+      "_type": "logoItem",
+      "link": {
+        "size": "base",
+        "_type": "customLink",
+        "variant": "default",
+        "text": "link text",
+        "type": "internal",
+        "target": "_self​​",
+        "url": null
+      }
+    },
+    {
+      "_type": "logoItem",
+      "link": {
+        "text": "link text",
+        "type": "internal",
+        "target": "_self​",
+        "size": "base​​​",
+        "_type": "customLink",
+        "variant": "default",
+        "url": null
+      },
+      "_key": "09a3481afc801a6b1c7ba37c72d075f4",
+      "type": "logo",
+      "image": {
+        "_type": "customImage",
+        "aspectRatio": "3/1",
+        "height": 300,
+        "image": {
+          "asset": {
+            "_ref": "image-ffa01b3e6b32fa47128b34c38d90363f9fdcbe21-2500x538-webp",
+            "_type": "reference"
+          },
+          "_type": "image",
+          "alt": "storyblok"
+        }
+      }
+    },
+    {
+      "type": "logo",
+      "image": {
+        "_type": "customImage",
+        "aspectRatio": "3/1",
+        "height": 300,
+        "image": {
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-6e6cc1187326add2d8ddc718895981e3376338cc-716x200-webp"
+          },
+          "_type": "image",
+          "alt": "hygraph​​​​‌"
+        }
+      },
+      "_type": "logoItem",
+      "link": {
+        "text": "link text​​​​",
+        "url": null,
+        "type": "internal",
+        "target": "_self​​​​‌",
+        "size": "base​​​​‌",
+        "_type": "customLink",
+        "variant": "default"
+      },
+      "_key": "2d441c5f50af821299e3c4d177b0bcb1"
+    },
+    {
+      "_type": "logoItem",
+      "link": {
+        "size": "base​​​​‌",
+        "_type": "customLink",
+        "url": null,
+        "variant": "default",
+        "text": "link text",
+        "type": "internal",
+        "target": "_self​​"
+      },
+      "_key": "7cf2eb61d1ccb04c545eda2a7d8dfebd",
+      "type": "logo",
+      "image": {
+        "_type": "customImage",
+        "aspectRatio": "3/1",
+        "height": 300,
+        "image": {
+          "_type": "image",
+          "alt": "ghost​​",
+          "asset": {
+            "_ref": "image-14480f7e6cffd126f29ca432552f310e8b01559c-800x294-webp",
+            "_type": "reference"
+          }
+        }
+      }
+    },
+    {
+      "_key": "782a25eb852075058097ec214d1a2b8c",
+      "type": "logo",
+      "image": {
+        "image": {
+          "_type": "image",
+          "alt": "gatsby​",
+          "asset": {
+            "_ref": "image-d356e78adf7bb1d8b313aedd75de21701a915eeb-2000x555-webp",
+            "_type": "reference"
+          }
+        },
+        "_type": "customImage",
+        "aspectRatio": "3/1",
+        "height": 300
+      },
+      "_type": "logoItem",
+      "link": {
+        "target": "_self​​​",
+        "size": "base​​​​‌",
+        "url": null,
+        "_type": "customLink",
+        "variant": "default",
+        "text": "link text",
+        "type": "internal"
+      }
+    }
+  ],
+  "marginTop": "base​​​​‌"
+}

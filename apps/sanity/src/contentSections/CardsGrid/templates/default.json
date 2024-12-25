@@ -1,0 +1,98 @@
+{
+  "marginBottom": "base",
+  "_key": "bb086e238e49",
+  "items": [
+    {
+      "image": {
+        "height": 50,
+        "image": {
+          "_type": "image",
+          "alt": "icon",
+          "asset": {
+            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
+            "_type": "reference"
+          }
+        },
+        "_type": "customImage",
+        "aspectRatio": "1/1​​​​‌"
+      },
+      "_type": "defaultCard",
+      "link": {
+        "target": "_self​​​​‌",
+        "size": "base",
+        "_type": "customLink",
+        "url": null,
+        "variant": "default",
+        "text": "link text",
+        "type": "internal"
+      },
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "style": "icon-title-inline",
+      "_key": "27dfd9f9f0e7",
+      "title": "initial title"
+    },
+    {
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "style": "icon-title-inline",
+      "_key": "b40f414ea8fa644e894e76394547344f",
+      "title": "initial title​​​​‌﻿",
+      "image": {
+        "image": {
+          "asset": {
+            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
+            "_type": "reference"
+          },
+          "_type": "image",
+          "alt": "icon"
+        },
+        "_type": "customImage",
+        "aspectRatio": "1/1",
+        "height": 50
+      },
+      "_type": "defaultCard",
+      "link": {
+        "variant": "default",
+        "text": "link text​​​​‌",
+        "type": "internal",
+        "target": "_self​​​​‌",
+        "url": null,
+        "size": "base​​​​‌",
+        "_type": "customLink"
+      }
+    },
+    {
+      "link": {
+        "_type": "customLink",
+        "variant": "default",
+        "text": "link text​​​​‌‌",
+        "type": "internal",
+        "target": "_self​​​​‌‌",
+        "url": null,
+        "size": "base​​​​‌‌"
+      },
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups‌",
+      "style": "icon-title-inline",
+      "_key": "4bb5da5b8b099082b60f068741dce0d0",
+      "title": "initial title‌",
+      "image": {
+        "_type": "customImage",
+        "aspectRatio": "1/1​​​​‌‌",
+        "height": 50,
+        "image": {
+          "_type": "image",
+          "alt": "icon‌",
+          "asset": {
+            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
+            "_type": "reference"
+          }
+        }
+      },
+      "_type": "defaultCard"
+    }
+  ],
+  "marginTop": "base‌",
+  "maxWidth": "base‌",
+  "backgroundColor": "none​​​​‌‌",
+  "columns": 3,
+  "_type": "section.cardsGrid"
+}
