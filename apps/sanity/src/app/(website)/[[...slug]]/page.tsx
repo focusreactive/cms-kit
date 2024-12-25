@@ -22,7 +22,8 @@ const getSlug = (params: Props["params"]) => {
   return params.slug ? `/${params.slug.join("/")}` : "/";
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const slug = getSlug(params);
 
   if (!slug) {
@@ -59,7 +60,8 @@ export async function generateStaticParams() {
   return generateStaticSlugs("page");
 }
 
-export default async function PageSlugRoute({ params }: Props) {
+export default async function PageSlugRoute(props: Props) {
+  const params = await props.params;
   const slug = getSlug(params);
 
   if (!slug) {
@@ -68,7 +70,7 @@ export default async function PageSlugRoute({ params }: Props) {
 
   const initial = await loadPage(slug);
 
-  if (draftMode().isEnabled) {
+  if ((await draftMode()).isEnabled) {
     return <PagePreview params={{ slug }} initial={initial} />;
   }
 

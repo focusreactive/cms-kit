@@ -3,6 +3,8 @@ import type { Viewport } from "next";
 import dynamic from "next/dynamic";
 import { draftMode } from "next/headers";
 
+import { SanityLive } from "@/lib/live";
+
 const LiveVisualEditing = dynamic(
   () => import("@/lib/loader/LiveVisualEditing"),
 );
@@ -39,7 +41,8 @@ export default async function IndexRoute({ children }: PropsWithChildren) {
   return (
     <>
       <Suspense>{children}</Suspense>
-      {draftMode().isEnabled && <LiveVisualEditing />}
+      <SanityLive />
+      {(await draftMode()).isEnabled && <LiveVisualEditing />}
     </>
   );
 }
