@@ -1,17 +1,22 @@
 import fs from "fs";
 import dotenv from "dotenv";
 
-const envPath = "../.env.local";
+const envPaths = ["../.env", "../.env.local"];
 
 export const loadEnvVariables = () => {
-  if (fs.existsSync(envPath)) {
-    return dotenv.parse(fs.readFileSync(envPath));
+  let envVariables = {};
+
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      const parsed = dotenv.parse(fs.readFileSync(envPath));
+      envVariables = { ...envVariables, ...parsed };
+    }
   }
 
-  return {};
+  return envVariables;
 };
 
-export const appendOrUpdateEnv = (key, value) => {
+export const appendOrUpdateEnv = (key, value, envPath = "../.env.local") => {
   let envContent = "";
 
   if (fs.existsSync(envPath)) {
@@ -33,7 +38,8 @@ export const appendOrUpdateEnv = (key, value) => {
 };
 
 export const checkEnvVariables = (requiredVars) => {
-  const missingVars = requiredVars.filter((varName) => !process.env[varName]);
+  const loadedVars = loadEnvVariables();
+  const missingVars = requiredVars.filter((varName) => !loadedVars[varName]);
   if (missingVars.length > 0) {
     throw new Error(
       `Missing required environment variables: ${missingVars.join(", ")}`,

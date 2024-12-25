@@ -8,7 +8,7 @@
 }
 
 .light {
-  --bg: #f6f6f6;
+  --bg: #fff;
   --text: #222222;
   --text-secondary: #666666;
   --primary: #4f46e5;
@@ -18,5 +18,19 @@
   --bg: #222222;
   --text: #f6f6f6;
   --text-secondary: #999999;
+  --primary: #4f46e5;
+}
+
+.light-gray {
+  --bg: #f6f6f6;
+  --text: #222222;
+  --text-secondary: #666666;
+  --primary: #4f46e5;
+}
+
+.dark-gray {
+  --bg: #5b5b5b;
+  --text: #f6f6f6;
+  --text-secondary: #bababa;
   --primary: #4f46e5;
 }

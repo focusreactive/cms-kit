@@ -4,8 +4,6 @@ import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
 import "./globals.css";
 import "@shared/ui/styles/global.css";
 
-import { CookieBanner } from "@shared/ui";
-
 storyblokInit({
   accessToken: process.env.storyblokApiToken,
   use: [apiPlugin],
@@ -27,7 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>{children}</body>
-      <CookieBanner />
     </html>
   );
 }

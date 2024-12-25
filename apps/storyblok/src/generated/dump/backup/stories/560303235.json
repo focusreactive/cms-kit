@@ -1,0 +1,73 @@
+{
+  "name": "Headers",
+  "parent_id": 596037362,
+  "group_id": "7b52cfda-6870-481f-9cbf-d398044d9434",
+  "alternates": [],
+  "created_at": "2024-10-09T05:47:36.253Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2024-12-16T08:35:29.196Z",
+  "published_at": "2024-10-21T12:06:56.092Z",
+  "id": 560303235,
+  "uuid": "c32bc308-3d70-4ed9-913e-abc6969e6f46",
+  "is_folder": true,
+  "content": {
+    "content_types": [
+      "header"
+    ],
+    "lock_subfolders_content_types": true
+  },
+  "published": true,
+  "slug": "headers",
+  "path": null,
+  "full_slug": "components/headers",
+  "default_root": "header",
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": {
+    "id": 596037362,
+    "uuid": "b8d443a1-05cb-4329-94e9-5d46567c5453",
+    "name": "Components",
+    "slug": "components",
+    "disble_fe_editor": false
+  },
+  "is_startpage": false,
+  "unpublished_changes": true,
+  "meta_data": null,
+  "imported_at": null,
+  "pinned": false,
+  "breadcrumbs": [
+    {
+      "id": 596037362,
+      "name": "Components",
+      "parent_id": null,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "components",
+      "translated_slugs": []
+    }
+  ],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": "2024-10-21T12:06:56.092Z",
+  "last_author": {
+    "id": 178697,
+    "userid": "dogfrogfog",
+    "friendly_name": "maksim Hodasevich"
+  },
+  "last_author_id": 178697,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 10,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

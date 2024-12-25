@@ -1,0 +1,225 @@
+{
+  "name": "custom footer",
+  "parent_id": 560836300,
+  "group_id": "6eab06e9-f096-47db-b4f5-df685dd35fec",
+  "alternates": [],
+  "created_at": "2024-10-09T15:58:29.178Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2024-12-16T08:32:11.394Z",
+  "published_at": "2024-12-16T08:32:11.360Z",
+  "id": 560838689,
+  "uuid": "9242f0ad-4f23-46b4-a369-227f91b0d3fd",
+  "is_folder": false,
+  "content": {
+    "_uid": "3a99b80d-65d5-43f5-9a8b-fa8009f4e311",
+    "text": [
+      {
+        "_uid": "e1007084-eff5-470a-b2b0-892e882c28a6",
+        "content": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 1
+              },
+              "content": [
+                {
+                  "text": "Exploring the World of DIY Crafts",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": " Dive into the world of DIY crafts with easy and creative projects for all skill levels. From handmade gifts to home decor, unleash your creativity and add a personal touch to your surroundings. Let's get crafting!",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "component": "richText",
+        "alignVariant": "center",
+        "removeInnerMargins": false
+      }
+    ],
+    "image": [
+      {
+        "_uid": "8e523525-e55e-4d84-8ef7-f4338ddbcede",
+        "asset": {
+          "id": 17605716,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/293915/284x260/c2ace3521b/screenshot-2024-10-07-at-22-01-09.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "component": "image",
+        "aspectRatio": "1/1"
+      }
+    ],
+    "links": [
+      {
+        "_uid": "2c8c692f-6a31-4967-b160-6cb30374f4a5",
+        "link": {
+          "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "maks"
+        },
+        "size": "base",
+        "text": "Home",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "653dae7d-dc6e-4a04-b093-bfa3a7477a45",
+        "link": {
+          "id": "11a25115-a87f-4896-aafc-37d5d35433eb",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "home"
+        },
+        "size": "base",
+        "text": "Blog",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "11616387-b4e3-4759-ad61-d9726143b940",
+        "link": {
+          "id": "",
+          "url": "https://app.storyblok.com/#/me/spaces/293915",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://app.storyblok.com/#/me/spaces/293915"
+        },
+        "size": "base",
+        "text": "Storyblok",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "3ec0f58f-5f27-4a56-b49a-55ac169282ff",
+        "link": {
+          "id": "",
+          "url": "https://github.com/focusreactive/turbo-cms-kit",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://github.com/focusreactive/turbo-cms-kit"
+        },
+        "size": "base",
+        "text": "GitHub",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "b683a9f1-24b9-43be-94a7-2ebf9621dccc",
+        "link": {
+          "id": "",
+          "url": "https://trello.com/b/2XLLkCma/cms-kit",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://trello.com/b/2XLLkCma/cms-kit"
+        },
+        "size": "base",
+        "text": "Trello",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "db9248fe-752e-4942-9ecf-035093916b60",
+        "link": {
+          "id": "",
+          "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
+        },
+        "size": "base",
+        "text": "Vercel",
+        "variant": "default",
+        "component": "link"
+      }
+    ],
+    "component": "footer",
+    "copywriteText": "2024  @ FocusReactive"
+  },
+  "published": true,
+  "slug": "custom-footer",
+  "path": null,
+  "full_slug": "components/footers/custom-footer",
+  "default_root": null,
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": {
+    "id": 560836300,
+    "uuid": "324075a4-d232-4d85-84d2-fc7633eaaa7e",
+    "name": "Footers",
+    "slug": "footers",
+    "disble_fe_editor": false
+  },
+  "is_startpage": false,
+  "unpublished_changes": false,
+  "meta_data": null,
+  "imported_at": null,
+  "pinned": false,
+  "breadcrumbs": [
+    {
+      "id": 596037362,
+      "name": "Components",
+      "parent_id": null,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "components",
+      "translated_slugs": []
+    },
+    {
+      "id": 560836300,
+      "name": "Footers",
+      "parent_id": 596037362,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "footers",
+      "translated_slugs": []
+    }
+  ],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": "2024-10-09T16:12:42.537Z",
+  "last_author": {
+    "id": 178697,
+    "userid": "dogfrogfog",
+    "friendly_name": "maksim Hodasevich"
+  },
+  "last_author_id": 178697,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 0,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

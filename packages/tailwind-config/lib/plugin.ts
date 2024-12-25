@@ -1,14 +1,30 @@
 import plugin from "tailwindcss/plugin";
+import { type PluginAPI } from "tailwindcss/types/config";
 
 // todo: consider implementing themes feature using CSS variables
 export const customPlugin = plugin(
   // 1. Add CSS variable definitions to the base layer
-  function () {},
+  function ({ addUtilities }: PluginAPI) {
+    addUtilities({
+      ".mask-shadow-y": {
+        maskImage:
+          "linear-gradient(90deg, transparent, #fff 10%, #fff 90%, transparent)",
+      },
+    });
+  },
 
   // 2. Extend the Tailwind theme with "themable" utilities
   {
     theme: {
       extend: {
+        typography: {
+          DEFAULT: {
+            css: {
+              "--tw-prose-headings": `var("--text")`,
+              "--tw-prose-invert-headings": `var("--text")`,
+            },
+          },
+        },
         colors: {
           primary: {
             "50": "#eff6ff",

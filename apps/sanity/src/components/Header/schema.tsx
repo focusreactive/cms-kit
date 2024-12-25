@@ -1,8 +1,4 @@
-import {
-  CommonGroup,
-  commonGroups,
-  themeField,
-} from "@/contentSections/commonFields";
+import { CommonGroup, commonGroups } from "@/contentSections/commonFields";
 import { AlignVariant } from "@shared/ui/components/sections/header/types";
 import { defineField } from "sanity";
 
@@ -49,7 +45,6 @@ export default {
       validation: (Rule) => Rule.required(),
       initialValue: AlignVariant.Right,
     }),
-    themeField,
   ],
   preview: {
     select: {

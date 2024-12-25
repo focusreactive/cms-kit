@@ -44,9 +44,6 @@ export default async function Home({ params, searchParams }: Props) {
   const { story, links } = await fetchStoryBySlug(
     isDraftModeEnabled,
     params.slug,
-    {
-      resolve_relations: "header,footer",
-    },
   );
 
   if (!story) {

@@ -1,0 +1,315 @@
+{
+  "name": "default footer",
+  "parent_id": 560836300,
+  "group_id": "1b121b20-08d7-4cdd-be89-9ef671259b30",
+  "alternates": [],
+  "created_at": "2024-10-09T15:49:12.237Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2024-12-16T08:32:15.533Z",
+  "published_at": "2024-12-16T08:32:15.508Z",
+  "id": 560836303,
+  "uuid": "8957e46c-ee4d-49ec-93b4-2d06c65d8eb2",
+  "is_folder": false,
+  "content": {
+    "_uid": "3a99b80d-65d5-43f5-9a8b-fa8009f4e311",
+    "text": [
+      {
+        "_uid": "3fa6eb70-0e7c-4286-a63e-1e7c5ed98e9b",
+        "content": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "text": "Flowbite",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": "Open-source library of over 400+ web components and interactive elements built for better web.",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "component": "richText",
+        "alignVariant": "center",
+        "removeInnerMargins": false
+      },
+      {
+        "_uid": "a381bd2a-57ae-40bd-b136-74cce1ef3662",
+        "content": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            },
+            {
+              "type": "blok",
+              "attrs": {
+                "id": "8033a188-9f77-4d4d-9670-e45ef9ec159e",
+                "body": [
+                  {
+                    "_uid": "i-0a68bab8-2252-4329-9218-096c3f41fbe2",
+                    "links": [
+                      {
+                        "_uid": "2b3acef4-9e76-4a4e-b906-4f699f1bc4f1",
+                        "link": {
+                          "id": "19601884-a1af-4b99-bd95-1a3ca01d5b7a",
+                          "url": "",
+                          "linktype": "story",
+                          "fieldtype": "multilink",
+                          "cached_url": "home"
+                        },
+                        "size": "base",
+                        "text": "Home",
+                        "variant": "default",
+                        "component": "link"
+                      },
+                      {
+                        "_uid": "cbd95eb7-34bc-4998-9532-bd26c9c7b655",
+                        "link": {
+                          "id": "5d416347-de08-4adb-b496-00b0a083de3a",
+                          "url": "",
+                          "linktype": "story",
+                          "fieldtype": "multilink",
+                          "cached_url": "demo"
+                        },
+                        "size": "base",
+                        "text": "Blog",
+                        "variant": "default",
+                        "component": "link"
+                      },
+                      {
+                        "_uid": "f85e677c-c635-42c0-bb49-8eec642347f5",
+                        "link": {
+                          "id": "",
+                          "url": "https://app.storyblok.com/#/me/spaces/293915",
+                          "target": "_blank",
+                          "linktype": "url",
+                          "fieldtype": "multilink",
+                          "cached_url": "https://app.storyblok.com/#/me/spaces/293915"
+                        },
+                        "size": "base",
+                        "text": "Storyblok",
+                        "variant": "default",
+                        "component": "link"
+                      },
+                      {
+                        "_uid": "9865fbc2-82c3-47ac-98f2-50731c98cc6e",
+                        "link": {
+                          "id": "",
+                          "url": "https://github.com/focusreactive/turbo-cms-kit",
+                          "target": "_blank",
+                          "linktype": "url",
+                          "fieldtype": "multilink",
+                          "cached_url": "https://github.com/focusreactive/turbo-cms-kit"
+                        },
+                        "size": "base",
+                        "text": "GitHub",
+                        "variant": "default",
+                        "component": "link"
+                      },
+                      {
+                        "_uid": "fc242a8f-846d-4057-bf04-fd590bf24450",
+                        "link": {
+                          "id": "",
+                          "url": "https://trello.com/b/2XLLkCma/cms-kit",
+                          "target": "_blank",
+                          "linktype": "url",
+                          "fieldtype": "multilink",
+                          "cached_url": "https://trello.com/b/2XLLkCma/cms-kit"
+                        },
+                        "size": "base",
+                        "text": "Trello",
+                        "variant": "default",
+                        "component": "link"
+                      },
+                      {
+                        "_uid": "08ef19b8-2066-4dfb-ac32-1a038aa7c215",
+                        "link": {
+                          "id": "",
+                          "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
+                          "linktype": "url",
+                          "fieldtype": "multilink",
+                          "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
+                        },
+                        "size": "base",
+                        "text": "Vercel",
+                        "variant": "default",
+                        "component": "link"
+                      }
+                    ],
+                    "theme": "light",
+                    "maxWidth": "base",
+                    "component": "linksList",
+                    "marginTop": "none",
+                    "alignVariant": "left",
+                    "marginBottom": "none",
+                    "backgroundColor": "none"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "component": "richText",
+        "alignVariant": "center",
+        "removeInnerMargins": false
+      }
+    ],
+    "image": [
+      {
+        "_uid": "f6c6d28e-e4cf-49d6-a2ae-2a5b404ccf3d",
+        "asset": {
+          "id": 17593700,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/293915/3840x2160/2e8c505a38/nike-logo.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "component": "image",
+        "aspectRatio": "16/9"
+      }
+    ],
+    "links": [
+      {
+        "_uid": "49969ae3-9a59-4f02-91ce-143d983f6b43",
+        "link": {
+          "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "maks"
+        },
+        "size": "base",
+        "text": "link 1",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "8531a335-6ba7-41ab-9842-e4a518938f14",
+        "link": {
+          "id": "11a25115-a87f-4896-aafc-37d5d35433eb",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "home"
+        },
+        "size": "base",
+        "text": "link 1",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "b6a9e9ac-714b-46a9-8ad5-7f8d60aa921c",
+        "link": {
+          "id": "11a25115-a87f-4896-aafc-37d5d35433eb",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "home"
+        },
+        "size": "base",
+        "text": "link 1",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "6e8e9d9e-dbdc-4d74-880e-c4b9631ef745",
+        "link": {
+          "id": "11a25115-a87f-4896-aafc-37d5d35433eb",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "home"
+        },
+        "size": "base",
+        "text": "link 1",
+        "variant": "default",
+        "component": "link"
+      }
+    ],
+    "component": "footer",
+    "copywriteText": "2024  @ FocusReactive"
+  },
+  "published": true,
+  "slug": "default-footer",
+  "path": null,
+  "full_slug": "components/footers/default-footer",
+  "default_root": null,
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": {
+    "id": 560836300,
+    "uuid": "324075a4-d232-4d85-84d2-fc7633eaaa7e",
+    "name": "Footers",
+    "slug": "footers",
+    "disble_fe_editor": false
+  },
+  "is_startpage": false,
+  "unpublished_changes": false,
+  "meta_data": null,
+  "imported_at": null,
+  "pinned": false,
+  "breadcrumbs": [
+    {
+      "id": 596037362,
+      "name": "Components",
+      "parent_id": null,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "components",
+      "translated_slugs": []
+    },
+    {
+      "id": 560836300,
+      "name": "Footers",
+      "parent_id": 596037362,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "footers",
+      "translated_slugs": []
+    }
+  ],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": "2024-10-21T12:06:55.806Z",
+  "last_author": {
+    "id": 178697,
+    "userid": "dogfrogfog",
+    "friendly_name": "maksim Hodasevich"
+  },
+  "last_author_id": 178697,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 0,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

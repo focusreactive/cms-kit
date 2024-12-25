@@ -1,105 +1,275 @@
-# CMS-Kit
+# CMS-Kit 🔧
 
 An endeavor accumulating the experience and best practices collected at [Focus Reactive](https://focusreactive.com/).
 The project serves the idea of making Headless CMS-based development accessible, comfortable, and fast.
 
-## Demo 👀
-### Sanity
-- [Demo Landing](https://turbo-cms-kit-sanity.vercel.app/)
-- [CMS](https://turbo-cms-kit-sanity.vercel.app/studio)
+## Quick start
+
+### What you get
+
+1. New Storyblok space, set up with vercel deployments
+2. 10+ ready to use components with different presets(styles)
+3. New Vercel project, deployed and configured with your new Storyblok space
+4. Multiple ready pages in different styles
 
 ### Storyblok
-- [Demo Landing](https://turbo-cms-kit-storyblok.vercel.app/)
-- [CMS](https://app.storyblok.com/#/me/spaces/293915/)
 
-## Features 🌟
+0. Since application will be deployed to Vercel, make sure your Github account is linked to Vercel. You can do it [here](https://github.com/settings/installations).
 
-- 🚀 Monorepo using **Turborepo**
-- 📁 New `/app` dir
-- 🗂️ Routing, Layouts, Nested Layouts and Layout Groups
-- 🌎 Data Fetching, Caching and Mutation
-- 🛠️ Server and Client Components
-- 🧩 UI Components built using **Radix UI**
-- 🎨 Styled using **Tailwind CSS**
-- 👷🏼‍♂️ Written in **TypeScript**
+1. Create a new repository using this template by clicking the "Use this template" button at the top of the repository page.
+   ![Screenshot 2024-11-07 at 13 38 48](https://github.com/user-attachments/assets/9a159ebd-d810-4b6d-ab79-ab453da6ab9c)
 
-## What's inside?
+2. Await the initial workflow to be finished
 
-This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+![Screenshot 2024-11-07 at 16 00 17](https://github.com/user-attachments/assets/375ce843-8185-4782-95ff-5f9d6aaf2935)
 
-### Apps and Packages
+3. Clone your new repository:
 
-- `storyblok`: CMS app
-- `sanity`: CMS app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `ts-config`: `tsconfig.json`s used throughout the monorepo
-- `tailwind-config`: `tsconfig.json`s used throughout the monorepo
+   ```bash
+   git clone <your-repository-url>
+   ```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+4. Navigate to the project directory:
 
-### Utilities
+   ```bash
+   cd <repository-name>
+   ```
 
-This turborepo has some additional tools already setup:
+5. Install dependencies using pnpm:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   ```bash
+   pnpm install
+   ```
 
-### Build
+6. Navigate to the Storyblok CLI directory:
 
-To build all apps and packages, run the following command:
+   ```bash
+   cd apps/storyblok/CLI
+   ```
 
-```
-pnpm run build
+7. Run the setup script,
+
+⚠️ command should be executed from _apps/storyblok/CLI_ (previous step), to consume correct environment variables:
+
+```bash
+   node sb.mjs
 ```
 
-### Develop
+8. Follow the interactive prompts in the CLI tool to:
+   - Enter your Storyblok Personal Access Token
+   - Enter your Vercel Personal Auth Token
+   - Select your Vercel team
+   - Choose a project name
+   - Complete the space creation and configuration process
 
-Setup environment variables:
-Link Vercel projects:
+### [TODO]: add video example
+
+### Sanity
+
+soon
+
+## Demo 👀
+
+- [Storyblok Landing](https://turbo-cms-kit-storyblok.vercel.app/)
+- [Sanity landing](https://turbo-cms-kit-sanity.vercel.app/)
+
+## Core Features
+
+- Monorepo using **Turborepo**
+- **Multiple CMS** support
+- New `/app` dir
+- Routing, layouts, nested layouts
+- Data fetching, **caching** and **revalidation**
+- Server and client components
+- Reusable UI components built using **Radix UI**
+- Styled using **tailwind CSS**
+- Written in **TypeScript**
+- Types and components **generation**
+- **CLI** to create new set up project
+- **Themes** using CSS variables
+- **Predefined** structure
+
+## Repo structure
+
+- `apps/storyblok`: CMS app
+- `apps/sanity`: CMS app
+- `packages/ui`: UI components library, shared between both CMS apps
+- `packages/eslint-config`: shared `eslint` configurations
+- `packages/ts-config`: shared `ts-config` configuration
+- `packages/tailwind-config`: shared `tailwind` configuration
+
+### Types of components
+
+- **UI component** - universal and sharable component between multiple CMSs
+- **Controller component** - takes data from CMS, convert it to UI component format, and use UI component with converted props. Each CMS has it's own controller component for each UI component.
+- All **controller components** have common propertiers to change style, such as margin, background, alignment etc.
+
+### Components composition and hierarchy
+
+The website structure follows a clear hierarchical composition:
+
+1. Pages
+
+   - Top-level components that represent entire web pages
+   - Each page contains multiple sections, SEO properties and theme
+
+2. Sections
+
+   - Container components that organize content into distinct areas
+   - Can be configured with settings like margin, background, width, alignment etc.
+   - Hold and arrange other components
+
+3. Base Components
+
+   - Components like **link**, **image**, and **rich text**
+   - Combination of multiple functional components like **card**
+   - Can be combined and reused across different sections
+
+**RichText** component has additional functionality. It allows to add sections inside, which gives ability to combine sections with text.
+
+### Add new section
+
+1. Create new component using generators
+
+```bash
+pnpm gen
 ```
-vercel login
-vercel link --repo
+
+2. Select type of component to create
+
+```bash
+- UI: Create a new UI component
+- Storyblok: Create a new content section
+- Sanity: Create a new content section
 ```
 
-Pull environment variables from Vercel:
-```
-vercel env --cwd apps/sanity --environment development pull
-vercel env --cwd apps/storyblok --environment development pull
-```
+3. Enter name of the component
+4. For Storyblok, add section component to the CMS
+5. Update properties and design
+6. Go to CMS folder
 
-To develop all apps and packages, run the following command:
-
-```
-pnpm run dev
+```bash
+cd apps/storyblok
 ```
 
-### Remote Caching
+or
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-pnpm dlx turbo login
+```bash
+cd apps/sanity
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+7. Generate types for added section
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+```bash
+# For Storyblok you will additionally
+# need to log into CLI
+pnpm sb-login
+
+pnpm gen:types
+```
+
+⚠️If you generating types for Storyblok, make sure you logged into CLI⚠️
+
+```bash
 
 ```
-pnpm dlx turbo link
+
+### Update existing section
+
+1. Updata design
+2. Update fields
+3. Go to CMS folder
+
+```bash
+cd apps/storyblok
 ```
 
-## Useful Links
+or
 
-Learn more about the power of Turborepo:
+```bash
+cd apps/sanity
+```
 
-- [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
-- [Caching](https://turborepo.org/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
-- [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
-- [Configuration Options](https://turborepo.org/docs/reference/configuration)
-- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
+4. Generate types for updated section
+
+```bash
+pnpm gen:types
+```
+
+## Start project in dev mode
+
+### Instalation
+
+1. Clone repository
+   ```bash
+   git clone https://github.com/focusreactive/cms-kit
+   ```
+2. Go to project directory
+   ```bash
+   cd cms-kit
+   ```
+3. Install dependencies
+   ```bash
+   pnpm install
+   ```
+
+### Environment variables
+
+#### Storyblok project
+
+Create `.env` and `.env.local` files in the root of your project and add the following variables:
+
+.env
+
+```bash
+REPO_PROD_BRANCH="main"
+REPO_TYPE="github"
+REPO_ID="[repo id]"
+REPO_NAME="[nickname]/[repo name]"
+```
+
+.env.local
+
+```bash
+# Created by Vercel CLI
+NEXT_PUBLIC_API_GATE="https://api.storyblok.com/v2/cdn"
+NEXT_PUBLIC_DOMAIN="https://localhost:4050"
+NEXT_PUBLIC_IS_PREVIEW="true"
+NEXT_PUBLIC_SB_REGION="EU"
+NEXT_PUBLIC_URL="https://localhost:4050"
+SB_PREVIEW_TOKEN="[storyblok space preview token]"
+SB_WEBHOOK_REVALIDATE_SECRET="[storyblok webhook revalidate key]"
+```
+
+#### Sanity
+
+.env
+
+```bash
+REPO_PROD_BRANCH="main"
+REPO_TYPE="github"
+REPO_ID="[repo id]"
+REPO_NAME="[nickname]/[repo name]"
+```
+
+.env.local
+**tbd**
+
+4. Create a new repo based on [cms-kit template](https://github.com/focusreactive/cms-kit)
+   ![Screenshot 2024-10-24 at 17 52 54](https://github.com/user-attachments/assets/b4773c54-bf7f-4697-ae7e-ada6e5163bf0)
+5. Pull repo locally
+6. Install packages
+   ```bash
+   pnpm install
+   ```
+7. Go to CLI folder
+   ```bash
+   cd apps/storyblok/cli
+   ```
+8. Execute command
+   ```bash
+   node sb.mjs
+   ```
+9. Follow steps
+
+Happy hacking 👾

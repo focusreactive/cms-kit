@@ -1,8 +1,7 @@
-export interface I{{ capitialize sectionName }} {
-    _key: string;
-    title: string;
-}
+import type { Section{{ capitialize sectionName }} } from "@/generated/extracted-types";
 
-export interface I{{ capitialize sectionName }}SectionProps {
-    data: I{{ capitialize sectionName }}
+export interface I{{ capitialize sectionName }}Props {
+  data: Section{{ capitialize sectionName }} & {
+    _key: string;
+  };
 }

@@ -3,10 +3,12 @@ import type { I{{ capitialize sectionName }}SectionProps } from './types';
 import { {{ capitialize sectionName }} } from '@shared/ui'
 
 export default function {{ capitialize sectionName }}Section({ data }: I{{ capitialize sectionName }}SectionProps) {
-  const { title, _key } = data;
+  if (!data) return null;
+
+  const { title } = data;
 
   return (
-    <SectionContainer id={_key}>
+    <SectionContainer sectionData={data}>
       <{{ capitialize sectionName }} title={title} />
     </SectionContainer>
   )

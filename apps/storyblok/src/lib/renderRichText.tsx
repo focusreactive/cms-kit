@@ -1,9 +1,10 @@
+import type { ImageStoryblok } from "@/generated/extracted-types";
 import { StoryblokComponent, type ISbRichtext } from "@storyblok/react/rsc";
 import { render } from "storyblok-rich-text-react-renderer";
 
 import { Image } from "@shared/ui";
 
-import { prepareImageProps, type IImage } from "./adapters/prepareImageProps";
+import { prepareImageProps } from "./adapters/prepareImageProps";
 
 export default function renderRichText(data: ISbRichtext) {
   return render(data, {
@@ -20,7 +21,7 @@ export default function renderRichText(data: ISbRichtext) {
           >
             <Image
               {...prepareImageProps({
-                ...(props as IImage),
+                ...(props as ImageStoryblok),
               })}
             />
           </div>
@@ -59,6 +60,42 @@ export default function renderRichText(data: ISbRichtext) {
               component: "logos",
               paddingX: "none",
             }}
+          />
+        );
+      },
+
+      stepGuide: (props) => {
+        return (
+          <StoryblokComponent
+            blok={{
+              ...props,
+              component: "stepGuide",
+              paddingX: "none",
+            }}
+          />
+        );
+      },
+
+      threeDElement: (props) => {
+        return (
+          <StoryblokComponent
+            blok={{ ...props, component: "threeDElement", paddingX: "none" }}
+          />
+        );
+      },
+
+      pricingTable: (props) => {
+        return (
+          <StoryblokComponent
+            blok={{ ...props, component: "pricingTable", paddingX: "none" }}
+          />
+        );
+      },
+
+      carousel: (props) => {
+        return (
+          <StoryblokComponent
+            blok={{ ...props, component: "carousel", paddingX: "none" }}
           />
         );
       },

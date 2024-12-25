@@ -1,4 +1,5 @@
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
+import type { AlignVariant } from "@shared/ui/components/sections/linksList/types";
 
 import { LinksList as LinksListUI } from "@shared/ui";
 
@@ -15,7 +16,7 @@ export default function LinksList({ blok }: ILinksLinkProps) {
   return (
     <SectionContainer blok={blok}>
       <LinksListUI
-        alignVariant={alignVariant}
+        alignVariant={alignVariant as AlignVariant}
         links={links.map(prepareLinkProps)}
       />
     </SectionContainer>

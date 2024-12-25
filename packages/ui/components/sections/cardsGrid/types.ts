@@ -12,7 +12,7 @@ export enum DefaultCardStyle {
 
 export interface IDefaultCardProps {
   title: string;
-  description: string;
+  description?: string;
   style: DefaultCardStyle;
   image?: IImageProps;
   link?: LinkProps;

@@ -9,7 +9,7 @@
     "start": "next start",
     "rollout": "./src/lib/rollout-tools/local/cli.mjs",
     "extract-schema": "pnpm sanity schema extract --path src/generated/extracted-schema.json --enforce-required-fields",
-    "generate-types": "pnpm extract-schema && pnpm sanity typegen generate"
+    "gen:types": "pnpm extract-schema && pnpm sanity typegen generate"
   },
   "dependencies": {
     "@focus-reactive/sanity-plugin-cms-kit": "^0.1.0",

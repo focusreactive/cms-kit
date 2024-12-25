@@ -1,4 +1,5 @@
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
+import type { BlogStyle } from "@shared/ui/components/sections/blog/types";
 
 import { BlogSection as BlogSectionUI } from "@shared/ui";
 
@@ -16,7 +17,7 @@ export default function Blog({ blok }: IBlogProps) {
     return <EmptyBlock name={blok.component as string} />;
 
   const formattedPosts = posts.map((post) => ({
-    style,
+    style: style as BlogStyle,
     text: prepareRichTextProps(post.text[0]),
     image: prepareImageProps(post.image[0]),
     link: prepareLinkProps(post.link[0]),
@@ -27,7 +28,7 @@ export default function Blog({ blok }: IBlogProps) {
       <BlogSectionUI
         text={prepareRichTextProps(text[0])}
         posts={formattedPosts}
-        style={style}
+        style={style as BlogStyle}
       />
     </SectionContainer>
   );

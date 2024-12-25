@@ -10,10 +10,6 @@ import { client } from "@/lib/api/client";
 const stegaClient = client.withConfig({ stega: true });
 
 export default function LiveVisualEditing() {
-  console.log(
-    process.env.NEXT_PUBLIC_VERCEL,
-    process.env.NEXT_PUBLIC_VERCEL_ENV,
-  );
   useLiveMode({ client: stegaClient });
   useEffect(() => {
     // If not an iframe or a Vercel Preview deployment, turn off Draft Mode

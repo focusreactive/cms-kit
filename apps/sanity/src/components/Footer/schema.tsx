@@ -1,7 +1,6 @@
 import {
   CommonGroup,
   commonGroups,
-  themeField,
 } from "@/contentSections/commonFields";
 import { defineField } from "sanity";
 
@@ -44,7 +43,6 @@ export default {
       type: "string",
       group: CommonGroup.Content,
     }),
-    themeField,
   ],
   preview: {
     select: {

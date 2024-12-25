@@ -12,12 +12,30 @@ import type { IHeroSectionProps } from "./types";
 export default function HeroSection({ data }: IHeroSectionProps) {
   if (!data) return null;
 
-  const { title, text, image, links } = data;
-
-  console.log(data);
+  const { title, text, image, links, globalData } = data;
 
   if (!title && !text?.text && !image?.image && (!links || links.length === 0))
     return <EmptyBlock name="Hero Section" />;
+
+  if (globalData) {
+    const {
+      title: globalTitle,
+      text: globalText,
+      image: globalImage,
+      links: globalLinks,
+    } = globalData as any;
+
+    return (
+      <SectionContainer sectionData={globalData as any}>
+        <Hero
+          title={globalTitle}
+          text={prepareRichTextProps(globalText)}
+          image={prepareImageProps(globalImage)}
+          links={globalLinks?.map(prepareLinkProps) || []}
+        />
+      </SectionContainer>
+    );
+  }
 
   return (
     <SectionContainer sectionData={data}>

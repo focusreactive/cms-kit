@@ -1,8 +1,12 @@
-import { CommonGroup } from "@/contentSections/commonFields";
+import {
+  CommonGroup,
+  commonGroups,
+  themeField,
+} from "@/contentSections/commonFields";
 import { sectionsPresets } from "@/contentSections/presets";
 import { defineBlocksField } from "@focus-reactive/sanity-plugin-cms-kit";
 import { definePathname } from "@tinloof/sanity-studio";
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, type FieldGroupDefinition } from "sanity";
 
 import sections from "@/lib/schemas/sections";
 
@@ -10,14 +14,12 @@ export default defineType({
   type: "document",
   name: "page",
   groups: [
-    {
-      name: "content",
-      title: "Content",
-      default: true,
-    },
+    commonGroups[0] as FieldGroupDefinition,
     { name: "seo", title: "SEO" },
+    commonGroups[1] as FieldGroupDefinition,
   ],
   fields: [
+    themeField,
     defineField({
       type: "string",
       name: "title",

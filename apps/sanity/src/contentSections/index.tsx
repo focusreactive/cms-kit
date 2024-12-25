@@ -1,12 +1,14 @@
 // start of section imports
 import Blog from "./Blog";
 import CardsGrid from "./CardsGrid";
-import SimpleCarousel from "./carousels/SimpleCarousel";
-import WideSimpleCarousel from "./carousels/WideSimpleCarousel";
+import Carousel from "./Carousel";
 import Copy from "./Copy";
 import Hero from "./Hero";
 import LinksList from "./LinksList";
 import Logos from "./Logos";
+import Pricing from "./PricingTable";
+import StepGuide from "./StepGuide";
+import ThreeDElement from "./ThreeDElement";
 
 // end of section imports
 
@@ -17,9 +19,11 @@ export const sections: Record<string, any> = {
   "section.linksList": LinksList,
   "section.cardsGrid": CardsGrid,
   "section.blog": Blog,
-  "section.simpleCarousel": SimpleCarousel,
-  "section.wideSimpleCarousel": WideSimpleCarousel,
+  "section.carousel": Carousel,
   "section.hero": Hero,
+  "section.pricing": Pricing,
+  "section.stepGuide": StepGuide,
+  "section.threeDElement": ThreeDElement,
   // end of section object
 };
 

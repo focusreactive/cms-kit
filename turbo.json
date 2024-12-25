@@ -12,29 +12,24 @@
   ],
   "tasks": {
     "build": {
-      "cache": false,
+      "cache": true,
+      "persistent": true,
       "dependsOn": ["^build"],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "dist/**",
-        "storybook-static/**"
-      ]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "start": {
       "dependsOn": ["^build"]
     },
-    "lint": {},
+    "lint": {
+      "cache": true,
+      "persistent": true
+    },
     "typecheck": {},
     "dev": {
       "cache": false,
       "persistent": true
     },
     "dev:turbo": {
-      "cache": false,
-      "persistent": true
-    },
-    "proxy": {
       "cache": false,
       "persistent": true
     }

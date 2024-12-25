@@ -1,4 +1,5 @@
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
+import type { AlignVariant } from "@shared/ui/components/sections/logos/types";
 
 import { Logos as LogosUI } from "@shared/ui";
 
@@ -24,7 +25,10 @@ export default function Logos({ blok }: ILogosProps) {
 
   return (
     <SectionContainer blok={blok}>
-      <LogosUI items={formattedItems} alignVariant={alignVariant} />
+      <LogosUI
+        items={formattedItems}
+        alignVariant={alignVariant as AlignVariant}
+      />
     </SectionContainer>
   );
 }

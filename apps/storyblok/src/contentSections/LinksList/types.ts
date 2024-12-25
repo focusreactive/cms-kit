@@ -1,13 +1,5 @@
-import type { AlignVariant } from "@shared/ui/components/sections/linksList/types";
-
-import type { ILinkBlok } from "@/lib/adapters/prepareLinkProps";
-import type { ISectionContainer } from "@/components/SectionContainer/types";
-
-interface ILinksLink extends ISectionContainer {
-  alignVariant: AlignVariant;
-  links: ILinkBlok[];
-}
+import type { LinksListStoryblok } from "@/generated/extracted-types";
 
 export interface ILinksLinkProps {
-  blok: ILinksLink;
+  blok: LinksListStoryblok;
 }

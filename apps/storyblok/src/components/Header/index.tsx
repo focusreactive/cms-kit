@@ -1,4 +1,5 @@
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
+import type { AlignVariant } from "@shared/ui/components/sections/header/types";
 
 import { Header as HeaderUI } from "@shared/ui";
 
@@ -22,7 +23,7 @@ export default function Header({ blok }: IHeaderProps) {
       <HeaderUI
         links={links.map(prepareLinkProps)}
         image={prepareImageProps(image[0])}
-        alignVariant={alignVariant}
+        alignVariant={alignVariant as AlignVariant}
       />
     </SectionContainer>
   );

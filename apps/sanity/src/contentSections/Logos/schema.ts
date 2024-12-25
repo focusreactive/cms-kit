@@ -7,8 +7,7 @@ import customLink from "@/lib/schemas/customLink";
 import {
   CommonGroup,
   commonGroups,
-  sectionMarginFields,
-  themeField,
+  sectionCommonFields,
 } from "../commonFields";
 
 export const logoItem = defineType({
@@ -79,8 +78,7 @@ export default {
       validation: (Rule) => Rule.required(),
       initialValue: AlignVariant.Left,
     }),
-    themeField,
-    ...sectionMarginFields,
+    ...sectionCommonFields,
   ],
   preview: {
     prepare: () => ({

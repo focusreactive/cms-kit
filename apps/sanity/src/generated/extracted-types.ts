@@ -68,8 +68,93 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type SectionThreeDElement = {
+  _type: "section.threeDElement";
+  model: "donut" | "globe" | "kubik-rubik";
+  marginTop: "none" | "base" | "lg";
+  marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SectionStepGuide = {
+  _type: "section.stepGuide";
+  items: Array<
+    {
+      _key: string;
+    } & StepGuideItem
+  >;
+  link: CustomLink;
+  marginTop: "none" | "base" | "lg";
+  marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SectionPricingTable = {
+  _type: "section.pricingTable";
+  tiers: Array<
+    {
+      _key: string;
+    } & PricingTableTier
+  >;
+  yearlyDiscountPercentage: number;
+  extraServiceEnabled?: boolean;
+  extraService?: {
+    text: string;
+    cost: number;
+  };
+  marginTop: "none" | "base" | "lg";
+  marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type SectionHero = {
+  _id: string;
   _type: "section.hero";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  globalData?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "section.hero";
+  };
   title: string;
   text?: CustomRichText;
   image?: CustomImage;
@@ -80,28 +165,46 @@ export type SectionHero = {
   >;
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
-export type SectionWideSimpleCarousel = {
-  _type: "section.wideSimpleCarousel";
+export type SectionCarousel = {
+  _type: "section.carousel";
+  slidesPerView: number;
   slides: Array<
     {
       _key: string;
-    } & WideSimpleCarouselCard
+    } & CarouselCard
   >;
+  effect: "slide" | "coverflow" | "cube" | "fade" | "flip" | "cards";
+  loop?: boolean;
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
-};
-
-export type SectionSimpleCarousel = {
-  _type: "section.simpleCarousel";
-  slides: Array<
-    {
-      _key: string;
-    } & SimpleCarouselCard
-  >;
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SectionBlog = {
@@ -116,9 +219,21 @@ export type SectionBlog = {
       _key: string;
     } & BlogSectionPost
   >;
-  theme: "light" | "dark";
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SectionCardsGrid = {
@@ -129,9 +244,21 @@ export type SectionCardsGrid = {
       _key: string;
     } & DefaultCard
   >;
-  theme: "light" | "dark";
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SectionLinksList = {
@@ -142,9 +269,21 @@ export type SectionLinksList = {
     } & CustomLink
   >;
   alignVariant: "left" | "center" | "right";
-  theme: "light" | "dark";
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SectionLogos = {
@@ -155,9 +294,21 @@ export type SectionLogos = {
     } & LogoItem
   >;
   alignVariant: "left" | "center" | "right";
-  theme: "light" | "dark";
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type SectionCopy = {
@@ -168,18 +319,44 @@ export type SectionCopy = {
     } & CustomRichText
   >;
   isReversedOnMobile: boolean;
-  theme: "light" | "dark";
   marginTop: "none" | "base" | "lg";
   marginBottom: "none" | "base" | "lg";
+  maxWidth: "none" | "base" | "small";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
-export type WideSimpleCarouselCard = {
-  _type: "wideSimpleCarouselCard";
+export type StepGuideItem = {
+  _type: "stepGuideItem";
+  number: string;
+  text: string;
   image: CustomImage;
 };
 
-export type SimpleCarouselCard = {
-  _type: "simpleCarouselCard";
+export type PricingTableTier = {
+  _type: "pricingTableTier";
+  name: string;
+  icon: CustomImage;
+  price?: number;
+  description: string;
+  features: Array<string>;
+  link: CustomLink;
+  popular?: boolean;
+};
+
+export type CarouselCard = {
+  _type: "carouselCard";
+  text?: CustomRichText;
   image: CustomImage;
 };
 
@@ -274,9 +451,10 @@ export type CustomLink = {
     | "default"
     | "primary"
     | "secondary"
-    | "headerNav"
-    | "footerNav"
-    | "badge";
+    | "badge"
+    | "ghost"
+    | "ghost-dark";
+  size: "base" | "sm" | "lg";
 };
 
 export type Page = {
@@ -285,6 +463,7 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  theme: "light" | "dark";
   title?: string;
   pathname?: Slug;
   header: {
@@ -311,13 +490,23 @@ export type Page = {
       } & SectionBlog)
     | ({
         _key: string;
-      } & SectionSimpleCarousel)
+      } & SectionCarousel)
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        _key: string;
+        [internalGroqTypeReferenceTo]?: "section.hero";
+      }
     | ({
         _key: string;
-      } & SectionWideSimpleCarousel)
+      } & SectionPricingTable)
     | ({
         _key: string;
-      } & SectionHero)
+      } & SectionStepGuide)
+    | ({
+        _key: string;
+      } & SectionThreeDElement)
   >;
   footer: {
     _ref: string;
@@ -328,7 +517,7 @@ export type Page = {
   seoTitle?: string;
   seoDescription?: string;
   showCookieBanner?: boolean;
-  robots?: "index" | "noindex";
+  robots?: "index" | "no-index";
   ogImage?: {
     asset?: {
       _ref: string;
@@ -358,7 +547,6 @@ export type Footer = {
     } & CustomLink
   >;
   copywriteText?: string;
-  theme: "light" | "dark";
 };
 
 export type CustomRichText = {
@@ -427,7 +615,6 @@ export type Header = {
     } & CustomLink
   >;
   alignVariant: "left" | "center" | "right";
-  theme: "light" | "dark";
 };
 
 export type SanityImageCrop = {
@@ -502,7 +689,16 @@ export type CustomImage = {
     _type: "image";
   };
   height: number;
-  aspectRatio: "16/9" | "3/2" | "4/3" | "1/1" | "9/16" | "1/2" | "4/1" | "3/1";
+  aspectRatio:
+    | "16/9"
+    | "3/2"
+    | "4/3"
+    | "1/1"
+    | "9/16"
+    | "1/2"
+    | "4/1"
+    | "3/1"
+    | "auto";
 };
 
 export type Slug = {
@@ -535,16 +731,19 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | SectionThreeDElement
+  | SectionStepGuide
+  | SectionPricingTable
   | SectionHero
-  | SectionWideSimpleCarousel
-  | SectionSimpleCarousel
+  | SectionCarousel
   | SectionBlog
   | SectionCardsGrid
   | SectionLinksList
   | SectionLogos
   | SectionCopy
-  | WideSimpleCarouselCard
-  | SimpleCarouselCard
+  | StepGuideItem
+  | PricingTableTier
+  | CarouselCard
   | BlogSectionPost
   | BasicRichText
   | Break
@@ -566,3 +765,405 @@ export type AllSanitySchemaTypes =
   | TextColor
   | SimplerColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/lib/api/queries.ts
+// Variable: PAGE_BY_SLUG_QUERY
+// Query:   *[_type == "page" && pathname.current == $slug][0] {    _id,    header->{        ...,  links[] {    ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}  }    },    sectionsBody[] {      ...,      _type == "section.hero" => {   ...,  globalData->{  ...,    links[] {      ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}    },  },  links[] {    ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}  } },      _type == "section.linksList" => {   ...,  links[] {    ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}  } },      _type == "section.cardsGrid" => {   ...,  items[] {    ...,    link {      ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}    }  } },      _type == "section.logos" => {   ...,  items[] {    ...,    link {      ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}    }  } },      _type == "section.blog" => {   ...,  posts[] {    ...,    link {      ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}    }  } },    },    footer->{        ...,  links[] {    ...,type == "internal" => {  url->{    _type == "page" => {      "slug": [pathname.current],    },  },}  }    },    title,    "slug": pathname.current,    seoTitle,    seoDescription,    ogImage,    robots,    theme,  }
+export type PAGE_BY_SLUG_QUERYResult = {
+  _id: string;
+  header: {
+    _id: string;
+    _type: "header";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    image?: CustomImage;
+    links: Array<{
+      _key: string;
+      _type: "customLink";
+      text: string;
+      type: "internal" | "url";
+      href?: string;
+      target: "_blank" | "_parent" | "_self" | "_top";
+      url: {
+        slug: Array<string | null>;
+      } | null;
+      variant:
+        | "badge"
+        | "default"
+        | "ghost-dark"
+        | "ghost"
+        | "primary"
+        | "secondary";
+      size: "base" | "lg" | "sm";
+    }>;
+    alignVariant: "center" | "left" | "right";
+  };
+  sectionsBody: Array<
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: "section.blog";
+        text: CustomRichText;
+        style:
+          | "three-column-with-background-images"
+          | "three-column-with-images"
+          | "three-column";
+        posts: Array<{
+          _key: string;
+          _type: "blogSection.post";
+          date?: string;
+          link: {
+            _type: "customLink";
+            text: string;
+            type: "internal" | "url";
+            href?: string;
+            target: "_blank" | "_parent" | "_self" | "_top";
+            url: {
+              slug: Array<string | null>;
+            } | null;
+            variant:
+              | "badge"
+              | "default"
+              | "ghost-dark"
+              | "ghost"
+              | "primary"
+              | "secondary";
+            size: "base" | "lg" | "sm";
+          } | null;
+          image?: CustomImage;
+          text?: CustomRichText;
+        }>;
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.cardsGrid";
+        columns: 1 | 2 | 3;
+        items: Array<{
+          _key: string;
+          _type: "defaultCard";
+          title: string;
+          description: string;
+          style:
+            | "icon-left-separate-title"
+            | "icon-left-with-background"
+            | "icon-left"
+            | "icon-title-inline"
+            | "icon-top"
+            | "no-icon";
+          link: {
+            _type: "customLink";
+            text: string;
+            type: "internal" | "url";
+            href?: string;
+            target: "_blank" | "_parent" | "_self" | "_top";
+            url: {
+              slug: Array<string | null>;
+            } | null;
+            variant:
+              | "badge"
+              | "default"
+              | "ghost-dark"
+              | "ghost"
+              | "primary"
+              | "secondary";
+            size: "base" | "lg" | "sm";
+          } | null;
+          image?: CustomImage;
+        }>;
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.carousel";
+        slidesPerView: number;
+        slides: Array<
+          {
+            _key: string;
+          } & CarouselCard
+        >;
+        effect: "cards" | "coverflow" | "cube" | "fade" | "flip" | "slide";
+        loop?: boolean;
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.copy";
+        columns: Array<
+          {
+            _key: string;
+          } & CustomRichText
+        >;
+        isReversedOnMobile: boolean;
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.linksList";
+        links: Array<{
+          _key: string;
+          _type: "customLink";
+          text: string;
+          type: "internal" | "url";
+          href?: string;
+          target: "_blank" | "_parent" | "_self" | "_top";
+          url: {
+            slug: Array<string | null>;
+          } | null;
+          variant:
+            | "badge"
+            | "default"
+            | "ghost-dark"
+            | "ghost"
+            | "primary"
+            | "secondary";
+          size: "base" | "lg" | "sm";
+        }>;
+        alignVariant: "center" | "left" | "right";
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.logos";
+        items: Array<{
+          _key: string;
+          _type: "logoItem";
+          type?: "clickableLogo" | "logo";
+          image?: CustomImage;
+          link: {
+            _type: "customLink";
+            text: string;
+            type: "internal" | "url";
+            href?: string;
+            target: "_blank" | "_parent" | "_self" | "_top";
+            url: {
+              slug: Array<string | null>;
+            } | null;
+            variant:
+              | "badge"
+              | "default"
+              | "ghost-dark"
+              | "ghost"
+              | "primary"
+              | "secondary";
+            size: "base" | "lg" | "sm";
+          } | null;
+        }>;
+        alignVariant: "center" | "left" | "right";
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.pricingTable";
+        tiers: Array<
+          {
+            _key: string;
+          } & PricingTableTier
+        >;
+        yearlyDiscountPercentage: number;
+        extraServiceEnabled?: boolean;
+        extraService?: {
+          text: string;
+          cost: number;
+        };
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.stepGuide";
+        items: Array<
+          {
+            _key: string;
+          } & StepGuideItem
+        >;
+        link: CustomLink;
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+    | {
+        _key: string;
+        _type: "section.threeDElement";
+        model: "donut" | "globe" | "kubik-rubik";
+        marginTop: "base" | "lg" | "none";
+        marginBottom: "base" | "lg" | "none";
+        maxWidth: "base" | "none" | "small";
+        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
+        backgroundImage?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+      }
+  > | null;
+  footer: {
+    _id: string;
+    _type: "footer";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    image?: CustomImage;
+    text?: CustomRichText;
+    links: Array<{
+      _key: string;
+      _type: "customLink";
+      text: string;
+      type: "internal" | "url";
+      href?: string;
+      target: "_blank" | "_parent" | "_self" | "_top";
+      url: {
+        slug: Array<string | null>;
+      } | null;
+      variant:
+        | "badge"
+        | "default"
+        | "ghost-dark"
+        | "ghost"
+        | "primary"
+        | "secondary";
+      size: "base" | "lg" | "sm";
+    }> | null;
+    copywriteText?: string;
+  };
+  title: string | null;
+  slug: string | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  ogImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  } | null;
+  robots: "index" | "no-index" | null;
+  theme: "dark" | "light";
+} | null;

@@ -2,7 +2,6 @@ import { cn } from "../../../utils";
 import { Image } from "../../ui/image";
 import { ImageAspectRatio } from "../../ui/image/types";
 import { Link } from "../../ui/link";
-import { LinkVariant } from "../../ui/link/types";
 import type { ILogoItem } from "./types";
 
 export default function LogoItem({ image, link }: ILogoItem) {
@@ -15,7 +14,7 @@ export default function LogoItem({ image, link }: ILogoItem) {
 
   if (link) {
     return (
-      <Link {...link} {...imageWrapperProps} variant={LinkVariant.Default}>
+      <Link {...link} {...imageWrapperProps}>
         {image && <Image {...image} fit="contain" />}
       </Link>
     );

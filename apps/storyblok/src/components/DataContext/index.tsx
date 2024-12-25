@@ -6,16 +6,19 @@ import type { IDataContextProviderProps, IDataContextValues } from "./types";
 
 export const DataContext = createContext<IDataContextValues>({
   allResolvedLinks: [],
+  globalComponentsStories: [],
 });
 
 export function DataContextProvider({
   children,
   allResolvedLinks,
+  globalComponentsStories,
 }: IDataContextProviderProps) {
   return (
     <DataContext.Provider
       value={{
         allResolvedLinks,
+        globalComponentsStories,
       }}
     >
       {children}

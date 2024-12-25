@@ -1,0 +1,20 @@
+import EmptyBlock from "@shared/ui/components/EmptyBlock";
+
+import { {{capitialize sectionName}} as {{capitialize sectionName}}UI } from "@shared/ui";
+
+import SectionContainer from "@/components/SectionContainer";
+
+import type { I{{capitialize sectionName}}Props } from "./types";
+
+export default function {{capitialize sectionName}}({ blok }: I{{capitialize sectionName}}Props) {
+  const { title } = blok;
+
+  if (!title)
+    return <EmptyBlock name={blok.component as string} />;
+
+  return (
+    <SectionContainer blok={blok}>
+      <{{capitialize sectionName}}UI title={title} />
+    </SectionContainer>
+  );
+}

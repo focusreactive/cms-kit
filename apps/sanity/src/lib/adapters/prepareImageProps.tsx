@@ -15,7 +15,7 @@ export const urlForImage = (source: CustomImage["image"]) => {
     return undefined;
   }
 
-  return builder.image(source).auto("format").fit("max");
+  return builder.image(source);
 };
 
 export const prepareImageProps = (props?: CustomImage): IImageProps => {
@@ -28,8 +28,13 @@ export const prepareImageProps = (props?: CustomImage): IImageProps => {
       fit: "cover",
     };
 
-  const url =
-    urlForImage(props.image)?.height(props.height).fit("crop").url() || "";
+  const url = props.image.asset?._ref.endsWith("svg")
+    ? urlForImage(props.image)?.url() || ""
+    : urlForImage(props.image)
+        ?.height(props.height)
+        .fit("max")
+        .auto("format")
+        .url() || "";
 
   return {
     src: url,

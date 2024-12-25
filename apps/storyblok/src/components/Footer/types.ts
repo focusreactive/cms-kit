@@ -1,15 +1,5 @@
-import type { IImage } from "@/lib/adapters/prepareImageProps";
-import type { ILinkBlok } from "@/lib/adapters/prepareLinkProps";
-import type { IRichText } from "@/lib/adapters/prepareRichTextProps";
-import type { ISectionContainer } from "@/components/SectionContainer/types";
-
-interface IFooter extends ISectionContainer {
-  links: ILinkBlok[];
-  text: IRichText[];
-  image: IImage[];
-  copywriteText?: string;
-}
+import type { FooterStoryblok } from "@/generated/extracted-types";
 
 export interface IFooterProps {
-  blok: IFooter;
+  blok: FooterStoryblok;
 }

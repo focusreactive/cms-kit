@@ -1,8 +1,9 @@
 name: Save repository info
 
 on:
-  repository_dispatch:
-    types: [fork]
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -20,15 +21,20 @@ jobs:
         with:
           ref: main
 
-      - name: Print and save repository info
+      - name: Override .env files with repository info
         run: |
-          echo "Repository ID: ${{ github.event.repository.id }}"
-          echo "REPO_ID=${{ github.event.repository.id }}" >> apps/sanity/.env
-          echo "REPO_ID=${{ github.event.repository.id }}" >> apps/storyblok/.env
-          echo "Repository Name: ${{ github.repository }}"
-          echo "REPO_NAME=${{ github.repository }}" >> apps/sanity/.env
-          echo "REPO_NAME=${{ github.repository }}" >> apps/storyblok/.env
+          rm -rf apps/sanity/.env
+          rm -rf apps/storyblok/.env
 
+          touch apps/sanity/.env
+          touch apps/storyblok/.env
+
+          echo -e "\nREPO_PROD_BRANCH=\"main\"\nREPO_TYPE=\"github\"\nREPO_ID=${{ github.event.repository.id }}\nREPO_NAME=${{ github.repository }}" >> apps/sanity/.env
+          echo -e "\nREPO_PROD_BRANCH=\"main\"\nREPO_TYPE=\"github\"\nREPO_ID=${{ github.event.repository.id }}\nREPO_NAME=${{ github.repository }}" >> apps/storyblok/.env
+      - name: Remove unnecessary scripts
+        run: |
+          jq 'del(.scripts["pull-stories"])' apps/storyblok/package.json > apps/storyblok/package.json.tmp
+          mv apps/storyblok/package.json.tmp apps/storyblok/package.json
       - name: Commit, push, and remove GitHub Actions workflow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

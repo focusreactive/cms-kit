@@ -1,0 +1,186 @@
+{
+  "name": "default hero",
+  "parent_id": 596040297,
+  "group_id": "0089d261-a9c0-4925-8f54-bf608fe114f1",
+  "alternates": [],
+  "created_at": "2024-12-16T08:36:23.665Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2024-12-16T08:36:23.665Z",
+  "published_at": null,
+  "id": 596040303,
+  "uuid": "7773c008-d6a5-4134-a184-99ea972f9366",
+  "is_folder": false,
+  "content": {
+    "_uid": "a3e625da-0ccb-4b6a-a379-d3518d374e59",
+    "text": [
+      {
+        "_uid": "2089c560-f262-4041-ab8e-ce0a11b1595a",
+        "content": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "text": "In Notion, work feels better.",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "attrs": {
+                "level": 2
+              },
+              "content": [
+                {
+                  "text": "With a little help from AI.",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "component": "richText",
+        "alignVariant": "left",
+        "removeInnerMargins": true
+      }
+    ],
+    "image": [
+      {
+        "_uid": "77e8a791-b426-4101-8b49-0967cd14b17c",
+        "asset": {
+          "id": 17600300,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/293915/2474x1318/df22f90af3/screenshot-2024-10-08-at-16-53-38.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "component": "image",
+        "aspectRatio": "16/9"
+      }
+    ],
+    "links": [
+      {
+        "_uid": "8db7eb44-74dc-4549-8e71-3386251dceb7",
+        "link": {
+          "id": "",
+          "url": "https://github.com/focusreactive/cms-kit",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://github.com/focusreactive/cms-kit"
+        },
+        "size": "lg",
+        "text": "Get for free",
+        "variant": "primary",
+        "component": "link"
+      },
+      {
+        "_uid": "9a58e8b0-bc14-4dd4-ae15-eb1d98d6bef8",
+        "link": {
+          "id": "",
+          "url": "https://focusreactive.com/#mail-us",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://focusreactive.com/#mail-us"
+        },
+        "size": "lg",
+        "text": "Request a demo",
+        "variant": "secondary",
+        "component": "link"
+      }
+    ],
+    "title": "Write. Plan. Collab. Win.",
+    "maxWidth": "base",
+    "component": "hero",
+    "marginTop": "base",
+    "marginBottom": "base",
+    "backgroundColor": "none",
+    "backgroundImage": {
+      "id": null,
+      "alt": null,
+      "name": "",
+      "focus": null,
+      "title": null,
+      "source": null,
+      "filename": "",
+      "copyright": null,
+      "fieldtype": "asset",
+      "meta_data": {}
+    }
+  },
+  "published": false,
+  "slug": "default-hero",
+  "path": null,
+  "full_slug": "components/heroes/default-hero",
+  "default_root": null,
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": {
+    "id": 596040297,
+    "uuid": "309fed25-e4d5-466a-8db2-9044525411f6",
+    "name": "Heroes",
+    "slug": "heroes",
+    "disble_fe_editor": false
+  },
+  "is_startpage": false,
+  "unpublished_changes": false,
+  "meta_data": null,
+  "imported_at": null,
+  "pinned": false,
+  "breadcrumbs": [
+    {
+      "id": 596037362,
+      "name": "Components",
+      "parent_id": null,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "components",
+      "translated_slugs": []
+    },
+    {
+      "id": 596040297,
+      "name": "Heroes",
+      "parent_id": 596037362,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "heroes",
+      "translated_slugs": []
+    }
+  ],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": null,
+  "last_author": {
+    "id": 178697,
+    "userid": "dogfrogfog",
+    "friendly_name": "maksim Hodasevich"
+  },
+  "last_author_id": 178697,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 0,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

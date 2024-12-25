@@ -1,5 +1,8 @@
 import { CommonGroup, commonGroups } from "@/contentSections/commonFields";
-import { LinkVariant } from "@shared/ui/components/ui/link/types";
+import {
+  ButtonSize,
+  ButtonVariant,
+} from "@shared/ui/components/ui/button/types";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -65,13 +68,27 @@ export default defineType({
       name: "variant",
       type: "string",
       options: {
-        list: Object.values(LinkVariant).map((variant) => ({
+        list: Object.values(ButtonVariant).map((variant) => ({
           title: variant,
           value: variant,
         })),
       },
       validation: (Rule) => Rule.required(),
-      initialValue: LinkVariant.Default,
+      initialValue: ButtonVariant.Default,
+    }),
+
+    defineField({
+      group: CommonGroup.Style,
+      name: "size",
+      type: "string",
+      options: {
+        list: Object.values(ButtonSize).map((size) => ({
+          title: size,
+          value: size,
+        })),
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: ButtonSize.Base,
     }),
   ],
 });

@@ -1,11 +1,5 @@
-import type { SbBlokData } from "@storyblok/react/rsc";
-
-interface IPageContainer extends SbBlokData {
-  sections: SbBlokData[];
-  header: string;
-  showCookieBanner: boolean;
-}
+import type { PageStoryblok } from "@/generated/extracted-types";
 
 export interface IPageContainerProps {
-  blok: IPageContainer;
+  blok: PageStoryblok;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "turbo-cms-kit",
+  "name": "cms-kit",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -17,7 +17,6 @@
     "build:sa": "turbo run build --filter=sanity",
     "start:sa": "turbo run start --filter=sanity",
     "proxy:sa": "turbo run proxy --filter=sanity",
-    "dev:turbo": "turbo run dev:turbo --parallel",
     "lint": "turbo run lint",
     "lint:fix": "turbo lint -- --fix && manypkg fix",
     "manypkg:fix": "manypkg fix",
@@ -35,19 +34,17 @@
     "@manypkg/cli": "^0.21.4",
     "@shared/eslint-config": "workspace:*",
     "@turbo/gen": "^2.0.6",
+    "dotenv": "^16.4.5",
+    "inquirer": "^12.0.0",
+    "open": "^10.1.0",
+    "ora": "^8.1.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "turbo": "^2.1.3"
+    "turbo": "^2.2.3"
   },
   "manypkg": {
     "ignoredRules": [
       "INTERNAL_MISMATCH"
     ]
-  },
-  "devDependencies": {
-    "dotenv": "^16.4.5",
-    "inquirer": "^12.0.0",
-    "open": "^10.1.0",
-    "ora": "^8.1.0"
   }
 }

@@ -17,4 +17,5 @@ module.exports = {
     ],
   },
   reportUnusedDisableDirectives: true,
-}
+  ignorePatterns: ["**/*.mjs", "**/*.hbs"],
+};

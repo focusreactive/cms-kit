@@ -34,7 +34,7 @@ export default defineType({
         })),
       },
       validation: (Rule) => Rule.required(),
-      initialValue: ImageAspectRatio["1/1"],
+      initialValue: ImageAspectRatio["auto"],
     }),
   ],
 });

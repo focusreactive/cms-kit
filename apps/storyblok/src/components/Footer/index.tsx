@@ -13,7 +13,7 @@ export default function Footer({ blok }: IFooterProps) {
   const { text, copywriteText, links, image } = blok;
 
   if (
-    text.length === 0 &&
+    text?.length === 0 &&
     links.length === 0 &&
     image.length === 0 &&
     !copywriteText
@@ -26,7 +26,7 @@ export default function Footer({ blok }: IFooterProps) {
         image={prepareImageProps(image?.[0])}
         copywriteText={copywriteText}
         links={links?.map(prepareLinkProps) || []}
-        text={prepareRichTextProps(text[0])}
+        text={prepareRichTextProps(text?.[0])}
       />
     </SectionContainer>
   );

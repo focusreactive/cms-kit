@@ -52,7 +52,7 @@ export async function promptForToken(tokenName) {
   return token;
 }
 
-export async function promptForVercelTeam(vercelToken, promptMessage) {
+export async function promptForVercelTeam() {
   const env = loadEnvVariables();
 
   if (env["VERCEL_TEAM_ID"]) {
@@ -69,12 +69,12 @@ export async function promptForVercelTeam(vercelToken, promptMessage) {
     }
   }
 
-  const vercelTeams = await getVercelTeams(vercelToken);
+  const vercelTeams = await getVercelTeams();
 
   const { team } = await inquirer.prompt({
     type: "list",
     name: "team",
-    message: promptMessage,
+    message: "Select Vercel team with scope of the token:",
     choices: vercelTeams.map((team) => ({
       name: `${team.name} (${team.slug})`,
       value: team,

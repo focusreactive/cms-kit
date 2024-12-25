@@ -1,0 +1,191 @@
+{
+  "name": "default header",
+  "parent_id": 560303235,
+  "group_id": "27520231-de45-4ca3-9274-5f87ff7accdf",
+  "alternates": [],
+  "created_at": "2024-10-09T05:47:59.840Z",
+  "deleted_at": null,
+  "sort_by_date": null,
+  "tag_list": [],
+  "updated_at": "2024-12-11T15:18:19.648Z",
+  "published_at": "2024-12-11T15:18:19.613Z",
+  "id": 560303238,
+  "uuid": "32a6be02-b148-40db-8f9b-bf4bd86572b1",
+  "is_folder": false,
+  "content": {
+    "_uid": "4ad7fd52-a576-4601-9889-04b46142e382",
+    "image": [
+      {
+        "_uid": "106d9002-a1c3-4f45-a2aa-8ff515b167e5",
+        "asset": {
+          "id": 17593700,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/293915/3840x2160/2e8c505a38/nike-logo.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "component": "image",
+        "aspectRatio": "16/9"
+      }
+    ],
+    "links": [
+      {
+        "_uid": "892b4038-4a39-473f-b3b6-b9b0b2c853bd",
+        "link": {
+          "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "maks"
+        },
+        "size": "base",
+        "text": "Home",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "42da28cf-0299-4a13-a006-a1813862fe91",
+        "link": {
+          "id": "5d416347-de08-4adb-b496-00b0a083de3a",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": "blog"
+        },
+        "size": "base",
+        "text": "Blog",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "e60a7e37-87dc-4ce8-b6a5-70c3c7d4cecc",
+        "link": {
+          "id": "",
+          "url": "https://app.storyblok.com/#/me/spaces/293915",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://app.storyblok.com/#/me/spaces/293915"
+        },
+        "size": "base",
+        "text": "Storyblok",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "3d6ad342-43b8-4b71-ad05-d9b581d76a0b",
+        "link": {
+          "id": "",
+          "url": "https://github.com/focusreactive/turbo-cms-kit",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://github.com/focusreactive/turbo-cms-kit"
+        },
+        "size": "base",
+        "text": "GitHub",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "da6abcc0-86a7-4891-9021-80f073e2fa3e",
+        "link": {
+          "id": "",
+          "url": "https://trello.com/b/2XLLkCma/cms-kit",
+          "target": "_blank",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://trello.com/b/2XLLkCma/cms-kit"
+        },
+        "size": "base",
+        "text": "Trello",
+        "variant": "default",
+        "component": "link"
+      },
+      {
+        "_uid": "f52b36a2-29d5-4b86-a79b-ddd7d135b274",
+        "link": {
+          "id": "",
+          "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
+        },
+        "size": "base",
+        "text": "Vercel",
+        "variant": "default",
+        "component": "link"
+      }
+    ],
+    "component": "header",
+    "alignVariant": "right"
+  },
+  "published": true,
+  "slug": "default-header",
+  "path": null,
+  "full_slug": "components/headers/default-header",
+  "default_root": null,
+  "disble_fe_editor": false,
+  "disable_fe_editor": false,
+  "parent": {
+    "id": 560303235,
+    "uuid": "c32bc308-3d70-4ed9-913e-abc6969e6f46",
+    "name": "Headers",
+    "slug": "headers",
+    "disble_fe_editor": false
+  },
+  "is_startpage": false,
+  "unpublished_changes": false,
+  "meta_data": null,
+  "imported_at": null,
+  "pinned": false,
+  "breadcrumbs": [
+    {
+      "id": 596037362,
+      "name": "Components",
+      "parent_id": null,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "components",
+      "translated_slugs": []
+    },
+    {
+      "id": 560303235,
+      "name": "Headers",
+      "parent_id": 596037362,
+      "disble_fe_editor": false,
+      "disable_fe_editor": false,
+      "path": null,
+      "slug": "headers",
+      "translated_slugs": []
+    }
+  ],
+  "publish_at": null,
+  "expire_at": null,
+  "first_published_at": "2024-10-09T05:57:45.909Z",
+  "last_author": {
+    "id": 178697,
+    "userid": "dogfrogfog",
+    "friendly_name": "maksim Hodasevich"
+  },
+  "last_author_id": 178697,
+  "user_ids": [],
+  "space_role_ids": [],
+  "translated_slugs": [],
+  "localized_paths": [],
+  "position": 0,
+  "translated_stories": [],
+  "can_not_view": false,
+  "is_scheduled": null,
+  "scheduled_dates": null,
+  "ideas": [],
+  "stage": null,
+  "favourite_for_user_ids": []
+}

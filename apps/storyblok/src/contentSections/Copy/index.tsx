@@ -17,7 +17,7 @@ export default function Copy({ blok }: ICopyProps) {
     <SectionContainer blok={blok}>
       <CopyUI
         columns={columns.map(prepareRichTextProps)}
-        isReversedOnMobile={isReversedOnMobile}
+        isReversedOnMobile={!!isReversedOnMobile}
       />
     </SectionContainer>
   );
