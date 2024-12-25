@@ -12,10 +12,10 @@ import Page from "@/components/Page";
 const PagePreview = dynamic(() => import("@/components/Page/PagePreview"));
 
 type Props = {
-  params: { slug: string[] | undefined };
+  params: Promise<{ slug: string[] | undefined }>;
 };
 
-const getSlug = (params: Props["params"]) => {
+const getSlug = (params: { slug: string[] | undefined }) => {
   // TODO: check why this happens
   if (params.slug?.[0] === "_next") return null;
 
