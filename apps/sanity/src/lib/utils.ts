@@ -27,10 +27,12 @@ export function createTemplate({
   json,
   title,
   category,
+  screenshot,
 }: {
   json: any;
   title: string;
   category: string;
+  screenshot: string;
 }): Preset {
   return {
     name: title,
@@ -39,7 +41,7 @@ export function createTemplate({
       area: json._type,
       category,
       title,
-      screenshot: "",
+      screenshot,
     },
   };
 }
