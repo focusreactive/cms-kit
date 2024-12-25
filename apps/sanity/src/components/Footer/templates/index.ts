@@ -1,4 +1,4 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
+import { createTemplate } from "@/lib/utils";
 
 import footer from "./footer.json";
 

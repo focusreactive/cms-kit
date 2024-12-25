@@ -35,8 +35,9 @@ export default defineType({
     }),
     defineBlocksField({
       name: "sectionsBody",
-      title: "Sections",
-      group: CommonGroup.Content,
+      // add fields to the package
+      // title: "Sections",
+      // group: CommonGroup.Content,
       of: sections.map((section) => ({
         type: section.name,
       })),
