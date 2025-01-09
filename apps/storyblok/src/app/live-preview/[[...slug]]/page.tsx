@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 export default async function Home(props: Props) {
   const params = await props.params;
-  const story = await fetchStory("published", params.slug);
+  const story = await fetchStory("draft", params.slug);
 
   if (!story) {
     notFound();

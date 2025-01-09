@@ -1,4 +1,3 @@
-import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import {
   apiPlugin,
   storyblokInit,
@@ -8,9 +7,7 @@ import {
 import { SB_CACHE_VERSION_TAG } from "@/constants/cacheTags";
 import { COMPONENTS } from "@/constants/sbComponents";
 
-const CONTENT_VERSION = process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_VERSION as
-  | "published"
-  | "draft";
+import { fetchRequest } from "./utils";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -18,52 +15,60 @@ export const getStoryblokApi = storyblokInit({
   components: COMPONENTS,
 }) as any;
 
-export async function fetchStory(slug?: string[]) {
-  try {
-    const storyblokApi = getStoryblokApi();
-    const sbParams: ISbStoriesParams = {
-      version: CONTENT_VERSION,
-      resolve_links: "url",
-    };
+// import { ISbResponse } from "@storyblok/react/rsc";
+// import { getStoryblokApi } from "@/lib/storyblok";
 
-    const cleanSlug =
-      slug?.filter(Boolean).filter((v) => v !== "undefined") || [];
+export async function fetchStory(
+  version: "draft" | "published",
+  slug?: string[],
+) {
+  getStoryblokApi();
+  const correctSlug = `/${slug ? slug.join("/") : "home"}`;
 
-    const { data } = await storyblokApi.get(
-      `cdn/stories/${cleanSlug.length > 0 ? cleanSlug.join("/") : "home"}`,
-      sbParams,
-      {
-        next: {
-          tags: [SB_CACHE_VERSION_TAG],
-        },
-      },
-    );
+  const data = await fetchRequest(
+    `${process.env.SB_API_HOST}/v2/cdn/stories${correctSlug}?version=${version}&token=${process.env.NEXT_PUBLIC_STORYBLOK_TOKEN}`,
+    {
+      next: { tags: [SB_CACHE_VERSION_TAG] },
+      cache: version === "published" ? "default" : "no-store",
+    },
+  );
 
-    return data;
-  } catch (error) {
-    console.log("error fetching story ❌", error);
-    return { story: null };
-  }
+  console.log(data);
+
+  return data;
 }
+
+// export async function fetchStory(slug?: string[]) {
+//   try {
+//     const storyblokApi = getStoryblokApi();
+//     const sbParams: ISbStoriesParams = {
+//       version: CONTENT_VERSION,
+//       resolve_links: "url",
+//     };
+
+//     const cleanSlug =
+//       slug?.filter(Boolean).filter((v) => v !== "undefined") || [];
+
+//     const { data } = await storyblokApi.get(
+//       `cdn/stories/${cleanSlug.length > 0 ? cleanSlug.join("/") : "home"}`,
+//       sbParams,
+//       {
+//         next: {
+//           tags: [SB_CACHE_VERSION_TAG],
+//         },
+//       },
+//     );
+
+//     return data;
+//   } catch (error) {
+//     console.log("error fetching story ❌", error);
+//     return { story: null };
+//   }
+// }
 
 export async function fetchStories(params?: ISbStoriesParams) {
   try {
-    const storyblokApi = getStoryblokApi();
-    const sbParams: ISbStoriesParams = {
-      version: CONTENT_VERSION,
-      ...params,
-    };
-
-    const start = performance.now();
-    const { data, total } = await storyblokApi.get("cdn/stories", sbParams, {
-      next: {
-        tags: [SB_CACHE_VERSION_TAG],
-      },
-    });
-    const end = performance.now();
-    console.log(`🕰️ fetchStories execute time: ${(end - start).toFixed(3)}ms`);
-
-    return { ...data, total };
+    throw new Error("test");
   } catch (error) {
     console.log("error fetching stories ❌", error);
     return { stories: null, total: 0 };
@@ -71,88 +76,92 @@ export async function fetchStories(params?: ISbStoriesParams) {
 }
 
 export async function fetchStoryMetadata(slug: string[]) {
-  try {
-    const { story } = await fetchStory(slug);
+  throw new Error("test");
 
-    if (!story) {
-      console.log(`missing metadata for story: ${slug?.join("/")}`);
-      return {};
-    }
+  // try {
+  //   const { story } = await fetchStory(slug);
 
-    const openGraph: Metadata["openGraph"] = {
-      title: story.content.seoTitle || story.name || "",
-      description: story.content.seoDescription || "",
-      images: [
-        {
-          url: story.content?.ogImage?.filename
-            ? `${story.content?.ogImage?.filename}/m/1200x630/filters:quality(75)`
-            : "",
-        },
-      ],
-    };
+  //   if (!story) {
+  //     console.log(`missing metadata for story: ${slug?.join("/")}`);
+  //     return {};
+  //   }
 
-    const storyFullSlug = story.full_slug === "home" ? "" : story.full_slug;
+  //   const openGraph: Metadata["openGraph"] = {
+  //     title: story.content.seoTitle || story.name || "",
+  //     description: story.content.seoDescription || "",
+  //     images: [
+  //       {
+  //         url: story.content?.ogImage?.filename
+  //           ? `${story.content?.ogImage?.filename}/m/1200x630/filters:quality(75)`
+  //           : "",
+  //       },
+  //     ],
+  //   };
 
-    const canonical = new URL(
-      `${process.env.NEXT_PUBLIC_DOMAIN as string}/${storyFullSlug}`,
-    ).toString();
+  //   const storyFullSlug = story.full_slug === "home" ? "" : story.full_slug;
 
-    return {
-      alternates: {
-        canonical,
-      },
-      metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
-      title: story.content.seoTitle || story.name || "",
-      description: story.content.seoDescription || "",
-      openGraph,
-      keywords: story.content?.seoKeywords || "",
-      robots:
-        story?.content?.robots === "index" ? { index: true } : { index: false },
-    };
-  } catch (error) {
-    console.log("error fetching story metadata ❌", error);
-    return {};
-  }
+  //   const canonical = new URL(
+  //     `${process.env.NEXT_PUBLIC_DOMAIN as string}/${storyFullSlug}`,
+  //   ).toString();
+
+  //   return {
+  //     alternates: {
+  //       canonical,
+  //     },
+  //     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
+  //     title: story.content.seoTitle || story.name || "",
+  //     description: story.content.seoDescription || "",
+  //     openGraph,
+  //     keywords: story.content?.seoKeywords || "",
+  //     robots:
+  //       story?.content?.robots === "index" ? { index: true } : { index: false },
+  //   };
+  // } catch (error) {
+  //   console.log("error fetching story metadata ❌", error);
+  //   return {};
+  // }
 }
 
 export async function fetchAllPages() {
-  try {
-    const storyblokApi = getStoryblokApi();
-    const commonSbParams: ISbStoriesParams = {
-      version: CONTENT_VERSION,
-      per_page: 1000,
-      // @ts-ignore
-      include_dates: "1",
-    };
+  throw new Error("test");
 
-    const { data, total } = await storyblokApi.get("cdn/links", commonSbParams);
-    const lastPageNumber = Math.ceil(total / 1000);
+  // try {
+  //   const storyblokApi = getStoryblokApi();
+  //   const commonSbParams: ISbStoriesParams = {
+  //     version: CONTENT_VERSION,
+  //     per_page: 1000,
+  //     // @ts-ignore
+  //     include_dates: "1",
+  //   };
 
-    let pages: { slug: string; is_folder: boolean; published_at: string }[] =
-      Object.values(data.links);
+  //   const { data, total } = await storyblokApi.get("cdn/links", commonSbParams);
+  //   const lastPageNumber = Math.ceil(total / 1000);
 
-    for (let i = 2; i <= lastPageNumber; i++) {
-      const { data } = await storyblokApi.get(
-        "cdn/links",
-        {
-          ...commonSbParams,
-          page: i,
-        },
-        {
-          next: {
-            tags: [SB_CACHE_VERSION_TAG],
-          },
-        },
-      );
+  //   let pages: { slug: string; is_folder: boolean; published_at: string }[] =
+  //     Object.values(data.links);
 
-      pages = pages.concat(data.links);
-    }
+  //   for (let i = 2; i <= lastPageNumber; i++) {
+  //     const { data } = await storyblokApi.get(
+  //       "cdn/links",
+  //       {
+  //         ...commonSbParams,
+  //         page: i,
+  //       },
+  //       {
+  //         next: {
+  //           tags: [SB_CACHE_VERSION_TAG],
+  //         },
+  //       },
+  //     );
 
-    const filteredPages = pages.filter((p) => !p.slug.startsWith("components"));
+  //     pages = pages.concat(data.links);
+  //   }
 
-    return filteredPages;
-  } catch (error) {
-    console.log("error fetching all pages ❌", error);
-    return [];
-  }
+  //   const filteredPages = pages.filter((p) => !p.slug.startsWith("components"));
+
+  //   return filteredPages;
+  // } catch (error) {
+  //   console.log("error fetching all pages ❌", error);
+  //   return [];
+  // }
 }
