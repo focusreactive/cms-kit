@@ -1029,7 +1029,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:47:06.859Z",
-      "updated_at": "2025-01-10T08:05:48.627Z",
+      "updated_at": "2025-01-10T08:48:05.925Z",
       "id": 6275827,
       "schema": {
         "image": {
@@ -1050,7 +1050,7 @@
           "id": "6Lv3P_n1SG-W6BbIEUKwxg"
         },
         "description": {
-          "type": "bloks",
+          "type": "text",
           "pos": 2,
           "id": "75OHDlnvQP2ppiFUACHJxg",
           "required": false,
@@ -1095,7 +1095,9 @@
               "name": "right"
             }
           ],
-          "id": "Z9fcO4VJS1a1iJzIGdLFbw"
+          "id": "Z9fcO4VJS1a1iJzIGdLFbw",
+          "exclude_empty_option": true,
+          "default_value": "left"
         },
         "backgroundColor": {
           "type": "option",

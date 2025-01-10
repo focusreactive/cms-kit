@@ -102,9 +102,9 @@ export interface CopyStoryblok {
 export interface DefaultCardStoryblok {
   image?: ImageStoryblok[];
   title: string;
-  description?: RichTextStoryblok[];
+  description?: string;
   link?: LinkStoryblok[];
-  alignVariant: "" | "left" | "center" | "right";
+  alignVariant: "left" | "center" | "right";
   backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   rounded: "large" | "none";
   component: "defaultCard";

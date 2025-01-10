@@ -1,10 +1,9 @@
 import type { IImageProps } from "../../ui/image/types";
 import type { LinkProps } from "../../ui/link/types";
-import type { IRichTextProps } from "../../ui/richText/types";
 
 export interface IDefaultCardProps {
   title: string;
-  description: IRichTextProps;
+  description?: string;
   image: IImageProps;
   link: LinkProps;
   alignVariant: "left" | "center" | "right";

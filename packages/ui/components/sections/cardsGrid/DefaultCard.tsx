@@ -1,7 +1,6 @@
 import { cn } from "../../../utils";
 import { Image } from "../../ui/image";
 import { Link } from "../../ui/link";
-import { RichText } from "../../ui/richText";
 import type { IDefaultCardProps } from "./types";
 
 export default function DefaultCard({
@@ -31,8 +30,8 @@ export default function DefaultCard({
           <Image {...image} />
         </div>
       )}
-      <div className="inline-block text-xl font-semibold">{title}</div>
-      <RichText {...description} />
+      <div className="text-xl font-semibold">{title}</div>
+      <div className="text-textSecondaryColor text-base">{description}</div>
       <Link {...link} />
     </div>
   );
