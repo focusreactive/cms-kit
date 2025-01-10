@@ -1029,26 +1029,36 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:47:06.859Z",
-      "updated_at": "2024-10-07T06:27:40.854Z",
+      "updated_at": "2025-01-10T08:05:48.627Z",
       "id": 6275827,
       "schema": {
-        "title": {
-          "type": "text",
-          "pos": 0,
-          "required": true
-        },
-        "description": {
-          "type": "text",
-          "pos": 1
-        },
         "image": {
           "type": "bloks",
-          "pos": 2,
+          "pos": 0,
           "maximum": 1,
           "restrict_type": "",
           "restrict_components": true,
           "component_whitelist": [
             "image"
+          ],
+          "id": "Y6yUbgeZQ8CT4DzTcrkLHA"
+        },
+        "title": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "id": "6Lv3P_n1SG-W6BbIEUKwxg"
+        },
+        "description": {
+          "type": "bloks",
+          "pos": 2,
+          "id": "75OHDlnvQP2ppiFUACHJxg",
+          "required": false,
+          "maximum": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "richText"
           ]
         },
         "link": {
@@ -1060,55 +1070,101 @@
           "restrict_components": true,
           "component_whitelist": [
             "link"
-          ]
+          ],
+          "id": "rv-oEaVmS22gwkUiPnWsEA"
+        },
+        "alignVariant": {
+          "type": "option",
+          "pos": 4,
+          "use_uuid": true,
+          "required": true,
+          "options": [
+            {
+              "_uid": "954bc5f9-00f6-4592-b862-fe4021f70b6d",
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "_uid": "4bb14d0f-5394-47c7-8d0d-5e44ac721813",
+              "value": "center",
+              "name": "center"
+            },
+            {
+              "_uid": "470e05b3-90cf-48d4-afff-941ff8268b84",
+              "value": "right",
+              "name": "right"
+            }
+          ],
+          "id": "Z9fcO4VJS1a1iJzIGdLFbw"
+        },
+        "backgroundColor": {
+          "type": "option",
+          "pos": 5,
+          "use_uuid": true,
+          "options": [
+            {
+              "_uid": "ad08aa83-bb4e-42c0-92ea-12da4eb2d6b7",
+              "name": "light",
+              "value": "light"
+            },
+            {
+              "_uid": "013dd81f-2bc4-4e83-9e8c-b1cdb92ec061",
+              "value": "light-gray",
+              "name": "light-gray"
+            },
+            {
+              "_uid": "b3a54502-89aa-4a5e-9f96-9e6033dbcfa2",
+              "value": "dark-gray",
+              "name": "dark-gray"
+            },
+            {
+              "_uid": "f1be2bc7-8e1a-4898-8404-6ed3bb996918",
+              "value": "dark",
+              "name": "dark"
+            },
+            {
+              "_uid": "ad2356de-50c5-4d7a-a8b8-3e6c14dd4e10",
+              "value": "none",
+              "name": "none"
+            }
+          ],
+          "id": "PcSI7_mQTdmzs2_z4zFtdg",
+          "exclude_empty_option": true,
+          "default_value": "light-gray",
+          "required": true
+        },
+        "rounded": {
+          "type": "option",
+          "pos": 6,
+          "use_uuid": true,
+          "required": true,
+          "default_value": "none",
+          "options": [
+            {
+              "_uid": "83e31ac3-6177-4189-9862-5f44f5c296f0",
+              "value": "large",
+              "name": "large"
+            },
+            {
+              "_uid": "c56f3a08-f41d-4317-a29a-1ec7c16eebde",
+              "name": "none",
+              "value": "none"
+            }
+          ],
+          "exclude_empty_option": true,
+          "id": "Ag6ZQ0aSSBSl5TwDLrr-XQ"
         },
         "tab-adcb6e4a-939c-45f3-ae07-caa1f3aa24b4": {
           "display_name": "Style",
           "keys": [
-            "style"
+            "verticalAlign",
+            "alignVariant",
+            "backgroundColor",
+            "rounded"
           ],
-          "pos": 4,
-          "type": "tab"
-        },
-        "style": {
-          "type": "option",
-          "pos": 5,
-          "use_uuid": true,
-          "required": true,
-          "exclude_empty_option": true,
-          "options": [
-            {
-              "_uid": "029691e2-5033-4d06-ad38-9ddea688b595",
-              "name": "icon on the left",
-              "value": "icon-left"
-            },
-            {
-              "_uid": "4092ee59-19e4-478b-82c2-6b93fca70196",
-              "value": "icon-left-with-background",
-              "name": "icon with background on the left"
-            },
-            {
-              "_uid": "cd0d138f-b2ad-4b08-a2fa-e3f73a3777ae",
-              "value": "icon-title-inline",
-              "name": "icon and title on the same line"
-            },
-            {
-              "_uid": "0b2d00f3-92fa-47f4-9f99-1f6090c93530",
-              "value": "icon-top",
-              "name": "icon on the top"
-            },
-            {
-              "_uid": "ead107e3-4a14-4490-bb61-0c85d30e097a",
-              "value": "no-icon",
-              "name": "no icon"
-            },
-            {
-              "_uid": "4eb11c17-4651-46a6-9636-2a63da6c256d",
-              "value": "icon-left-separate-title",
-              "name": "icon on the left, separate title"
-            }
-          ],
-          "default_value": "icon-left"
+          "pos": 7,
+          "type": "tab",
+          "id": "rctuSpOcRfOuB8qh86oktA"
         }
       },
       "image": "//a.storyblok.com/f/293915/x/881bf3f61c/screenshot-2024-10-07-at-08-27-00.png",

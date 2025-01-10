@@ -100,17 +100,13 @@ export interface CopyStoryblok {
 }
 
 export interface DefaultCardStoryblok {
-  title: string;
-  description?: string;
   image?: ImageStoryblok[];
+  title: string;
+  description?: RichTextStoryblok[];
   link?: LinkStoryblok[];
-  style:
-    | "icon-left"
-    | "icon-left-with-background"
-    | "icon-title-inline"
-    | "icon-top"
-    | "no-icon"
-    | "icon-left-separate-title";
+  alignVariant: "" | "left" | "center" | "right";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  rounded: "large" | "none";
   component: "defaultCard";
   _uid: string;
   [k: string]: any;
