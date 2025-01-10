@@ -2258,6 +2258,14 @@
             "value": "defaultCard"
           }
         },
+        "image": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "customImage"
+          },
+          "optional": true
+        },
         "title": {
           "type": "objectAttribute",
           "value": {
@@ -2270,40 +2278,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
-        },
-        "style": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "icon-left"
-              },
-              {
-                "type": "string",
-                "value": "icon-left-with-background"
-              },
-              {
-                "type": "string",
-                "value": "icon-title-inline"
-              },
-              {
-                "type": "string",
-                "value": "icon-top"
-              },
-              {
-                "type": "string",
-                "value": "no-icon"
-              },
-              {
-                "type": "string",
-                "value": "icon-left-separate-title"
-              }
-            ]
-          },
-          "optional": false
+          "optional": true
         },
         "link": {
           "type": "objectAttribute",
@@ -2313,13 +2288,72 @@
           },
           "optional": true
         },
-        "image": {
+        "alignVariant": {
           "type": "objectAttribute",
           "value": {
-            "type": "inline",
-            "name": "customImage"
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "left"
+              },
+              {
+                "type": "string",
+                "value": "center"
+              },
+              {
+                "type": "string",
+                "value": "right"
+              }
+            ]
           },
-          "optional": true
+          "optional": false
+        },
+        "backgroundColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "light"
+              },
+              {
+                "type": "string",
+                "value": "light-gray"
+              },
+              {
+                "type": "string",
+                "value": "dark-gray"
+              },
+              {
+                "type": "string",
+                "value": "dark"
+              },
+              {
+                "type": "string",
+                "value": "none"
+              }
+            ]
+          },
+          "optional": false
+        },
+        "rounded": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "large"
+              },
+              {
+                "type": "string",
+                "value": "none"
+              }
+            ]
+          },
+          "optional": false
         }
       }
     }

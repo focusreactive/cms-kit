@@ -322,17 +322,13 @@ export type Break = {
 
 export type DefaultCard = {
   _type: "defaultCard";
-  title: string;
-  description: string;
-  style:
-    | "icon-left"
-    | "icon-left-with-background"
-    | "icon-title-inline"
-    | "icon-top"
-    | "no-icon"
-    | "icon-left-separate-title";
-  link?: CustomLink;
   image?: CustomImage;
+  title: string;
+  description?: string;
+  link?: CustomLink;
+  alignVariant: "left" | "center" | "right";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  rounded: "large" | "none";
 };
 
 export type LogoItem = {
@@ -801,15 +797,9 @@ export type PAGE_BY_SLUG_QUERYResult = {
         items: Array<{
           _key: string;
           _type: "defaultCard";
+          image?: CustomImage;
           title: string;
-          description: string;
-          style:
-            | "icon-left-separate-title"
-            | "icon-left-with-background"
-            | "icon-left"
-            | "icon-title-inline"
-            | "icon-top"
-            | "no-icon";
+          description?: string;
           link: {
             _type: "customLink";
             text: string;
@@ -828,7 +818,14 @@ export type PAGE_BY_SLUG_QUERYResult = {
               | "secondary";
             size: "base" | "lg" | "sm";
           } | null;
-          image?: CustomImage;
+          alignVariant: "center" | "left" | "right";
+          backgroundColor:
+            | "dark-gray"
+            | "dark"
+            | "light-gray"
+            | "light"
+            | "none";
+          rounded: "large" | "none";
         }>;
         marginTop: "base" | "lg" | "none";
         marginBottom: "base" | "lg" | "none";
