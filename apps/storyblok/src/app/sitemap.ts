@@ -5,18 +5,23 @@ import { fetchStories } from "@/lib/storyblok";
 
 const storiesPerPageSize = 1;
 
+const version =
+  process.env.NEXT_PUBLIC_IS_PREVIEW === "true" ? "draft" : "published";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const commonFetchParams: ISbStoriesParams = {
     per_page: storiesPerPageSize,
     content_type: "page",
   };
-  const { stories: firstPageStories, total } =
-    await fetchStories(commonFetchParams);
+  const { stories: firstPageStories, total } = await fetchStories(
+    version,
+    commonFetchParams,
+  );
   const lastPageNumber = Math.ceil(total / storiesPerPageSize);
 
   const pagesPromises: ReturnType<typeof fetchStories>[] = [];
   for (let i = 2; i <= lastPageNumber; i++) {
-    const promise = fetchStories({
+    const promise = fetchStories(version, {
       ...commonFetchParams,
       page: i,
     });
