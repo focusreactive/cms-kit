@@ -1,19 +1,15 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
+import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
 
-import badge from "./badge.json";
-import primarySecondary from "./primary-secondary.json";
+import { createTemplate } from "@/lib/utils";
 
-export const linksListTemplates = [
+import defaultPreview from "./default-preview.png";
+import defaultTemplate from "./default.json";
+
+export const linksListTemplates: Preset[] = [
   createTemplate({
-    json: badge,
-    title: "Badge link style",
-    description: "wdwefewfwefwef",
+    title: "Two links list",
+    json: defaultTemplate,
     category: "linksList",
-  }),
-  createTemplate({
-    json: primarySecondary,
-    title: "Primary and secondary links list",
-    description: "wdwefewf121212wefwef",
-    category: "linksList",
+    screenshot: defaultPreview.src,
   }),
 ];

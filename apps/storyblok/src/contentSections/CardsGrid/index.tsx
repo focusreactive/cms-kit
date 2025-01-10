@@ -1,5 +1,4 @@
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
-import type { DefaultCardStyle } from "@shared/ui/components/sections/cardsGrid/types";
 
 import { CardsGrid as CardsGridUI } from "@shared/ui";
 
@@ -16,7 +15,6 @@ export default function CardsGrid({ blok }: ICardsGridProps) {
 
   const formattedItems = items.map((item) => ({
     ...item,
-    style: item.style as DefaultCardStyle,
     type: item._type,
     image: prepareImageProps(item?.image?.[0]),
     link: prepareLinkProps(item?.link?.[0]),

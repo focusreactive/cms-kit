@@ -1,12 +1,15 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
+import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
 
-import oneColumns from "./one-column.json";
+import { createTemplate } from "@/lib/utils";
 
-export const cardsGridsTemplates = [
+import defaultPreview from "./default-preview.png";
+import defaultTemplate from "./default.json";
+
+export const cardsGridsTemplates: Preset[] = [
   createTemplate({
-    json: oneColumns,
-    title: "One column cards grid",
-    description: "one columns grid ",
-    category: "grid",
+    title: "Three columns cards grid",
+    json: defaultTemplate,
+    category: "cardsGrids",
+    screenshot: defaultPreview.src,
   }),
 ];

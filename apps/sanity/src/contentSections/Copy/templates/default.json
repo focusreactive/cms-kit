@@ -1,0 +1,81 @@
+{
+  "marginBottom": "base​​​​‌",
+  "_key": "54c4351ff481",
+  "isReversedOnMobile": false,
+  "marginTop": "base​​​​‌",
+  "maxWidth": "base​​​​‌",
+  "backgroundColor": "none",
+  "columns": [
+    {
+      "_key": "55ba7409e7fb",
+      "removeInnerMargins": false,
+      "_type": "customRichText",
+      "alignVariant": "left",
+      "text": [
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "title",
+              "_key": "036d8a93fa5d"
+            }
+          ],
+          "_type": "block",
+          "style": "h2",
+          "_key": "88ee66df51fa",
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "f3948c81e5c7",
+          "markDefs": [],
+          "children": [
+            {
+              "_key": "b327250337940",
+              "_type": "span",
+              "marks": ["strong", "em"],
+              "text": "Lorem ipsum"
+            },
+            {
+              "_type": "span",
+              "marks": ["strong"],
+              "text": " is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.​​​​‌",
+              "_key": "b327250337941"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "_key": "a39782f3110a",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "",
+              "_key": "81df362565120"
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "_type": "span",
+              "marks": ["underline"],
+              "text": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.​​​​‌",
+              "_key": "92873e08cb300"
+            }
+          ],
+          "_type": "block",
+          "style": "normal",
+          "_key": "491288596ec9",
+          "markDefs": []
+        }
+      ]
+    }
+  ],
+  "_type": "section.copy"
+}

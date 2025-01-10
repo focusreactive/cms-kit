@@ -3,13 +3,12 @@ import {
   commonGroups,
   themeField,
 } from "@/contentSections/commonFields";
-// import { sectionsPresets } from "@/contentSections/presets";
+import { sectionsPresets } from "@/contentSections/presets";
+import { defineBlocksField } from "@focus-reactive/sanity-plugin-cms-kit";
 import { definePathname } from "@tinloof/sanity-studio";
 import { defineField, defineType, type FieldGroupDefinition } from "sanity";
 
 import sections from "@/lib/schemas/sections";
-
-// import { componentsWithBlocksInput } from "@/lib/templateSelectorInput";
 
 export default defineType({
   type: "document",
@@ -36,17 +35,17 @@ export default defineType({
       group: CommonGroup.Content,
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
+    defineBlocksField({
       name: "sectionsBody",
-      title: "Sections",
-      type: "array",
-      group: CommonGroup.Content,
+      // add fields to the package
+      // title: "Sections",
+      // group: CommonGroup.Content,
       of: sections.map((section) => ({
         type: section.name,
       })),
-      // components: componentsWithBlocksInput({
-      //   presets: Object.values(sectionsPresets).flat(),
-      // }),
+      options: {
+        presets: Object.values(sectionsPresets).flat(),
+      },
     }),
     defineField({
       name: "footer",

@@ -2,8 +2,6 @@ import { blogPost } from "@/contentSections/Blog/schema";
 import { defaultCard } from "@/contentSections/CardsGrid/schema";
 import { carouselCard } from "@/contentSections/Carousel/schema";
 import { logoItem } from "@/contentSections/Logos/schema";
-import { pricingTier } from "@/contentSections/PricingTable/schema";
-import { stepGuideItem } from "@/contentSections/StepGuide/schema";
 
 import footer from "@/components/Footer/schema";
 import header from "@/components/Header/schema";
@@ -27,8 +25,6 @@ const schemas = [
   basicRichText,
   blogPost,
   carouselCard,
-  pricingTier,
-  stepGuideItem,
   ...sections,
 ];
 

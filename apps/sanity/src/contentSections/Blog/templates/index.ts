@@ -1,19 +1,19 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
+import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
 
-import withImage from "./with-images.json";
-import withoutImage from "./without-images.json";
+// import { createTemplate } from "@/lib/utils";
 
-export const blogTemplates = [
-  createTemplate({
-    json: withImage,
-    title: "Blog section with images",
-    description: "desc1",
-    category: "blog",
-  }),
-  createTemplate({
-    json: withoutImage,
-    title: "Blog section without images",
-    description: "desc2",
-    category: "blog",
-  }),
+// import withImage from "./with-images.json";
+// import withoutImage from "./without-images.json";
+
+export const blogTemplates: Preset[] = [
+  // createTemplate({
+  //   title: "Blog section with images",
+  //   json: withImage,
+  //   category: "blog",
+  // }),
+  // createTemplate({
+  //   title: "Blog section without images",
+  //   json: withoutImage,
+  //   category: "blog",
+  // }),
 ];

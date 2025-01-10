@@ -2,9 +2,6 @@ import CardsGrid from "@/contentSections/CardsGrid";
 import Carousel from "@/contentSections/Carousel";
 import LinksList from "@/contentSections/LinksList";
 import Logos from "@/contentSections/Logos";
-import PricingTable from "@/contentSections/PricingTable";
-import StepGuide from "@/contentSections/StepGuide";
-import ThreeDElement from "@/contentSections/ThreeDElement";
 import type { CustomImage } from "@/generated/extracted-types";
 import { PortableText } from "@portabletext/react";
 import { stegaClean } from "@sanity/client/stega";
@@ -52,18 +49,6 @@ const COMPONENTS = {
     // todo: infer from schema
     "section.linksList": ({ value }: { value: any }) => {
       return <LinksList data={{ ...value, paddingX: "none" }} />;
-    },
-
-    "section.stepGuide": ({ value }: { value: any }) => {
-      return <StepGuide data={{ ...value, paddingX: "none" }} />;
-    },
-
-    "section.threeDElement": ({ value }: { value: any }) => {
-      return <ThreeDElement data={{ ...value, paddingX: "none" }} />;
-    },
-
-    "section.pricingTable": ({ value }: { value: any }) => {
-      return <PricingTable data={{ ...value, paddingX: "none" }} />;
     },
 
     "section.carousel": ({ value }: { value: any }) => {

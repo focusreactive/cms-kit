@@ -5,11 +5,11 @@ import { createTemplate } from "@/lib/utils";
 import defaultPreview from "./default-preview.png";
 import defaultTemplate from "./default.json";
 
-export const logosTemplates: Preset[] = [
+export const heroTemplates: Preset[] = [
   createTemplate({
-    title: "1212121212 Logos default",
+    title: "Hero default",
     json: defaultTemplate,
-    category: "logos",
+    category: "hero",
     screenshot: defaultPreview.src,
   }),
 ];

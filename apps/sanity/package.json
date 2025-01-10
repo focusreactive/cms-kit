@@ -12,6 +12,7 @@
     "gen:types": "pnpm extract-schema && pnpm sanity typegen generate"
   },
   "dependencies": {
+    "@focus-reactive/sanity-plugin-cms-kit": "^0.1.0",
     "@portabletext/react": "^3.1.0",
     "@sanity/client": "^6.21.1",
     "@sanity/image-url": "^1.0.2",

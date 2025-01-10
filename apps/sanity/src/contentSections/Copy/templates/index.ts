@@ -1,12 +1,15 @@
-import { createTemplate } from "@/lib/templateSelectorInput/createTemplate";
+import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
 
-import centeredDark from "./image-cards-grid.json";
+import { createTemplate } from "@/lib/utils";
 
-export const copyTemplates = [
+import defaultPreview from "./default-preview.png";
+import defaultTemplate from "./default.json";
+
+export const copyTemplates: Preset[] = [
   createTemplate({
-    json: centeredDark,
     title: "Text, cards grid and an image",
-    description: "dak",
+    json: defaultTemplate,
     category: "copy",
+    screenshot: defaultPreview.src,
   }),
 ];

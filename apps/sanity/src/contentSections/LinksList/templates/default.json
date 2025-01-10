@@ -1,0 +1,31 @@
+{
+  "alignVariant": "left",
+  "links": [
+    {
+      "target": "_blank",
+      "size": "base​​​",
+      "_type": "customLink",
+      "variant": "primary",
+      "href": "https://google.com",
+      "text": "Get for free",
+      "_key": "2739e01fde20ada6117123343086ed46",
+      "type": "url"
+    },
+    {
+      "size": "base",
+      "_type": "customLink",
+      "variant": "secondary",
+      "href": "https://google.com",
+      "text": "Get for free",
+      "_key": "5833c115c14e9b8bc513e387d43b3551",
+      "type": "url",
+      "target": "_blank​​​​"
+    }
+  ],
+  "marginBottom": "base​​",
+  "_key": "29ba8638c4e8",
+  "marginTop": "base​​​​‌",
+  "maxWidth": "base​​​​‌",
+  "backgroundColor": "none",
+  "_type": "section.linksList"
+}

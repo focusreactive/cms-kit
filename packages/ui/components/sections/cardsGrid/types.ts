@@ -1,21 +1,14 @@
 import type { IImageProps } from "../../ui/image/types";
 import type { LinkProps } from "../../ui/link/types";
 
-export enum DefaultCardStyle {
-  IconTop = "icon-top",
-  IconTitleInline = "icon-title-inline",
-  IconLeftWithBackground = "icon-left-with-background",
-  NoIcon = "no-icon",
-  IconLeftSeparateTitle = "icon-left-separate-title",
-  IconLeft = "icon-left",
-}
-
 export interface IDefaultCardProps {
   title: string;
   description?: string;
-  style: DefaultCardStyle;
-  image?: IImageProps;
-  link?: LinkProps;
+  image: IImageProps;
+  link: LinkProps;
+  alignVariant: "left" | "center" | "right";
+  rounded: "none" | "large";
+  backgroundColor: "none" | "light" | "dark" | "light-gray" | "dark-gray";
 }
 
 export interface ICardsGridProps {

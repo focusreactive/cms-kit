@@ -8,21 +8,6 @@ import {
   sectionCommonFields,
 } from "../commonFields";
 
-const featurePointStyles = [
-  { title: "icon on the left", value: "icon-left" },
-  {
-    title: "icon with background on the left",
-    value: "icon-left-with-background",
-  },
-  { title: "icon and title on the same line", value: "icon-title-inline" },
-  { title: "icon on the top", value: "icon-top" },
-  { title: "no icon", value: "no-icon" },
-  {
-    title: "icon on the left, separate title",
-    value: "icon-left-separate-title",
-  },
-];
-
 export const defaultCard = defineType({
   name: "defaultCard",
   type: "object",
@@ -30,6 +15,11 @@ export const defaultCard = defineType({
   options: {},
   groups: commonGroups,
   fields: [
+    defineField({
+      name: "image",
+      type: customImage.name,
+      group: CommonGroup.Content,
+    }),
     defineField({
       name: "title",
       type: "string",
@@ -41,19 +31,6 @@ export const defaultCard = defineType({
       name: "description",
       type: "string",
       group: CommonGroup.Content,
-      validation: (Rule) => Rule.required(),
-      initialValue: "initial description",
-    }),
-    defineField({
-      name: "style",
-      type: "string",
-      options: {
-        list: featurePointStyles,
-        layout: "dropdown",
-      },
-      group: CommonGroup.Style,
-      validation: (Rule) => Rule.required(),
-      initialValue: "icon-left",
     }),
     defineField({
       name: "link",
@@ -61,9 +38,52 @@ export const defaultCard = defineType({
       group: CommonGroup.Content,
     }),
     defineField({
-      name: "image",
-      type: customImage.name,
-      group: CommonGroup.Content,
+      name: "alignVariant",
+      type: "string",
+      group: CommonGroup.Style,
+      options: {
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "right" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: "left",
+    }),
+    defineField({
+      name: "backgroundColor",
+      type: "string",
+      group: CommonGroup.Style,
+      options: {
+        list: [
+          { title: "light", value: "light" },
+          { title: "light-gray", value: "light-gray" },
+          { title: "dark-gray", value: "dark-gray" },
+          { title: "dark", value: "dark" },
+          { title: "none", value: "none" },
+        ],
+        layout: "dropdown",
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: "none",
+    }),
+    defineField({
+      name: "rounded",
+      type: "string",
+      group: CommonGroup.Style,
+      options: {
+        list: [
+          { title: "Large", value: "large" },
+          { title: "None", value: "none" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: "none",
     }),
   ],
   preview: {
