@@ -1,15 +1,12 @@
 import { type Metadata } from "next";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
-import dynamic from "next/dynamic";
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
+import { PAGE_BY_SLUG_QUERY } from "@/lib/api/queries";
+import { sanityFetch } from "@/lib/live";
 import { generateStaticSlugs } from "@/lib/loader/generateStaticSlugs";
-import { loadPage } from "@/lib/loader/loadQuery";
 import { urlForOpenGraphImage } from "@/lib/utils";
 import Page from "@/components/Page";
-
-const PagePreview = dynamic(() => import("@/components/Page/PagePreview"));
 
 type Props = {
   params: Promise<{ slug: string[] | undefined }>;
@@ -30,7 +27,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {};
   }
 
-  const { data: page } = await loadPage(slug);
+  const { data: page } = await sanityFetch({
+    query: PAGE_BY_SLUG_QUERY,
+    params: { slug },
+  });
 
   const ogImage = urlForOpenGraphImage(page?.ogImage);
   const openGraph: OpenGraph = {
@@ -68,15 +68,16 @@ export default async function PageSlugRoute(props: Props) {
     notFound();
   }
 
-  const initial = await loadPage(slug);
+  const { data: page } = await sanityFetch({
+    query: PAGE_BY_SLUG_QUERY,
+    params: { slug },
+  });
 
-  if ((await draftMode()).isEnabled) {
-    return <PagePreview params={{ slug }} initial={initial} />;
-  }
-
-  if (!initial.data) {
+  if (!page) {
     notFound();
   }
 
-  return <Page data={initial.data} />;
+  console.log(page);
+
+  return <Page data={page} />;
 }
