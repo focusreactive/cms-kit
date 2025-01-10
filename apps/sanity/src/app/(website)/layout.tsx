@@ -1,9 +1,12 @@
 import { type PropsWithChildren } from "react";
 import type { Viewport } from "next";
 import { draftMode } from "next/headers";
+import { handleError } from "@/lib/client-utils";
 import { VisualEditing } from "next-sanity";
+import { Toaster } from "sonner";
 
 import { SanityLive } from "@/lib/live";
+import DraftModeToast from "@/components/DraftModeToast";
 
 // TODO: add global metadata
 // export async function generateMetadata(): Promise<Metadata> {
@@ -36,9 +39,16 @@ export const viewport: Viewport = {
 export default async function IndexRoute({ children }: PropsWithChildren) {
   return (
     <>
+      <Toaster />
+      {(await draftMode()).isEnabled && (
+        <>
+          <DraftModeToast />
+          <VisualEditing />
+        </>
+      )}
+      <SanityLive onError={handleError} />
+
       {children}
-      <SanityLive />
-      {(await draftMode()).isEnabled && <VisualEditing />}
     </>
   );
 }

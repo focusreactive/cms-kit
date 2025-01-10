@@ -29,6 +29,7 @@
     "sanity": "3.68.3",
     "sanity-plugin-simpler-color-input": "3",
     "server-only": "0.0.1",
+    "sonner": "^1.7.1",
     "uuid": "10.0.0"
   },
   "devDependencies": {
