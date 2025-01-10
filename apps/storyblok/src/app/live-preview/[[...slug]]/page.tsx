@@ -8,8 +8,7 @@ import CoreLayout from "@/components/CoreLayout";
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
-  return {};
-  // return fetchStoryMetadata(params.slug ?? []);
+  return fetchStoryMetadata("draft", params.slug);
 }
 
 export async function generateStaticParams() {
@@ -20,7 +19,7 @@ export default async function Home(props: Props) {
   const params = await props.params;
   const { story, links } = await fetchStory("draft", params.slug);
 
-  if (!story) {
+  if (!story || process.env.NEXT_PUBLIC_IS_PREVIEW !== "true") {
     notFound();
   }
 

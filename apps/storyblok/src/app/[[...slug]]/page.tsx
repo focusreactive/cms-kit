@@ -7,8 +7,7 @@ import CoreLayout from "@/components/CoreLayout";
 export async function generateMetadata(props: Props) {
   const params = await props.params;
 
-  return {};
-  // return fetchStoryMetadata(params.slug ?? []);
+  return fetchStoryMetadata("published", params.slug);
 }
 
 export async function generateStaticParams() {

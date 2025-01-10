@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
 
 import { COMPONENTS } from "@/constants/sbComponents";
@@ -56,51 +57,46 @@ export async function fetchStories(
   return data;
 }
 
-export async function fetchStoryMetadata(slug: string[]) {
-  throw new Error("test");
+export async function fetchStoryMetadata(
+  version: "draft" | "published",
+  slug?: string[],
+) {
+  const { story } = await fetchStory(version, slug);
 
-  // try {
-  //   const { story } = await fetchStory(slug);
+  if (!story) {
+    console.log(`missing metadata for story: ${slug?.join("/")}`);
+    return {};
+  }
 
-  //   if (!story) {
-  //     console.log(`missing metadata for story: ${slug?.join("/")}`);
-  //     return {};
-  //   }
+  const openGraph: Metadata["openGraph"] = {
+    title: story.content.seoTitle || story.name || "",
+    description: story.content.seoDescription || "",
+    images: [
+      {
+        url: story.content?.ogImage?.filename
+          ? `${story.content?.ogImage?.filename}/m/1200x630/filters:quality(75)`
+          : "",
+      },
+    ],
+  };
 
-  //   const openGraph: Metadata["openGraph"] = {
-  //     title: story.content.seoTitle || story.name || "",
-  //     description: story.content.seoDescription || "",
-  //     images: [
-  //       {
-  //         url: story.content?.ogImage?.filename
-  //           ? `${story.content?.ogImage?.filename}/m/1200x630/filters:quality(75)`
-  //           : "",
-  //       },
-  //     ],
-  //   };
+  const correctSlug = story.full_slug === "home" ? "" : story.full_slug;
+  const canonical = new URL(
+    `${process.env.NEXT_PUBLIC_DOMAIN as string}/${correctSlug}`,
+  ).toString();
 
-  //   const storyFullSlug = story.full_slug === "home" ? "" : story.full_slug;
-
-  //   const canonical = new URL(
-  //     `${process.env.NEXT_PUBLIC_DOMAIN as string}/${storyFullSlug}`,
-  //   ).toString();
-
-  //   return {
-  //     alternates: {
-  //       canonical,
-  //     },
-  //     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
-  //     title: story.content.seoTitle || story.name || "",
-  //     description: story.content.seoDescription || "",
-  //     openGraph,
-  //     keywords: story.content?.seoKeywords || "",
-  //     robots:
-  //       story?.content?.robots === "index" ? { index: true } : { index: false },
-  //   };
-  // } catch (error) {
-  //   console.log("error fetching story metadata ❌", error);
-  //   return {};
-  // }
+  return {
+    alternates: {
+      canonical,
+    },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
+    title: story.content.seoTitle || story.name || "",
+    description: story.content.seoDescription || "",
+    openGraph,
+    keywords: story.content?.seoKeywords || "",
+    robots:
+      story?.content?.robots === "index" ? { index: true } : { index: false },
+  };
 }
 
 export async function fetchAllPages() {
