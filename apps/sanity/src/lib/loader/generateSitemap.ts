@@ -10,7 +10,6 @@ import config from "../../config";
 // rework to be simple reusable query
 // no need to create generateSitemapFile
 export function generateSitemap(type: string) {
-  // Not using loadQuery as it's optimized for fetching in the RSC lifecycle
   return client
     .withConfig({
       token: config.sanity.token,

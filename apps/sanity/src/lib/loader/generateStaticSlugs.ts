@@ -5,9 +5,7 @@ import { groq } from "next-sanity";
 import config from "@/config";
 import { client } from "@/lib/api/client";
 
-// Used in `generateStaticParams`
 export async function generateStaticSlugs(type: string) {
-  // Not using loadQuery as it's optimized for fetching in the RSC lifecycle
   const slugs = await client
     .withConfig({
       token: config.sanity.token,
@@ -20,7 +18,7 @@ export async function generateStaticSlugs(type: string) {
       { type },
       {
         next: {
-          tags: [type], // TODO: should it be the same as in loadPage?
+          tags: [type],
         },
       },
     );
