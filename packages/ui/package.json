@@ -13,7 +13,6 @@
     "@shared/ts-config": "workspace:*",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/three": "^0.169.0",
     "eslint": "^8",
     "react": "^18",
     "react-dom": "^18",
@@ -35,7 +34,6 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-toast": "^1.1.5",
-    "@react-three/fiber": "^8.17.10",
     "@tanstack/react-table": "^8.17.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -44,7 +42,6 @@
     "react-hook-form": "^7.51.5",
     "swiper": "^11.1.14",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "three": "^0.170.0"
+    "tailwindcss-animate": "^1.0.7"
   }
 }

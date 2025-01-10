@@ -6,9 +6,6 @@ import Copy from "./Copy";
 import Hero from "./Hero";
 import LinksList from "./LinksList";
 import Logos from "./Logos";
-import Pricing from "./PricingTable";
-import StepGuide from "./StepGuide";
-import ThreeDElement from "./ThreeDElement";
 
 // end of section imports
 
@@ -21,9 +18,6 @@ export const sections: Record<string, any> = {
   "section.blog": Blog,
   "section.carousel": Carousel,
   "section.hero": Hero,
-  "section.pricing": Pricing,
-  "section.stepGuide": StepGuide,
-  "section.threeDElement": ThreeDElement,
   // end of section object
 };
 

@@ -64,34 +64,6 @@ export default function renderRichText(data: ISbRichtext) {
         );
       },
 
-      stepGuide: (props) => {
-        return (
-          <StoryblokComponent
-            blok={{
-              ...props,
-              component: "stepGuide",
-              paddingX: "none",
-            }}
-          />
-        );
-      },
-
-      threeDElement: (props) => {
-        return (
-          <StoryblokComponent
-            blok={{ ...props, component: "threeDElement", paddingX: "none" }}
-          />
-        );
-      },
-
-      pricingTable: (props) => {
-        return (
-          <StoryblokComponent
-            blok={{ ...props, component: "pricingTable", paddingX: "none" }}
-          />
-        );
-      },
-
       carousel: (props) => {
         return (
           <StoryblokComponent
