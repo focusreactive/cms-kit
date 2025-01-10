@@ -16,7 +16,9 @@ export async function generateStaticParams() {
 
 export default async function DynamicPage(props: Props) {
   const params = await props.params;
-  const { story, links } = await fetchStory("published", params.slug);
+  const {
+    data: { story, links },
+  } = await fetchStory("published", params.slug);
 
   if (!story) {
     notFound();

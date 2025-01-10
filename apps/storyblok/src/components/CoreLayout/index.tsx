@@ -10,7 +10,9 @@ export default async function CoreLayout({
   version,
   allResolvedLinks,
 }: ICoreLayoutProps) {
-  const { stories: globalComponentsStories } = await fetchStories(version, {
+  const {
+    data: { stories: globalComponentsStories },
+  } = await fetchStories(version, {
     by_slugs: "components/*",
   });
 

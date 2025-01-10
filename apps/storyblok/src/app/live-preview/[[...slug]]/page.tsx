@@ -17,7 +17,9 @@ export async function generateStaticParams() {
 
 export default async function Home(props: Props) {
   const params = await props.params;
-  const { story, links } = await fetchStory("draft", params.slug);
+  const {
+    data: { story, links },
+  } = await fetchStory("draft", params.slug);
 
   if (!story || process.env.NEXT_PUBLIC_IS_PREVIEW !== "true") {
     notFound();

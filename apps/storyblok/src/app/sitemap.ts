@@ -13,13 +13,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     per_page: storiesPerPageSize,
     content_type: "page",
   };
-  const { stories: firstPageStories, total } = await fetchStories(
-    version,
-    commonFetchParams,
-  );
-  const lastPageNumber = Math.ceil(total / storiesPerPageSize);
 
+  const {
+    data: { stories: firstPageStories },
+    headers,
+  } = await fetchStories(version, commonFetchParams);
+
+  const total = Number(headers.get("Total"));
+  const lastPageNumber = Math.ceil(total / storiesPerPageSize);
   const pagesPromises: ReturnType<typeof fetchStories>[] = [];
+
   for (let i = 2; i <= lastPageNumber; i++) {
     const promise = fetchStories(version, {
       ...commonFetchParams,
@@ -31,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const storiesRequestData = await Promise.all(pagesPromises);
 
-  const otherPagesStories = storiesRequestData.flatMap((data) => data.stories);
+  const otherPagesStories = storiesRequestData.flatMap((r) => r.data.stories);
   const allPagesStories = firstPageStories.concat(
     otherPagesStories,
   ) as ISbStoryData[];

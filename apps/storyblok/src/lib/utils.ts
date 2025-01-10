@@ -11,7 +11,10 @@ export async function fetcher(slug: string, params: Record<string, unknown>) {
     console.log("fetcher execution time: ", (end - now).toFixed(2));
     console.log(response.status, response.statusText);
 
-    return await response.json();
+    return {
+      data: await response.json(),
+      headers: response.headers,
+    };
   } catch (error) {
     console.error("Error in fetcher:", error);
     throw error;

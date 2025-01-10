@@ -61,7 +61,9 @@ export async function fetchStoryMetadata(
   version: "draft" | "published",
   slug?: string[],
 ) {
-  const { story } = await fetchStory(version, slug);
+  const {
+    data: { story },
+  } = await fetchStory(version, slug);
 
   if (!story) {
     console.log(`missing metadata for story: ${slug?.join("/")}`);
