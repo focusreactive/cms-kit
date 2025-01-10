@@ -5,13 +5,6 @@ import { StoryblokStory } from "@storyblok/react/rsc";
 import { fetchStory, fetchStoryMetadata } from "@/lib/storyblok";
 import CoreLayout from "@/components/CoreLayout";
 
-export const dynamicParams = true;
-
-type Props = {
-  params: Promise<{ slug?: string[] }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
@@ -37,3 +30,8 @@ export default async function Home(props: Props) {
     </CoreLayout>
   );
 }
+
+type Props = {
+  params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};

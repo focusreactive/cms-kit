@@ -23,7 +23,7 @@ export async function fetchStory(
   });
 
   const data = await fetcher(
-    `${process.env.SB_API_HOST}/v2/cdn/stories${correctSlug}?${searchParams.toString()}`,
+    `${process.env.NEXT_PUBLIC_STORYBLOK_API_GATE}/stories${correctSlug}?${searchParams.toString()}`,
     {
       method: "GET",
       ...getNextCachingParams(version),
@@ -46,7 +46,7 @@ export async function fetchStories(
   });
 
   const data = await fetcher(
-    `${process.env.SB_API_HOST}/v2/cdn/stories?${searchParams.toString()}`,
+    `${process.env.NEXT_PUBLIC_STORYBLOK_API_GATE}/stories?${searchParams.toString()}`,
     {
       method: "GET",
       ...getNextCachingParams(version),

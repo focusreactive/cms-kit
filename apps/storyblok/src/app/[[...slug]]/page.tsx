@@ -1,40 +1,36 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { StoryblokStory } from "@storyblok/react/rsc";
 
 import { fetchStory, fetchStoryMetadata } from "@/lib/storyblok";
 import CoreLayout from "@/components/CoreLayout";
 
-export const dynamicParams = true;
-
-type Props = {
-  params: Promise<{ slug?: string[] }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props) {
   const params = await props.params;
 
-  return fetchStoryMetadata(params.slug ?? []);
+  return {};
+  // return fetchStoryMetadata(params.slug ?? []);
 }
 
 export async function generateStaticParams() {
   return [];
 }
 
-export default async function Home(props: Props) {
+export default async function DynamicPage(props: Props) {
   const params = await props.params;
-  const story = await fetchStory("published", params.slug);
+  const { story, links } = await fetchStory("published", params.slug);
 
   if (!story) {
     notFound();
   }
 
-  const links = [] as any[];
-
   return (
-    <CoreLayout allResolvedLinks={links}>
+    <CoreLayout version="published" allResolvedLinks={links}>
       <StoryblokStory story={story} />
     </CoreLayout>
   );
 }
+
+type Props = {
+  params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
