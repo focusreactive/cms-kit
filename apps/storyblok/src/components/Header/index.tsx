@@ -1,3 +1,5 @@
+"use client";
+
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
 import type { AlignVariant } from "@shared/ui/components/sections/header/types";
 
