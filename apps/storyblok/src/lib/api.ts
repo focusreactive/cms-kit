@@ -69,15 +69,13 @@ export async function fetchStoryBySlug(
     searchParamsData as Record<string, string>,
   );
 
-  const { story, links } = await fetch(
+  const response = await fetch(
     `${API_GATE}/stories/${slug?.join("/") || ""}?${searchParams.toString()}`,
   ).then((res) => res.json());
 
-  console.log("links length: ", links.length);
-
   return {
-    story,
-    links,
+    story: response.story,
+    links: response.links,
   };
 }
 
@@ -107,7 +105,7 @@ export async function fetchAllPages() {
   const lastPageNumber = Math.ceil(total / 1000);
 
   let pages: { slug: string; is_folder: boolean; published_at: string }[] =
-    Object.values(pagesData.links);
+    Object.values(pagesData?.links || []);
 
   for (let i = 2; i <= lastPageNumber; i++) {
     const paginatedLinksResponse = await fetch(

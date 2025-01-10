@@ -288,9 +288,6 @@ export interface PageStoryblok {
     | HeroStoryblok
     | LinksListStoryblok
     | LogosStoryblok
-    | PricingTableStoryblok
-    | StepGuideStoryblok
-    | ThreeDElementStoryblok
   )[];
   seoTitle: string;
   seoDescription: string;
@@ -300,21 +297,6 @@ export interface PageStoryblok {
   footer: ISbStoryData<FooterStoryblok> | string;
   theme: "light" | "dark";
   component: "page";
-  _uid: string;
-  [k: string]: any;
-}
-
-export interface PricingTableStoryblok {
-  tiers?: PricingTableTierStoryblok[];
-  yearlyDiscountPercentage?: string;
-  extraServiceEnabled?: boolean;
-  extraService: PricingTableExtraServiceStoryblok[];
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  maxWidth: "small" | "base" | "none";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: AssetStoryblok;
-  component: "pricingTable";
   _uid: string;
   [k: string]: any;
 }
@@ -365,36 +347,11 @@ export interface RichTextStoryblok {
   [k: string]: any;
 }
 
-export interface StepGuideStoryblok {
-  stepGuideItem: StepGuideItemStoryblok[];
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  link: LinkStoryblok[];
-  maxWidth: "base" | "none" | "small";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: AssetStoryblok;
-  component: "stepGuide";
-  _uid: string;
-  [k: string]: any;
-}
-
 export interface StepGuideItemStoryblok {
   number: string;
   text: string;
   image: ImageStoryblok[];
   component: "stepGuideItem";
-  _uid: string;
-  [k: string]: any;
-}
-
-export interface ThreeDElementStoryblok {
-  threeDModel: "donut" | "globe" | "kubik-rubik";
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  maxWidth: "base" | "none" | "small";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: AssetStoryblok;
-  component: "threeDElement";
   _uid: string;
   [k: string]: any;
 }

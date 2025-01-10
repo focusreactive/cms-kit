@@ -68,81 +68,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type SectionThreeDElement = {
-  _type: "section.threeDElement";
-  model: "donut" | "globe" | "kubik-rubik";
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  maxWidth: "none" | "base" | "small";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
-
-export type SectionStepGuide = {
-  _type: "section.stepGuide";
-  items: Array<
-    {
-      _key: string;
-    } & StepGuideItem
-  >;
-  link: CustomLink;
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  maxWidth: "none" | "base" | "small";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
-
-export type SectionPricingTable = {
-  _type: "section.pricingTable";
-  tiers: Array<
-    {
-      _key: string;
-    } & PricingTableTier
-  >;
-  yearlyDiscountPercentage: number;
-  extraServiceEnabled?: boolean;
-  extraService?: {
-    text: string;
-    cost: number;
-  };
-  marginTop: "none" | "base" | "lg";
-  marginBottom: "none" | "base" | "lg";
-  maxWidth: "none" | "base" | "small";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  backgroundImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
-
 export type SectionHero = {
   _id: string;
   _type: "section.hero";
@@ -336,24 +261,6 @@ export type SectionCopy = {
   };
 };
 
-export type StepGuideItem = {
-  _type: "stepGuideItem";
-  number: string;
-  text: string;
-  image: CustomImage;
-};
-
-export type PricingTableTier = {
-  _type: "pricingTableTier";
-  name: string;
-  icon: CustomImage;
-  price?: number;
-  description: string;
-  features: Array<string>;
-  link: CustomLink;
-  popular?: boolean;
-};
-
 export type CarouselCard = {
   _type: "carouselCard";
   text?: CustomRichText;
@@ -498,15 +405,6 @@ export type Page = {
         _key: string;
         [internalGroqTypeReferenceTo]?: "section.hero";
       }
-    | ({
-        _key: string;
-      } & SectionPricingTable)
-    | ({
-        _key: string;
-      } & SectionStepGuide)
-    | ({
-        _key: string;
-      } & SectionThreeDElement)
   >;
   footer: {
     _ref: string;
@@ -617,6 +515,81 @@ export type Header = {
   alignVariant: "left" | "center" | "right";
 };
 
+export type CustomImage = {
+  _type: "customImage";
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  height: number;
+  aspectRatio:
+    | "16/9"
+    | "3/2"
+    | "4/3"
+    | "1/1"
+    | "9/16"
+    | "1/2"
+    | "4/1"
+    | "3/1"
+    | "auto";
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
+export type GlobTemplateView = string;
+
+export type GlobSmartLink = {
+  _type: "glob.SmartLink";
+  type?: "url" | "internal";
+  text?: string;
+  href?: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  prefetch?: boolean;
+};
+
+export type GlobCustomRichText = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+  listItem?: "bullet" | "number";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type GlobImageWithMetadata = {
+  _type: "glob.imageWithMetadata";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+};
+
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -674,39 +647,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type CustomImage = {
-  _type: "customImage";
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  height: number;
-  aspectRatio:
-    | "16/9"
-    | "3/2"
-    | "4/3"
-    | "1/1"
-    | "9/16"
-    | "1/2"
-    | "4/1"
-    | "3/1"
-    | "auto";
-};
-
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
-
 export type HighlightColor = {
   _type: "highlightColor";
   label?: string;
@@ -731,9 +671,6 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
-  | SectionThreeDElement
-  | SectionStepGuide
-  | SectionPricingTable
   | SectionHero
   | SectionCarousel
   | SectionBlog
@@ -741,8 +678,6 @@ export type AllSanitySchemaTypes =
   | SectionLinksList
   | SectionLogos
   | SectionCopy
-  | StepGuideItem
-  | PricingTableTier
   | CarouselCard
   | BlogSectionPost
   | BasicRichText
@@ -754,13 +689,17 @@ export type AllSanitySchemaTypes =
   | Footer
   | CustomRichText
   | Header
+  | CustomImage
+  | Slug
+  | GlobTemplateView
+  | GlobSmartLink
+  | GlobCustomRichText
+  | GlobImageWithMetadata
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | CustomImage
-  | Slug
   | HighlightColor
   | TextColor
   | SimplerColor;
@@ -1026,81 +965,6 @@ export type PAGE_BY_SLUG_QUERYResult = {
           } | null;
         }>;
         alignVariant: "center" | "left" | "right";
-        marginTop: "base" | "lg" | "none";
-        marginBottom: "base" | "lg" | "none";
-        maxWidth: "base" | "none" | "small";
-        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
-        backgroundImage?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      }
-    | {
-        _key: string;
-        _type: "section.pricingTable";
-        tiers: Array<
-          {
-            _key: string;
-          } & PricingTableTier
-        >;
-        yearlyDiscountPercentage: number;
-        extraServiceEnabled?: boolean;
-        extraService?: {
-          text: string;
-          cost: number;
-        };
-        marginTop: "base" | "lg" | "none";
-        marginBottom: "base" | "lg" | "none";
-        maxWidth: "base" | "none" | "small";
-        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
-        backgroundImage?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      }
-    | {
-        _key: string;
-        _type: "section.stepGuide";
-        items: Array<
-          {
-            _key: string;
-          } & StepGuideItem
-        >;
-        link: CustomLink;
-        marginTop: "base" | "lg" | "none";
-        marginBottom: "base" | "lg" | "none";
-        maxWidth: "base" | "none" | "small";
-        backgroundColor: "dark-gray" | "dark" | "light-gray" | "light" | "none";
-        backgroundImage?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          _type: "image";
-        };
-      }
-    | {
-        _key: string;
-        _type: "section.threeDElement";
-        model: "donut" | "globe" | "kubik-rubik";
         marginTop: "base" | "lg" | "none";
         marginBottom: "base" | "lg" | "none";
         maxWidth: "base" | "none" | "small";
