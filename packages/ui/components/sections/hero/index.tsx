@@ -10,8 +10,8 @@ export function Hero({ title, text, image, links }: IHeroProps) {
         <h1 className="text-textColor text-7xl font-bold">{title}</h1>
         <RichText {...text} />
         <div className="flex items-center gap-4">
-          {links.map((link) => (
-            <Link key={link.text} {...link} />
+          {links.map((link, i) => (
+            <Link key={i} {...link} />
           ))}
         </div>
       </div>

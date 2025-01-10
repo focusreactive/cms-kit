@@ -3,12 +3,12 @@ import { CARDS_GRID_FRAGMENT } from "@/contentSections/CardsGrid/query";
 import { HERO_FRAGMENT } from "@/contentSections/Hero/query";
 import { LINKS_LIST_FRAGMENT } from "@/contentSections/LinksList/query";
 import { LOGOS_FRAGMENT } from "@/contentSections/Logos/query";
-import { groq } from "next-sanity";
+import { defineQuery } from "next-sanity";
 
 import { FOOTER_FRAGMENT } from "@/components/Footer/query";
 import { HEADER_FRAGMENT } from "@/components/Header/query";
 
-export const PAGE_BY_SLUG_QUERY = groq`
+export const PAGE_BY_SLUG_QUERY = defineQuery(`
   *[_type == "page" && pathname.current == $slug][0] {
     _id,
     header->{
@@ -34,4 +34,4 @@ export const PAGE_BY_SLUG_QUERY = groq`
     robots,
     theme,
   }
-`;
+`);

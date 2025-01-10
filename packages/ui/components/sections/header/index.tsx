@@ -24,8 +24,8 @@ export function Header({
         )}
         aria-label="main mavigation"
       >
-        {links.map((link) => (
-          <Link key={link.text} {...link} />
+        {links.map((link, i) => (
+          <Link key={i} {...link} />
         ))}
       </nav>
     </header>
