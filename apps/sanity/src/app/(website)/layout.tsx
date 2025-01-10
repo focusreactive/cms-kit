@@ -1,13 +1,9 @@
-import { Suspense, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type { Viewport } from "next";
-import dynamic from "next/dynamic";
 import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 
 import { SanityLive } from "@/lib/live";
-
-const LiveVisualEditing = dynamic(
-  () => import("@/lib/loader/LiveVisualEditing"),
-);
 
 // TODO: add global metadata
 // export async function generateMetadata(): Promise<Metadata> {
@@ -40,9 +36,9 @@ export const viewport: Viewport = {
 export default async function IndexRoute({ children }: PropsWithChildren) {
   return (
     <>
-      <Suspense>{children}</Suspense>
+      {children}
       <SanityLive />
-      {(await draftMode()).isEnabled && <LiveVisualEditing />}
+      {(await draftMode()).isEnabled && <VisualEditing />}
     </>
   );
 }

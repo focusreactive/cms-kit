@@ -3,7 +3,7 @@ import { visionTool } from "@sanity/vision";
 import { pages } from "@tinloof/sanity-studio";
 import { defineConfig } from "sanity";
 import { simplerColorInput } from "sanity-plugin-simpler-color-input";
-import { presentationTool } from "sanity/presentation";
+// import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
 import config from "@/config";
@@ -30,14 +30,14 @@ export default defineConfig({
       creatablePages: ["page"],
       resolve,
     }),
-    presentationTool({
-      resolve,
-      previewUrl: {
-        previewMode: {
-          enable: "/api/draft",
-        },
-      },
-    }),
+    // presentationTool({
+    //   resolve,
+    //   previewUrl: {
+    //     previewMode: {
+    //       enable: "/api/draft",
+    //     },
+    //   },
+    // }),
     structureTool(),
     visionTool({ defaultApiVersion: config.sanity.apiVersion }),
     simplerColorInput(),
