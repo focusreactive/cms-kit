@@ -1,3 +1,4 @@
+import { stegaClean } from "@sanity/client/stega";
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
 
 import { CardsGrid as SharedCardsGrid } from "@shared/ui";
@@ -16,8 +17,12 @@ export default function CardsGrid({ data }: ICardsGridSectionProps) {
   if (!items || items.length === 0) return <EmptyBlock name="Cards Grid" />;
 
   const formattedItems = items?.map((item) => ({
-    ...item,
-    type: item._type,
+    alignVariant: stegaClean(item.alignVariant),
+    backgroundColor: stegaClean(item.backgroundColor),
+    description: stegaClean(item.description),
+    rounded: stegaClean(item.rounded),
+    title: stegaClean(item.title),
+    type: stegaClean(item._type),
     image: prepareImageProps(item.image),
     link: prepareLinkProps(item.link),
   }));
