@@ -42,7 +42,7 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const Component = asChild ? Slot : "button";
+  const Component = (asChild ? Slot : "button") as any;
 
   return (
     <Component
