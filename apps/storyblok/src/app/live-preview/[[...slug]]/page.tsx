@@ -15,7 +15,8 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
-  return fetchStoryMetadata(params.slug ?? []);
+  return {};
+  // return fetchStoryMetadata(params.slug ?? []);
 }
 
 export async function generateStaticParams() {
@@ -24,16 +25,14 @@ export async function generateStaticParams() {
 
 export default async function Home(props: Props) {
   const params = await props.params;
-  const story = await fetchStory("draft", params.slug);
+  const { story, links } = await fetchStory("draft", params.slug);
 
   if (!story) {
     notFound();
   }
 
-  const links = [] as any[];
-
   return (
-    <CoreLayout allResolvedLinks={links}>
+    <CoreLayout version="draft" allResolvedLinks={links}>
       <StoryblokStory story={story} />
     </CoreLayout>
   );

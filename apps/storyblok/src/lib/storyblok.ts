@@ -1,22 +1,14 @@
-import {
-  apiPlugin,
-  storyblokInit,
-  type ISbStoriesParams,
-} from "@storyblok/react/rsc";
+import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
 
-import { SB_CACHE_VERSION_TAG } from "@/constants/cacheTags";
 import { COMPONENTS } from "@/constants/sbComponents";
 
-import { fetchRequest } from "./utils";
+import { fetcher, getNextCachingParams } from "./utils";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
   use: [apiPlugin],
   components: COMPONENTS,
 }) as any;
-
-// import { ISbResponse } from "@storyblok/react/rsc";
-// import { getStoryblokApi } from "@/lib/storyblok";
 
 export async function fetchStory(
   version: "draft" | "published",
@@ -25,54 +17,43 @@ export async function fetchStory(
   getStoryblokApi();
   const correctSlug = `/${slug ? slug.join("/") : "home"}`;
 
-  const data = await fetchRequest(
-    `${process.env.SB_API_HOST}/v2/cdn/stories${correctSlug}?version=${version}&token=${process.env.NEXT_PUBLIC_STORYBLOK_TOKEN}`,
+  const searchParams = new URLSearchParams({
+    version,
+    token: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN || "",
+  });
+
+  const data = await fetcher(
+    `${process.env.SB_API_HOST}/v2/cdn/stories${correctSlug}?${searchParams.toString()}`,
     {
-      next: { tags: [SB_CACHE_VERSION_TAG] },
-      cache: version === "published" ? "default" : "no-store",
+      method: "GET",
+      ...getNextCachingParams(version),
     },
   );
-
-  console.log(data);
 
   return data;
 }
 
-// export async function fetchStory(slug?: string[]) {
-//   try {
-//     const storyblokApi = getStoryblokApi();
-//     const sbParams: ISbStoriesParams = {
-//       version: CONTENT_VERSION,
-//       resolve_links: "url",
-//     };
+export async function fetchStories(
+  version: "draft" | "published",
+  params?: any,
+) {
+  getStoryblokApi();
 
-//     const cleanSlug =
-//       slug?.filter(Boolean).filter((v) => v !== "undefined") || [];
+  const searchParams = new URLSearchParams({
+    version,
+    token: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN || "",
+    ...params,
+  });
 
-//     const { data } = await storyblokApi.get(
-//       `cdn/stories/${cleanSlug.length > 0 ? cleanSlug.join("/") : "home"}`,
-//       sbParams,
-//       {
-//         next: {
-//           tags: [SB_CACHE_VERSION_TAG],
-//         },
-//       },
-//     );
+  const data = await fetcher(
+    `${process.env.SB_API_HOST}/v2/cdn/stories?${searchParams.toString()}`,
+    {
+      method: "GET",
+      ...getNextCachingParams(version),
+    },
+  );
 
-//     return data;
-//   } catch (error) {
-//     console.log("error fetching story ❌", error);
-//     return { story: null };
-//   }
-// }
-
-export async function fetchStories(params?: ISbStoriesParams) {
-  try {
-    throw new Error("test");
-  } catch (error) {
-    console.log("error fetching stories ❌", error);
-    return { stories: null, total: 0 };
-  }
+  return data;
 }
 
 export async function fetchStoryMetadata(slug: string[]) {
