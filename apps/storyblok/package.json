@@ -16,7 +16,7 @@
   "dependencies": {
     "@shared/ui": "workspace:*",
     "@storyblok/react": "4.3.2",
-    "next": "15.1.1",
+    "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "storyblok-rich-text-react-renderer": "2.9.1"
