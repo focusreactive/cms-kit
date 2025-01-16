@@ -150,6 +150,9 @@ const main = async () => {
     execSync("rm -rf ../../sanity", {
       stdio: "ignore",
     });
+    execSync("git add . && git commit -m 'Remove sanity project' && git push", {
+      stdio: "ignore",
+    });
 
     spinner.succeed("Sanity folder removed ✅");
 
