@@ -34,7 +34,7 @@ const main = async () => {
   modifyJsonFile("../package.json", (contentJson) => {
     delete contentJson.scripts["pull-stories"];
 
-    return json;
+    return contentJson;
   });
 
   execSync("git add . && git commit -m 'Remove sanity project' && git push", {
