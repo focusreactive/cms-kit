@@ -38,11 +38,6 @@ const main = async () => {
     return contentJson;
   });
 
-  // read package.json content
-  const packageJson = JSON.parse(fs.readFileSync("../package.json", "utf8"));
-  console.log(colorText("\nPackage.json content:", "cyan"));
-  console.log(packageJson);
-
   execSync("git add . && git commit -m 'Cleanup'", {
     stdio: "ignore",
   });
