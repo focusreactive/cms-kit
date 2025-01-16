@@ -30,6 +30,19 @@ const main = async () => {
     colorText("ℹ️  Configuration will be saved to .env.local", "yellow"),
   );
 
+  // remove pull-schemas script from package.json
+  modifyFile("../package.json", (content) => {
+    const json = JSON.parse(content);
+    delete json.scripts["pull-schemas"];
+    return JSON.stringify(json, null, 2);
+  });
+
+  execSync("git add . && git commit -m 'Remove sanity project' && git push", {
+    // stdio: "ignore",
+  });
+
+  return;
+
   try {
     const sbPersonalAccessToken = await promptForToken(
       "SB_PERSONAL_ACCESS_TOKEN",
@@ -153,20 +166,6 @@ const main = async () => {
       execSync("rm -rf ../src/generated/dump", {
         stdio: "ignore",
       });
-
-      // remove pull-schemas script from package.json
-      modifyFile("../package.json", (content) => {
-        const json = JSON.parse(content);
-        delete json.scripts["pull-schemas"];
-        return JSON.stringify(json, null, 2);
-      });
-
-      execSync(
-        "git add . && git commit -m 'Remove sanity project' && git push",
-        {
-          stdio: "ignore",
-        },
-      );
 
       spinner.succeed("Sanity folder removed ✅");
     }
