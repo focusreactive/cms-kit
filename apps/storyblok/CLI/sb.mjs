@@ -33,7 +33,7 @@ const main = async () => {
   // remove pull-schemas script from package.json
   modifyFile("../package.json", (content) => {
     const json = JSON.parse(content);
-    delete json.scripts["pull-schemas"];
+    delete json.scripts["pull-stories"];
     return JSON.stringify(json, null, 2);
   });
 
