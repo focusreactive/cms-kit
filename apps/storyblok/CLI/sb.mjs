@@ -37,8 +37,8 @@ const main = async () => {
     return contentJson;
   });
 
-  execSync("git add . && git commit -m 'Remove sanity project' && git push", {
-    stdio: "ignore",
+  execSync("git add . && git commit -m 'Cleanup' && git push", {
+    // stdio: "ignore",
   });
 
   return;
