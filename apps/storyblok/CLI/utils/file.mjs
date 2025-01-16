@@ -19,7 +19,7 @@ export function replaceTextInFile(path, oldText, newText) {
 }
 
 export function modifyJsonFile(path, transformer) {
-  fs.readFile(path, "utf8", (err, data) => {
+  fs.readFileSync(path, "utf8", (err, data) => {
     if (err) {
       console.error(err);
       return;
@@ -28,7 +28,7 @@ export function modifyJsonFile(path, transformer) {
     const content = JSON.parse(data);
     const modifiedContent = transformer(content);
 
-    fs.writeFile(
+    fs.writeFileSync(
       path,
       JSON.stringify(modifiedContent, null, 2) + "\n",
       (err) => {
