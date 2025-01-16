@@ -141,11 +141,7 @@ const main = async () => {
       "Successfully created Vercel production and preview deployments 🎉",
     );
 
-    spinner.start("Updating apps/storyblok/package.json ⏳");
-    replaceTextInFile("../package.json", "293915", spaceId);
-    spinner.succeed("apps/storyblok/package.json updated ✅");
-
-    if (process.env.DEBUG) {
+    if (!process.env.DEBUG) {
       spinner.start("Removing unrelated files and scripts ⏳");
       execSync("rm -rf ../../sanity", {
         stdio: "ignore",
@@ -155,6 +151,7 @@ const main = async () => {
         stdio: "ignore",
       });
 
+      replaceTextInFile("../package.json", "293915", spaceId);
       // remove pull-schemas script from package.json
       modifyJsonFile("../package.json", (contentJson) => {
         delete contentJson.scripts["pull-stories"];
@@ -162,7 +159,7 @@ const main = async () => {
         return contentJson;
       });
 
-      execSync("git add . && git commit -m 'Cleanup' git push", {
+      execSync("git add . && git commit -m 'Cleanup' && git push", {
         stdio: "ignore",
       });
 
