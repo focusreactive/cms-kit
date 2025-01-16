@@ -16,7 +16,6 @@ export async function createStoryblokSpace(name) {
     },
     body: JSON.stringify({ space: { name } }),
   });
-  // create 2 tokens
 
   if (!response.ok) {
     console.log(response.status, response.statusText, await response.json());
@@ -25,9 +24,6 @@ export async function createStoryblokSpace(name) {
 
   const data = await response.json();
 
-  console.log("data", data);
-
-  console.log("data.space", data.space);
   return {
     spaceId: data.space.id,
     previewToken: data.space.first_token,
@@ -400,4 +396,33 @@ export async function updateStory(spaceId, storyId, storyData) {
   const data = await response.json();
 
   return data;
+}
+
+export async function createAccessToken(spaceId, access = "public") {
+  const envs = loadEnvVariables();
+  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+
+  const response = await fetch(
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/api_keys/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        api_key: {
+          access,
+          name: `${access} access Token`,
+        },
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.log(response.status, response.statusText, await response.json());
+    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
 }

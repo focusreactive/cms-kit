@@ -92,7 +92,7 @@ export async function createVercelProject({ projectName, sbParams }) {
           },
           {
             key: "NEXT_PUBLIC_STORYBLOK_TOKEN",
-            value: previewToken,
+            value: storyblokToken,
           },
           {
             key: "SB_WEBHOOK_REVALIDATE_SECRET",

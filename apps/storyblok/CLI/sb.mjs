@@ -3,6 +3,7 @@ import fs from "fs";
 import ora from "ora";
 
 import {
+  createAccessToken,
   createStoryblokSpace,
   createStoryblokWebhook,
   updatePageComponentSectionsField,
@@ -81,8 +82,13 @@ const main = async () => {
     await uploadBackupStories(spaceId);
     spinner.succeed("Successfully filled new space with data 🎉");
 
-    // Create Vercel production and preview projects
+    console.log(
+      "Creating public storyblok token for production environment ⏳",
+    );
+    const { token: publicToken } = await createAccessToken(spaceId, "public");
+    console.log("Successfully created public storyblok token ✅");
 
+    // Create Vercel production and preview projects
     spinner.start("Creating Vercel production and preview projects ⏳");
     const whRevalidateSecret = crypto.randomUUID();
     const {
@@ -93,7 +99,7 @@ const main = async () => {
       projectName,
       sbParams: {
         isPreview: false,
-        previewToken,
+        storyblokToken: publicToken,
         whRevalidateSecret,
       },
     });
@@ -106,7 +112,7 @@ const main = async () => {
       projectName,
       sbParams: {
         isPreview: true,
-        previewToken,
+        storyblokToken: previewToken,
         whRevalidateSecret,
       },
     });
@@ -118,7 +124,7 @@ const main = async () => {
 
     spinner.start("Updating Storyblok space with Vercel data⏳");
     await updateStoryblokSpace(spaceId, {
-      domain: `${previewDeploymentUrl}/`,
+      domain: `${previewDeploymentUrl}/live-preview/`,
     });
     await createStoryblokWebhook(
       spaceId,
