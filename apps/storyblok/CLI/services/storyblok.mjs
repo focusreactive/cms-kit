@@ -16,6 +16,7 @@ export async function createStoryblokSpace(name) {
     },
     body: JSON.stringify({ space: { name } }),
   });
+  // create 2 tokens
 
   if (!response.ok) {
     console.log(response.status, response.statusText, await response.json());
@@ -24,6 +25,9 @@ export async function createStoryblokSpace(name) {
 
   const data = await response.json();
 
+  console.log("data", data);
+
+  console.log("data.space", data.space);
   return {
     spaceId: data.space.id,
     previewToken: data.space.first_token,
@@ -188,6 +192,7 @@ async function getSectionsFolder(spaceId) {
 }
 
 const globalComponentNames = ["header", "footer"];
+
 export async function uploadBackupStories(spaceId) {
   // Get directory path relative to current file
   const __filename = fileURLToPath(import.meta.url);
@@ -205,30 +210,51 @@ export async function uploadBackupStories(spaceId) {
       }),
   );
 
-  const { parentStories, childStories, globalComponents } = stories.reduce(
-    (acc, story) => {
-      if (story.is_folder) {
-        acc.parentStories.push(story);
-      } else {
-        if (globalComponentNames.includes(story.content.component)) {
-          acc.globalComponents.push(story);
+  const { parentFoldersStories, pageStories, globalComponentsStories } =
+    stories.reduce(
+      (acc, story) => {
+        if (story.is_folder) {
+          acc.parentFoldersStories.push(story);
         } else {
-          acc.childStories.push(story);
+          if (globalComponentNames.includes(story.content.component)) {
+            acc.globalComponentsStories.push(story);
+          } else {
+            acc.pageStories.push(story);
+          }
         }
-      }
 
-      return acc;
-    },
-    { parentStories: [], childStories: [], globalComponents: [] },
-  );
+        return acc;
+      },
+      {
+        pageStories: [],
+        parentFoldersStories: [],
+        globalComponentsStories: [],
+      },
+    );
 
   // Map to track old ID to new ID relationships
   const idMap = new Map();
 
+  // since all folders are inside components/ folder, it should be created first
+  const sortedParentFoldersStories = parentFoldersStories.sort((a, b) => {
+    if (a.slug === "components") return -1;
+    if (b.slug === "components") return 1;
+
+    return 0;
+  });
+
   // Create all parent stories first
-  for (const story of parentStories) {
+  for (const story of sortedParentFoldersStories) {
     try {
-      const newStory = await createStory(spaceId, story);
+      const newParentId = idMap.get(story.parent_id) || null;
+
+      const storyData = {
+        ...story,
+        content: story.content,
+        parent_id: newParentId,
+      };
+
+      const newStory = await createStory(spaceId, storyData);
       idMap.set(story.id, newStory.story.id);
     } catch (error) {
       console.error(`Failed to create parent story: ${error.message}`);
@@ -240,7 +266,7 @@ export async function uploadBackupStories(spaceId) {
   let headerUuid = null;
   let footerUuid = null;
 
-  for (const story of globalComponents) {
+  for (const story of globalComponentsStories) {
     // Update the parent_id to use the new ID
     const newParentId = idMap.get(story.parent_id) || null;
 
@@ -260,7 +286,7 @@ export async function uploadBackupStories(spaceId) {
   }
 
   // Create child stories with updated parent IDs
-  for (const story of childStories) {
+  for (const story of pageStories) {
     try {
       // Update the parent_id to use the new ID
       const newParentId = idMap.get(story.parent_id) || null;

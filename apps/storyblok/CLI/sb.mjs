@@ -92,7 +92,6 @@ const main = async () => {
       projectName,
       sbParams: {
         isPreview: false,
-        spaceId,
         previewToken,
         whRevalidateSecret,
       },
@@ -106,7 +105,6 @@ const main = async () => {
       projectName,
       sbParams: {
         isPreview: true,
-        spaceId,
         previewToken,
         whRevalidateSecret,
       },
@@ -146,15 +144,32 @@ const main = async () => {
     modifyFile("../package.json", "293915", spaceId);
     spinner.succeed("apps/storyblok/package.json updated ✅");
 
-    spinner.start("Removing unrelated files and scripts ⏳");
-    execSync("rm -rf ../../sanity", {
-      stdio: "ignore",
-    });
-    execSync("git add . && git commit -m 'Remove sanity project' && git push", {
-      stdio: "ignore",
-    });
+    if (process.env.DEBUG) {
+      spinner.start("Removing unrelated files and scripts ⏳");
+      execSync("rm -rf ../../sanity", {
+        stdio: "ignore",
+      });
 
-    spinner.succeed("Sanity folder removed ✅");
+      execSync("rm -rf ../src/generated/dump", {
+        stdio: "ignore",
+      });
+
+      // remove pull-schemas script from package.json
+      modifyFile("../package.json", (content) => {
+        const json = JSON.parse(content);
+        delete json.scripts["pull-schemas"];
+        return JSON.stringify(json, null, 2);
+      });
+
+      execSync(
+        "git add . && git commit -m 'Remove sanity project' && git push",
+        {
+          stdio: "ignore",
+        },
+      );
+
+      spinner.succeed("Sanity folder removed ✅");
+    }
 
     console.log(
       colorText(

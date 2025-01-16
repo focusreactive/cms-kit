@@ -232,12 +232,11 @@ REPO_NAME="[nickname]/[repo name]"
 
 ```bash
 # Created by Vercel CLI
-NEXT_PUBLIC_API_GATE="https://api.storyblok.com/v2/cdn"
 NEXT_PUBLIC_DOMAIN="https://localhost:4050"
 NEXT_PUBLIC_IS_PREVIEW="true"
-NEXT_PUBLIC_SB_REGION="EU"
-NEXT_PUBLIC_DOMAIN="https://localhost:4050"
 NEXT_PUBLIC_STORYBLOK_TOKEN="[storyblok space preview token]"
+NEXT_PUBLIC_STORYBLOK_API_GATE="https://api.storyblok.com/v2/cdn"
+VERCEL_REDEPLOY_HOOK_URL="https://api.vercel.com/v1/integrations/deploy/[KEY]/[KEY"
 SB_WEBHOOK_REVALIDATE_SECRET="[storyblok webhook revalidate key]"
 ```
 

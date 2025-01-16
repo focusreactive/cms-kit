@@ -58,13 +58,10 @@ export async function getVercelUserInfo() {
 }
 
 export async function createVercelProject({ projectName, sbParams }) {
-  const { isPreview, spaceId, previewToken, whRevalidateSecret } = sbParams;
+  const { isPreview, previewToken, whRevalidateSecret } = sbParams;
   const envs = loadEnvVariables();
   const repoName = envs.REPO_NAME;
   const vercelToken = envs.VERCEL_PERSONAL_AUTH_TOKEN;
-  const repoId = envs.REPO_ID;
-  const repoType = envs.REPO_TYPE;
-  const repoProdBranch = envs.REPO_PROD_BRANCH;
   // const rollOutApiToken = envs.ROLL_OUT_API_TOKEN;
   const vercelTeamId = envs.VERCEL_TEAM_ID;
 
@@ -86,20 +83,12 @@ export async function createVercelProject({ projectName, sbParams }) {
             value: `https://${finalProjectName}.vercel.app`,
           },
           {
-            key: "NEXT_PUBLIC_DOMAIN",
-            value: `https://${finalProjectName}.vercel.app`,
-          },
-          {
-            key: "NEXT_PUBLIC_API_GATE",
+            key: "NEXT_PUBLIC_STORYBLOK_API_GATE",
             value: "https://api.storyblok.com/v2/cdn",
           },
           {
             key: "NEXT_PUBLIC_IS_PREVIEW",
             value: isPreview ? "true" : "false",
-          },
-          {
-            key: "NEXT_PUBLIC_SB_REGION",
-            value: "EU",
           },
           {
             key: "NEXT_PUBLIC_STORYBLOK_TOKEN",
@@ -109,26 +98,6 @@ export async function createVercelProject({ projectName, sbParams }) {
             key: "SB_WEBHOOK_REVALIDATE_SECRET",
             value: whRevalidateSecret,
           },
-          {
-            key: "SB_SPACE_ID",
-            value: spaceId + "",
-          },
-          {
-            key: "REPO_ID",
-            value: repoId,
-          },
-          {
-            key: "REPO_TYPE",
-            value: repoType,
-          },
-          {
-            key: "REPO_PROD_BRANCH",
-            value: repoProdBranch,
-          },
-          // {
-          // key: "ROLL_OUT_API_TOKEN",
-          // value: rollOutApiToken,
-          // },
         ].map((v) => ({
           ...v,
           target: ["production", "preview", "development"],
