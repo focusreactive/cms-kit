@@ -108,5 +108,7 @@ export async function promptForProjectName() {
     default: "nextjs-storyblok-fast",
   });
 
-  return projectName;
+  const hash = Math.random().toString(36).substring(2, 7);
+
+  return `${projectName}-${hash}`;
 }
