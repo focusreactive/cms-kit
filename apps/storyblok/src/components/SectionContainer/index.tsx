@@ -29,19 +29,15 @@ export default function SectionContainer({
   return (
     <section
       {...storyblokEditable(blok)}
-      className={cn(
-        "bg-bgColor overflow-x-hidden",
-        className,
-        backgroundColor,
-        {
-          "mt-0": marginTop === "none",
-          "mb-0": marginBottom === "none",
-          "mt-sectionBase": marginTop === "base",
-          "mb-sectionBase": marginBottom === "base",
-          "mt-sectionLg": marginTop === "lg",
-          "mb-sectionLg": marginBottom === "lg",
-        },
-      )}
+      className={cn("overflow-x-hidden", className, backgroundColor, {
+        "bg-bgColor": backgroundColor && backgroundColor !== "none",
+        "mt-0": marginTop === "none",
+        "mb-0": marginBottom === "none",
+        "mt-sectionBase": marginTop === "base",
+        "mb-sectionBase": marginBottom === "base",
+        "mt-sectionLg": marginTop === "lg",
+        "mb-sectionLg": marginBottom === "lg",
+      })}
       id={_uid}
       style={style}
     >
