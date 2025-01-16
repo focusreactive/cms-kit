@@ -1,4 +1,5 @@
 import { execSync } from "child_process";
+import fs from "fs";
 import ora from "ora";
 
 import {
@@ -37,8 +38,13 @@ const main = async () => {
     return contentJson;
   });
 
-  execSync("git add . && git commit -m 'Cleanup' && git push", {
-    // stdio: "ignore",
+  // read package.json content
+  const packageJson = JSON.parse(fs.readFileSync("../package.json", "utf8"));
+  console.log(colorText("\nPackage.json content:", "cyan"));
+  console.log(packageJson);
+
+  execSync("git add . && git commit -m 'Cleanup'", {
+    stdio: "ignore",
   });
 
   return;
