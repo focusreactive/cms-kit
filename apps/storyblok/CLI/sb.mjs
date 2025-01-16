@@ -31,19 +31,6 @@ const main = async () => {
     colorText("ℹ️  Configuration will be saved to .env.local", "yellow"),
   );
 
-  // remove pull-schemas script from package.json
-  modifyJsonFile("../package.json", (contentJson) => {
-    delete contentJson.scripts["pull-stories"];
-
-    return contentJson;
-  });
-
-  execSync("git add . && git commit -m 'Cleanup'", {
-    stdio: "ignore",
-  });
-
-  return;
-
   try {
     const sbPersonalAccessToken = await promptForToken(
       "SB_PERSONAL_ACCESS_TOKEN",
@@ -165,6 +152,17 @@ const main = async () => {
       });
 
       execSync("rm -rf ../src/generated/dump", {
+        stdio: "ignore",
+      });
+
+      // remove pull-schemas script from package.json
+      modifyJsonFile("../package.json", (contentJson) => {
+        delete contentJson.scripts["pull-stories"];
+
+        return contentJson;
+      });
+
+      execSync("git add . && git commit -m 'Cleanup' git push", {
         stdio: "ignore",
       });
 
