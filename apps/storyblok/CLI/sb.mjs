@@ -31,15 +31,14 @@ const main = async () => {
   );
 
   // remove pull-schemas script from package.json
-  modifyJsonFile("../package.json", (content) => {
-    const json = JSON.parse(content);
-    delete json.scripts["pull-stories"];
+  modifyJsonFile("../package.json", (contentJson) => {
+    delete contentJson.scripts["pull-stories"];
 
     return json;
   });
 
   execSync("git add . && git commit -m 'Remove sanity project' && git push", {
-    // stdio: "ignore",
+    stdio: "ignore",
   });
 
   return;
