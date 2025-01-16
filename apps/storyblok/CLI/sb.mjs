@@ -12,7 +12,7 @@ import {
   createProjectDeployment,
   createVercelProject,
 } from "./services/vercel.mjs";
-import { modifyFile } from "./utils/file.mjs";
+import { modifyJsonFile, replaceTextInFile } from "./utils/file.mjs";
 import { openUrlAndConfirm } from "./utils/open.mjs";
 import {
   promptForProjectName,
@@ -31,10 +31,11 @@ const main = async () => {
   );
 
   // remove pull-schemas script from package.json
-  modifyFile("../package.json", (content) => {
+  modifyJsonFile("../package.json", (content) => {
     const json = JSON.parse(content);
     delete json.scripts["pull-stories"];
-    return JSON.stringify(json, null, 2);
+
+    return json;
   });
 
   execSync("git add . && git commit -m 'Remove sanity project' && git push", {
@@ -154,7 +155,7 @@ const main = async () => {
     );
 
     spinner.start("Updating apps/storyblok/package.json ⏳");
-    modifyFile("../package.json", "293915", spaceId);
+    replaceTextInFile("../package.json", "293915", spaceId);
     spinner.succeed("apps/storyblok/package.json updated ✅");
 
     if (process.env.DEBUG) {

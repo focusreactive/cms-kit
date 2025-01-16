@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export function modifyFile(path, oldText, newText) {
+export function replaceTextInFile(path, oldText, newText) {
   fs.readFile(path, "utf8", (err, data) => {
     if (err) {
       console.error(err);
@@ -15,5 +15,28 @@ export function modifyFile(path, oldText, newText) {
         return;
       }
     });
+  });
+}
+
+export function modifyJsonFile(path, transformer) {
+  fs.readFile(path, "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    const content = JSON.parse(data);
+    const modifiedContent = transformer(content);
+
+    fs.writeFile(
+      path,
+      JSON.stringify(modifiedContent, null, 2) + "\n",
+      (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      },
+    );
   });
 }
