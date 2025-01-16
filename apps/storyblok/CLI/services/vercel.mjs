@@ -58,7 +58,7 @@ export async function getVercelUserInfo() {
 }
 
 export async function createVercelProject({ projectName, sbParams }) {
-  const { isPreview, previewToken, whRevalidateSecret } = sbParams;
+  const { isPreview, storyblokToken, whRevalidateSecret } = sbParams;
   const envs = loadEnvVariables();
   const repoName = envs.REPO_NAME;
   const vercelToken = envs.VERCEL_PERSONAL_AUTH_TOKEN;
