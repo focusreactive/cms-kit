@@ -476,9 +476,9 @@
       "all_presets": [
         {
           "id": 2282765,
-          "name": "Dark three columns",
+          "name": "Default 2 columns",
           "component_id": 6275957,
-          "image": "//a.storyblok.com/f/293915/x/22cc4febaa/screenshot-2024-09-10-at-16-44-01.png",
+          "image": "//a.storyblok.com/f/293915/x/f0b927a712/screenshot-2025-01-16-at-11-05-06.png",
           "icon": "",
           "color": "",
           "description": ""
@@ -991,15 +991,6 @@
           "name": "Cards with text",
           "component_id": 6030874,
           "image": "//a.storyblok.com/f/293915/x/d647e4ac83/screenshot-2024-09-10-at-16-34-53.png",
-          "icon": "",
-          "color": "",
-          "description": ""
-        },
-        {
-          "id": 2282725,
-          "name": "Dark cards with text and image",
-          "component_id": 6030874,
-          "image": "//a.storyblok.com/f/293915/x/cf02d2ac96/screenshot-2024-09-10-at-16-35-27.png",
           "icon": "",
           "color": "",
           "description": ""

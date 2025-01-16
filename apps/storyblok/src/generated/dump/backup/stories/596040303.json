@@ -7,8 +7,8 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2024-12-16T08:36:23.665Z",
-  "published_at": null,
+  "updated_at": "2024-12-23T14:31:15.840Z",
+  "published_at": "2024-12-23T14:31:15.820Z",
   "id": 596040303,
   "uuid": "7773c008-d6a5-4134-a184-99ea972f9366",
   "is_folder": false,
@@ -106,6 +106,7 @@
     "maxWidth": "base",
     "component": "hero",
     "marginTop": "base",
+    "globalData": "",
     "marginBottom": "base",
     "backgroundColor": "none",
     "backgroundImage": {
@@ -121,7 +122,7 @@
       "meta_data": {}
     }
   },
-  "published": false,
+  "published": true,
   "slug": "default-hero",
   "path": null,
   "full_slug": "components/heroes/default-hero",
@@ -164,7 +165,7 @@
   ],
   "publish_at": null,
   "expire_at": null,
-  "first_published_at": null,
+  "first_published_at": "2024-12-23T14:31:15.820Z",
   "last_author": {
     "id": 178697,
     "userid": "dogfrogfog",

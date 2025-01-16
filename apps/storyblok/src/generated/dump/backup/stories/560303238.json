@@ -7,8 +7,8 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2024-12-11T15:18:19.648Z",
-  "published_at": "2024-12-11T15:18:19.613Z",
+  "updated_at": "2025-01-10T17:00:58.496Z",
+  "published_at": "2025-01-10T17:00:58.476Z",
   "id": 560303238,
   "uuid": "32a6be02-b148-40db-8f9b-bf4bd86572b1",
   "is_folder": false,
@@ -90,21 +90,6 @@
         },
         "size": "base",
         "text": "GitHub",
-        "variant": "default",
-        "component": "link"
-      },
-      {
-        "_uid": "da6abcc0-86a7-4891-9021-80f073e2fa3e",
-        "link": {
-          "id": "",
-          "url": "https://trello.com/b/2XLLkCma/cms-kit",
-          "target": "_blank",
-          "linktype": "url",
-          "fieldtype": "multilink",
-          "cached_url": "https://trello.com/b/2XLLkCma/cms-kit"
-        },
-        "size": "base",
-        "text": "Trello",
         "variant": "default",
         "component": "link"
       },

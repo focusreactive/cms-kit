@@ -11,11 +11,11 @@ export function Header({
   alignVariant,
 }: IHeaderProps) {
   return (
-    <header className={cn("flex gap-10 py-3", className)}>
+    <header className={cn("bg-bgColor flex gap-10 py-3", className)}>
       <div className="h-10">{image && <Image {...image} fit="contain" />}</div>
       <nav
         className={cn(
-          "bg-bgColor flex grow flex-wrap items-center justify-center gap-3 gap-x-6",
+          "flex grow flex-wrap items-center justify-center gap-3 gap-x-6",
           {
             "justify-center": alignVariant === AlignVariant.Center,
             "justify-start": alignVariant === AlignVariant.Left,
