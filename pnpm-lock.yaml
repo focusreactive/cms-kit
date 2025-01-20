@@ -25,7 +25,7 @@ importers:
         version: link:packages/eslint-config
       '@turbo/gen':
         specifier: ^2.0.6
-        version: 2.0.6(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)
+        version: 2.0.6(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -64,7 +64,7 @@ importers:
         version: 1.1.0
       '@sanity/preview-url-secret':
         specifier: 2.0.5
-        version: 2.0.5(@sanity/client@6.24.1(debug@4.3.5))
+        version: 2.0.5(@sanity/client@6.24.1)
       '@sanity/vision':
         specifier: 3.68.3
         version: 3.68.3(@babel/runtime@7.24.7)(@codemirror/lint@6.8.1)(@codemirror/theme-one-dark@6.1.2)(@emotion/is-prop-valid@1.2.2)(@lezer/common@1.2.1)(codemirror@6.0.1(@lezer/common@1.2.1))(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
@@ -73,7 +73,7 @@ importers:
         version: link:../../packages/ui
       '@tailwindcss/typography':
         specifier: 0.5.10
-        version: 0.5.10(tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))
+        version: 0.5.10(tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))
       '@tinloof/sanity-studio':
         specifier: 1.7.1
         version: 1.7.1(@emotion/is-prop-valid@1.2.2)(@sanity/color@3.0.6)(@types/babel__core@7.20.5)(@types/node@22.0.2)(@types/react@18.3.3)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(rxjs@7.8.1)(sanity@3.68.3(@emotion/is-prop-valid@1.2.2)(@types/babel__core@7.20.5)(@types/node@22.0.2)(@types/react@18.3.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.34.0))(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.34.0)
@@ -105,6 +105,9 @@ importers:
         specifier: 10.0.0
         version: 10.0.0
     devDependencies:
+      '@shared/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
       '@shared/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -131,7 +134,7 @@ importers:
         version: 3.2.5
       tailwindcss:
         specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+        version: 3.4.3(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -168,7 +171,7 @@ importers:
         version: link:../../packages/ts-config
       '@tailwindcss/typography':
         specifier: ^0.5.10
-        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5)))
+        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5)))
       '@types/node':
         specifier: ^20
         version: 20.14.10
@@ -204,7 +207,7 @@ importers:
         version: 0.3.0
       tailwindcss:
         specifier: ^3.4.3
-        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5))
+        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -232,7 +235,7 @@ importers:
     devDependencies:
       eslint-plugin-tailwindcss:
         specifier: ^3.17.4
-        version: 3.17.4(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)))
+        version: 3.17.4(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)))
 
   packages/sanity-template-selector:
     dependencies:
@@ -269,13 +272,13 @@ importers:
     dependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.10
-        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))
+        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))
       tailwindcss:
         specifier: ^3.4.3
-        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))
     devDependencies:
       '@shared/ts-config':
         specifier: workspace:*
@@ -353,7 +356,7 @@ importers:
         version: 2.4.0
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))
     devDependencies:
       '@shared/eslint-config':
         specifier: workspace:*
@@ -381,7 +384,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       tailwindcss:
         specifier: ^3.4.3
-        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+        version: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -12963,7 +12966,7 @@ snapshots:
       '@sanity/comlink': 2.0.2
       '@sanity/icons': 3.5.7(react@19.0.0)
       '@sanity/logos': 2.1.13(@sanity/color@3.0.6)(react@19.0.0)
-      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1(debug@4.3.5))
+      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1)
       '@sanity/ui': 2.11.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@sanity/uuid': 3.0.2
       fast-deep-equal: 3.1.3
@@ -13027,7 +13030,7 @@ snapshots:
     optionalDependencies:
       react: 19.0.0
 
-  '@sanity/preview-url-secret@2.0.5(@sanity/client@6.24.1(debug@4.3.5))':
+  '@sanity/preview-url-secret@2.0.5(@sanity/client@6.24.1)':
     dependencies:
       '@sanity/client': 6.24.1(debug@4.3.5)
       '@sanity/uuid': 3.0.2
@@ -13217,7 +13220,7 @@ snapshots:
     dependencies:
       '@sanity/comlink': 2.0.3
       '@sanity/mutate': 0.11.0-canary.4(xstate@5.19.1)
-      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1(debug@4.3.5))
+      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1)
       '@vercel/stega': 0.1.2
       get-random-values-esm: 1.0.2
       react: 19.0.0
@@ -13380,29 +13383,29 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tailwindcss/typography@0.5.10(tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))':
+  '@tailwindcss/typography@0.5.10(tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.3(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+      tailwindcss: 3.4.3(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
 
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5)))':
+  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5))
 
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)))':
+  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
 
   '@tanstack/react-table@8.19.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -13504,7 +13507,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@2.0.6(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)':
+  '@turbo/gen@2.0.6(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)':
     dependencies:
       '@turbo/workspaces': 2.0.6
       chalk: 2.4.2
@@ -13514,7 +13517,7 @@ snapshots:
       minimatch: 9.0.5
       node-plop: 0.26.3
       proxy-agent: 6.4.0
-      ts-node: 10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)
+      ts-node: 10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.1
     transitivePeerDependencies:
@@ -15710,7 +15713,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.9.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.3(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -15729,7 +15732,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.57.0)
       eslint-plugin-react: 7.37.3(eslint@8.57.0)
       eslint-plugin-react-hooks: 5.1.0(eslint@8.57.0)
@@ -15762,7 +15765,7 @@ snapshots:
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.14.0
@@ -15779,7 +15782,7 @@ snapshots:
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.14.0
@@ -15823,7 +15826,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -15850,7 +15853,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.16.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -15970,11 +15973,11 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3))):
+  eslint-plugin-tailwindcss@3.17.4(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3))):
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.39
-      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3))
+      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3))
 
   eslint-plugin-turbo@2.3.3(eslint@8.57.0):
     dependencies:
@@ -17813,7 +17816,7 @@ snapshots:
       '@sanity/icons': 3.5.7(react@19.0.0)
       '@sanity/next-loader': 1.2.8(next@15.1.2(@babel/core@7.26.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@sanity/preview-kit': 5.1.26(@sanity/client@6.24.1)(react@19.0.0)
-      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1(debug@4.3.5))
+      '@sanity/preview-url-secret': 2.0.5(@sanity/client@6.24.1)
       '@sanity/types': 3.68.3(@types/react@18.3.3)(debug@4.3.5)
       '@sanity/ui': 2.11.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@sanity/visual-editing': 2.11.2(@sanity/client@6.24.1)(next@15.1.2(@babel/core@7.26.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -18425,29 +18428,29 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.39
 
-  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5)):
+  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.39
-      ts-node: 10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5)
+      ts-node: 10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5)
 
-  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)):
+  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.39
-      ts-node: 10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)
+      ts-node: 10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)
 
-  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)):
+  postcss-load-config@4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.4.5
     optionalDependencies:
       postcss: 8.4.39
-      ts-node: 10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)
+      ts-node: 10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)
 
   postcss-nested@6.0.1(postcss@8.4.39):
     dependencies:
@@ -20006,11 +20009,11 @@ snapshots:
 
   tailwind-merge@2.4.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))):
     dependencies:
-      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
 
-  tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)):
+  tailwindcss@3.4.3(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -20029,7 +20032,7 @@ snapshots:
       postcss: 8.4.39
       postcss-import: 15.1.0(postcss@8.4.39)
       postcss-js: 4.0.1(postcss@8.4.39)
-      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
       postcss-nested: 6.0.1(postcss@8.4.39)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -20037,7 +20040,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5)):
+  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -20056,7 +20059,7 @@ snapshots:
       postcss: 8.4.39
       postcss-import: 15.1.0(postcss@8.4.39)
       postcss-js: 4.0.1(postcss@8.4.39)
-      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5))
+      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5))
       postcss-nested: 6.0.1(postcss@8.4.39)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -20064,7 +20067,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5)):
+  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -20083,7 +20086,7 @@ snapshots:
       postcss: 8.4.39
       postcss-import: 15.1.0(postcss@8.4.39)
       postcss-js: 4.0.1(postcss@8.4.39)
-      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5))
+      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5))
       postcss-nested: 6.0.1(postcss@8.4.39)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -20091,7 +20094,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3)):
+  tailwindcss@3.4.4(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -20110,7 +20113,7 @@ snapshots:
       postcss: 8.4.39
       postcss-import: 15.1.0(postcss@8.4.39)
       postcss-js: 4.0.1(postcss@8.4.39)
-      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3))
+      postcss-load-config: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3))
       postcss-nested: 6.0.1(postcss@8.4.39)
       postcss-selector-parser: 6.1.0
       resolve: 1.22.8
@@ -20283,7 +20286,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@20.14.10)(typescript@5.4.5):
+  ts-node@10.9.2(@swc/core@1.7.28)(@types/node@20.14.10)(typescript@5.4.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -20304,7 +20307,7 @@ snapshots:
       '@swc/core': 1.7.28(@swc/helpers@0.5.15)
     optional: true
 
-  ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.4.5):
+  ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.4.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -20325,7 +20328,7 @@ snapshots:
       '@swc/core': 1.7.28(@swc/helpers@0.5.15)
     optional: true
 
-  ts-node@10.9.2(@swc/core@1.7.28(@swc/helpers@0.5.15))(@types/node@22.0.2)(typescript@5.7.3):
+  ts-node@10.9.2(@swc/core@1.7.28)(@types/node@22.0.2)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
