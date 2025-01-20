@@ -7,7 +7,7 @@ import defaultTemplate from "./default.json";
 
 export const logosTemplates: Preset[] = [
   createTemplate({
-    title: "1212121212 Logos default",
+    title: "Logos default",
     json: defaultTemplate,
     category: "logos",
     screenshot: defaultPreview.src,

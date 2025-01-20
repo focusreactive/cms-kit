@@ -11,6 +11,7 @@ export const CMSKitContentBlocks = definePlugin<ContentBlocksArg>(
     const params = {
       presets,
     };
+    
     return {
       name: 'content-blocks',
       // title: 'CMS-KIT Content Blocks',

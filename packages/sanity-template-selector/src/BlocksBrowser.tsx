@@ -1,22 +1,33 @@
-import { Autocomplete, Box, Select, Stack } from '@sanity/ui';
-import React from 'react';
+import React from "react";
+import { CloseCircleIcon, SearchIcon } from "@sanity/icons";
+import { Autocomplete, Box, Select, Stack } from "@sanity/ui";
+import styled from "styled-components";
+
 import {
   OnItemAppend,
   Preset,
   RenderItemProps,
   RenderItemViewProps,
   RenderViewProps,
-} from './types';
-import styled from 'styled-components';
-import { CloseCircleIcon, SearchIcon } from '@sanity/icons';
+} from "./types";
 
 const DefaultRenderItemView = ({ preset }: RenderItemViewProps) => {
-  const height = 100 + Math.round(Math.random() * 300);
-
   return (
-    <div style={{ height }}>
-      <h4>{preset.meta?.title}</h4>
-      <p>{preset.name}</p>
+    <div
+      style={{
+        padding: 5,
+      }}
+    >
+      <h4 style={{ marginBottom: 5 }}>{preset.meta?.title}</h4>
+      <img
+        style={{
+          width: "100%",
+          height: "auto",
+          borderRadius: 5,
+        }}
+        src={preset.meta.screenshot}
+        alt={preset.meta?.title}
+      />
     </div>
   );
 };
@@ -56,17 +67,6 @@ const ItemActions = styled.div`
       background-color: #203e6c;
     }
   }
-
-  .title {
-    padding: 6px;
-    color: white;
-    cursor: zoom-in;
-    button {
-      border: none;
-      background: none;
-      text-align: left;
-    }
-  }
 `;
 
 const DefaultRenderItem = ({
@@ -89,9 +89,6 @@ const DefaultRenderItem = ({
         {renderItemView({ preset })}
       </div>
       <ItemActions>
-        <div className="title">
-          <div style={{ textWrap: 'wrap' }}>{preset.meta.title}</div>
-        </div>
         <button className="primary" onClick={handleClick}>
           Add
         </button>
@@ -223,12 +220,12 @@ const BlocksBrowser = ({
   renderItem = (props) => <DefaultRenderItem {...props} />,
   renderItemView = (props) => <DefaultRenderItemView {...props} />,
 }: Props) => {
-  const [singleViewName, setSingleViewName] = React.useState<string>('');
-  const [filterTitle, setFilterTitle] = React.useState<string>('');
-  const [areaFilter, setAreaFilter] = React.useState<string>('all');
-  const [categoryFilter, setCategoryFilter] = React.useState<string>('all');
-  const [typesFilter, setTypesFilter] = React.useState<string>('all');
-  const [nameFilter, setNameFilter] = React.useState<string>('all');
+  const [singleViewName, setSingleViewName] = React.useState<string>("");
+  const [filterTitle, setFilterTitle] = React.useState<string>("");
+  const [areaFilter, setAreaFilter] = React.useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = React.useState<string>("all");
+  const [typesFilter, setTypesFilter] = React.useState<string>("all");
+  const [nameFilter, setNameFilter] = React.useState<string>("all");
 
   const searchOptions = presets.map((p) => ({ value: p.meta.title }));
   const areaOptionsSet = new Set(presets.map((p) => p.meta.area));
@@ -237,24 +234,24 @@ const BlocksBrowser = ({
   const nameOptionsSet = new Set(presets.map((p) => p.name));
 
   const handleSearchByName = (value) => {
-    setFilterTitle(value || '');
+    setFilterTitle(value || "");
   };
 
   const handleSelect = (setFn) => (e) => {
     const value = e.target.value;
-    console.log('🚀 ~ handleSelect ~ value:', value);
+    console.log("🚀 ~ handleSelect ~ value:", value);
     setFn(value);
   };
   const filteredPresets = presets
     .filter((p) => !!p.meta.title.match(filterTitle))
-    .filter((p) => (areaFilter === 'all' ? true : p.meta.area === areaFilter))
+    .filter((p) => (areaFilter === "all" ? true : p.meta.area === areaFilter))
     .filter((p) =>
-      categoryFilter === 'all' ? true : p.meta.category === categoryFilter,
+      categoryFilter === "all" ? true : p.meta.category === categoryFilter,
     )
     .filter((p) =>
-      typesFilter === 'all' ? true : p.value._type === typesFilter,
+      typesFilter === "all" ? true : p.value._type === typesFilter,
     )
-    .filter((p) => (nameFilter === 'all' ? true : p.name === nameFilter));
+    .filter((p) => (nameFilter === "all" ? true : p.name === nameFilter));
 
   const preset = singleViewName
     ? presets.find((p) => p.name === singleViewName)
@@ -262,12 +259,12 @@ const BlocksBrowser = ({
 
   const selectSinglePreset = (p?: Preset) => {
     if (!p) {
-      setSingleViewName('');
+      setSingleViewName("");
     }
     setSingleViewName(p!.name);
   };
 
-  const resetSinglePreset = () => setSingleViewName('');
+  const resetSinglePreset = () => setSingleViewName("");
 
   return (
     <Box>
@@ -297,7 +294,7 @@ const BlocksBrowser = ({
             space={[2, 2, 3]}
             onChange={handleSelect(setAreaFilter)}
           >
-            <option value={'all'}>All Areas</option>
+            <option value={"all"}>All Areas</option>
             {[...areaOptionsSet].map((v) => (
               <option key={v}>{v}</option>
             ))}
@@ -309,7 +306,7 @@ const BlocksBrowser = ({
             space={[2, 2, 3]}
             onChange={handleSelect(setCategoryFilter)}
           >
-            <option value={'all'}>All Categories</option>
+            <option value={"all"}>All Categories</option>
             {[...categoryOptionsSet].map((v) => (
               <option key={v}>{v}</option>
             ))}
@@ -321,7 +318,7 @@ const BlocksBrowser = ({
             space={[2, 2, 3]}
             onChange={handleSelect(setTypesFilter)}
           >
-            <option value={'all'}>All Types</option>
+            <option value={"all"}>All Types</option>
             {[...typesOptionsSet].map((v) => (
               <option key={v}>{v}</option>
             ))}
@@ -333,7 +330,7 @@ const BlocksBrowser = ({
             space={[2, 2, 3]}
             onChange={handleSelect(setNameFilter)}
           >
-            <option value={'all'}>All Names</option>
+            <option value={"all"}>All Names</option>
             {[...nameOptionsSet].map((v) => (
               <option key={v}>{v}</option>
             ))}
