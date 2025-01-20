@@ -1,4 +1,4 @@
-import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
+import type { Preset } from "@focus-reactive/sanity-template-selector";
 
 // import { createTemplate } from "@/lib/utils";
 

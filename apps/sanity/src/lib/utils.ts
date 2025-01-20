@@ -1,5 +1,5 @@
 import type { Page } from "@/generated/extracted-types";
-import type { Preset } from "@focus-reactive/sanity-plugin-cms-kit";
+import type { Preset } from "@focus-reactive/sanity-template-selector";
 import createImageUrlBuilder from "@sanity/image-url";
 
 import config from "../config";

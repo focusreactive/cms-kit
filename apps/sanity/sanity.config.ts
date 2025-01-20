@@ -1,4 +1,4 @@
-import { CMSKitContentBlocks } from "@focus-reactive/sanity-plugin-cms-kit";
+import { CMSKitContentBlocks } from "@focus-reactive/sanity-template-selector";
 import { visionTool } from "@sanity/vision";
 import { pages } from "@tinloof/sanity-studio";
 import { defineConfig } from "sanity";

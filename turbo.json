@@ -32,6 +32,14 @@
     "dev:turbo": {
       "cache": false,
       "persistent": true
+    },
+    "@focus-reactive/sanity-template-selector#build": {
+      "persistent": false,
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "sanity#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     }
   }
 }

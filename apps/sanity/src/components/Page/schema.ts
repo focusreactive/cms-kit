@@ -4,7 +4,7 @@ import {
   themeField,
 } from "@/contentSections/commonFields";
 import { sectionsPresets } from "@/contentSections/presets";
-import { defineBlocksField } from "@focus-reactive/sanity-plugin-cms-kit";
+import { defineBlocksField } from "@focus-reactive/sanity-template-selector";
 import { definePathname } from "@tinloof/sanity-studio";
 import { defineField, defineType, type FieldGroupDefinition } from "sanity";
 
