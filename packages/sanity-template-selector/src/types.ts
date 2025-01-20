@@ -1,4 +1,4 @@
-import { SchemaTypeDefinition } from 'sanity';
+import { SchemaTypeDefinition } from "sanity";
 
 export type Preset = {
   name: string;
@@ -24,14 +24,11 @@ export type RenderItemProps = {
   preset: Preset;
   onItemAppend: OnItemAppend;
   selectSinglePreset: (p?: Preset) => void;
-  renderItemView: (props: RenderItemViewProps) => React.ReactNode;
 };
 
 export type RenderViewProps = {
   presets: Array<Preset>;
   onItemAppend: OnItemAppend;
-  renderItem: (props: RenderItemProps) => React.ReactNode;
-  renderItemView: (props: RenderItemViewProps) => React.ReactNode;
   selectSinglePreset: (p?: Preset) => void;
 };
 
@@ -39,9 +36,6 @@ export type contentBlocksProps = {
   blockTypes: SchemaTypeDefinition[];
   name: string;
   params: object;
-  renderItem?: (props: RenderItemProps) => React.ReactNode;
-  renderItemView?: (props: RenderItemViewProps) => React.ReactNode;
-  renderView?: (props: RenderViewProps) => React.ReactNode;
 };
 
 export type ContentBlocksArg = {
@@ -51,8 +45,5 @@ export type ContentBlocksArg = {
 };
 
 export type BlocksInputCustomProps = {
-  renderItem?: (props: RenderItemProps) => React.ReactNode;
-  renderItemView?: (props: RenderItemViewProps) => React.ReactNode;
-  renderView?: (props: RenderViewProps) => React.ReactNode;
   presets: Preset[];
 };

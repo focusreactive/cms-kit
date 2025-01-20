@@ -73,7 +73,6 @@ const DefaultRenderItem = ({
   preset,
   onItemAppend,
   selectSinglePreset,
-  renderItemView,
 }: RenderItemProps) => {
   const handleClick = () => {
     onItemAppend(preset.value);
@@ -86,7 +85,7 @@ const DefaultRenderItem = ({
   return (
     <ItemContainer>
       <div className="preview" onClick={handleSelectSingle}>
-        {renderItemView({ preset })}
+        <DefaultRenderItemView preset={preset} />
       </div>
       <ItemActions>
         <button className="primary" onClick={handleClick}>
@@ -112,13 +111,6 @@ const PopupInnerContainer = styled.div`
   overflow-y: auto;
 `;
 
-const PopupToolbar = styled.div`
-  padding: 16px 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-`;
-
 const ViewColumnContainer = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
@@ -134,8 +126,6 @@ const RenderColumn = ({
   presets,
   position,
   columns,
-  renderItem,
-  renderItemView,
   onItemAppend,
   selectSinglePreset,
 }: RenderViewProps & { position: number; columns: number }) => {
@@ -144,12 +134,11 @@ const RenderColumn = ({
     <ViewColumnContainer>
       {presetsColumns.map((preset) => (
         <div key={preset.value._key}>
-          {renderItem({
-            preset,
-            onItemAppend,
-            selectSinglePreset,
-            renderItemView,
-          })}
+          <DefaultRenderItem
+            preset={preset}
+            onItemAppend={onItemAppend}
+            selectSinglePreset={selectSinglePreset}
+          />
         </div>
       ))}
     </ViewColumnContainer>
@@ -158,8 +147,6 @@ const RenderColumn = ({
 
 const DefaultRenderView = ({
   presets,
-  renderItem,
-  renderItemView,
   onItemAppend,
   selectSinglePreset,
 }: RenderViewProps) => {
@@ -174,8 +161,6 @@ const DefaultRenderView = ({
             <RenderColumn
               key={c}
               presets={presets}
-              renderItem={renderItem}
-              renderItemView={renderItemView}
               onItemAppend={onItemAppend}
               position={c}
               columns={columns}
@@ -207,51 +192,10 @@ type Props = {
   onClose: () => void;
   onItemAppend: OnItemAppend;
   presets: Preset[];
-  renderView?: (props: RenderViewProps) => React.ReactNode;
-  renderItem?: (props: RenderItemProps) => React.ReactNode;
-  renderItemView?: (props: RenderItemProps) => React.ReactNode;
 };
 
-const BlocksBrowser = ({
-  onClose,
-  onItemAppend,
-  presets,
-  renderView = (props) => <DefaultRenderView {...props} />,
-  renderItem = (props) => <DefaultRenderItem {...props} />,
-  renderItemView = (props) => <DefaultRenderItemView {...props} />,
-}: Props) => {
+const BlocksBrowser = ({ onClose, onItemAppend, presets }: Props) => {
   const [singleViewName, setSingleViewName] = React.useState<string>("");
-  const [filterTitle, setFilterTitle] = React.useState<string>("");
-  const [areaFilter, setAreaFilter] = React.useState<string>("all");
-  const [categoryFilter, setCategoryFilter] = React.useState<string>("all");
-  const [typesFilter, setTypesFilter] = React.useState<string>("all");
-  const [nameFilter, setNameFilter] = React.useState<string>("all");
-
-  const searchOptions = presets.map((p) => ({ value: p.meta.title }));
-  const areaOptionsSet = new Set(presets.map((p) => p.meta.area));
-  const categoryOptionsSet = new Set(presets.map((p) => p.meta.category));
-  const typesOptionsSet = new Set(presets.map((p) => p.value._type));
-  const nameOptionsSet = new Set(presets.map((p) => p.name));
-
-  const handleSearchByName = (value) => {
-    setFilterTitle(value || "");
-  };
-
-  const handleSelect = (setFn) => (e) => {
-    const value = e.target.value;
-    console.log("🚀 ~ handleSelect ~ value:", value);
-    setFn(value);
-  };
-  const filteredPresets = presets
-    .filter((p) => !!p.meta.title.match(filterTitle))
-    .filter((p) => (areaFilter === "all" ? true : p.meta.area === areaFilter))
-    .filter((p) =>
-      categoryFilter === "all" ? true : p.meta.category === categoryFilter,
-    )
-    .filter((p) =>
-      typesFilter === "all" ? true : p.value._type === typesFilter,
-    )
-    .filter((p) => (nameFilter === "all" ? true : p.name === nameFilter));
 
   const preset = singleViewName
     ? presets.find((p) => p.name === singleViewName)
@@ -272,88 +216,21 @@ const BlocksBrowser = ({
         <CloseCircleIcon />
       </CloseButton>
       <Stack>
-        <PopupToolbar>
-          <Autocomplete
-            style={{ width: 300, flexGrow: 2 }}
-            fontSize={[1, 1, 1]}
-            padding={[1, 1, 2]}
-            icon={SearchIcon}
-            id="search"
-            options={searchOptions}
-            placeholder="Search options"
-            value={filterTitle}
-            filterOption={(query, option) => {
-              handleSearchByName(query);
-              return !!option.value.match(query);
-            }}
-          />
-
-          <Select
-            fontSize={[1, 1, 1]}
-            padding={[1, 1, 2]}
-            space={[2, 2, 3]}
-            onChange={handleSelect(setAreaFilter)}
-          >
-            <option value={"all"}>All Areas</option>
-            {[...areaOptionsSet].map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Select>
-
-          <Select
-            fontSize={[1, 1, 1]}
-            padding={[1, 1, 2]}
-            space={[2, 2, 3]}
-            onChange={handleSelect(setCategoryFilter)}
-          >
-            <option value={"all"}>All Categories</option>
-            {[...categoryOptionsSet].map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Select>
-
-          <Select
-            fontSize={[1, 1, 1]}
-            padding={[1, 1, 2]}
-            space={[2, 2, 3]}
-            onChange={handleSelect(setTypesFilter)}
-          >
-            <option value={"all"}>All Types</option>
-            {[...typesOptionsSet].map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Select>
-
-          <Select
-            fontSize={[1, 1, 1]}
-            padding={[1, 1, 2]}
-            space={[2, 2, 3]}
-            onChange={handleSelect(setNameFilter)}
-          >
-            <option value={"all"}>All Names</option>
-            {[...nameOptionsSet].map((v) => (
-              <option key={v}>{v}</option>
-            ))}
-          </Select>
-        </PopupToolbar>
         {singleViewName ? (
           <Box>
-            {renderItem({
-              onItemAppend,
-              preset: preset!,
-              selectSinglePreset: resetSinglePreset,
-              renderItemView,
-            })}
+            <DefaultRenderItem
+              onItemAppend={onItemAppend}
+              preset={preset!}
+              selectSinglePreset={resetSinglePreset}
+            />
           </Box>
         ) : (
           <Box>
-            {renderView({
-              presets: filteredPresets,
-              onItemAppend,
-              renderItem,
-              renderItemView,
-              selectSinglePreset,
-            })}
+            <DefaultRenderView
+              presets={presets}
+              onItemAppend={onItemAppend}
+              selectSinglePreset={selectSinglePreset}
+            />
           </Box>
         )}
       </Stack>

@@ -1,10 +1,11 @@
-import React, { ComponentType } from 'react';
-import styled from 'styled-components';
-import { Button, Card, Grid, Popover, Stack, Text } from '@sanity/ui';
-import { AddIcon } from '@sanity/icons';
-import { ArrayFieldProps } from 'sanity';
-import BlocksBrowser from './BlocksBrowser';
-import { BlocksInputCustomProps, Preset } from './types';
+import React, { ComponentType } from "react";
+import { AddIcon } from "@sanity/icons";
+import { Button, Card, Grid, Popover, Stack, Text } from "@sanity/ui";
+import { ArrayFieldProps } from "sanity";
+import styled from "styled-components";
+
+import BlocksBrowser from "./BlocksBrowser";
+import { BlocksInputCustomProps } from "./types";
 
 const ButtonsContainer = styled.div`
   position: relative;
@@ -36,7 +37,7 @@ const ArrayFunctions = ({
   return (
     <Grid>
       <Popover
-        style={{ width: 'calc(100% - 48px)' }}
+        style={{ width: "calc(100% - 48px)" }}
         content={renderBlocksSelector({ onClose: handleClose })}
         padding={4}
         placement="top"
@@ -50,7 +51,7 @@ const ArrayFunctions = ({
             text="Add Block..."
             icon={AddIcon}
             onClick={handleClose}
-            disabled={window.location.pathname.startsWith('/presentation/')}
+            disabled={window.location.pathname.startsWith("/presentation/")}
           />
           <Button
             mode="ghost"
@@ -65,12 +66,10 @@ const ArrayFunctions = ({
   );
 };
 
-
-
 export const BlocksInput: ComponentType<ArrayFieldProps> = (
   props: ArrayFieldProps & BlocksInputCustomProps,
 ) => {
-  const inputProps: ArrayFieldProps['inputProps'] = {
+  const inputProps: ArrayFieldProps["inputProps"] = {
     ...props.inputProps,
     arrayFunctions: () => (
       <ArrayFunctions
@@ -80,13 +79,10 @@ export const BlocksInput: ComponentType<ArrayFieldProps> = (
               onClose={onClose}
               onItemAppend={props.inputProps.onItemAppend}
               presets={props.presets}
-              renderItemView={props.renderItemView}
-              renderItem={props.renderItem}
-              renderView={props.renderView}
             />
           );
         }}
-        onPaste={() => console.log('migrating')}
+        onPaste={() => console.log("migrating")}
       />
     ),
   };
