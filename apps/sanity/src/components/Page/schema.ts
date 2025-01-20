@@ -36,6 +36,7 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      group: CommonGroup.Content,
       name: "sectionsBody",
       type: "array",
       of: sections.map((section) => ({
