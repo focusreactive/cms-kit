@@ -4,11 +4,11 @@ import { Autocomplete, Box, Select, Stack } from "@sanity/ui";
 import styled from "styled-components";
 
 import {
-  OnItemAppend,
-  Preset,
-  RenderItemProps,
-  RenderItemViewProps,
-  RenderViewProps,
+  type OnItemAppend,
+  type Preset,
+  type RenderItemProps,
+  type RenderItemViewProps,
+  type RenderViewProps,
 } from "./types";
 
 const DefaultRenderItemView = ({ preset }: RenderItemViewProps) => {

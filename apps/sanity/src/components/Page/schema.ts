@@ -4,7 +4,7 @@ import {
   themeField,
 } from "@/contentSections/commonFields";
 import { sectionsPresets } from "@/contentSections/presets";
-import { defineBlocksField } from "@focus-reactive/sanity-template-selector";
+import { templateSelectorInput } from "@focus-reactive/sanity-template-selector";
 import { definePathname } from "@tinloof/sanity-studio";
 import { defineField, defineType, type FieldGroupDefinition } from "sanity";
 
@@ -35,17 +35,15 @@ export default defineType({
       group: CommonGroup.Content,
       validation: (Rule) => Rule.required(),
     }),
-    defineBlocksField({
+    defineField({
       name: "sectionsBody",
-      // add fields to the package
-      // title: "Sections",
-      // group: CommonGroup.Content,
+      type: "array",
       of: sections.map((section) => ({
         type: section.name,
       })),
-      options: {
+      components: templateSelectorInput({
         presets: Object.values(sectionsPresets).flat(),
-      },
+      }),
     }),
     defineField({
       name: "footer",

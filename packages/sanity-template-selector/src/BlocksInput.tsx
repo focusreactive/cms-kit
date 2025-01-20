@@ -1,11 +1,11 @@
-import React, { ComponentType } from "react";
+import React, { type ComponentType, type ReactElement } from "react";
 import { AddIcon } from "@sanity/icons";
 import { Button, Card, Grid, Popover, Stack, Text } from "@sanity/ui";
-import { ArrayFieldProps } from "sanity";
+import type { ArrayFieldProps } from "sanity";
 import styled from "styled-components";
 
 import BlocksBrowser from "./BlocksBrowser";
-import { BlocksInputCustomProps } from "./types";
+import type { BlocksInputCustomProps } from "./types";
 
 const ButtonsContainer = styled.div`
   position: relative;
@@ -66,9 +66,9 @@ const ArrayFunctions = ({
   );
 };
 
-export const BlocksInput: ComponentType<ArrayFieldProps> = (
-  props: ArrayFieldProps & BlocksInputCustomProps,
-) => {
+export const BlocksInput: ComponentType<
+  ArrayFieldProps & BlocksInputCustomProps
+> = (props: ArrayFieldProps & BlocksInputCustomProps) => {
   const inputProps: ArrayFieldProps["inputProps"] = {
     ...props.inputProps,
     arrayFunctions: () => (
@@ -96,4 +96,12 @@ export const BlocksInput: ComponentType<ArrayFieldProps> = (
       {props.inputProps.renderInput(inputProps)}
     </Stack>
   );
+};
+
+export const templateSelectorInput = (
+  params: object,
+): { field: (props: any) => ReactElement } => {
+  return {
+    field: (props) => <BlocksInput {...props} {...params} />,
+  };
 };

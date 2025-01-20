@@ -1,4 +1,4 @@
-import { SchemaTypeDefinition } from "sanity";
+import type { SchemaTypeDefinition } from "sanity";
 
 export type Preset = {
   name: string;

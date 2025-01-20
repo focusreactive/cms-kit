@@ -1,4 +1,3 @@
-import { CMSKitContentBlocks } from "@focus-reactive/sanity-template-selector";
 import { visionTool } from "@sanity/vision";
 import { pages } from "@tinloof/sanity-studio";
 import { defineConfig } from "sanity";
@@ -41,6 +40,5 @@ export default defineConfig({
     structureTool(),
     visionTool({ defaultApiVersion: config.sanity.apiVersion }),
     simplerColorInput(),
-    CMSKitContentBlocks({}),
   ],
 });
