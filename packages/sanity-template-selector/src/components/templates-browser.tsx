@@ -1,22 +1,24 @@
 import React from "react";
 import { CloseCircleIcon } from "@sanity/icons";
-import { Button, Flex } from "@sanity/ui";
+import { Button, Flex, Grid } from "@sanity/ui";
 
 import type { OnItemAppendType, Preset } from "../types";
 import { Template } from "./template";
 
 export function TemplatesBrowser({ onClose, onItemAppend, presets }: Props) {
   return (
-    <Flex justify="flex-end" gap={2}>
-      <Button padding={1} mode="bleed" onClick={onClose}>
-        <CloseCircleIcon
-          style={{
-            width: 24,
-            height: 24,
-          }}
-        />
-      </Button>
-      <Flex gap={2}>
+    <Flex justify="flex-end" direction="column" gap={2}>
+      <Flex justify="flex-end">
+        <Button padding={1} mode="bleed" onClick={onClose}>
+          <CloseCircleIcon
+            style={{
+              width: 24,
+              height: 24,
+            }}
+          />
+        </Button>
+      </Flex>
+      <Grid gap={4} columns={2}>
         {presets.map((preset) => (
           <Template
             key={preset.name}
@@ -24,7 +26,7 @@ export function TemplatesBrowser({ onClose, onItemAppend, presets }: Props) {
             onItemAppend={onItemAppend}
           />
         ))}
-      </Flex>
+      </Grid>
     </Flex>
   );
 }

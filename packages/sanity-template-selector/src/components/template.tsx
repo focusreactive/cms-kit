@@ -1,4 +1,5 @@
 import React from "react";
+import { AddIcon } from "@sanity/icons";
 import { Button, Card, Stack, Text } from "@sanity/ui";
 
 import type { OnItemAppendType, Preset } from "../types";
@@ -21,9 +22,7 @@ export function Template({ preset, onItemAppend }: TemplateProps) {
           src={preset.meta.screenshot}
           alt={preset.meta?.title}
         />
-        <Button size={2} className="primary" onClick={handleAppendClick}>
-          Add
-        </Button>
+        <Button mode="ghost" icon={AddIcon} onClick={handleAppendClick} />
       </Stack>
     </Card>
   );
