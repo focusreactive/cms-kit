@@ -9,14 +9,12 @@ export function TemplatesBrowser({ onClose, onItemAppend, presets }: Props) {
   return (
     <Flex justify="flex-end" direction="column" gap={2}>
       <Flex justify="flex-end">
-        <Button padding={1} mode="bleed" onClick={onClose}>
-          <CloseCircleIcon
-            style={{
-              width: 24,
-              height: 24,
-            }}
-          />
-        </Button>
+        <Button
+          padding={1}
+          mode="bleed"
+          onClick={onClose}
+          icon={CloseCircleIcon}
+        />
       </Flex>
       <Grid gap={4} columns={2}>
         {presets.map((preset) => (

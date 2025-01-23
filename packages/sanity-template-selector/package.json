@@ -9,6 +9,10 @@
     "watch": "swc src -d dist -D --watch",
     "lint": "eslint \"**/*.ts*\""
   },
+  "dependencies": {
+    "@sanity/icons": "3.5.7",
+    "@sanity/ui": "2.11.4"
+  },
   "devDependencies": {
     "@shared/eslint-config": "workspace:*",
     "@shared/tailwind-config": "workspace:*",
@@ -22,9 +26,7 @@
     "typescript": "5.2.2"
   },
   "peerDependencies": {
-    "@sanity/icons": "*",
-    "@sanity/ui": "*",
     "react": "*",
-    "sanity": "3.0.0"
+    "sanity": "*"
   }
 }
