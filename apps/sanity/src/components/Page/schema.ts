@@ -4,7 +4,7 @@ import {
   themeField,
 } from "@/contentSections/commonFields";
 import { sectionsPresets } from "@/contentSections/presets";
-import { templateSelectorInput } from "@focus-reactive/sanity-template-selector";
+import { getTemplatesSelectorComponents } from "@focus-reactive/sanity-template-selector";
 import { definePathname } from "@tinloof/sanity-studio";
 import { defineField, defineType, type FieldGroupDefinition } from "sanity";
 
@@ -42,7 +42,7 @@ export default defineType({
       of: sections.map((section) => ({
         type: section.name,
       })),
-      components: templateSelectorInput({
+      components: getTemplatesSelectorComponents({
         presets: Object.values(sectionsPresets).flat(),
       }),
     }),

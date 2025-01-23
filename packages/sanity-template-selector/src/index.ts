@@ -1,3 +1,2 @@
-export { templateSelectorInput } from "./BlocksInput";
-
+export * from "./get-components";
 export * from "./types";
