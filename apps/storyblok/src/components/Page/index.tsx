@@ -19,8 +19,8 @@ export default function PageContainer({ blok }: IPageContainerProps) {
   return (
     <div className={cn("bg-bgColor", theme)}>
       {globalHeader && <StoryblokStory story={globalHeader} />}
-      {sections.map((s) => (
-        <StoryblokServerComponent blok={s} key={s._uid} />
+      {sections.map((s, i) => (
+        <StoryblokServerComponent blok={s} key={s._uid + i} />
       ))}
       {globalFooter && <StoryblokStory story={globalFooter} />}
       {showCookieBanner && <CookieBanner />}
