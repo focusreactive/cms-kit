@@ -1,6 +1,5 @@
 {
   "marginBottom": "base",
-  "_key": "bb086e238e49",
   "items": [
     {
       "image": {
@@ -28,13 +27,11 @@
       },
       "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "style": "icon-title-inline",
-      "_key": "27dfd9f9f0e7",
       "title": "initial title"
     },
     {
       "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "style": "icon-title-inline",
-      "_key": "b40f414ea8fa644e894e76394547344f",
       "title": "initial title​​​​‌﻿",
       "image": {
         "image": {
@@ -72,7 +69,6 @@
       },
       "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups‌",
       "style": "icon-title-inline",
-      "_key": "4bb5da5b8b099082b60f068741dce0d0",
       "title": "initial title‌",
       "image": {
         "_type": "customImage",

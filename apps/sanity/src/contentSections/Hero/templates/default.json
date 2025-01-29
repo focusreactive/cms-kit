@@ -1,5 +1,4 @@
 {
-  "_key": "cc234d717c1a",
   "maxWidth": "base",
   "marginTop": "base",
   "_type": "section.hero",
@@ -12,7 +11,6 @@
       "variant": "primary",
       "href": "https://github.com/focusreactive/cms-kit",
       "text": "Get for free",
-      "_key": "f040752769eb",
       "type": "url"
     },
     {
@@ -22,8 +20,7 @@
       "_type": "customLink",
       "variant": "secondary",
       "href": "https://focusreactive.com/#mail-us",
-      "text": "Request a demo",
-      "_key": "2e6d45a8ffb90a9d2f617459b0058096"
+      "text": "Request a demo"
     }
   ],
   "marginBottom": "base",
@@ -33,14 +30,12 @@
     "alignVariant": "left",
     "text": [
       {
-        "_key": "803b91475d98",
         "markDefs": [],
         "children": [
           {
             "_type": "span",
             "marks": [],
-            "text": "In Notion, work feels better.",
-            "_key": "5d2397ebf0b70"
+            "text": "In Notion, work feels better."
           }
         ],
         "_type": "block",
@@ -51,14 +46,12 @@
         "children": [
           {
             "text": "With a little help from AI.",
-            "_key": "37bb7278b2010",
             "_type": "span",
             "marks": []
           }
         ],
         "_type": "block",
-        "style": "h2",
-        "_key": "349ddd94fa19"
+        "style": "h2"
       }
     ]
   },

@@ -4,10 +4,8 @@
   "_type": "section.logos",
   "alignVariant": "center​​​​‌",
   "marginBottom": "base​​​​‌",
-  "_key": "92db570ae9c5",
   "items": [
     {
-      "_key": "48f5d8c30794",
       "type": "logo",
       "image": {
         "aspectRatio": "3/1",
@@ -44,7 +42,6 @@
         "variant": "default",
         "url": null
       },
-      "_key": "09a3481afc801a6b1c7ba37c72d075f4",
       "type": "logo",
       "image": {
         "_type": "customImage",
@@ -84,8 +81,7 @@
         "size": "base​​​​‌",
         "_type": "customLink",
         "variant": "default"
-      },
-      "_key": "2d441c5f50af821299e3c4d177b0bcb1"
+      }
     },
     {
       "_type": "logoItem",
@@ -98,7 +94,6 @@
         "type": "internal",
         "target": "_self​​"
       },
-      "_key": "7cf2eb61d1ccb04c545eda2a7d8dfebd",
       "type": "logo",
       "image": {
         "_type": "customImage",
@@ -115,7 +110,6 @@
       }
     },
     {
-      "_key": "782a25eb852075058097ec214d1a2b8c",
       "type": "logo",
       "image": {
         "image": {
