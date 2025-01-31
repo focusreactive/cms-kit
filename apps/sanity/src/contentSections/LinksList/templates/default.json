@@ -1,28 +1,28 @@
 {
+  "_type": "section.linksList",
   "alignVariant": "left",
+  "maxWidth": "base",
+  "marginTop": "base",
+  "marginBottom": "base",
+  "backgroundColor": "none",
   "links": [
     {
       "target": "_blank",
-      "size": "base​​​",
+      "size": "base",
       "_type": "customLink",
       "variant": "primary",
-      "href": "https://google.com",
+      "href": "https://github.com/focusreactive/cms-kit",
       "text": "Get for free",
       "type": "url"
     },
     {
+      "type": "url",
+      "target": "_blank",
       "size": "base",
       "_type": "customLink",
       "variant": "secondary",
-      "href": "https://google.com",
-      "text": "Get for free",
-      "type": "url",
-      "target": "_blank​​​​"
+      "href": "https://focusreactive.com/#mail-us",
+      "text": "Request a demo"
     }
-  ],
-  "marginBottom": "base​​",
-  "marginTop": "base​​​​‌",
-  "maxWidth": "base​​​​‌",
-  "backgroundColor": "none",
-  "_type": "section.linksList"
+  ]
 }

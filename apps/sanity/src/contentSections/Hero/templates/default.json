@@ -1,7 +1,8 @@
 {
+  "_type": "section.hero",
   "maxWidth": "base",
   "marginTop": "base",
-  "_type": "section.hero",
+  "marginBottom": "base",
   "backgroundColor": "none",
   "links": [
     {
@@ -23,7 +24,6 @@
       "text": "Request a demo"
     }
   ],
-  "marginBottom": "base",
   "text": {
     "removeInnerMargins": true,
     "_type": "customRichText",
