@@ -1,9 +1,9 @@
 {
-  "maxWidth": "base​​​​‌‌",
-  "backgroundColor": "none‍",
+  "maxWidth": "base",
+  "backgroundColor": "none",
   "_type": "section.logos",
-  "alignVariant": "center​​​​‌",
-  "marginBottom": "base​​​​‌",
+  "alignVariant": "center",
+  "marginBottom": "base",
   "items": [
     {
       "type": "logo",
@@ -27,7 +27,7 @@
         "variant": "default",
         "text": "link text",
         "type": "internal",
-        "target": "_self​​",
+        "target": "_self",
         "url": null
       }
     },
@@ -36,8 +36,8 @@
       "link": {
         "text": "link text",
         "type": "internal",
-        "target": "_self​",
-        "size": "base​​​",
+        "target": "_self",
+        "size": "base",
         "_type": "customLink",
         "variant": "default",
         "url": null
@@ -69,16 +69,16 @@
             "_ref": "image-6e6cc1187326add2d8ddc718895981e3376338cc-716x200-webp"
           },
           "_type": "image",
-          "alt": "hygraph​​​​‌"
+          "alt": "hygraph"
         }
       },
       "_type": "logoItem",
       "link": {
-        "text": "link text​​​​",
+        "text": "link text",
         "url": null,
         "type": "internal",
-        "target": "_self​​​​‌",
-        "size": "base​​​​‌",
+        "target": "_self",
+        "size": "base",
         "_type": "customLink",
         "variant": "default"
       }
@@ -86,13 +86,13 @@
     {
       "_type": "logoItem",
       "link": {
-        "size": "base​​​​‌",
+        "size": "base",
         "_type": "customLink",
         "url": null,
         "variant": "default",
         "text": "link text",
         "type": "internal",
-        "target": "_self​​"
+        "target": "_self"
       },
       "type": "logo",
       "image": {
@@ -101,7 +101,7 @@
         "height": 300,
         "image": {
           "_type": "image",
-          "alt": "ghost​​",
+          "alt": "ghost",
           "asset": {
             "_ref": "image-14480f7e6cffd126f29ca432552f310e8b01559c-800x294-webp",
             "_type": "reference"
@@ -114,7 +114,7 @@
       "image": {
         "image": {
           "_type": "image",
-          "alt": "gatsby​",
+          "alt": "gatsby",
           "asset": {
             "_ref": "image-d356e78adf7bb1d8b313aedd75de21701a915eeb-2000x555-webp",
             "_type": "reference"
@@ -126,8 +126,8 @@
       },
       "_type": "logoItem",
       "link": {
-        "target": "_self​​​",
-        "size": "base​​​​‌",
+        "target": "_self",
+        "size": "base",
         "url": null,
         "_type": "customLink",
         "variant": "default",
@@ -136,5 +136,5 @@
       }
     }
   ],
-  "marginTop": "base​​​​‌"
+  "marginTop": "base"
 }

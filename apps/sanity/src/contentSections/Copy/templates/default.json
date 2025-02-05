@@ -1,8 +1,8 @@
 {
-  "marginBottom": "base​​​​‌",
+  "marginBottom": "base",
   "isReversedOnMobile": false,
-  "marginTop": "base​​​​‌",
-  "maxWidth": "base​​​​‌",
+  "marginTop": "base",
+  "maxWidth": "base",
   "backgroundColor": "none",
   "columns": [
     {
@@ -35,7 +35,7 @@
             {
               "_type": "span",
               "marks": ["strong"],
-              "text": " is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.​​​​‌"
+              "text": " is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."
             }
           ]
         },
@@ -56,7 +56,7 @@
             {
               "_type": "span",
               "marks": ["underline"],
-              "text": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.​​​​‌"
+              "text": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."
             }
           ],
           "_type": "block",

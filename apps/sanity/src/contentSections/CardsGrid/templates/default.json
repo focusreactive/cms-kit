@@ -13,11 +13,11 @@
           }
         },
         "_type": "customImage",
-        "aspectRatio": "1/1​​​​‌"
+        "aspectRatio": "1/1"
       },
       "_type": "defaultCard",
       "link": {
-        "target": "_self​​​​‌",
+        "target": "_self",
         "size": "base",
         "_type": "customLink",
         "url": null,
@@ -32,7 +32,7 @@
     {
       "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "style": "icon-title-inline",
-      "title": "initial title​​​​‌﻿",
+      "title": "initial title﻿",
       "image": {
         "image": {
           "asset": {
@@ -49,11 +49,11 @@
       "_type": "defaultCard",
       "link": {
         "variant": "default",
-        "text": "link text​​​​‌",
+        "text": "link text",
         "type": "internal",
-        "target": "_self​​​​‌",
+        "target": "_self",
         "url": null,
-        "size": "base​​​​‌",
+        "size": "base",
         "_type": "customLink"
       }
     },
@@ -61,22 +61,22 @@
       "link": {
         "_type": "customLink",
         "variant": "default",
-        "text": "link text​​​​‌‌",
+        "text": "link text",
         "type": "internal",
-        "target": "_self​​​​‌‌",
+        "target": "_self",
         "url": null,
-        "size": "base​​​​‌‌"
+        "size": "base"
       },
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups‌",
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
       "style": "icon-title-inline",
-      "title": "initial title‌",
+      "title": "initial title",
       "image": {
         "_type": "customImage",
-        "aspectRatio": "1/1​​​​‌‌",
+        "aspectRatio": "1/1",
         "height": 50,
         "image": {
           "_type": "image",
-          "alt": "icon‌",
+          "alt": "icon",
           "asset": {
             "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
             "_type": "reference"
@@ -86,9 +86,9 @@
       "_type": "defaultCard"
     }
   ],
-  "marginTop": "base‌",
-  "maxWidth": "base‌",
-  "backgroundColor": "none​​​​‌‌",
+  "marginTop": "base",
+  "maxWidth": "base",
+  "backgroundColor": "none",
   "columns": 3,
   "_type": "section.cardsGrid"
 }
