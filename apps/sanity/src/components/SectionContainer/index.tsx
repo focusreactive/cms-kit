@@ -42,19 +42,15 @@ export default function SectionContainer({
   return (
     <section
       id={_key}
-      className={cn(
-        "bg-bgColor overflow-x-hidden",
-        className,
-        cleanBackgroundColor, // implement using CSS variables
-        {
-          "mt-0": cleanMarginTop === "none",
-          "mb-0": cleanMarginBottom === "none",
-          "mt-sectionBase": cleanMarginTop === "base",
-          "mb-sectionBase": cleanMarginBottom === "base",
-          "mt-sectionLg": cleanMarginTop === "lg",
-          "mb-sectionLg": cleanMarginBottom === "lg",
-        },
-      )}
+      className={cn("overflow-x-hidden", className, cleanBackgroundColor, {
+        "bg-bgColor": cleanBackgroundColor && cleanBackgroundColor !== "none",
+        "mt-0": cleanMarginTop === "none",
+        "mb-0": cleanMarginBottom === "none",
+        "mt-sectionBase": cleanMarginTop === "base",
+        "mb-sectionBase": cleanMarginBottom === "base",
+        "mt-sectionLg": cleanMarginTop === "lg",
+        "mb-sectionLg": cleanMarginBottom === "lg",
+      })}
       style={style}
     >
       <div

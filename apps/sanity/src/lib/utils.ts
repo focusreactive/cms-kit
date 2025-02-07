@@ -1,5 +1,4 @@
 import type { Page } from "@/generated/extracted-types";
-import type { Preset } from "@focus-reactive/sanity-template-selector";
 import createImageUrlBuilder from "@sanity/image-url";
 
 import config from "../config";
@@ -33,7 +32,7 @@ export function createTemplate({
   title: string;
   category: string;
   screenshot: string;
-}): Preset {
+}) {
   return {
     name: title,
     value: json,

@@ -1,11 +1,9 @@
-import type { Preset } from "@focus-reactive/sanity-template-selector";
-
 import { createTemplate } from "@/lib/utils";
 
 import defaultPreview from "./default-preview.png";
 import defaultTemplate from "./default.json";
 
-export const heroTemplates: Preset[] = [
+export const heroTemplates = [
   createTemplate({
     title: "Hero default",
     json: defaultTemplate,
