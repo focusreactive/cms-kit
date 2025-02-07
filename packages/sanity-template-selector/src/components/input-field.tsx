@@ -15,7 +15,10 @@ function ArrayFunctions(props: InputFieldProps) {
   return (
     <>
       <Popover
-        style={{ width: "calc(100% - 48px)" }}
+        style={{
+          width: "calc(100% - 48px)",
+          maxWidth: "700px",
+        }}
         content={
           <TemplatesBrowser
             onClose={toggle}

@@ -1,6 +1,5 @@
 import React from "react";
-import { AddIcon } from "@sanity/icons";
-import { Button, Card, Stack, Text } from "@sanity/ui";
+import { Card, Stack, Text } from "@sanity/ui";
 
 import type { OnItemAppendType, Preset } from "../types";
 
@@ -10,19 +9,34 @@ export function Template({ preset, onItemAppend }: TemplateProps) {
   };
 
   return (
-    <Card>
-      <Stack space={2}>
-        <Text>{preset.meta?.title}</Text>
+    <Card
+      style={{
+        border: "1px solid #E0E0E0",
+        borderRadius: "4px",
+        padding: "8px",
+        cursor: "copy",
+      }}
+    >
+      <Stack space={2} onClick={handleAppendClick}>
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: "16px",
+            fontWeight: 500,
+            marginBottom: "8px",
+          }}
+        >
+          {preset.meta?.title}
+        </Text>
         <img
           style={{
             width: "100%",
             height: "auto",
-            borderRadius: 5,
+            borderRadius: 4,
           }}
           src={preset.meta.screenshot}
           alt={preset.meta?.title}
         />
-        <Button mode="ghost" icon={AddIcon} onClick={handleAppendClick} />
       </Stack>
     </Card>
   );
