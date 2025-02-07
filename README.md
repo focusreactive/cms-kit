@@ -1,4 +1,4 @@
-# CMS-Kit 🔧
+# CMS-Kit 🔧🔧🔧
 
 An endeavor accumulating the experience and best practices collected at [Focus Reactive](https://focusreactive.com/).
 The project serves the idea of making Headless CMS-based development accessible, comfortable, and fast.
@@ -56,6 +56,7 @@ The project serves the idea of making Headless CMS-based development accessible,
 ```
 
 8. Follow the interactive prompts in the CLI tool to:
+
    - Enter your Storyblok Personal Access Token
    - Enter your Vercel Personal Auth Token
    - Select your Vercel team
@@ -63,14 +64,14 @@ The project serves the idea of making Headless CMS-based development accessible,
    - Complete the space creation and configuration process
 
 9. Go to project settings in Vercel dashboard
-    - select **Git** section
-    - create deploy hook and copy it
-    - select **Environment variables** section
-    - add variables called **VERCEL_REDEPLOY_HOOK_URL** and assign it to created deploy hook value
-    - trigger rebuild
+   - select **Git** section
+   - create deploy hook and copy it
+   - select **Environment variables** section
+   - add variables called **VERCEL_REDEPLOY_HOOK_URL** and assign it to created deploy hook value
+   - trigger rebuild
 
 This process ensures that global component updates are displayed on all pages.
-   
+
 ### [TODO]: add video example
 
 ### Sanity
