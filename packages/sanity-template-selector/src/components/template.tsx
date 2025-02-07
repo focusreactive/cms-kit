@@ -2,10 +2,13 @@ import React from "react";
 import { Card, Stack, Text } from "@sanity/ui";
 
 import type { OnItemAppendType, Preset } from "../types";
+import { addKeysToNodes } from "../utils";
 
 export function Template({ preset, onItemAppend }: TemplateProps) {
   const handleAppendClick = () => {
-    onItemAppend(preset.value);
+    const processedValue = addKeysToNodes(preset.value);
+
+    onItemAppend(processedValue);
   };
 
   return (
