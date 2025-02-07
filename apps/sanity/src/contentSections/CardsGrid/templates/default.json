@@ -1,94 +1,112 @@
 {
+  "marginTop": "base",
+  "maxWidth": "base",
+  "backgroundColor": "dark",
+  "columns": 3,
+  "_type": "section.cardsGrid",
   "marginBottom": "base",
   "items": [
     {
       "image": {
-        "height": 50,
-        "image": {
-          "_type": "image",
-          "alt": "icon",
-          "asset": {
-            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
-            "_type": "reference"
-          }
-        },
-        "_type": "customImage",
-        "aspectRatio": "1/1"
-      },
-      "_type": "defaultCard",
-      "link": {
-        "target": "_self",
-        "size": "base",
-        "_type": "customLink",
-        "url": null,
-        "variant": "default",
-        "text": "link text",
-        "type": "internal"
-      },
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-      "style": "icon-title-inline",
-      "title": "initial title"
-    },
-    {
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-      "style": "icon-title-inline",
-      "title": "initial title﻿",
-      "image": {
-        "image": {
-          "asset": {
-            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
-            "_type": "reference"
-          },
-          "_type": "image",
-          "alt": "icon"
-        },
         "_type": "customImage",
         "aspectRatio": "1/1",
-        "height": 50
-      },
-      "_type": "defaultCard",
-      "link": {
-        "variant": "default",
-        "text": "link text",
-        "type": "internal",
-        "target": "_self",
-        "url": null,
-        "size": "base",
-        "_type": "customLink"
-      }
-    },
-    {
-      "link": {
-        "_type": "customLink",
-        "variant": "default",
-        "text": "link text",
-        "type": "internal",
-        "target": "_self",
-        "url": null,
-        "size": "base"
-      },
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-      "style": "icon-title-inline",
-      "title": "initial title",
-      "image": {
-        "_type": "customImage",
-        "aspectRatio": "1/1",
-        "height": 50,
+        "height": 100,
         "image": {
           "_type": "image",
-          "alt": "icon",
+          "alt": "butterfly",
           "asset": {
-            "_ref": "image-e41ba355dad1252ec04515b9f6a0195b31c9fbee-24x24-webp",
+            "_ref": "image-f54101e43aa75e6c291adc4aadd5547f05382cfc-140x140-png",
             "_type": "reference"
           }
         }
       },
-      "_type": "defaultCard"
+      "_type": "defaultCard",
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "link": {
+        "_type": "customLink",
+        "variant": "ghost-dark",
+        "href": "https://github.com/focusreactive/cms-kit",
+        "text": "learn more ->",
+        "type": "url",
+        "url": {
+          "_ref": "efb81724-c1ab-4130-b620-d0bc19cda893",
+          "_type": "reference"
+        },
+        "target": "_blank",
+        "size": "sm"
+      },
+      "rounded": "large",
+      "backgroundColor": "light-gray",
+      "alignVariant": "left",
+      "title": "3 minutes roll out"
+    },
+    {
+      "backgroundColor": "light-gray",
+      "image": {
+        "image": {
+          "_type": "image",
+          "alt": "butterfly",
+          "asset": {
+            "_ref": "image-f54101e43aa75e6c291adc4aadd5547f05382cfc-140x140-png",
+            "_type": "reference"
+          }
+        },
+        "_type": "customImage",
+        "aspectRatio": "1/1",
+        "height": 100
+      },
+      "rounded": "large",
+      "alignVariant": "left",
+      "_type": "defaultCard",
+      "title": "Best practices",
+      "link": {
+        "text": "learn more ->",
+        "type": "url",
+        "url": {
+          "_ref": "efb81724-c1ab-4130-b620-d0bc19cda893",
+          "_type": "reference"
+        },
+        "target": "_blank",
+        "size": "sm",
+        "_type": "customLink",
+        "variant": "ghost-dark",
+        "href": "https://github.com/focusreactive/cms-kit"
+      },
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."
+    },
+    {
+      "link": {
+        "url": {
+          "_ref": "efb81724-c1ab-4130-b620-d0bc19cda893",
+          "_type": "reference"
+        },
+        "target": "_blank",
+        "size": "sm",
+        "_type": "customLink",
+        "variant": "ghost-dark",
+        "href": "https://github.com/focusreactive/cms-kit",
+        "text": "learn more ->",
+        "type": "url"
+      },
+      "alignVariant": "left",
+      "backgroundColor": "light-gray",
+      "_type": "defaultCard",
+      "rounded": "large",
+      "title": "max performance",
+      "image": {
+        "image": {
+          "_type": "image",
+          "alt": "butterfly",
+          "asset": {
+            "_ref": "image-fea67ddaccb69a2b72bad4fdbcc4b42e88e971f8-86x80-png",
+            "_type": "reference"
+          }
+        },
+        "_type": "customImage",
+        "aspectRatio": "1/1",
+        "height": 100
+      },
+      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."
     }
-  ],
-  "marginTop": "base",
-  "maxWidth": "base",
-  "backgroundColor": "none",
-  "columns": 3,
-  "_type": "section.cardsGrid"
+  ]
 }

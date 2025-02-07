@@ -77,8 +77,5 @@ export default async function PageSlugRoute(props: Props) {
     notFound();
   }
 
-  console.log("pagepage");
-  console.log(page);
-
   return <Page data={page} />;
 }
