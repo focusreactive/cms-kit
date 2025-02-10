@@ -16,6 +16,8 @@ export type Preset = {
 
 export type OnItemAppendType = (item: { _key: string }) => void;
 
-export interface InputFieldProps extends ArrayFieldProps {
+export interface PresetProps {
   presets: Preset[];
 }
+
+export interface InputFieldProps extends ArrayFieldProps, PresetProps {}
