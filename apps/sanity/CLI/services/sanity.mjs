@@ -189,7 +189,7 @@ export async function fillSanityDataset() {
   const datasetName = envs.NEXT_PUBLIC_SANITY_DATASET;
 
   execSync(
-    `pnpm sanity dataset import initial-data.tar.gz ${datasetName}`,
+    `pnpm sanity dataset import src/generated/initial-data.tar.gz ${datasetName}`,
     // `SANITY_AUTH_TOKEN=${token} npx sanity dataset import initial-data.tar.gz ${datasetName}`,
     {
       stdio: "inherit",
