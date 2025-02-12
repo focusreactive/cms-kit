@@ -114,7 +114,7 @@ export async function createSanityCorsEntry(url) {
   const token = envs.SANITY_PERSONAL_AUTH_TOKEN;
   const projectId = envs.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
-  const urls = [url, "https://localhost:3000/"];
+  const urls = [url, "http://localhost:3000/"];
 
   for (const origin of urls) {
     const response = await fetch(
