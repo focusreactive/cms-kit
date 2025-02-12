@@ -3,16 +3,21 @@
 An endeavor accumulating the experience and best practices collected at [Focus Reactive](https://focusreactive.com/).
 The project serves the idea of making Headless CMS-based development accessible, comfortable, and fast.
 
+## Demo 👀
+
+- [Storyblok landing](https://turbo-cms-kit-storyblok.vercel.app/)
+- [Sanity landing](https://turbo-cms-kit-sanity.vercel.app/)
+
+## What you get
+
+1. New CMS project (**Storyblok**/**Sanity**), set up with vercel deployments
+2. Multiple ready to use components with different presets(styles)
+3. New Vercel project, deployed and configured with your CMS project
+4. Ready-to-use pages in different styles
+
 ## Quick start
 
-### What you get
-
-1. New Storyblok space, set up with vercel deployments
-2. 10+ ready to use components with different presets(styles)
-3. New Vercel project, deployed and configured with your new Storyblok space
-4. Multiple ready pages in different styles
-
-### Storyblok
+### Setup
 
 0. Since application will be deployed to Vercel, make sure your Github account is linked to Vercel. You can do it [here](https://github.com/settings/installations).
 
@@ -40,6 +45,12 @@ The project serves the idea of making Headless CMS-based development accessible,
    ```bash
    pnpm install
    ```
+
+**Choose CMS option for your project: Storyblok or Sanity. Follow corresponding steps.**
+
+Learn more about each of the CMS options in our detailed articles: [Storyblok CMS Overview](https://focusreactive.com/storyblok-cms-overview/), [Sanity CMS Overview](https://focusreactive.com/sanity-cms-overview/).
+
+### Storyblok
 
 6. Navigate to the Storyblok CLI directory:
 
@@ -76,12 +87,31 @@ This process ensures that global component updates are displayed on all pages.
 
 ### Sanity
 
-soon
+6. Navigate to the Storyblok CLI directory:
 
-## Demo 👀
+   ```bash
+   cd apps/sanity/CLI
+   ```
 
-- [Storyblok Landing](https://turbo-cms-kit-storyblok.vercel.app/)
-- [Sanity landing](https://turbo-cms-kit-sanity.vercel.app/)
+7. Run the setup script,
+
+⚠️ command should be executed from _apps/sanity/CLI_ (previous step), to consume correct environment variables:
+
+```bash
+   node sa.mjs
+```
+
+8. Follow the interactive prompts in the CLI tool to:
+
+   - Enter your Sanity Personal Access Token
+   - Select your Sanity organization
+   - Enter your Vercel Personal Auth Token
+   - Select your Vercel team
+   - Choose a project name
+   - Choose a dataset name
+   - Complete the project creation and configuration process
+
+🏁 Your CMS-based project is ready 🏁
 
 ## Core Features
 
@@ -171,17 +201,9 @@ cd apps/sanity
 7. Generate types for added section
 
 ```bash
-# For Storyblok you will additionally
-# need to log into CLI
 pnpm sb-login
 
 pnpm gen:types
-```
-
-⚠️If you generating types for Storyblok, make sure you logged into CLI⚠️
-
-```bash
-
 ```
 
 ### Update existing section
@@ -222,12 +244,9 @@ pnpm gen:types
    ```bash
    pnpm install
    ```
+4. Add and fill `.env` and `.env.local` file with proper data:
 
-### Environment variables
-
-#### Storyblok project
-
-Create `.env` and `.env.local` files in the root of your project and add the following variables:
+Create `.env` and `.env.local` files in project folder (apps/sanity or apps/storyblok) and add the following variables:
 
 .env
 
@@ -238,47 +257,31 @@ REPO_ID="[repo id]"
 REPO_NAME="[nickname]/[repo name]"
 ```
 
+**Storyblok project**
+
 .env.local
 
 ```bash
-# Created by Vercel CLI
 NEXT_PUBLIC_DOMAIN="https://localhost:4050"
 NEXT_PUBLIC_IS_PREVIEW="true"
 NEXT_PUBLIC_STORYBLOK_TOKEN="[storyblok space preview token]"
 NEXT_PUBLIC_STORYBLOK_API_GATE="https://api.storyblok.com/v2/cdn"
-VERCEL_REDEPLOY_HOOK_URL="https://api.vercel.com/v1/integrations/deploy/[KEY]/[KEY"
-SB_WEBHOOK_REVALIDATE_SECRET="[storyblok webhook revalidate key]"
 ```
 
-#### Sanity
-
-.env
-
-```bash
-REPO_PROD_BRANCH="main"
-REPO_TYPE="github"
-REPO_ID="[repo id]"
-REPO_NAME="[nickname]/[repo name]"
-```
+**Sanity project**
 
 .env.local
-**tbd**
 
-4. Create a new repo based on [cms-kit template](https://github.com/focusreactive/cms-kit)
-   ![Screenshot 2024-10-24 at 17 52 54](https://github.com/user-attachments/assets/b4773c54-bf7f-4697-ae7e-ada6e5163bf0)
-5. Pull repo locally
-6. Install packages
+```bash
+NEXT_PUBLIC_DOMAIN="http://localhost:3000"
+NEXT_PUBLIC_SANITY_PROJECT_ID="[project id]"
+NEXT_PUBLIC_SANITY_DATASET="production"
+NEXT_PUBLIC_SANITY_READ_TOKEN="[read token]"
+```
+
+5. Run dev server
    ```bash
-   pnpm install
+   pnpm dev
    ```
-7. Go to CLI folder
-   ```bash
-   cd apps/storyblok/cli
-   ```
-8. Execute command
-   ```bash
-   node sb.mjs
-   ```
-9. Follow steps
 
 Happy hacking 👾
