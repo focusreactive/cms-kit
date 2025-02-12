@@ -10,8 +10,6 @@ import { colorText } from "./styles.mjs";
 const envReadableNames = {
   VERCEL_PERSONAL_AUTH_TOKEN: "Vercel access token",
   SANITY_PERSONAL_AUTH_TOKEN: "Sanity access token",
-  NEXT_PUBLIC_SANITY_DATASET: "Sanity dataset",
-  SANITY_ORGANIZATION_ID: "Sanity organization",
 };
 
 const newTokenPages = {
@@ -130,11 +128,20 @@ export async function promptForVercelTeam() {
 export async function promptForSanityOrganization() {
   const env = loadEnvVariables();
 
+  const { isPersonal } = await inquirer.prompt({
+    type: "confirm",
+    name: "isPersonal",
+    message: "Do you want to create project on your personal account?",
+    default: true,
+  });
+
+  if (isPersonal) return;
+
   if (env["SANITY_ORGANIZATION_ID"]) {
     const { useCurrent } = await inquirer.prompt({
       type: "confirm",
       name: "useCurrent",
-      message: `${envReadableNames["SANITY_ORGANIZATION_ID"]} is already set. Do you want to keep the current value?`,
+      message: `Sanity organization is already set. Do you want to keep the current value?`,
       default: true,
     });
 
@@ -156,8 +163,6 @@ export async function promptForSanityOrganization() {
   });
 
   appendOrUpdateEnv("SANITY_ORGANIZATION_ID", organization.id);
-
-  return organization.id;
 }
 
 export async function promptForProjectName() {
@@ -194,23 +199,19 @@ export async function promptForDatasetName() {
     const { useCurrent } = await inquirer.prompt({
       type: "confirm",
       name: "useCurrent",
-      message: `${envReadableNames["NEXT_PUBLIC_SANITY_DATASET"]} is already set. Do you want to keep the current value?`,
+      message: `Dataset name is already set. Do you want to keep the current value?`,
       default: true,
     });
 
-    if (useCurrent) {
-      return env["NEXT_PUBLIC_SANITY_DATASET"];
-    }
+    if (useCurrent) return;
   }
 
   const { name } = await inquirer.prompt({
     type: "input",
     name: "name",
-    message: `Provide ${envReadableNames["NEXT_PUBLIC_SANITY_DATASET"]}:`,
+    message: `Enter dataset name:`,
     default: "production",
   });
 
   appendOrUpdateEnv("NEXT_PUBLIC_SANITY_DATASET", name);
-
-  return name;
 }

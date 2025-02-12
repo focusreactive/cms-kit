@@ -83,15 +83,10 @@ export async function getVercelProjects() {
   return data.projects;
 }
 
-export async function createVercelProject({ projectName, sbParams }) {
-  const { isPreview, storyblokToken, whRevalidateSecret } = sbParams;
+export async function createVercelProject({ projectName }) {
   const envs = loadEnvVariables();
-  const repoName = envs.REPO_NAME;
   const vercelToken = envs.VERCEL_PERSONAL_AUTH_TOKEN;
-  // const rollOutApiToken = envs.ROLL_OUT_API_TOKEN;
   const vercelTeamId = envs.VERCEL_TEAM_ID;
-
-  const finalProjectName = `${projectName}${isPreview ? "-preview" : ""}`;
 
   const response = await fetch(
     `https://api.vercel.com/v10/projects?teamId=${vercelTeamId}`,
@@ -102,27 +97,23 @@ export async function createVercelProject({ projectName, sbParams }) {
         Authorization: `Bearer ${vercelToken}`,
       },
       body: JSON.stringify({
-        name: finalProjectName,
+        name: projectName,
         environmentVariables: [
           {
             key: "NEXT_PUBLIC_DOMAIN",
-            value: `https://${finalProjectName}.vercel.app`,
+            value: `https://${projectName}.vercel.app`,
           },
           {
-            key: "NEXT_PUBLIC_STORYBLOK_API_GATE",
-            value: "https://api.storyblok.com/v2/cdn",
+            key: "NEXT_PUBLIC_SANITY_PROJECT_ID",
+            value: envs.NEXT_PUBLIC_SANITY_PROJECT_ID,
           },
           {
-            key: "NEXT_PUBLIC_IS_PREVIEW",
-            value: isPreview ? "true" : "false",
+            key: "NEXT_PUBLIC_SANITY_DATASET",
+            value: envs.NEXT_PUBLIC_SANITY_DATASET,
           },
           {
-            key: "NEXT_PUBLIC_STORYBLOK_TOKEN",
-            value: storyblokToken,
-          },
-          {
-            key: "SB_WEBHOOK_REVALIDATE_SECRET",
-            value: whRevalidateSecret,
+            key: "NEXT_PUBLIC_SANITY_READ_TOKEN",
+            value: envs.NEXT_PUBLIC_SANITY_READ_TOKEN,
           },
         ].map((v) => ({
           ...v,
@@ -131,11 +122,11 @@ export async function createVercelProject({ projectName, sbParams }) {
         })),
         framework: "nextjs",
         gitRepository: {
-          repo: repoName,
+          repo: envs.REPO_NAME,
           type: "github",
         },
-        buildCommand: "cd ../../ && turbo run build --filter=storyblok",
-        rootDirectory: "apps/storyblok",
+        buildCommand: "cd ../../ && turbo run build --filter=sanity",
+        rootDirectory: "apps/sanity",
         publicSource: false,
         installCommand: "pnpm i",
       }),
@@ -192,6 +183,4 @@ export async function createProjectDeployment({ name, id }) {
 
     throw new Error(`❌ HTTP error! Status: ${response.status}`);
   }
-
-  return data;
 }
