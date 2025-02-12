@@ -106,7 +106,7 @@ export async function createSanityReadToken() {
 
   const data = await response.json();
 
-  appendOrUpdateEnv("SANITY_READ_TOKEN", data.key);
+  appendOrUpdateEnv("NEXT_PUBLIC_SANITY_READ_TOKEN", data.key);
 }
 
 export async function createSanityCorsEntry(url) {
@@ -185,14 +185,12 @@ export async function createSanityDataset() {
 
 export async function fillSanityDataset() {
   const envs = loadEnvVariables();
-  const token = envs.SANITY_PERSONAL_AUTH_TOKEN;
   const datasetName = envs.NEXT_PUBLIC_SANITY_DATASET;
 
   execSync(
     `pnpm sanity dataset import src/generated/initial-data.tar.gz ${datasetName}`,
-    // `SANITY_AUTH_TOKEN=${token} npx sanity dataset import initial-data.tar.gz ${datasetName}`,
     {
-      stdio: "inherit",
+      stdio: "ignore",
     },
   );
 }

@@ -82,29 +82,28 @@ const main = async () => {
     });
     spinner.succeed("Successfully created Vercel deployment ✅");
 
-    // if (!process.env.DEBUG) {
-    //     spinner.start("Removing unrelated files ⏳");
-    //     execSync("rm -rf ../../storyblok", {
-    //       stdio: "ignore",
-    //     });
+    if (!process.env.DEBUG) {
+      spinner.start("Removing unrelated files ⏳");
+      execSync("rm -rf ../../storyblok", {
+        stdio: "ignore",
+      });
 
-    //     execSync("rm -rf ../src/generated/initial-data.tar.gz", {
-    //       stdio: "ignore",
-    //     });
+      execSync("rm -rf ../src/generated/initial-data.tar.gz", {
+        stdio: "ignore",
+      });
 
-    //     // remove pull-schemas script from package.json
-    //     modifyJsonFile("../package.json", (contentJson) => {
-    //       delete contentJson.scripts["update-dataset"];
+      modifyJsonFile("../package.json", (contentJson) => {
+        delete contentJson.scripts["update-dataset"];
 
-    //       return contentJson;
-    //     });
+        return contentJson;
+      });
 
-    //     execSync("git add -A && git commit -m 'Cleanup' && git push", {
-    //       stdio: "ignore",
-    //     });
+      execSync("git add -A && git commit -m 'Cleanup' && git push", {
+        stdio: "ignore",
+      });
 
-    //     spinner.succeed("Unrelated files removed ✅");
-    //   }
+      spinner.succeed("Unrelated files removed ✅");
+    }
 
     console.log(
       colorText("\nSanity project setup completed successfully! 🎉", "green"),
