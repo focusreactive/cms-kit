@@ -1,5 +1,6 @@
-import { loadEnvVariables } from "../utils/envs.mjs";
 import { execSync } from "child_process";
+
+import { appendOrUpdateEnv, loadEnvVariables } from "../utils/envs.mjs";
 
 export async function getSanityOrganizations() {
   const token = loadEnvVariables().SANITY_PERSONAL_AUTH_TOKEN;
@@ -74,10 +75,12 @@ export async function createSanityProject(displayName) {
     throw new Error("Error createSanityProject");
   }
 
-  appendOrUpdateEnv("NEXT_PUBLIC_SANITY_PROJECT_ID", sanityProjectId);
+  const data = await response.json();
+
+  appendOrUpdateEnv("NEXT_PUBLIC_SANITY_PROJECT_ID", data.id);
 }
 
-export async function createSanityReadToken(projectId) {
+export async function createSanityReadToken() {
   const envs = loadEnvVariables();
   const token = envs.SANITY_PERSONAL_AUTH_TOKEN;
   const projectId = envs.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -109,6 +112,7 @@ export async function createSanityReadToken(projectId) {
 export async function createSanityCorsEntry(url) {
   const envs = loadEnvVariables();
   const token = envs.SANITY_PERSONAL_AUTH_TOKEN;
+  const projectId = envs.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
   const urls = [url, "https://localhost:3000/"];
 
@@ -167,7 +171,7 @@ export async function createSanityDataset() {
   const response = await fetch(
     `https://api.sanity.io/v2021-06-07/projects/${projectId}/datasets/${datasetName}`,
     {
-      method: "PUT", 
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -7,12 +7,13 @@ import {
   createSanityReadToken,
   fillSanityDataset,
   getSanityUserInfo,
-  inviteUserToSanityProject,
+  //   inviteUserToSanityProject,
 } from "./services/sanity.mjs";
 import {
   createProjectDeployment,
   createVercelProject,
 } from "./services/vercel.mjs";
+import { loadEnvVariables } from "./utils/envs.mjs";
 import {
   promptForDatasetName,
   promptForProjectName,
@@ -62,9 +63,9 @@ const main = async () => {
     await createSanityCorsEntry(deploymentUrl);
     spinner.succeed("Sanity CORS entries created ✅");
 
-    spinner.start("Inviting user to Sanity project ⏳");
-    await inviteUserToSanityProject(sanityUserInfo.email);
-    spinner.succeed("User invited to Sanity project ✅");
+    // spinner.start("Inviting user to Sanity project ⏳");
+    // await inviteUserToSanityProject(sanityUserInfo.email);
+    // spinner.succeed("User invited to Sanity project ✅");
 
     spinner.start("Creating Sanity dataset ⏳");
     await createSanityDataset();
@@ -99,6 +100,8 @@ const main = async () => {
       colorText("Sanity Studio:", "cyan"),
       colorText(`${deploymentUrl}/studio`, "yellow"),
     );
+
+    const sanityProjectId = loadEnvVariables().NEXT_PUBLIC_SANITY_PROJECT_ID;
     console.log(
       colorText("Sanity dashboard:", "cyan"),
       colorText(
