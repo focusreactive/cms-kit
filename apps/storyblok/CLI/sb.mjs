@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import fs from "fs";
 import ora from "ora";
 
 import {

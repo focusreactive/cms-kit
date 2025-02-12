@@ -46,29 +46,6 @@ export async function localRollout({ inputs, secrets }) {
     ora().succeed("Email: " + email);
     ora().succeed("Final Project Name (Sanity): " + finalProjectName);
 
-    // const existingProjectsSpinner = ora(
-    //   "Fetching existing Vercel projects...",
-    // ).start();
-    // const existingProjects = 0;
-    // // const existingProjects = await getVercelProjects();
-    // existingProjectsSpinner.succeed("Fetched existing Vercel projects.");
-
-    // const allowToCreateProject =
-    //   existingProjects &&
-    //   existingProjects.length < parseInt(secrets.MAX_NUMBER_OF_PROJECTS || "5");
-    // const existingProject = existingProjects?.find(
-    //   (project) => project.name === finalProjectName,
-    // );
-
-    // if (!allowToCreateProject) {
-    //   ora().fail("Limit of the projects reached");
-    //   return;
-    // }
-    // if (existingProject) {
-    //   ora().fail("Project with this email already exists");
-    //   return;
-    // }
-
     let sanityProjectId = "";
     // Check if NEXT_PUBLIC_SANITY_PROJECT_ID is already set
     const existingSanityProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;

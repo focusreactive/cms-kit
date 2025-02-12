@@ -7,7 +7,6 @@
     "build": "next build",
     "lint": "next lint",
     "start": "next start",
-    "rollout": "./src/lib/rollout-tools/local/cli.mjs",
     "extract-schema": "pnpm sanity schema extract --path src/generated/extracted-schema.json --enforce-required-fields",
     "gen:types": "pnpm extract-schema && pnpm sanity typegen generate"
   },
