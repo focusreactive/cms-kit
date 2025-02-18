@@ -21,7 +21,7 @@ export default function SectionContainer({
     paddingX,
     paddingY,
     maxWidth,
-    backgroundColor,
+    theme,
     backgroundImage,
   } = sectionData;
 
@@ -36,27 +36,33 @@ export default function SectionContainer({
 
   const cleanMarginTop = stegaClean(marginTop);
   const cleanMarginBottom = stegaClean(marginBottom);
-  const cleanBackgroundColor = stegaClean(backgroundColor); // implement using CSS variables
+  const cleanPaddingX = stegaClean(paddingX);
+  const cleanPaddingY = stegaClean(paddingY);
+  const cleanTheme = stegaClean(theme);
   const cleanMaxWidth = stegaClean(maxWidth);
 
   return (
     <section
       id={_key}
-      className={cn("overflow-x-hidden", className, cleanBackgroundColor, {
-        "bg-bgColor": cleanBackgroundColor && cleanBackgroundColor !== "none",
+      className={cn("overflow-x-hidden", className, cleanTheme, {
+        "bg-bgColor": !!cleanTheme,
         "mt-0": cleanMarginTop === "none",
         "mb-0": cleanMarginBottom === "none",
         "mt-sectionBase": cleanMarginTop === "base",
         "mb-sectionBase": cleanMarginBottom === "base",
-        "mt-sectionLg": cleanMarginTop === "lg",
-        "mb-sectionLg": cleanMarginBottom === "lg",
+        "mt-sectionLarge": cleanMarginTop === "large",
+        "mb-sectionLarge": cleanMarginBottom === "large",
       })}
       style={style}
     >
       <div
         className={cn("mx-auto px-4 py-8", {
-          "px-0": paddingX === "none",
-          "py-0": paddingY === "none",
+          "px-0": cleanPaddingX === "none",
+          "py-0": cleanPaddingY === "none",
+          "px-sectionBase": cleanPaddingX === "base",
+          "py-sectionBase": cleanPaddingY === "base",
+          "px-sectionLarge": cleanPaddingX === "large",
+          "py-sectionLarge": cleanPaddingY === "large",
           "max-w-screen-xl": cleanMaxWidth === "base",
           "max-w-screen-sm": cleanMaxWidth === "small",
         })}

@@ -2,13 +2,13 @@ import type { SectionHero } from "@/generated/extracted-types";
 
 interface ISectionData {
   _key: string;
-  paddingX?: "none";
-  paddingY?: "none";
-  marginTop?: "none" | "base" | "lg";
-  marginBottom?: "none" | "base" | "lg";
+  paddingX?: "none" | "base" | "large";
+  paddingY?: "none" | "base" | "large";
+  marginTop?: "none" | "base" | "large";
+  marginBottom?: "none" | "base" | "large";
   maxWidth?: SectionHero["maxWidth"];
-  backgroundColor?: SectionHero["backgroundColor"];
   backgroundImage?: SectionHero["backgroundImage"];
+  theme?: SectionHero["theme"];
 }
 
 export interface ISectionContainerProps {

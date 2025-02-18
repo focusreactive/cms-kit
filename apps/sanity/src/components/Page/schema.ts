@@ -1,7 +1,7 @@
 import {
   CommonGroup,
   commonGroups,
-  themeField,
+  getThemeField,
 } from "@/contentSections/commonFields";
 import { sectionsPresets } from "@/contentSections/presets";
 import { getTemplatesSelectorComponents } from "@focus-reactive/sanity-template-selector";
@@ -19,7 +19,7 @@ export default defineType({
     commonGroups[1] as FieldGroupDefinition,
   ],
   fields: [
-    themeField,
+    getThemeField(true),
     defineField({
       type: "string",
       name: "title",

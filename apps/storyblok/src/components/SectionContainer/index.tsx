@@ -16,7 +16,7 @@ export default function SectionContainer({
     marginTop,
     marginBottom,
     maxWidth,
-    backgroundColor,
+    theme,
     backgroundImage,
   } = blok;
 
@@ -29,14 +29,14 @@ export default function SectionContainer({
   return (
     <section
       {...storyblokEditable(blok)}
-      className={cn("overflow-x-hidden", className, backgroundColor, {
-        "bg-bgColor": backgroundColor && backgroundColor !== "none",
+      className={cn("overflow-x-hidden", className, theme, {
+        "bg-bgColor": !!theme,
         "mt-0": marginTop === "none",
         "mb-0": marginBottom === "none",
         "mt-sectionBase": marginTop === "base",
         "mb-sectionBase": marginBottom === "base",
-        "mt-sectionLg": marginTop === "lg",
-        "mb-sectionLg": marginBottom === "lg",
+        "mt-sectionLarge": marginTop === "large",
+        "mb-sectionLarge": marginBottom === "large",
       })}
       id={_uid}
       style={style}
@@ -45,6 +45,10 @@ export default function SectionContainer({
         className={cn("mx-auto px-4 py-8", {
           "px-0": paddingX === "none",
           "py-0": paddingY === "none",
+          "px-sectionBase": paddingX === "base",
+          "py-sectionBase": paddingY === "base",
+          "px-sectionLarge": paddingX === "large",
+          "py-sectionLarge": paddingY === "large",
           "max-w-screen-xl": maxWidth === "base",
           "max-w-screen-sm": maxWidth === "small",
         })}

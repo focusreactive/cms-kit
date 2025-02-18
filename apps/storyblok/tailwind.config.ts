@@ -13,8 +13,12 @@ const config: Config = {
         primaryColor: "var(--primary)",
       },
       margin: {
-        sectionBase: "var(--section-margin-base)",
-        sectionLg: "var(--section-margin-lg)",
+        sectionBase: "var(--section-spacing-base)",
+        sectionLarge: "var(--section-spacing-large)",
+      },
+      padding: {
+        sectionBase: "var(--section-spacing-base)",
+        sectionLarge: "var(--section-spacing-large)",
       },
     },
   },

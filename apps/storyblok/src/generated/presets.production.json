@@ -1751,84 +1751,6 @@
       "description": ""
     },
     {
-      "id": 2312483,
-      "name": "Custom",
-      "preset": {
-        "_uid": "4ad7fd52-a576-4601-9889-04b46142e382",
-        "image": [
-          {
-            "_uid": "106d9002-a1c3-4f45-a2aa-8ff515b167e5",
-            "asset": {
-              "id": 17605716,
-              "alt": "",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/284x260/c2ace3521b/screenshot-2024-10-07-at-22-01-09.png",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {},
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "16/9"
-          }
-        ],
-        "links": [
-          {
-            "_uid": "40490f01-340c-429a-8658-7cc2a7cb4ac3",
-            "link": {
-              "id": "",
-              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
-            },
-            "text": "Vercel",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "eadbb7ad-f909-42d0-a16e-3279b3699734",
-            "link": {
-              "id": "",
-              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
-            },
-            "text": "Vercel",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "f52b36a2-29d5-4b86-a79b-ddd7d135b274",
-            "link": {
-              "id": "",
-              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
-            },
-            "text": "Vercel",
-            "variant": "default",
-            "component": "link"
-          }
-        ],
-        "component": "header",
-        "alignVariant": "right"
-      },
-      "component_id": 6394530,
-      "space_id": 293915,
-      "created_at": "2024-10-09T05:55:16.076Z",
-      "updated_at": "2024-10-09T05:55:16.076Z",
-      "image": "//a.storyblok.com/f/293915/x/a6940e5b40/screenshot-2024-10-09-at-07-55-06.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
       "id": 2313387,
       "name": "Custom",
       "preset": {
@@ -1983,101 +1905,21 @@
       "description": ""
     },
     {
-      "id": 2337115,
-      "name": "Default",
+      "id": 2312483,
+      "name": "Custom",
       "preset": {
-        "_uid": "611c74ab-fad3-4b2f-9ee6-ba15543e98d3",
-        "text": " Add your first product",
+        "_uid": "4ad7fd52-a576-4601-9889-04b46142e382",
         "image": [
           {
-            "_uid": "2e1f5bca-6409-430a-b3aa-1d9fc7ddbe18",
+            "_uid": "106d9002-a1c3-4f45-a2aa-8ff515b167e5",
             "asset": {
-              "id": 17902334,
-              "alt": "call us",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/960x960/6a4a666d16/call-us.svg",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {
-                "alt": "call us",
-                "title": "",
-                "source": "",
-                "copyright": ""
-              },
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "3/1"
-          }
-        ],
-        "number": "01",
-        "component": "stepGuideItem"
-      },
-      "component_id": 6492255,
-      "space_id": 293915,
-      "created_at": "2024-10-30T16:11:36.349Z",
-      "updated_at": "2024-10-30T16:20:36.391Z",
-      "image": "//a.storyblok.com/f/293915/x/8becce59cc/screenshot-2024-10-30-at-17-11-17.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
-      "id": 2311975,
-      "name": "Default",
-      "preset": {
-        "_uid": "a3e625da-0ccb-4b6a-a379-d3518d374e59",
-        "text": [
-          {
-            "_uid": "2089c560-f262-4041-ab8e-ce0a11b1595a",
-            "content": {
-              "type": "doc",
-              "content": [
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 2
-                  },
-                  "content": [
-                    {
-                      "text": "In Notion, work feels better.",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 2
-                  },
-                  "content": [
-                    {
-                      "text": "With a little help from AI.",
-                      "type": "text"
-                    }
-                  ]
-                }
-              ]
-            },
-            "component": "richText",
-            "alignVariant": "left",
-            "removeInnerMargins": true
-          }
-        ],
-        "image": [
-          {
-            "_uid": "77e8a791-b426-4101-8b49-0967cd14b17c",
-            "asset": {
-              "id": 17600300,
+              "id": 17605716,
               "alt": "",
               "name": "",
               "focus": "",
               "title": "",
               "source": "",
-              "filename": "https://a.storyblok.com/f/293915/2474x1318/df22f90af3/screenshot-2024-10-08-at-16-53-38.png",
+              "filename": "https://a.storyblok.com/f/293915/284x260/c2ace3521b/screenshot-2024-10-07-at-22-01-09.png",
               "copyright": "",
               "fieldtype": "asset",
               "meta_data": {},
@@ -2089,59 +1931,53 @@
         ],
         "links": [
           {
-            "_uid": "8db7eb44-74dc-4549-8e71-3386251dceb7",
+            "_uid": "40490f01-340c-429a-8658-7cc2a7cb4ac3",
             "link": {
               "id": "",
-              "url": "https://github.com/focusreactive/cms-kit",
+              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
               "linktype": "url",
               "fieldtype": "multilink",
-              "cached_url": "https://github.com/focusreactive/cms-kit"
+              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
             },
-            "size": "lg",
-            "text": "Get for free",
-            "variant": "primary",
+            "text": "Vercel",
+            "variant": "default",
             "component": "link"
           },
           {
-            "_uid": "9a58e8b0-bc14-4dd4-ae15-eb1d98d6bef8",
+            "_uid": "eadbb7ad-f909-42d0-a16e-3279b3699734",
             "link": {
               "id": "",
-              "url": "https://focusreactive.com/#mail-us",
-              "target": "_blank",
+              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
               "linktype": "url",
               "fieldtype": "multilink",
-              "cached_url": "https://focusreactive.com/#mail-us"
+              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
             },
-            "size": "lg",
-            "text": "Request a demo",
-            "variant": "secondary",
+            "text": "Vercel",
+            "variant": "default",
+            "component": "link"
+          },
+          {
+            "_uid": "f52b36a2-29d5-4b86-a79b-ddd7d135b274",
+            "link": {
+              "id": "",
+              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
+            },
+            "text": "Vercel",
+            "variant": "default",
             "component": "link"
           }
         ],
-        "title": "Write. Plan. Collab. Win.",
-        "maxWidth": "base",
-        "component": "hero",
-        "marginTop": "base",
-        "marginBottom": "base",
-        "backgroundColor": "none",
-        "backgroundImage": {
-          "id": null,
-          "alt": null,
-          "name": "",
-          "focus": null,
-          "title": null,
-          "source": null,
-          "filename": "",
-          "copyright": null,
-          "fieldtype": "asset",
-          "meta_data": {}
-        }
+        "component": "header",
+        "alignVariant": "right"
       },
-      "component_id": 6391508,
+      "component_id": 6394530,
       "space_id": 293915,
-      "created_at": "2024-10-08T15:14:26.596Z",
-      "updated_at": "2024-12-11T15:52:30.143Z",
-      "image": "//a.storyblok.com/f/293915/x/9118f0bd1b/screenshot-2024-10-08-at-17-14-10.png",
+      "created_at": "2024-10-09T05:55:16.076Z",
+      "updated_at": "2024-10-09T05:55:16.076Z",
+      "image": "//a.storyblok.com/f/293915/x/a6940e5b40/screenshot-2024-10-09-at-07-55-06.png",
       "color": "",
       "icon": "",
       "description": ""
@@ -2557,84 +2393,122 @@
       "description": ""
     },
     {
-      "id": 2344451,
+      "id": 2311975,
       "name": "Default",
       "preset": {
-        "_uid": "9393f0dd-9ddd-4dff-a278-7d15b933bb64",
-        "icon": [
+        "_uid": "a3e625da-0ccb-4b6a-a379-d3518d374e59",
+        "text": [
           {
-            "_uid": "1b27d5ef-edbb-407e-84b0-705826523200",
+            "_uid": "2089c560-f262-4041-ab8e-ce0a11b1595a",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "In Notion, work feels better.",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "With a little help from AI.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "richText",
+            "alignVariant": "left",
+            "removeInnerMargins": true
+          }
+        ],
+        "image": [
+          {
+            "_uid": "77e8a791-b426-4101-8b49-0967cd14b17c",
             "asset": {
-              "id": 17887678,
+              "id": 17600300,
               "alt": "",
               "name": "",
               "focus": "",
               "title": "",
               "source": "",
-              "filename": "https://a.storyblok.com/f/293915/68x80/a59904240e/personal.png",
+              "filename": "https://a.storyblok.com/f/293915/2474x1318/df22f90af3/screenshot-2024-10-08-at-16-53-38.png",
               "copyright": "",
               "fieldtype": "asset",
               "meta_data": {},
               "is_external_url": false
             },
             "component": "image",
-            "aspectRatio": "auto"
+            "aspectRatio": "16/9"
           }
         ],
-        "link": [
+        "links": [
           {
-            "_uid": "c5c30f6a-24d8-4c81-992e-85f2f6a06540",
+            "_uid": "8db7eb44-74dc-4549-8e71-3386251dceb7",
             "link": {
-              "id": "19601884-a1af-4b99-bd95-1a3ca01d5b7a",
-              "url": "",
-              "linktype": "story",
+              "id": "",
+              "url": "https://github.com/focusreactive/cms-kit",
+              "linktype": "url",
               "fieldtype": "multilink",
-              "cached_url": "home"
+              "cached_url": "https://github.com/focusreactive/cms-kit"
             },
-            "size": "base",
-            "text": "Sign up",
-            "variant": "ghost",
+            "size": "lg",
+            "text": "Get for free",
+            "variant": "primary",
+            "component": "link"
+          },
+          {
+            "_uid": "9a58e8b0-bc14-4dd4-ae15-eb1d98d6bef8",
+            "link": {
+              "id": "",
+              "url": "https://focusreactive.com/#mail-us",
+              "target": "_blank",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://focusreactive.com/#mail-us"
+            },
+            "size": "lg",
+            "text": "Request a demo",
+            "variant": "secondary",
             "component": "link"
           }
         ],
-        "name": "Free",
-        "price": "0",
-        "popular": false,
-        "features": [
-          {
-            "_uid": "4d86c6fd-abf9-4e5c-86f0-1985f0d5eeb1",
-            "text": "Collaborative workspace",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "b55484df-bbbe-4b6a-9cbc-01cd15a0c4d6",
-            "text": "Integrate with Slack, GitHub & more",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "8f87924e-f474-4d71-b694-e87a1143910b",
-            "text": "Basic page analytics",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "4b9b385e-962b-42ce-84ec-61635548bdbe",
-            "text": "7 day page history",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "56c0cc89-2993-40fa-bb9b-910c9d1d5961",
-            "text": "Invite 10 guests",
-            "component": "pricingTableTierFeature"
-          }
-        ],
-        "component": "pricingTableTier",
-        "description": "For individuals to organize personal projects and life"
+        "title": "Write. Plan. Collab. Win.",
+        "maxWidth": "base",
+        "component": "hero",
+        "marginTop": "base",
+        "marginBottom": "base",
+        "backgroundColor": "none",
+        "backgroundImage": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "source": null,
+          "filename": "",
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {}
+        }
       },
-      "component_id": 6489131,
+      "component_id": 6391508,
       "space_id": 293915,
-      "created_at": "2024-11-07T10:17:11.807Z",
-      "updated_at": "2024-12-11T15:56:00.294Z",
-      "image": "//a.storyblok.com/f/293915/x/a3a979a7d8/screenshot-2024-11-07-at-11-16-47.png",
+      "created_at": "2024-10-08T15:14:26.596Z",
+      "updated_at": "2024-12-11T15:52:30.143Z",
+      "image": "//a.storyblok.com/f/293915/x/9118f0bd1b/screenshot-2024-10-08-at-17-14-10.png",
       "color": "",
       "icon": "",
       "description": ""
@@ -7158,109 +7032,6 @@
       "created_at": "2024-09-10T14:40:48.975Z",
       "updated_at": "2024-09-10T14:42:00.966Z",
       "image": "//a.storyblok.com/f/293915/x/70d70bca47/screenshot-2024-09-10-at-16-40-30.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
-      "id": 2344452,
-      "name": "Popular",
-      "preset": {
-        "_uid": "39341603-eddb-4ea5-9695-2c2cf60d27b0",
-        "icon": [
-          {
-            "_uid": "88d2babf-6b6d-495e-9e0e-1305355eaad1",
-            "asset": {
-              "id": 17887679,
-              "alt": "",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/86x80/d9b65aa6fe/pro.png",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {},
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "auto"
-          }
-        ],
-        "link": [
-          {
-            "_uid": "3677d28c-79cc-422c-b00f-b22b0e8e1120",
-            "link": {
-              "id": "19601884-a1af-4b99-bd95-1a3ca01d5b7a",
-              "url": "",
-              "linktype": "story",
-              "fieldtype": "multilink",
-              "cached_url": "home"
-            },
-            "size": "base",
-            "text": "Get started",
-            "variant": "ghost-dark",
-            "component": "link"
-          }
-        ],
-        "name": "Plus",
-        "price": "",
-        "popular": true,
-        "features": [
-          {
-            "_uid": "41d6dd7f-2e84-47ae-92d3-f718c113c536",
-            "text": "Everything in Free +",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "ef6ef543-367f-4f95-b05e-a46aea89b402",
-            "text": "Unlimited blocks for teams",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "ffad141b-683a-4f2c-9945-5c58e42cb58b",
-            "text": "Unlimited file uploads",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "5f8a9a9b-f6ca-4075-b9ba-7ed27db820c7",
-            "text": "30 day page history",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "9dbf9650-0c2b-4983-bc3b-2b76b55c8370",
-            "text": "Invite 100 guests",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "1487efa6-51e2-4cbd-bca1-ce187b353ac9",
-            "text": "Synced databases with 3rd party apps",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "8ff9fb9e-53f8-49f5-ac78-a03465caa726",
-            "text": "Custom websites",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "37730a48-b948-4638-bdcf-66e86697fec9",
-            "text": "Custom automations",
-            "component": "pricingTableTierFeature"
-          },
-          {
-            "_uid": "362d31e3-8d48-4250-b965-9ba57bd13c0c",
-            "text": "Charts & dashboards",
-            "component": "pricingTableTierFeature"
-          }
-        ],
-        "component": "pricingTableTier",
-        "description": "For small teams and professionals to work together"
-      },
-      "component_id": 6489131,
-      "space_id": 293915,
-      "created_at": "2024-11-07T10:17:30.100Z",
-      "updated_at": "2024-12-11T15:56:08.486Z",
-      "image": "//a.storyblok.com/f/293915/x/669572a185/screenshot-2024-11-07-at-11-16-53.png",
       "color": "",
       "icon": "",
       "description": ""

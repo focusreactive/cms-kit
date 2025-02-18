@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --section-margin-base: 24px;
-  --section-margin-lg: 72px;
+  --section-spacing-base: 24px;
+  --section-spacing-large: 72px;
 }
 
 .light {
