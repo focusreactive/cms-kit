@@ -7,7 +7,7 @@ import {
 export const prepareImageProps = (props?: ImageStoryblok): IImageProps => {
   if (!props) {
     return {
-      src: "",
+      src: null as unknown as string,
       alt: "",
       aspectRatio: ImageAspectRatio["16/9"],
       fill: true,

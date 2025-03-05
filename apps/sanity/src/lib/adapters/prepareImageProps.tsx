@@ -21,7 +21,7 @@ export const urlForImage = (source: CustomImage["image"]) => {
 export const prepareImageProps = (props?: CustomImage): IImageProps => {
   if (!props || !props.image)
     return {
-      src: "",
+      src: null as unknown as string,
       alt: "",
       aspectRatio: ImageAspectRatio["1/1"],
       fill: true,
