@@ -531,8 +531,6 @@ export async function uploadBackupDatasources(spaceId) {
           );
         }
       }
-
-      return newDatasource;
     } catch (error) {
       console.error(
         `❌ Failed to create datasource ${datasourceId}: ${error.message}`,
