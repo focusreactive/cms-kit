@@ -41,29 +41,20 @@
           "required": false,
           "options": [
             {
-              "_uid": "ec9fcb5f-ccf5-4551-877e-a06a239dd952",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "ec7f13b1-970c-4731-87cc-501e629fbf02",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "b4ba3cbf-7da0-44a0-b790-607e03a0773a",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "16308391-5db4-40c5-895a-9a967931c67a",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "4a01b294-a9e9-4170-92af-07b7ca55fd99",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "default_value": "light",
@@ -81,18 +72,15 @@
           "description": "Outer top spacing",
           "options": [
             {
-              "_uid": "89d2bf05-96c7-4caf-8bff-75ba13a33919",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "2c12d4f8-f0dd-4ad1-ad77-3f82eb386434",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "1e7bd460-7448-4830-b25f-83d5a940cad2",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -113,7 +101,21 @@
           "exclude_empty_option": true,
           "description": "Inner horizontal spacing",
           "tooltip": true,
-          "id": "hTNO88egTeyZz434dCXCtg"
+          "id": "hTNO88egTeyZz434dCXCtg",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -125,7 +127,21 @@
           "exclude_empty_option": true,
           "datasource_slug": "spacings",
           "default_value": "base",
-          "id": "wod8czF4Rb6BLxsZvQFltQ"
+          "id": "wod8czF4Rb6BLxsZvQFltQ",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -135,18 +151,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "5f71623c-e718-44c9-b37e-9a2c519efe2b",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "48d8b294-c983-4477-abb5-ec538f72b1f0",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "24b0be3d-6710-4b27-8c7e-ac03e2576c8a",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -351,29 +364,20 @@
           "use_uuid": true,
           "options": [
             {
-              "_uid": "633b4251-ea78-415f-a048-d3e2815a98a0",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "8ebfdadf-044f-46ca-be06-0bf92fbabc5b",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "a90c7e00-f2e2-40eb-b33d-173963533078",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "bcf188ac-f83f-4815-a51b-d03bfb80ab49",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "29e81e81-5469-4ec4-8c82-7a004bdd9498",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "default_value": "light",
@@ -418,18 +422,15 @@
           "exclude_empty_option": true,
           "options": [
             {
-              "_uid": "30d26c32-e2c0-4af7-9bc8-416d586233eb",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "127a679c-064f-47fc-82ef-ef4db1ec19e3",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "26901018-526c-4f05-9cda-5cbcbb43a587",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -450,7 +451,21 @@
           "datasource_slug": "spacings",
           "default_value": "base",
           "exclude_empty_option": true,
-          "id": "4__j_SK6Su2BAR5RmlqKGA"
+          "id": "4__j_SK6Su2BAR5RmlqKGA",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -463,7 +478,21 @@
           "default_value": "base",
           "exclude_empty_option": true,
           "id": "aCa8PlGUTTac9dFqqbMrqg",
-          "tooltip": true
+          "tooltip": true,
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -474,18 +503,15 @@
           "default_value": "base",
           "options": [
             {
-              "_uid": "611d7d6a-32ac-44cb-9e97-ee50468de3b1",
               "value": "none",
               "name": "none"
             },
             {
-              "_uid": "f594c9ca-122e-45c1-9cef-3b406c32939d",
-              "name": "base",
-              "value": "base"
+              "value": "base",
+              "name": "base"
             },
             {
-              "_uid": "7a630ae8-ad64-47aa-8e3e-e6f69d9c8004",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -600,29 +626,20 @@
           "default_value": "light",
           "options": [
             {
-              "_uid": "f618a465-463d-4ec6-83d7-a08568998849",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "80b2dd44-743d-462c-9d24-858dc4fc48aa",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "6600e39b-1b42-410c-85cb-6b2ad3a1f81e",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "9a5de758-45e1-4314-b94e-721e4b93dda7",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "d33c9287-95ac-43f6-a4d9-53793f87794b",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "required": false,
@@ -638,18 +655,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "575736ba-6f58-4a4b-b2c8-2d0c576a5461",
               "value": "none",
               "name": "none"
             },
             {
-              "_uid": "2ebbe333-09ab-4bb4-84e7-d1d17d883942",
-              "name": "base",
-              "value": "base"
+              "value": "base",
+              "name": "base"
             },
             {
-              "_uid": "5d121815-9a88-4779-b56f-48c4baebbbae",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -673,7 +687,21 @@
           "datasource_slug": "spacings",
           "exclude_empty_option": true,
           "default_value": "base",
-          "id": "AQZidd3DSB2ZYbyuiRVMgg"
+          "id": "AQZidd3DSB2ZYbyuiRVMgg",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -686,7 +714,21 @@
           "default_value": "base",
           "required": true,
           "id": "0CaUqbPuRJuQvDbpaULTsA",
-          "tooltip": true
+          "tooltip": true,
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -695,18 +737,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "a079ce4b-ef6b-4469-8e7c-5dc55f0bb7d2",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "167e1b4e-892f-41dc-8a61-28976236ef52",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "e3bd27f7-9aa5-46ab-8ed4-96d9787361ff",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -977,29 +1016,20 @@
           "use_uuid": true,
           "options": [
             {
-              "_uid": "ac861806-c651-47c4-be5b-5b21661045c1",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "01c3e13c-f439-4126-8ee6-0a95fa8cb24d",
-              "value": "light-gray",
-              "name": "light gray"
-            },
-            {
-              "_uid": "9aca0b94-d5c0-4352-9174-3dc6517f82c3",
-              "value": "dark-gray",
-              "name": "dark gray"
-            },
-            {
-              "_uid": "ea8810e4-ddec-4323-bad2-f6eba95a8c50",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "2f3ee3ae-600b-44b9-8f46-1c4c6ca43c85",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "required": false,
@@ -1021,18 +1051,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "bb118ed8-0c4d-4168-9d90-1ae5ada4716a",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "847bcc05-3524-4ebd-9abf-8d7ae03e3dd3",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "c6fe7939-4db1-4db1-a95d-a5115f18ebec",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -1055,7 +1082,21 @@
           "default_value": "base",
           "description": "Inner horizontal spacing",
           "tooltip": true,
-          "id": "QIAlOn-lTGyEt7Erdv_hWw"
+          "id": "QIAlOn-lTGyEt7Erdv_hWw",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -1068,7 +1109,21 @@
           "description": "Inner vertical spacing",
           "tooltip": true,
           "default_value": "base",
-          "id": "UsArIrWFTw6OgOaXsONyKA"
+          "id": "UsArIrWFTw6OgOaXsONyKA",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -1078,18 +1133,15 @@
           "exclude_empty_option": true,
           "options": [
             {
-              "_uid": "2041c484-aeed-412b-bfae-1239e6a1303a",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "20ff7466-d69a-4659-995e-4240ff9bef69",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "6d3f51ae-0690-4c1d-a250-e2f6245aaf51",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -1569,29 +1621,20 @@
           "use_uuid": true,
           "options": [
             {
-              "_uid": "af7b32bf-2ad6-468b-a999-fc75dd0eb3f5",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "703436ba-db46-42cf-8235-bd8cc1b2e84f",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "a4704b39-4200-4b0a-a4a0-37f27734b4db",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "a23fb8a1-26c6-4709-b22b-5f76c1c8cd10",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "c762737d-b1ad-489e-9f00-161474646d3d",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "required": false,
@@ -1608,18 +1651,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "34d918ff-3c2f-4a6d-9cec-36568ca4f7f5",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "c9bd85c9-e197-4ef5-ae82-92a4ef58595e",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "819537c1-7fad-43cc-8cdf-11447c67ecea",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -1642,7 +1682,21 @@
           "datasource_slug": "spacings",
           "exclude_empty_option": true,
           "default_value": "base",
-          "id": "MHmpDTITQ5a3mauKVP09Bg"
+          "id": "MHmpDTITQ5a3mauKVP09Bg",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -1655,7 +1709,21 @@
           "datasource_slug": "spacings",
           "exclude_empty_option": true,
           "default_value": "base",
-          "id": "X9Te1KU0Rca79L1xCNATDQ"
+          "id": "X9Te1KU0Rca79L1xCNATDQ",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -1664,18 +1732,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "70bb36cf-0a37-4554-b21b-e193340b99cf",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "508d8111-9618-4344-bdd1-b5175b86d7e0",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "79d829a8-7074-415d-bc8b-fb158b76fd6c",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -2034,29 +2099,20 @@
           "required": false,
           "options": [
             {
-              "_uid": "e6f38028-41eb-4862-8661-fc762b1e71b1",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "17f090fa-ad5f-482f-8910-e33e5a26072e",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "27e9a1a3-c58f-4190-b3e3-67e13a1409a9",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "74588d58-96bd-4377-8334-42d7f2be792d",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "76e9c086-f60a-4797-b489-4c915fdcef2b",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "default_value": "light",
@@ -2099,18 +2155,15 @@
           "required": true,
           "options": [
             {
-              "_uid": "ca5ba7f1-b69e-489c-b1d4-6ee006b039f8",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "2a94cacb-180f-4ac9-9f6a-431fd5bb528d",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "7f0e8272-1214-45b2-864a-9fb91603def4",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -2132,7 +2185,21 @@
           "datasource_slug": "spacings",
           "exclude_empty_option": true,
           "default_value": "base",
-          "id": "vPJ-SMwQRjm0lfEkqW4NFg"
+          "id": "vPJ-SMwQRjm0lfEkqW4NFg",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -2145,7 +2212,21 @@
           "datasource_slug": "spacings",
           "exclude_empty_option": true,
           "default_value": "base",
-          "id": "dUTGyhd3S-SHRW9m4g3OJA"
+          "id": "dUTGyhd3S-SHRW9m4g3OJA",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -2154,18 +2235,15 @@
           "description": "Outer bottom spacing",
           "options": [
             {
-              "_uid": "ba24a11a-7496-401d-b3e1-dc04831eda9e",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "13b2d511-1d08-4e81-86a1-488169391698",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "b814a113-ec21-4159-829c-ada7bd243821",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -2368,29 +2446,20 @@
           "use_uuid": true,
           "options": [
             {
-              "_uid": "9bfa4225-69b3-4c26-96b3-86cf61504915",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "489df1a0-179b-4903-8bd3-080d4c03ba41",
-              "value": "light-gray",
-              "name": "light-gray"
-            },
-            {
-              "_uid": "ae934643-876a-47ef-97a4-cfb146e573d3",
-              "value": "dark-gray",
-              "name": "dark-gray"
-            },
-            {
-              "_uid": "1f3551e5-692a-44be-80ba-d120aad2ab63",
               "value": "dark",
               "name": "dark"
             },
             {
-              "_uid": "9069a591-dd12-45d5-a807-27f6f1b0ae5a",
-              "value": "none",
-              "name": "none"
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "default_value": "light",
@@ -2446,18 +2515,15 @@
           "description": "Outer top spacing",
           "options": [
             {
-              "_uid": "27e24538-9d78-4dcc-aa92-f6449efe0b97",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "66c39ff6-3daf-4f7e-a082-b40f2161a4f8",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "41500abe-a7c7-46a6-bc56-ad655389e0b9",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -2479,7 +2545,21 @@
           "exclude_empty_option": true,
           "default_value": "base",
           "description": "Inner horizontal spacing",
-          "id": "7wTRY_lERAq0ZgRjU-Ae4w"
+          "id": "7wTRY_lERAq0ZgRjU-Ae4w",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "paddingY": {
           "type": "option",
@@ -2492,7 +2572,21 @@
           "source": "internal",
           "datasource_slug": "spacings",
           "default_value": "base",
-          "id": "CL0wT-QnQBmYTShYdfh3eQ"
+          "id": "CL0wT-QnQBmYTShYdfh3eQ",
+          "options": [
+            {
+              "value": "none",
+              "name": "none"
+            },
+            {
+              "value": "base",
+              "name": "base"
+            },
+            {
+              "value": "large",
+              "name": "large"
+            }
+          ]
         },
         "marginBottom": {
           "type": "option",
@@ -2502,18 +2596,15 @@
           "description": "Outer bottom spacing",
           "options": [
             {
-              "_uid": "83b27c99-a0d1-415a-81d4-e0fdd0742f6e",
-              "name": "none",
-              "value": "none"
+              "value": "none",
+              "name": "none"
             },
             {
-              "_uid": "02afb296-55d0-4f91-9f65-08b071434416",
               "value": "base",
               "name": "base"
             },
             {
-              "_uid": "f719e9f3-2619-4067-b214-afd164305fe5",
-              "value": "lg",
+              "value": "large",
               "name": "large"
             }
           ],
@@ -2734,14 +2825,20 @@
           "required": true,
           "options": [
             {
-              "_uid": "d1b86e98-185a-4151-8226-15e976ef5b29",
-              "name": "light",
-              "value": "light"
+              "value": "light",
+              "name": "light"
             },
             {
-              "_uid": "140bc7b4-5e18-479d-b270-09e5be1f0e57",
               "value": "dark",
               "name": "dark"
+            },
+            {
+              "value": "light-gray",
+              "name": "light gray"
+            },
+            {
+              "value": "dark-gray",
+              "name": "dark gray"
             }
           ],
           "exclude_empty_option": true,

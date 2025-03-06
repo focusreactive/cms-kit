@@ -28,11 +28,11 @@ export interface AssetStoryblok {
 
 export interface BlogStoryblok {
   style: "three-column" | "three-column-with-images" | "three-column-with-background-images";
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   text: RichTextStoryblok[];
@@ -53,12 +53,12 @@ export interface BlogPostStoryblok {
 }
 
 export interface CardsGridStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
   columns: "1" | "2" | "3";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   items: DefaultCardStoryblok[];
@@ -68,11 +68,11 @@ export interface CardsGridStoryblok {
 }
 
 export interface CarouselStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   slidesPerView: string;
@@ -93,12 +93,12 @@ export interface CarouselSlideStoryblok {
 }
 
 export interface CopyStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
   isReversedOnMobile?: boolean;
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   columns: RichTextStoryblok[];
@@ -140,11 +140,11 @@ export interface HeaderStoryblok {
 }
 
 export interface HeroStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   globalData?: ISbStoryData<HeroStoryblok> | string;
@@ -250,12 +250,12 @@ export interface LinkStoryblok {
 }
 
 export interface LinksListStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
   alignVariant: "left" | "center" | "right";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   links: LinkStoryblok[];
@@ -274,13 +274,13 @@ export interface LogoItemStoryblok {
 }
 
 export interface LogosStoryblok {
-  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
   items: LogoItemStoryblok[];
   alignVariant: "left" | "center" | "right";
-  marginTop: "none" | "base" | "lg";
-  paddingX: number | string;
-  paddingY: number | string;
-  marginBottom: "none" | "base" | "lg";
+  marginTop: "none" | "base" | "large";
+  paddingX: "none" | "base" | "large";
+  paddingY: "none" | "base" | "large";
+  marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
   backgroundImage?: AssetStoryblok;
   component: "logos";
@@ -305,7 +305,7 @@ export interface PageStoryblok {
   robots: "index" | "no-index";
   showCookieBanner?: boolean;
   footer: ISbStoryData<FooterStoryblok> | string;
-  theme: "light" | "dark";
+  theme: "light" | "dark" | "light-gray" | "dark-gray";
   component: "page";
   _uid: string;
   [k: string]: any;

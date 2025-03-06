@@ -7,7 +7,7 @@ export interface ISectionContainer extends SbBlokData {
   marginBottom?: "none" | "base" | "large";
   paddingX?: "none" | "base" | "large";
   paddingY?: "none" | "base" | "large";
-  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray" | "none";
   backgroundImage?: AssetStoryblok;
 }
 
