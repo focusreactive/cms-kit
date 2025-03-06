@@ -7,7 +7,7 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2024-12-16T14:09:54.311Z",
+  "updated_at": "2025-03-06T14:49:42.498Z",
   "published_at": null,
   "id": 596040305,
   "uuid": "110ce313-3f23-4e69-b785-7e325d9c6990",
@@ -52,9 +52,11 @@
         "component": "link"
       }
     ],
-    "theme": "none",
+    "theme": "",
     "title": "custom textwfwefwefwef",
     "maxWidth": "base",
+    "paddingX": "base",
+    "paddingY": "base",
     "component": "hero",
     "marginTop": "base",
     "globalData": "",

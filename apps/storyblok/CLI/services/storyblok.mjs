@@ -139,7 +139,7 @@ async function getPageComponent(spaceId) {
   });
 
   const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/components?${searchParams}`,
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/components?${searchParams.toString()}`,
     {
       method: "GET",
       headers: {
@@ -320,7 +320,7 @@ export async function getStoryBySlug(spaceId, slug) {
   });
 
   const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories?${searchParams}`,
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories?${searchParams.toString()}`,
     {
       method: "GET",
       headers: {
