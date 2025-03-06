@@ -1,6 +1,5 @@
 {
   "maxWidth": "base",
-  "backgroundColor": "none",
   "_type": "section.logos",
   "alignVariant": "center",
   "marginBottom": "base",
@@ -136,5 +135,8 @@
       }
     }
   ],
-  "marginTop": "base"
+  "marginTop": "base",
+  "theme": "light",
+  "paddingX": "base",
+  "paddingY": "base"
 }

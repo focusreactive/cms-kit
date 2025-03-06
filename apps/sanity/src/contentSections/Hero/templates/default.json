@@ -3,7 +3,6 @@
   "maxWidth": "base",
   "marginTop": "base",
   "marginBottom": "base",
-  "backgroundColor": "none",
   "links": [
     {
       "target": "_blank",
@@ -69,5 +68,8 @@
     "_type": "customImage"
   },
   "title": "cms-kit",
-  "globalData": null
+  "globalData": null,
+  "theme": "light",
+  "paddingX": "base",
+  "paddingY": "base"
 }

@@ -1,10 +1,12 @@
 {
   "marginTop": "base",
   "maxWidth": "base",
-  "backgroundColor": "dark",
   "columns": 3,
   "_type": "section.cardsGrid",
   "marginBottom": "base",
+  "theme": "light",
+  "paddingX": "base",
+  "paddingY": "base",
   "items": [
     {
       "image": {

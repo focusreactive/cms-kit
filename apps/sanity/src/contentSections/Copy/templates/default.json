@@ -3,7 +3,9 @@
   "isReversedOnMobile": false,
   "marginTop": "base",
   "maxWidth": "base",
-  "backgroundColor": "none",
+  "theme": "light",
+  "paddingX": "base",
+  "paddingY": "base",
   "columns": [
     {
       "removeInnerMargins": false,

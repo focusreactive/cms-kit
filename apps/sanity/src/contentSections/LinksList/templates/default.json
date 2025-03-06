@@ -4,7 +4,9 @@
   "maxWidth": "base",
   "marginTop": "base",
   "marginBottom": "base",
-  "backgroundColor": "none",
+  "theme": "light",
+  "paddingX": "base",
+  "paddingY": "base",
   "links": [
     {
       "target": "_blank",
