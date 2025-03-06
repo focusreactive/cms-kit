@@ -7,7 +7,7 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2024-12-16T08:32:15.533Z",
+  "updated_at": "2025-03-06T14:56:13.107Z",
   "published_at": "2024-12-16T08:32:15.508Z",
   "id": 560836303,
   "uuid": "8957e46c-ee4d-49ec-93b4-2d06c65d8eb2",
@@ -151,8 +151,10 @@
                         "component": "link"
                       }
                     ],
-                    "theme": "none",
+                    "theme": "",
                     "maxWidth": "base",
+                    "paddingX": "base",
+                    "paddingY": "base",
                     "component": "linksList",
                     "marginTop": "none",
                     "alignVariant": "left",
@@ -264,7 +266,7 @@
     "disble_fe_editor": false
   },
   "is_startpage": false,
-  "unpublished_changes": false,
+  "unpublished_changes": true,
   "meta_data": null,
   "imported_at": null,
   "pinned": false,
