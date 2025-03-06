@@ -102,13 +102,13 @@
         "component": "link"
       }
     ],
+    "theme": "none",
     "title": "Write. Plan. Collab. Win.",
     "maxWidth": "base",
     "component": "hero",
     "marginTop": "base",
     "globalData": "",
     "marginBottom": "base",
-    "backgroundColor": "none",
     "backgroundImage": {
       "id": null,
       "alt": null,

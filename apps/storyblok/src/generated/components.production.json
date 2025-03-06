@@ -5,7 +5,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:53:37.659Z",
-      "updated_at": "2025-02-18T11:33:47.178Z",
+      "updated_at": "2025-02-18T11:56:01.463Z",
       "id": 6275958,
       "schema": {
         "style": {
@@ -38,7 +38,7 @@
           "type": "option",
           "pos": 1,
           "use_uuid": true,
-          "required": true,
+          "required": false,
           "options": [
             {
               "_uid": "ec9fcb5f-ccf5-4551-877e-a06a239dd952",
@@ -342,7 +342,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:51:16.668Z",
-      "updated_at": "2025-02-18T11:40:01.935Z",
+      "updated_at": "2025-02-18T11:56:49.122Z",
       "id": 6275957,
       "schema": {
         "theme": {
@@ -377,7 +377,7 @@
             }
           ],
           "default_value": "light",
-          "required": true,
+          "required": false,
           "exclude_empty_option": true,
           "source": "internal",
           "datasource_slug": "themes",
@@ -590,7 +590,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-10-08T14:20:16.827Z",
-      "updated_at": "2025-02-18T11:39:33.002Z",
+      "updated_at": "2025-02-18T11:56:55.907Z",
       "id": 6391276,
       "schema": {
         "theme": {
@@ -625,7 +625,7 @@
               "name": "none"
             }
           ],
-          "required": true,
+          "required": false,
           "exclude_empty_option": true,
           "source": "internal",
           "datasource_slug": "themes",
@@ -968,7 +968,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-07-09T16:19:19.131Z",
-      "updated_at": "2025-02-18T11:42:02.332Z",
+      "updated_at": "2025-02-18T11:57:04.930Z",
       "id": 6030874,
       "schema": {
         "theme": {
@@ -1002,7 +1002,7 @@
               "name": "none"
             }
           ],
-          "required": true,
+          "required": false,
           "default_value": "light",
           "exclude_empty_option": true,
           "source": "internal",
@@ -1560,7 +1560,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-10-08T14:42:35.362Z",
-      "updated_at": "2025-02-18T11:43:46.153Z",
+      "updated_at": "2025-02-18T12:16:00.685Z",
       "id": 6391508,
       "schema": {
         "theme": {
@@ -1594,7 +1594,7 @@
               "name": "none"
             }
           ],
-          "required": true,
+          "required": false,
           "default_value": "light",
           "exclude_empty_option": true,
           "source": "internal",
@@ -1684,7 +1684,8 @@
           "id": "WGN6SNb4Stett5cOyVwivA",
           "description": "Outer bottom spacing",
           "source": "internal",
-          "datasource_slug": "spacings"
+          "datasource_slug": "spacings",
+          "tooltip": true
         },
         "maxWidth": {
           "type": "option",
@@ -2023,14 +2024,14 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:44:36.150Z",
-      "updated_at": "2025-02-18T11:45:57.753Z",
+      "updated_at": "2025-02-18T11:57:23.357Z",
       "id": 6275825,
       "schema": {
         "theme": {
           "type": "option",
           "pos": 0,
           "use_uuid": true,
-          "required": true,
+          "required": false,
           "options": [
             {
               "_uid": "e6f38028-41eb-4862-8661-fc762b1e71b1",
@@ -2358,7 +2359,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:38:10.602Z",
-      "updated_at": "2025-02-18T11:47:57.981Z",
+      "updated_at": "2025-02-18T11:57:47.081Z",
       "id": 6275709,
       "schema": {
         "theme": {
@@ -2393,7 +2394,7 @@
             }
           ],
           "default_value": "light",
-          "required": true,
+          "required": false,
           "exclude_empty_option": true,
           "source": "internal",
           "datasource_slug": "themes",

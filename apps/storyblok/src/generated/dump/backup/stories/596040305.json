@@ -52,13 +52,13 @@
         "component": "link"
       }
     ],
+    "theme": "none",
     "title": "custom textwfwefwefwef",
     "maxWidth": "base",
     "component": "hero",
     "marginTop": "base",
     "globalData": "",
     "marginBottom": "base",
-    "backgroundColor": "none",
     "backgroundImage": {
       "id": null,
       "alt": null,

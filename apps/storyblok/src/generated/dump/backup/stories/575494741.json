@@ -7,8 +7,8 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2025-01-16T10:01:17.522Z",
-  "published_at": "2025-01-16T10:01:17.483Z",
+  "updated_at": "2025-03-05T14:24:18.091Z",
+  "published_at": "2025-03-05T14:24:18.050Z",
   "id": 575494741,
   "uuid": "11a25115-a87f-4896-aafc-37d5d35433eb",
   "is_folder": false,
@@ -121,13 +121,15 @@
             "component": "link"
           }
         ],
+        "theme": "",
         "title": "Write. Plan. Collaborate.",
         "maxWidth": "base",
+        "paddingX": "large",
+        "paddingY": "large",
         "component": "hero",
         "marginTop": "base",
         "globalData": "",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -143,6 +145,7 @@
       },
       {
         "_uid": "ca86da6b-8674-4e39-9d3b-3667cbdace43",
+        "theme": "light-gray",
         "columns": [
           {
             "_uid": "fa65ebf9-fc9f-453d-8ec5-da7babe81337",
@@ -221,12 +224,14 @@
                             "component": "link"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "linksList",
                         "marginTop": "none",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -251,10 +256,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
-        "marginTop": "lg",
-        "marginBottom": "none",
-        "backgroundColor": "light-gray",
+        "marginTop": "base",
+        "marginBottom": "base",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -271,6 +277,7 @@
       },
       {
         "_uid": "dfd17c98-4379-4ef7-a183-045b6d29e459",
+        "theme": "",
         "columns": [
           {
             "_uid": "de1a785c-9e3d-472e-8f23-91f1fd507f81",
@@ -433,12 +440,14 @@
                             "backgroundColor": "light-gray"
                           }
                         ],
+                        "theme": "",
                         "columns": "2",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "cardsGrid",
                         "marginTop": "none",
                         "marginBottom": "base",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -463,10 +472,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -483,6 +493,7 @@
       },
       {
         "_uid": "54f35ec6-0116-49b5-80be-b0fe4b09fb14",
+        "theme": "",
         "columns": [
           {
             "_uid": "d34d0bec-efd1-4c60-aebf-9701247a3b1e",
@@ -589,12 +600,14 @@
                             "component": "link"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "linksList",
                         "marginTop": "none",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -619,10 +632,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": 19960475,
           "alt": "",
@@ -640,6 +654,7 @@
       },
       {
         "_uid": "df7be297-d99e-45f9-8895-9b9fc6c4322f",
+        "theme": "",
         "columns": [
           {
             "_uid": "cd375a40-c482-477b-8fa7-20549bca7776",
@@ -797,12 +812,14 @@
                             "component": "logoItem"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "logos",
                         "marginTop": "none",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -827,10 +844,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "isReversedOnMobile": false
       },
       {
@@ -954,6 +972,7 @@
       },
       {
         "_uid": "6fa207de-106d-46ed-805a-99811a0bcbf3",
+        "theme": "",
         "columns": [
           {
             "_uid": "15c8e14b-8271-43c4-9dfd-a5b610d99176",
@@ -1038,10 +1057,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "none",
         "marginBottom": "none",
-        "backgroundColor": "none",
         "isReversedOnMobile": false
       },
       {
@@ -1138,12 +1158,14 @@
             "backgroundColor": "light"
           }
         ],
+        "theme": "dark",
         "columns": "3",
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "cardsGrid",
-        "marginTop": "lg",
-        "marginBottom": "lg",
-        "backgroundColor": "dark",
+        "marginTop": "base",
+        "marginBottom": "base",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -1160,6 +1182,7 @@
       {
         "_uid": "5b055f74-a86e-42d2-9ca5-2ff4d0974507",
         "loop": true,
+        "theme": "light",
         "effect": "coverflow",
         "slides": [
           {
@@ -1686,11 +1709,12 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "carousel",
         "marginTop": "base",
         "marginBottom": "base",
         "slidesPerView": "3",
-        "backgroundColor": "light",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -1932,11 +1956,13 @@
           }
         ],
         "style": "three-column-with-images",
+        "theme": "",
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "blog",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,

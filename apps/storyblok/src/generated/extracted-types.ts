@@ -28,7 +28,7 @@ export interface AssetStoryblok {
 
 export interface BlogStoryblok {
   style: "three-column" | "three-column-with-images" | "three-column-with-background-images";
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
   paddingY: number | string;
@@ -53,7 +53,7 @@ export interface BlogPostStoryblok {
 }
 
 export interface CardsGridStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   columns: "1" | "2" | "3";
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
@@ -68,7 +68,7 @@ export interface CardsGridStoryblok {
 }
 
 export interface CarouselStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
   paddingY: number | string;
@@ -93,7 +93,7 @@ export interface CarouselSlideStoryblok {
 }
 
 export interface CopyStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   isReversedOnMobile?: boolean;
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
@@ -140,7 +140,7 @@ export interface HeaderStoryblok {
 }
 
 export interface HeroStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
   paddingY: number | string;
@@ -250,7 +250,7 @@ export interface LinkStoryblok {
 }
 
 export interface LinksListStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   alignVariant: "left" | "center" | "right";
   marginTop: "none" | "base" | "lg";
   paddingX: number | string;
@@ -274,7 +274,7 @@ export interface LogoItemStoryblok {
 }
 
 export interface LogosStoryblok {
-  theme: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  theme?: "light" | "light-gray" | "dark-gray" | "dark" | "none";
   items: LogoItemStoryblok[];
   alignVariant: "left" | "center" | "right";
   marginTop: "none" | "base" | "lg";

@@ -1,5 +1,5 @@
 {
-  "name": "maks",
+  "name": "secondary",
   "parent_id": null,
   "group_id": "67b3f53b-70f4-4a8a-a8f6-0e5b0a7f8ef0",
   "alternates": [],
@@ -7,8 +7,8 @@
   "deleted_at": null,
   "sort_by_date": null,
   "tag_list": [],
-  "updated_at": "2025-01-16T10:03:52.489Z",
-  "published_at": "2024-12-20T15:39:54.592Z",
+  "updated_at": "2025-03-06T07:16:00.064Z",
+  "published_at": "2025-03-06T07:16:00.010Z",
   "id": 571196664,
   "uuid": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
   "is_folder": false,
@@ -121,13 +121,15 @@
             "component": "link"
           }
         ],
+        "theme": "",
         "title": "CMS-KIT",
         "maxWidth": "base",
+        "paddingX": "large",
+        "paddingY": "large",
         "component": "hero",
         "marginTop": "base",
         "globalData": "",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -143,6 +145,7 @@
       },
       {
         "_uid": "778ee6e0-89b5-44b6-b28c-819b404aca47",
+        "theme": "light-gray",
         "columns": [
           {
             "_uid": "10ff462c-45fe-4795-8fa1-ed59d1650704",
@@ -221,12 +224,14 @@
                             "component": "link"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "linksList",
                         "marginTop": "none",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -251,10 +256,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
-        "marginTop": "lg",
+        "marginTop": "base",
         "marginBottom": "none",
-        "backgroundColor": "light-gray",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -271,6 +277,7 @@
       },
       {
         "_uid": "987f452b-b531-4f93-86b1-49e49b54338f",
+        "theme": "",
         "columns": [
           {
             "_uid": "0afa124c-2d81-49cd-93ec-4b675a9e0db1",
@@ -433,12 +440,14 @@
                             "backgroundColor": "light-gray"
                           }
                         ],
+                        "theme": "",
                         "columns": "2",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "cardsGrid",
                         "marginTop": "none",
                         "marginBottom": "base",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -463,10 +472,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -483,6 +493,7 @@
       },
       {
         "_uid": "41406cbd-295d-4065-9d11-8c69764c7f00",
+        "theme": "",
         "columns": [
           {
             "_uid": "5be8d885-d521-4d61-a14e-5ad928402201",
@@ -589,12 +600,14 @@
                             "component": "link"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "linksList",
                         "marginTop": "none",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -619,10 +632,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": 19960475,
           "alt": "",
@@ -640,6 +654,7 @@
       },
       {
         "_uid": "f18c1b2a-0bdb-4424-91da-026e636cbccb",
+        "theme": "",
         "columns": [
           {
             "_uid": "aa740edb-a6c1-420f-98cf-8bee202bb6dd",
@@ -797,12 +812,14 @@
                             "component": "logoItem"
                           }
                         ],
+                        "theme": "",
                         "maxWidth": "base",
+                        "paddingX": "base",
+                        "paddingY": "base",
                         "component": "logos",
-                        "marginTop": "none",
+                        "marginTop": "base",
                         "alignVariant": "center",
                         "marginBottom": "none",
-                        "backgroundColor": "none",
                         "backgroundImage": {
                           "id": null,
                           "alt": null,
@@ -827,14 +844,16 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "isReversedOnMobile": false
       },
       {
         "_uid": "0e200aa5-5c63-4a90-a091-3c73aa39eb73",
+        "theme": "",
         "columns": [
           {
             "_uid": "1d2d27a3-6c55-49a8-a266-d7998bb99a3f",
@@ -919,10 +938,11 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "copy",
         "marginTop": "none",
         "marginBottom": "none",
-        "backgroundColor": "none",
         "isReversedOnMobile": false
       },
       {
@@ -1019,12 +1039,14 @@
             "backgroundColor": "light"
           }
         ],
+        "theme": "dark",
         "columns": "3",
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "cardsGrid",
-        "marginTop": "lg",
-        "marginBottom": "lg",
-        "backgroundColor": "dark",
+        "marginTop": "base",
+        "marginBottom": "base",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -1041,6 +1063,7 @@
       {
         "_uid": "47ef87ef-5b8f-4697-b7a4-2c38d6a4e03e",
         "loop": true,
+        "theme": "light",
         "effect": "coverflow",
         "slides": [
           {
@@ -1567,11 +1590,12 @@
           }
         ],
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "carousel",
         "marginTop": "base",
         "marginBottom": "base",
         "slidesPerView": "3",
-        "backgroundColor": "light",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -1813,11 +1837,13 @@
           }
         ],
         "style": "three-column-with-images",
+        "theme": "",
         "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
         "component": "blog",
         "marginTop": "base",
         "marginBottom": "base",
-        "backgroundColor": "none",
         "backgroundImage": {
           "id": null,
           "alt": null,
@@ -1838,15 +1864,15 @@
     "showCookieBanner": true
   },
   "published": true,
-  "slug": "maks",
+  "slug": "secondary",
   "path": null,
-  "full_slug": "maks",
+  "full_slug": "secondary",
   "default_root": null,
   "disble_fe_editor": false,
   "disable_fe_editor": false,
   "parent": null,
   "is_startpage": false,
-  "unpublished_changes": true,
+  "unpublished_changes": false,
   "meta_data": null,
   "imported_at": null,
   "pinned": false,

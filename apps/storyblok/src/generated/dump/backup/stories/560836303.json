@@ -151,13 +151,12 @@
                         "component": "link"
                       }
                     ],
-                    "theme": "light",
+                    "theme": "none",
                     "maxWidth": "base",
                     "component": "linksList",
                     "marginTop": "none",
                     "alignVariant": "left",
-                    "marginBottom": "none",
-                    "backgroundColor": "none"
+                    "marginBottom": "none"
                   }
                 ]
               }
