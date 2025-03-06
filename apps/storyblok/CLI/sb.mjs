@@ -7,6 +7,7 @@ import {
   createStoryblokWebhook,
   updatePageComponentSectionsField,
   updateStoryblokSpace,
+  uploadBackupDatasources,
   uploadBackupStories,
 } from "./services/storyblok.mjs";
 import {
@@ -78,6 +79,7 @@ const main = async () => {
     });
 
     await updatePageComponentSectionsField(spaceId);
+    await uploadBackupDatasources(spaceId);
     await uploadBackupStories(spaceId);
     spinner.succeed("Successfully filled new space with data 🎉");
 

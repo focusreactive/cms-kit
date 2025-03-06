@@ -1,0 +1,26 @@
+[
+  {
+    "id": 10735692,
+    "name": "light",
+    "value": "light",
+    "dimension_value": ""
+  },
+  {
+    "id": 10735694,
+    "name": "dark",
+    "value": "dark",
+    "dimension_value": ""
+  },
+  {
+    "id": 10735693,
+    "name": "light gray",
+    "value": "light-gray",
+    "dimension_value": ""
+  },
+  {
+    "id": 10735695,
+    "name": "dark gray",
+    "value": "dark gray",
+    "dimension_value": ""
+  }
+]

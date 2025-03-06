@@ -187,6 +187,123 @@ async function getSectionsFolder(spaceId) {
   return data.component_groups.find((folder) => folder.name === "sections");
 }
 
+export async function getStoryBySlug(spaceId, slug) {
+  const envs = loadEnvVariables();
+  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+
+  const searchParams = new URLSearchParams({
+    version: "draft",
+    by_slugs: slug, // home, headers/default-header
+  });
+
+  const response = await fetch(
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories?${searchParams.toString()}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.log(response.status, response.statusText, await response.json());
+    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.stories[0] || null;
+}
+
+async function createStory(spaceId, storyData) {
+  const envs = loadEnvVariables();
+  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+
+  const response = await fetch(
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        story: storyData,
+        publish: 1,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.log(response.status, response.statusText, await response.json());
+    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function updateStory(spaceId, storyId, storyData) {
+  const envs = loadEnvVariables();
+  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+
+  const response = await fetch(
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories/${storyId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        story: storyData,
+        publish: 1,
+        force_update: 1,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.log(response.status, response.statusText, await response.json());
+    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function createAccessToken(spaceId, access = "public") {
+  const envs = loadEnvVariables();
+  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+
+  const response = await fetch(
+    `https://mapi.storyblok.com/v1/spaces/${spaceId}/api_keys/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        api_key: {
+          access,
+          name: `${access} access Token`,
+        },
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.log(response.status, response.statusText, await response.json());
+    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
 const globalComponentNames = ["header", "footer"];
 
 export async function uploadBackupStories(spaceId) {
@@ -310,119 +427,116 @@ export async function uploadBackupStories(spaceId) {
   }
 }
 
-export async function getStoryBySlug(spaceId, slug) {
-  const envs = loadEnvVariables();
-  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
-
-  const searchParams = new URLSearchParams({
-    version: "draft",
-    by_slugs: slug, // home, headers/default-header
-  });
-
-  const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories?${searchParams.toString()}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    },
+export async function uploadBackupDatasources(spaceId) {
+  // Get directory path relative to current file
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const backupDir = join(
+    __dirname,
+    "../../src/generated/dump/backup/datasources",
   );
 
-  if (!response.ok) {
-    console.log(response.status, response.statusText, await response.json());
-    throw new Error(`❌ HTTP error! Status: ${response.status}`);
-  }
+  // Read all datasource files from backup directory
+  const datasourceFiles = await readdir(backupDir);
+  const datasourceIds = datasourceFiles
+    .filter((file) => file.endsWith(".json") && !file.includes("_entries"))
+    .map((file) => file.replace(".json", ""));
 
-  const data = await response.json();
-  return data.stories[0] || null;
-}
+  // Create each datasource
+  for (const datasourceId of datasourceIds) {
+    try {
+      const envs = loadEnvVariables();
+      const token = envs.SB_PERSONAL_ACCESS_TOKEN;
 
-async function createStory(spaceId, storyData) {
-  const envs = loadEnvVariables();
-  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
+      // Get directory path relative to current file
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = dirname(__filename);
+      const backupDir = join(
+        __dirname,
+        "../../src/generated/dump/backup/datasources",
+      );
 
-  const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        story: storyData,
-        publish: 1,
-      }),
-    },
-  );
+      // Read datasource metadata file
+      const datasourceFile = join(backupDir, `${datasourceId}.json`);
+      const datasourceContent = await readFile(datasourceFile, "utf8");
+      const datasourceData = JSON.parse(datasourceContent);
 
-  if (!response.ok) {
-    console.log(response.status, response.statusText, await response.json());
-    throw new Error(`❌ HTTP error! Status: ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  return data;
-}
-
-export async function updateStory(spaceId, storyId, storyData) {
-  const envs = loadEnvVariables();
-  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
-
-  const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/stories/${storyId}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        story: storyData,
-        publish: 1,
-        force_update: 1,
-      }),
-    },
-  );
-
-  if (!response.ok) {
-    console.log(response.status, response.statusText, await response.json());
-    throw new Error(`❌ HTTP error! Status: ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  return data;
-}
-
-export async function createAccessToken(spaceId, access = "public") {
-  const envs = loadEnvVariables();
-  const token = envs.SB_PERSONAL_ACCESS_TOKEN;
-
-  const response = await fetch(
-    `https://mapi.storyblok.com/v1/spaces/${spaceId}/api_keys/`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        api_key: {
-          access,
-          name: `${access} access Token`,
+      // Create the datasource
+      const response = await fetch(
+        `https://mapi.storyblok.com/v1/spaces/${spaceId}/datasources/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({
+            datasource: {
+              name: datasourceData.name,
+              slug: datasourceData.slug,
+              dimensions_attributes: datasourceData.dimensions.map((dim) => ({
+                name: dim.name,
+                entry_value: dim.entry_value,
+              })),
+            },
+          }),
         },
-      }),
-    },
-  );
+      );
 
-  if (!response.ok) {
-    console.log(response.status, response.statusText, await response.json());
-    throw new Error(`❌ HTTP error! Status: ${response.status}`);
+      if (!response.ok) {
+        console.log(
+          response.status,
+          response.statusText,
+          await response.json(),
+        );
+        throw new Error(`❌ HTTP error! Status: ${response.status}`);
+      }
+
+      const newDatasource = await response.json();
+
+      // Read datasource entries file
+      const entriesFile = join(backupDir, `${datasourceId}_entries.json`);
+      const entriesContent = await readFile(entriesFile, "utf8");
+      const entriesData = JSON.parse(entriesContent);
+
+      // Create entries for the datasource
+      for (const entry of entriesData) {
+        const entryResponse = await fetch(
+          `https://mapi.storyblok.com/v1/spaces/${spaceId}/datasource_entries`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+            body: JSON.stringify({
+              datasource_entry: {
+                name: entry.name,
+                value: entry.value,
+                dimension_value: entry.dimension_value || "",
+                datasource_id: newDatasource.datasource.id,
+              },
+            }),
+          },
+        );
+
+        if (!entryResponse.ok) {
+          console.log(
+            entryResponse.status,
+            entryResponse.statusText,
+            await entryResponse.json(),
+          );
+          throw new Error(
+            `❌ HTTP error creating entry! Status: ${entryResponse.status}`,
+          );
+        }
+      }
+
+      return newDatasource;
+    } catch (error) {
+      console.error(
+        `❌ Failed to create datasource ${datasourceId}: ${error.message}`,
+      );
+    }
   }
-
-  return await response.json();
 }
