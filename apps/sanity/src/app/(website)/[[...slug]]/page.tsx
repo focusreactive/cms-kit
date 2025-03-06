@@ -1,12 +1,14 @@
 import { type Metadata } from "next";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import { notFound } from "next/navigation";
+import type { Page as PageType } from "@/generated/extracted-types";
 
 import { PAGE_BY_SLUG_QUERY } from "@/lib/api/queries";
 import { sanityFetch } from "@/lib/live";
 import { generateStaticSlugs } from "@/lib/loader/generateStaticSlugs";
 import { urlForOpenGraphImage } from "@/lib/utils";
 import Page from "@/components/Page";
+import type { IPageWithReference } from "@/components/Page/types";
 
 type Props = {
   params: Promise<{ slug: string[] | undefined }>;
@@ -32,10 +34,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     params: { slug },
   });
 
-  const ogImage = urlForOpenGraphImage(page?.ogImage);
+  const typedPage = page as unknown as PageType;
+
+  const ogImage = urlForOpenGraphImage(typedPage?.ogImage);
   const openGraph: OpenGraph = {
-    title: page?.seoTitle,
-    description: page?.seoDescription,
+    title: typedPage?.seoTitle,
+    description: typedPage?.seoDescription,
     images: ogImage ? [ogImage] : [],
   };
 
@@ -48,11 +52,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       canonical,
     },
     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
-    title: page?.seoTitle,
-    description: page?.seoDescription,
+    title: typedPage?.seoTitle,
+    description: typedPage?.seoDescription,
     openGraph,
-    // keywords: page?.seoKeywords,
-    robots: page?.robots === "index" ? { index: true } : { index: false },
+    robots: typedPage?.robots === "index" ? { index: true } : { index: false },
   };
 }
 
@@ -77,5 +80,5 @@ export default async function PageSlugRoute(props: Props) {
     notFound();
   }
 
-  return <Page data={page} />;
+  return <Page data={page as unknown as IPageWithReference} />;
 }
