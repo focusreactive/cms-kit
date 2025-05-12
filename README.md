@@ -8,7 +8,7 @@ The project serves the idea of making Headless CMS-based development accessible,
 - [Storyblok landing](https://turbo-cms-kit-storyblok.vercel.app/)
 - [Sanity landing](https://turbo-cms-kit-sanity.vercel.app/)
 
-## What you get
+## Features
 
 1. New CMS project (**Storyblok**/**Sanity**), set up with vercel deployments
 2. Multiple ready to use components with different presets(styles)
