@@ -83,8 +83,6 @@ Learn more about each of the CMS options in our detailed articles: [Storyblok CM
 
 This process ensures that global component updates are displayed on all pages.
 
-### [TODO]: add video example
-
 ### Sanity
 
 6. Navigate to the Storyblok CLI directory:
