@@ -3,9 +3,6 @@
 An endeavor accumulating the experience and best practices collected at [Focus Reactive](https://focusreactive.com/).
 The project serves the idea of making Headless CMS-based development accessible, comfortable, and fast.
 
-#### Storyblok
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit%2Ftree%2Fmain&env=NEXT_PUBLIC_DOMAIN,NEXT_PUBLIC_IS_PREVIEW,NEXT_PUBLIC_STORYBLOK_TOKEN,NEXT_PUBLIC_STORYBLOK_API_GATE,VERCEL_REDEPLOY_HOOK_URL,SB_WEBHOOK_REVALIDATE_SECRET&envDescription=Example&envLink=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit%2Fblob%2Fmain%2Fapps%2Fstoryblok%2F.env.local.example&project-name=cms-kit-storyblok&repository-name=cms-kit-storyblok&demo-title=CMS-Kit%3A%20Storyblok&demo-description=Headless%20CMS%20platform%20based%20on%20Next.js%20and%20Storyblok%20CMS&demo-url=https%3A%2F%2Fturbo-cms-kit-storyblok.vercel.app%2F)
-
 ## Demo 👀
 
 - [Storyblok landing](https://turbo-cms-kit-storyblok.vercel.app/)
