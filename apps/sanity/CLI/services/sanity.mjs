@@ -106,7 +106,7 @@ export async function createSanityReadToken() {
 
   const data = await response.json();
 
-  appendOrUpdateEnv("NEXT_PUBLIC_SANITY_READ_TOKEN", data.key);
+  appendOrUpdateEnv("SANITY_API_READ_TOKEN", data.key);
 }
 
 export async function createSanityCorsEntry(url) {

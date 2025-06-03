@@ -112,8 +112,8 @@ export async function createVercelProject({ projectName }) {
             value: envs.NEXT_PUBLIC_SANITY_DATASET,
           },
           {
-            key: "NEXT_PUBLIC_SANITY_READ_TOKEN",
-            value: envs.NEXT_PUBLIC_SANITY_READ_TOKEN,
+            key: "SANITY_API_READ_TOKEN",
+            value: envs.SANITY_API_READ_TOKEN,
           },
         ].map((v) => ({
           ...v,
