@@ -4,7 +4,7 @@ import { groq } from "next-sanity";
 
 import { client } from "@/lib/api/client";
 
-import config from "../../config";
+import { token } from "../token";
 
 // TODO: @dogfrogfog
 // rework to be simple reusable query
@@ -12,7 +12,7 @@ import config from "../../config";
 export function generateSitemap(type: string) {
   return client
     .withConfig({
-      token: config.sanity.token,
+      token,
       perspective: "published",
       useCdn: false,
       stega: false,

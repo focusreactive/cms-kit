@@ -1,13 +1,11 @@
-import { type Metadata } from "next";
-
-import config from "@/config";
+import type { Metadata } from "next";
 
 import Studio from "./Studio";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: `${config.siteName} - CMS`,
+  title: "CMS-Kit Boilerplate",
 };
 
 export default function StudioPage() {

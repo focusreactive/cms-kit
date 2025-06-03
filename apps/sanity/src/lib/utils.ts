@@ -1,11 +1,11 @@
 import type { Page } from "@/generated/extracted-types";
 import createImageUrlBuilder from "@sanity/image-url";
 
-import config from "../config";
+import { dataset, projectId } from "./config";
 
 const imageBuilder = createImageUrlBuilder({
-  projectId: config.sanity.projectId || "",
-  dataset: config.sanity.dataset || "",
+  projectId,
+  dataset,
 });
 
 export const urlForImage = (source: Page["ogImage"]) => {

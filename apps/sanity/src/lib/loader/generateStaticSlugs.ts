@@ -2,13 +2,13 @@ import "server-only";
 
 import { groq } from "next-sanity";
 
-import config from "@/config";
 import { client } from "@/lib/api/client";
+import { token } from "@/lib/token";
 
 export async function generateStaticSlugs(type: string) {
   const slugs = await client
     .withConfig({
-      token: config.sanity.token,
+      token,
       perspective: "published",
       useCdn: false,
       stega: false,

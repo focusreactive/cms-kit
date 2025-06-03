@@ -5,16 +5,18 @@ import { simplerColorInput } from "sanity-plugin-simpler-color-input";
 // import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
-import config from "@/config";
 import * as resolve from "@/lib/presentation/resolve";
 import schemas from "@/lib/schemas";
 import StudioLogo from "@/components/StudioLogo";
 
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-projectID";
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+
 export default defineConfig({
-  basePath: config.sanity.studioUrl,
-  projectId: config.sanity.projectId,
-  dataset: config.sanity.dataset,
-  title: config.siteName,
+  basePath: "/studio",
+  projectId,
+  dataset,
+  title: "CMS-Kit",
   icon: StudioLogo,
   schema: {
     types: schemas,
@@ -38,7 +40,7 @@ export default defineConfig({
     //   },
     // }),
     structureTool(),
-    visionTool({ defaultApiVersion: config.sanity.apiVersion }),
+    visionTool(),
     simplerColorInput(),
   ],
 });

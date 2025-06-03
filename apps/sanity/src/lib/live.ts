@@ -1,11 +1,10 @@
 import { defineLive } from "next-sanity";
 
-import config from "@/config";
-
 import { client } from "./api/client";
+import { token } from "./token";
 
 export const { sanityFetch, SanityLive } = defineLive({
-  client: client.withConfig({ apiVersion: config.sanity.apiVersion }),
-  browserToken: config.sanity.token,
-  serverToken: config.sanity.token,
+  client: client as any,
+  browserToken: token,
+  serverToken: token,
 });
