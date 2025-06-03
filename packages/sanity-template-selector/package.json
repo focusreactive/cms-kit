@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@sanity/icons": "3.5.7",
-    "@sanity/ui": "2.11.4"
+    "@sanity/ui": "2.15.18"
   },
   "devDependencies": {
     "@shared/eslint-config": "workspace:*",
