@@ -1,3 +1,15 @@
+## [1.0.10](https://github.com/focusreactive/cms-kit/compare/v1.0.9...v1.0.10) (2025-06-03)
+
+
+### Bug Fixes
+
+* **sanity:** rename NEXT_PUBLIC_SANITY_READ_TOKEN to SANITY_API_READ_TOKEN in environment files ([e66640c](https://github.com/focusreactive/cms-kit/commit/e66640cf631817ee0b305360f3153f1cd50b1cef))
+
+
+### Features
+
+* **sanity:** consolidate configuration management to work with server side env and remove deprecated config file ([36920c1](https://github.com/focusreactive/cms-kit/commit/36920c1ef6d4de09b884fd85482edcc8f60f8c14))
+
 ## [1.0.9](https://github.com/focusreactive/cms-kit/compare/v1.0.8...v1.0.9) (2025-03-07)
 
 
