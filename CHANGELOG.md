@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/focusreactive/cms-kit/compare/v1.0.10...v1.0.11) (2025-06-06)
+
+
+### Bug Fixes
+
+* **page:** return instructions mock block for missing slug instead of notFound() ([d8025cf](https://github.com/focusreactive/cms-kit/commit/d8025cf76c571746302e371fa23f07ce010d2767))
+
 ## [1.0.10](https://github.com/focusreactive/cms-kit/compare/v1.0.9...v1.0.10) (2025-06-03)
 
 
