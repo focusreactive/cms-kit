@@ -68,7 +68,7 @@ export default async function PageSlugRoute(props: Props) {
   const slug = getSlug(params);
 
   if (!slug) {
-    notFound();
+    return <div>instructions mock block</div>;
   }
 
   const { data: page } = await sanityFetch({
