@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/focusreactive/cms-kit/compare/v1.0.11...v1.0.12) (2025-06-09)
+
+
+### Features
+
+* **sanity:** add new simplified way to roll out new project using vercel deploy link ([#98](https://github.com/focusreactive/cms-kit/issues/98)) ([4b0efd1](https://github.com/focusreactive/cms-kit/commit/4b0efd16e0fcc7460959ab7d07c24a6cfe190364))
+
 ## [1.0.11](https://github.com/focusreactive/cms-kit/compare/v1.0.10...v1.0.11) (2025-06-06)
 
 
