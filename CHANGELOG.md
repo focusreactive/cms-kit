@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/focusreactive/cms-kit/compare/v1.0.12...v1.0.13) (2025-06-09)
+
+
+### Features
+
+* **sanity:** add import-dataset script to package.json for easier dataset management ([7bab11a](https://github.com/focusreactive/cms-kit/commit/7bab11a870c568dd2af7eef6fdbaed597acde7c5))
+
 ## [1.0.12](https://github.com/focusreactive/cms-kit/compare/v1.0.11...v1.0.12) (2025-06-09)
 
 
