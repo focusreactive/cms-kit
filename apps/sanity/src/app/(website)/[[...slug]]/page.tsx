@@ -44,14 +44,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 
   const canonical = new URL(
-    `${process.env.NEXT_PUBLIC_DOMAIN as string}${slug === "/" ? "" : slug}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL as string}${slug === "/" ? "" : slug}`,
   ).toString();
 
   return {
     alternates: {
       canonical,
     },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN as string),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
     title: typedPage?.seoTitle,
     description: typedPage?.seoDescription,
     openGraph,

@@ -100,7 +100,7 @@ export async function createVercelProject({ projectName }) {
         name: projectName,
         environmentVariables: [
           {
-            key: "NEXT_PUBLIC_DOMAIN",
+            key: "NEXT_PUBLIC_BASE_URL",
             value: `https://${projectName}.vercel.app`,
           },
           {
