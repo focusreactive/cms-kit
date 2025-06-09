@@ -18,10 +18,17 @@ This production ready boilerplate accumulating the experience and best practices
 
 ## Demo 👀
 
+**Production website**
+
 ![CMS-Kit website core web vitals score](https://cdn.sanity.io/images/vftxng62/production/67581c7101b3bc70504f0b827fdb39e18e82ccf9-454x101.png)
 
 - [Sanity](https://turbo-cms-kit-sanity.vercel.app/)
 - [Storyblok](https://turbo-cms-kit-storyblok.vercel.app/)
+
+**Editing experience**
+- Sanity
+
+![sanity-demo](https://github.com/user-attachments/assets/5e3e9be3-f78d-4f1e-8b0c-5226e4cf3371)
 
 ## Getting Started
 
@@ -34,7 +41,7 @@ This production ready boilerplate accumulating the experience and best practices
 
 1. *Create Github repository, create Sanity project, deploy to Vercel*
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit&project-name=sanity-cms-kit&repository-name=sanity-cms-kit&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx&build-command=cd%20../../%20%26%26%20turbo%20run%20build%20--filter%3Dsanity&install-command=pnpm%20i&root-directory=apps/sanity&env=NEXT_PUBLIC_BASE_URL&envDescription=https://%5Byour-vercel-project-name%5D.vercel.app&envLink=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit%2Fblob%2Fmain%2Fapps%2Fsanity%2F.env.local.example&production-deploy-hook=trigger%20rebuild)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit&project-name=sanity-cms-kit&repository-name=sanity-cms-kit&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx&build-command=cd%20../../%20%26%26%20turbo%20run%20build%20--filter%3Dsanity&install-command=pnpm%20i&root-directory=apps/sanity&env=NEXT_PUBLIC_BASE_URL&envDescription=https://%5Byour-vercel-project-name%5D.vercel.app&envLink=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit%2Fblob%2Fmain%2Fapps%2Fsanity%2F.env.local.example&production-deploy-hook=trigger%20rebuild&demo-title=CMS-Kit%3A%20Sanity%20%2B%20Next.js%2015%20visual%20site%20builder&demo-description=Production%20ready%20boilerplate%20serves%20the%20idea%20of%20making%20Headless%20CMS-based%20development%20accessible%2C%20comfortable%2C%20and%20fast.&demo-url=https%3A%2F%2Fturbo-cms-kit-sanity.vercel.app%2F&demo-image=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fvftxng62%2Fproduction%2Fa6364de57a7566685ad87e201eb1fe99c89f1677-1200x630.png)
 
 2. *Clone project locally*
 
