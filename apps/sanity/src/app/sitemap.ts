@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const correctPath = slug.split("/").filter(Boolean);
 
     return {
-      url: `${process.env.NEXT_PUBLIC_DOMAIN}/${correctPath.join("/")}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${correctPath.join("/")}`,
       lastModified: new Date(_createdAt),
     };
   });
