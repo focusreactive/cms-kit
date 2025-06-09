@@ -46,8 +46,8 @@ This production ready boilerplate accumulating the experience and best practices
 Execute following command to pull ENV variables from Vercel and replace some of the with local development values
 
 ```shell
-vercel link &&
-vercel env pull &&
+pnpm vercel link &&
+pnpm vercel env pull &&
 mv .env.local apps/sanity/ &&
 sed -i '' '/^NEXT_PUBLIC_BASE_URL/d' apps/sanity/.env.local &&
 echo 'NEXT_PUBLIC_BASE_URL="http://localhost:3000"' >> apps/sanity/.env.local
@@ -62,7 +62,7 @@ cd apps/sanity && pnpm import-dataset
 5. Run project locally
 
 ```shell
-pnpm dev
+pnpm install && pnpm dev
 ```
 
 ### Storyblok
