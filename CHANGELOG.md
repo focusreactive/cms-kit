@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/focusreactive/cms-kit/compare/v1.0.13...v1.0.14) (2025-06-09)
+
+
+### Bug Fixes
+
+* **readme:** refactor sanity roll out commands ([70706b7](https://github.com/focusreactive/cms-kit/commit/70706b7792aacc30f931d6ec5a2ef42e6a4c9d25))
+
 ## [1.0.13](https://github.com/focusreactive/cms-kit/compare/v1.0.12...v1.0.13) (2025-06-09)
 
 
