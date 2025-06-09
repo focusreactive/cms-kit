@@ -32,16 +32,23 @@ This production ready boilerplate accumulating the experience and best practices
 
 ### Sanity
 
-1. Create Github repository, create Sanity project, deploy to Vercel
+1. *Create Github repository, create Sanity project, deploy to Vercel*
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit&project-name=sanity-cms-kit&repository-name=sanity-cms-kit&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx&build-command=cd%20../../%20%26%26%20turbo%20run%20build%20--filter%3Dsanity&install-command=pnpm%20i&root-directory=apps/sanity&env=NEXT_PUBLIC_BASE_URL&envDescription=https://%5Byour-vercel-project-name%5D.vercel.app&envLink=https%3A%2F%2Fgithub.com%2Ffocusreactive%2Fcms-kit%2Fblob%2Fmain%2Fapps%2Fsanity%2F.env.local.example&production-deploy-hook=trigger%20rebuild)
 
-2. Clone project locally
+2. *Clone project locally*
 
 - Navigate to your Github account and clone project repository locally.
-- Navigate to project folder using `cd <your app name>`.
+- Navigate to project folder.
+```shell
+cd <project folder>
+```
+- Install dependencies
+```shell
+pnpm install
+```
 
-3. Pull required ENV variables
+3. *Pull required ENV variables*
 
 Execute following command to pull ENV variables from Vercel and replace some of the with local development values
 
@@ -53,16 +60,16 @@ sed -i '' '/^NEXT_PUBLIC_BASE_URL/d' apps/sanity/.env.local &&
 echo 'NEXT_PUBLIC_BASE_URL="http://localhost:3000"' >> apps/sanity/.env.local
 ```
 
-4. Import templates and example pages data
+4. *Import templates and example pages data*
 
 ```shell
 cd apps/sanity && pnpm import-dataset
 ```
 
-5. Run project locally
+5. *Run project locally*
 
 ```shell
-pnpm install && pnpm dev
+pnpm dev
 ```
 
 ### Storyblok
