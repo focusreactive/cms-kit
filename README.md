@@ -62,9 +62,7 @@ Execute following command to pull ENV variables from Vercel and replace some of 
 ```shell
 pnpm vercel link &&
 pnpm vercel env pull &&
-mv .env.local apps/sanity/ &&
-sed -i '' '/^NEXT_PUBLIC_BASE_URL/d' apps/sanity/.env.local &&
-echo 'NEXT_PUBLIC_BASE_URL="http://localhost:3000"' >> apps/sanity/.env.local
+mv .env.local apps/sanity/
 ```
 
 4. *Import templates and example pages data*
