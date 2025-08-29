@@ -9,7 +9,7 @@ export interface ISectionContainer extends SbBlokData {
   paddingY?: "none" | "base" | "large";
   theme?: "light" | "dark" | "light-gray" | "dark-gray" | "none";
   backgroundImage?: AssetStoryblok;
-  backgroundGradient?: "primary";
+  backgroundGradient?: "gradient-1";
 }
 
 export interface ISectionContainerProps {

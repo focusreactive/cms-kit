@@ -75,7 +75,7 @@ const outerVariants = cva("", {
       large: "mb-sectionLarge",
     },
     backgroundGradient: {
-      primary: "bg-gradient-to-br from-white to-primaryLightColor",
+      "gradient-1": "bg-gradient-to-br from-white to-primaryLightColor",
     },
   },
   defaultVariants: {

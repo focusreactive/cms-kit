@@ -17,7 +17,7 @@ export const buttonVariants = cva(
         [ButtonVariant.Badge]:
           "rounded-2xl text-textSecondaryColor ring-1 ring-textSecondaryColor hover:ring-primaryColor",
         [ButtonVariant.Ghost]:
-          "bg-bgColor radius-md text-textColor border border-bgColor hover:border-textSecondaryColor font-medium rounded-2xl",
+          "bg-bgColor radius-md text-textColor border border-bgColor hover:text-primaryColor font-medium rounded-2xl",
         [ButtonVariant.GhostDark]:
           "bg-textColor text-bgColor radius-md hover:bg-textSecondaryColor font-medium rounded-2xl",
       },
@@ -47,6 +47,7 @@ export function Button({
   return (
     <Component
       className={cn(
+        "not-prose",
         buttonVariants({
           variant,
           size,

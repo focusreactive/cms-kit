@@ -16,6 +16,8 @@
   --text-secondary: #666666;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #ff0765;
+  --primary-2-light: #ffe6f0;
 }
 
 .dark {
@@ -24,6 +26,8 @@
   --text-secondary: #999999;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #ff0765;
+  --primary-2-light: #ffe6f0;
 }
 
 .light-gray {
@@ -32,6 +36,8 @@
   --text-secondary: #666666;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #ff0765;
+  --primary-2-light: #ffe6f0;
 }
 
 .dark-gray {
@@ -40,4 +46,6 @@
   --text-secondary: #bababa;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #ff0765;
+  --primary-2-light: #ffe6f0;
 }

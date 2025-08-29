@@ -1012,7 +1012,7 @@
       "display_name": null,
       "description": "Section for copywriting, text only",
       "created_at": "2024-07-09T16:19:19.131Z",
-      "updated_at": "2025-08-29T12:59:29.021Z",
+      "updated_at": "2025-08-29T13:41:41.252Z",
       "id": 6030874,
       "schema": {
         "theme": {
@@ -1191,8 +1191,8 @@
           "options": [
             {
               "_uid": "c76d8c88-2bae-4127-91ab-94f4b6517585",
-              "name": "primary",
-              "value": "primary"
+              "name": "gradient-1",
+              "value": "gradient-1"
             }
           ],
           "id": "1ejGNIwwTXOI5Y2PttF38A"
@@ -1281,7 +1281,7 @@
       "display_name": null,
       "description": null,
       "created_at": "2024-09-10T10:47:06.859Z",
-      "updated_at": "2025-01-10T08:48:05.925Z",
+      "updated_at": "2025-08-29T13:41:27.993Z",
       "id": 6275827,
       "schema": {
         "image": {
@@ -1380,6 +1380,11 @@
               "_uid": "ad2356de-50c5-4d7a-a8b8-3e6c14dd4e10",
               "value": "none",
               "name": "none"
+            },
+            {
+              "_uid": "0b2154b8-d899-436c-a63e-d7565a527230",
+              "value": "gradient-2",
+              "name": "gradient-2"
             }
           ],
           "id": "PcSI7_mQTdmzs2_z4zFtdg",

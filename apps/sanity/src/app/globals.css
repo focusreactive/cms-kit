@@ -1,5 +1,4 @@
 @tailwind base;
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -17,6 +16,8 @@
   --text-secondary: #666666;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #39ff14;
+  --primary-2-light: #ccffcc;
 }
 
 .dark {
@@ -25,6 +26,8 @@
   --text-secondary: #999999;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #39ff14;
+  --primary-2-light: #ccffcc;
 }
 
 .light-gray {
@@ -33,6 +36,8 @@
   --text-secondary: #666666;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #39ff14;
+  --primary-2-light: #ccffcc;
 }
 
 .dark-gray {
@@ -41,4 +46,6 @@
   --text-secondary: #bababa;
   --primary: #4f46e5;
   --primary-light: #e4e1ff;
+  --primary-2: #39ff14;
+  --primary-2-light: #ccffcc;
 }

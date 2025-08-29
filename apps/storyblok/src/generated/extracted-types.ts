@@ -100,7 +100,7 @@ export interface CopyStoryblok {
   paddingY: "none" | "base" | "large";
   marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
-  backgroundGradient?: "primary";
+  backgroundGradient?: "gradient-1";
   backgroundImage?: AssetStoryblok;
   columns: RichTextStoryblok[];
   component: "copy";
@@ -114,7 +114,7 @@ export interface DefaultCardStoryblok {
   description?: string;
   link?: LinkStoryblok[];
   alignVariant: "left" | "center" | "right";
-  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none";
+  backgroundColor: "light" | "light-gray" | "dark-gray" | "dark" | "none" | "gradient-2";
   rounded: "large" | "none";
   component: "defaultCard";
   _uid: string;
