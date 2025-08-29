@@ -15,6 +15,7 @@
   --text: #222222;
   --text-secondary: #666666;
   --primary: #4f46e5;
+  --primary-light: #e4e1ff;
 }
 
 .dark {
@@ -22,6 +23,7 @@
   --text: #f6f6f6;
   --text-secondary: #999999;
   --primary: #4f46e5;
+  --primary-light: #e4e1ff;
 }
 
 .light-gray {
@@ -29,6 +31,7 @@
   --text: #222222;
   --text-secondary: #666666;
   --primary: #4f46e5;
+  --primary-light: #e4e1ff;
 }
 
 .dark-gray {
@@ -36,4 +39,5 @@
   --text: #f6f6f6;
   --text-secondary: #bababa;
   --primary: #4f46e5;
+  --primary-light: #e4e1ff;
 }

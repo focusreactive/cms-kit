@@ -100,6 +100,7 @@ export interface CopyStoryblok {
   paddingY: "none" | "base" | "large";
   marginBottom: "none" | "base" | "large";
   maxWidth: "base" | "none" | "small";
+  backgroundGradient?: "primary";
   backgroundImage?: AssetStoryblok;
   columns: RichTextStoryblok[];
   component: "copy";

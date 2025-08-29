@@ -3,9 +3,9 @@
     {
       "name": "blog",
       "display_name": null,
-      "description": null,
+      "description": "Blog section with text on top and grid of cards of blogposts underneath",
       "created_at": "2024-09-10T10:53:37.659Z",
-      "updated_at": "2025-02-18T11:56:01.463Z",
+      "updated_at": "2025-08-22T09:09:18.786Z",
       "id": 6275958,
       "schema": {
         "style": {
@@ -260,7 +260,7 @@
           "image": "//a.storyblok.com/f/293915/x/88c459b916/screenshot-2024-09-10-at-16-38-56.png",
           "icon": "",
           "color": "",
-          "description": ""
+          "description": "Blog section with text on top and grid of 3 three columns with cards under the text. "
         }
       ],
       "preset_id": null,
@@ -271,6 +271,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -348,14 +349,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
       "name": "cardsGrid",
       "display_name": null,
-      "description": null,
+      "description": "Grid of cards of different types",
       "created_at": "2024-09-10T10:51:16.668Z",
-      "updated_at": "2025-02-18T11:56:49.122Z",
+      "updated_at": "2025-08-22T09:08:53.470Z",
       "id": 6275957,
       "schema": {
         "theme": {
@@ -609,14 +611,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
       "name": "carousel",
       "display_name": null,
-      "description": null,
+      "description": "Carousel of cards of different types",
       "created_at": "2024-10-08T14:20:16.827Z",
-      "updated_at": "2025-02-18T11:56:55.907Z",
+      "updated_at": "2025-08-22T09:08:42.824Z",
       "id": 6391276,
       "schema": {
         "theme": {
@@ -943,6 +946,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -1000,14 +1004,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
       "name": "copy",
       "display_name": null,
-      "description": null,
+      "description": "Section for copywriting, text only",
       "created_at": "2024-07-09T16:19:19.131Z",
-      "updated_at": "2025-02-18T11:57:04.930Z",
+      "updated_at": "2025-08-29T12:59:29.021Z",
       "id": 6030874,
       "schema": {
         "theme": {
@@ -1178,9 +1183,23 @@
           "exclude_empty_option": true,
           "id": "lAynktsqQVyz3Fy5ATe6Bg"
         },
+        "backgroundGradient": {
+          "type": "option",
+          "pos": 7,
+          "use_uuid": true,
+          "exclude_empty_option": true,
+          "options": [
+            {
+              "_uid": "c76d8c88-2bae-4127-91ab-94f4b6517585",
+              "name": "primary",
+              "value": "primary"
+            }
+          ],
+          "id": "1ejGNIwwTXOI5Y2PttF38A"
+        },
         "backgroundImage": {
           "type": "asset",
-          "pos": 7,
+          "pos": 8,
           "required": false,
           "filetypes": [
             "images"
@@ -1189,7 +1208,7 @@
         },
         "columns": {
           "type": "bloks",
-          "pos": 8,
+          "pos": 9,
           "restrict_type": "",
           "restrict_components": true,
           "component_whitelist": [
@@ -1212,9 +1231,10 @@
             "backgroundImage",
             "theme",
             "paddingX",
-            "paddingY"
+            "paddingY",
+            "backgroundGradient"
           ],
-          "pos": 9,
+          "pos": 10,
           "type": "tab",
           "key": "tab-a56fbd62-e3cd-4f10-8de8-b218250de1a7",
           "id": "pW-9YuPNTxCN6LIYJQ3hpw"
@@ -1228,7 +1248,7 @@
       "all_presets": [
         {
           "id": 2282712,
-          "name": "Cards with text",
+          "name": "Text",
           "component_id": 6030874,
           "image": "//a.storyblok.com/f/293915/x/d647e4ac83/screenshot-2024-09-10-at-16-34-53.png",
           "icon": "",
@@ -1253,6 +1273,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -1424,6 +1445,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
@@ -1505,7 +1527,8 @@
       "icon": null,
       "internal_tags_list": [],
       "internal_tag_ids": [],
-      "content_type_asset_preview": null
+      "content_type_asset_preview": null,
+      "metadata": {}
     },
     {
       "name": "header",
@@ -1605,14 +1628,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": ""
     },
     {
       "name": "hero",
       "display_name": null,
-      "description": null,
+      "description": "Hero section with text and CTAs on the left and image on the right",
       "created_at": "2024-10-08T14:42:35.362Z",
-      "updated_at": "2025-02-18T12:16:00.685Z",
+      "updated_at": "2025-08-22T09:07:04.239Z",
       "id": 6391508,
       "schema": {
         "theme": {
@@ -1872,7 +1896,7 @@
           "image": "//a.storyblok.com/f/293915/x/9118f0bd1b/screenshot-2024-10-08-at-17-14-10.png",
           "icon": "",
           "color": "",
-          "description": ""
+          "description": "Two columns hero with text and CTAs on the left and image on the right"
         }
       ],
       "preset_id": null,
@@ -1883,6 +1907,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -1971,6 +1996,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
@@ -2082,14 +2108,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
       "name": "linksList",
       "display_name": null,
-      "description": null,
+      "description": "Horizontal list of buttons/links",
       "created_at": "2024-09-10T10:44:36.150Z",
-      "updated_at": "2025-02-18T11:57:23.357Z",
+      "updated_at": "2025-08-22T09:07:36.086Z",
       "id": 6275825,
       "schema": {
         "theme": {
@@ -2343,6 +2370,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -2430,14 +2458,15 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     },
     {
       "name": "logos",
       "display_name": null,
-      "description": null,
+      "description": "Horizontal multiline grid of images",
       "created_at": "2024-09-10T10:38:10.602Z",
-      "updated_at": "2025-02-18T11:57:47.081Z",
+      "updated_at": "2025-08-22T09:07:56.322Z",
       "id": 6275709,
       "schema": {
         "theme": {
@@ -2680,7 +2709,7 @@
           "image": "//a.storyblok.com/f/293915/x/cbb2ba4bd0/screenshot-2024-09-10-at-16-36-10.png",
           "icon": "",
           "color": "",
-          "description": ""
+          "description": "Horizontal list of logos, can be multiline and images"
         }
       ],
       "preset_id": null,
@@ -2691,6 +2720,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "sections"
     },
     {
@@ -2872,6 +2902,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "pages"
     },
     {
@@ -2957,6 +2988,7 @@
       "internal_tags_list": [],
       "internal_tag_ids": [],
       "content_type_asset_preview": null,
+      "metadata": {},
       "component_group_name": "components"
     }
   ],
