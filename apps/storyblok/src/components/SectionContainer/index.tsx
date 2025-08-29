@@ -1,6 +1,6 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 
-import { cn } from "@shared/ui";
+import { cn, cva } from "@shared/ui";
 
 import type { ISectionContainerProps } from "./types";
 
@@ -18,6 +18,7 @@ export default function SectionContainer({
     maxWidth,
     theme,
     backgroundImage,
+    backgroundGradient,
   } = blok;
 
   const style = backgroundImage?.filename
@@ -29,32 +30,81 @@ export default function SectionContainer({
   return (
     <section
       {...storyblokEditable(blok)}
-      className={cn("overflow-x-hidden", className, theme, {
-        "bg-bgColor": !!theme,
-        "mt-0": marginTop === "none",
-        "mb-0": marginBottom === "none",
-        "mt-sectionBase": marginTop === "base",
-        "mb-sectionBase": marginBottom === "base",
-        "mt-sectionLarge": marginTop === "large",
-        "mb-sectionLarge": marginBottom === "large",
-      })}
+      className={cn(
+        "mx-auto max-w-screen-xl overflow-x-hidden rounded-2xl",
+        className,
+        theme,
+        outerVariants({
+          marginTop,
+          marginBottom,
+          backgroundGradient,
+        }),
+        {
+          "bg-bgColor": !!theme && !backgroundGradient,
+        },
+      )}
       id={_uid}
       style={style}
     >
       <div
-        className={cn("mx-auto px-4 py-8", {
-          "px-0": paddingX === "none",
-          "py-0": paddingY === "none",
-          "px-sectionBase": paddingX === "base",
-          "py-sectionBase": paddingY === "base",
-          "px-sectionLarge": paddingX === "large",
-          "py-sectionLarge": paddingY === "large",
-          "max-w-screen-xl": maxWidth === "base",
-          "max-w-screen-sm": maxWidth === "small",
-        })}
+        className={cn(
+          "mx-auto px-4 py-8",
+          innerVariants({
+            paddingX,
+            paddingY,
+            maxWidth,
+          }),
+        )}
       >
         {children}
       </div>
     </section>
   );
 }
+
+const outerVariants = cva("", {
+  variants: {
+    marginTop: {
+      none: "mt-0",
+      base: "mt-sectionBase",
+      large: "mt-sectionLarge",
+    },
+    marginBottom: {
+      none: "mb-0",
+      base: "mb-sectionBase",
+      large: "mb-sectionLarge",
+    },
+    backgroundGradient: {
+      "gradient-1": "bg-gradient-to-br from-white to-primaryLightColor",
+    },
+  },
+  defaultVariants: {
+    marginTop: "base",
+    marginBottom: "base",
+  },
+});
+
+const innerVariants = cva("", {
+  variants: {
+    paddingX: {
+      none: "px-0",
+      base: "px-sectionBase",
+      large: "px-sectionLarge",
+    },
+    paddingY: {
+      none: "py-0",
+      base: "py-sectionBase",
+      large: "py-sectionLarge",
+    },
+    maxWidth: {
+      base: "max-w-screen-xl",
+      small: "max-w-screen-sm",
+      none: "max-w-none",
+    },
+  },
+  defaultVariants: {
+    paddingX: "base",
+    paddingY: "base",
+    maxWidth: "base",
+  },
+});

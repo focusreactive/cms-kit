@@ -11,8 +11,10 @@ export function Header({
   alignVariant,
 }: IHeaderProps) {
   return (
-    <header className={cn("bg-bgColor flex gap-10 py-3", className)}>
-      <div className="h-10">{image && <Image {...image} fit="contain" />}</div>
+    <header
+      className={cn("flex gap-10 bg-white/30 p-3 backdrop-blur-md", className)}
+    >
+      <div className="h-20">{image && <Image {...image} fit="contain" />}</div>
       <nav
         className={cn(
           "flex grow flex-wrap items-center justify-center gap-3 gap-x-6",

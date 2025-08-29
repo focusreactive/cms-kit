@@ -1,3 +1,4 @@
+import { cva } from "class-variance-authority";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -12,3 +13,5 @@ export function getLinkClickParams(disabled = false) {
     onClick: disabled ? (e: any) => e.preventDefault() : undefined,
   };
 }
+
+export { cva };

@@ -12,13 +12,13 @@ export const templates: any = {
 
 export function BlogSection({ text, style, posts }: IBlogSectionProps) {
   return (
-    <div className="bg-bgColor py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="bg-bgColor py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl space-y-12 px-6 lg:px-8">
         <div className={`${templates[style]?.header}`}>
           <RichText {...text} />
         </div>
 
-        <div className="border-textSecondaryColor mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {posts.map((post, i) => (
             <BlogPostCard {...post} key={i} />
           ))}

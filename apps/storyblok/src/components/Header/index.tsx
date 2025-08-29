@@ -19,8 +19,15 @@ export default function Header({ blok }: IHeaderProps) {
 
   return (
     <SectionContainer
-      blok={{ ...blok, paddingY: "none" }}
-      className="sticky left-0 top-0 z-50"
+      blok={{
+        ...blok,
+        paddingY: "none",
+        paddingX: "none",
+        marginTop: "none",
+        marginBottom: "none",
+        theme: undefined,
+      }}
+      className="sticky left-0 top-0 z-50 rounded-t-none"
     >
       <HeaderUI
         links={links.map(prepareLinkProps)}

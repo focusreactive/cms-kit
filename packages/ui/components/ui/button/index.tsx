@@ -5,21 +5,21 @@ import { cn } from "../../../utils";
 import { ButtonSize, ButtonVariant, type ButtonProps } from "./types";
 
 export const buttonVariants = cva(
-  "leading-none inline text-center hover:shadow-md transition-all duration-150",
+  "leading-none inline text-center transition-all duration-150",
   {
     variants: {
       variant: {
         [ButtonVariant.Default]: "text-textColor",
         [ButtonVariant.Primary]:
-          "font-medium text-bgColor rounded-lg bg-primaryColor hover:outline",
+          "font-medium text-bgColor rounded-2xl bg-primaryColor hover:text-primaryLightColor",
         [ButtonVariant.Secondary]:
-          "font-medium text-textColor border border-textColor rounded-lg focus:ring-4 focus:ring-textSecondaryColor",
+          "font-medium text-textColor border border-textColor rounded-2xl focus:ring-4 focus:ring-textSecondaryColor",
         [ButtonVariant.Badge]:
-          "rounded-full text-textSecondaryColor ring-1 ring-textSecondaryColor hover:ring-primaryColor",
+          "rounded-2xl text-textSecondaryColor ring-1 ring-textSecondaryColor hover:ring-primaryColor",
         [ButtonVariant.Ghost]:
-          "bg-bgColor radius-md text-textColor border border-bgColor hover:border-textSecondaryColor font-medium rounded-md",
+          "bg-bgColor radius-md text-textColor border border-bgColor hover:text-primaryColor font-medium rounded-2xl",
         [ButtonVariant.GhostDark]:
-          "bg-textColor text-bgColor radius-md hover:bg-textSecondaryColor font-medium rounded-md",
+          "bg-textColor text-bgColor radius-md hover:bg-textSecondaryColor font-medium rounded-2xl",
       },
       size: {
         [ButtonSize.Base]: "px-4 py-2 text-base",
@@ -47,6 +47,7 @@ export function Button({
   return (
     <Component
       className={cn(
+        "not-prose",
         buttonVariants({
           variant,
           size,

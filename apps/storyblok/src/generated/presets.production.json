@@ -383,299 +383,6 @@
       "description": ""
     },
     {
-      "id": 2282712,
-      "name": "Cards with text",
-      "preset": {
-        "_uid": "4119d1ef-903d-4c07-a46e-23c89a98708c",
-        "theme": "",
-        "columns": [
-          {
-            "_uid": "a8f23af7-06e5-4bb7-87d2-261c85926fd5",
-            "content": {
-              "type": "doc",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "text": "Experience CMS-Kit in Action",
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "bold"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 2
-                  },
-                  "content": [
-                    {
-                      "text": "Start Editing Content Right Here",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "text": "Welcome! Dive in and make some changes. Any edits you make here are instantly reflected on the live page to the left. This is the magic of ",
-                      "type": "text"
-                    },
-                    {
-                      "text": "Storyblok Visual Editing",
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "bold"
-                        }
-                      ]
-                    },
-                    {
-                      "text": ", offering seamless and intuitive content management.",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "text": "Right now, you're editing a ",
-                      "type": "text"
-                    },
-                    {
-                      "text": "Rich Text",
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "italic"
-                        }
-                      ]
-                    },
-                    {
-                      "text": " field. You can write some text or add more advanced blocks like ",
-                      "type": "text"
-                    },
-                    {
-                      "text": "Image",
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "italic"
-                        }
-                      ]
-                    },
-                    {
-                      "text": " or ",
-                      "type": "text"
-                    },
-                    {
-                      "text": "Cards Grid",
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "italic"
-                        }
-                      ]
-                    },
-                    {
-                      "text": " down below.",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "blok",
-                  "attrs": {
-                    "id": "4594bedd-8168-4d1d-be76-3fe3a2229a03",
-                    "body": [
-                      {
-                        "_uid": "i-6a31531c-82d5-462e-af64-a968fc14849f",
-                        "items": [
-                          {
-                            "_uid": "be25f0d8-828f-43b5-8e0c-182571c9d9ff",
-                            "link": [],
-                            "image": [
-                              {
-                                "_uid": "1b061b7e-cb5c-4c54-bc18-d5b056cc0320",
-                                "asset": {
-                                  "id": 17287559,
-                                  "alt": "",
-                                  "name": "",
-                                  "focus": "",
-                                  "title": "",
-                                  "source": "",
-                                  "filename": "https://a.storyblok.com/f/293915/15x15/6d170b1cb4/icon.webp",
-                                  "copyright": "",
-                                  "fieldtype": "asset",
-                                  "meta_data": {
-                                    "alt": "",
-                                    "title": "",
-                                    "source": "",
-                                    "copyright": ""
-                                  },
-                                  "is_external_url": false
-                                },
-                                "component": "image",
-                                "aspectRatio": "1/1"
-                              }
-                            ],
-                            "title": "Instant Accounts: ",
-                            "rounded": "none",
-                            "component": "defaultCard",
-                            "description": "Create Vercel and Sanity accounts instantly. Get your project environment ready in minutes",
-                            "alignVariant": "left",
-                            "backgroundColor": "light-gray"
-                          },
-                          {
-                            "_uid": "39b43912-84a8-414f-9915-606253c79066",
-                            "link": [],
-                            "image": [
-                              {
-                                "_uid": "6f861720-f237-4b18-b8f1-3c86f6ad6ab1",
-                                "asset": {
-                                  "id": 17287559,
-                                  "alt": "",
-                                  "name": "",
-                                  "focus": "",
-                                  "title": "",
-                                  "source": "",
-                                  "filename": "https://a.storyblok.com/f/293915/15x15/6d170b1cb4/icon.webp",
-                                  "copyright": "",
-                                  "fieldtype": "asset",
-                                  "meta_data": {
-                                    "alt": "",
-                                    "title": "",
-                                    "source": "",
-                                    "copyright": ""
-                                  },
-                                  "is_external_url": false
-                                },
-                                "component": "image",
-                                "aspectRatio": "1/1"
-                              }
-                            ],
-                            "title": "GitHub Integration: ",
-                            "rounded": "none",
-                            "component": "defaultCard",
-                            "description": "Connect to your GitHub repository effortlessly. Set up webhooks and streamline your development process",
-                            "alignVariant": "left",
-                            "backgroundColor": "light-gray"
-                          },
-                          {
-                            "_uid": "49c07e13-bac4-4b2c-8572-6e6e83f69402",
-                            "link": [],
-                            "image": [
-                              {
-                                "_uid": "61a104c7-3d84-4e7d-bf08-00f5943de2e7",
-                                "asset": {
-                                  "id": 17287559,
-                                  "alt": "",
-                                  "name": "",
-                                  "focus": "",
-                                  "title": "",
-                                  "source": "",
-                                  "filename": "https://a.storyblok.com/f/293915/15x15/6d170b1cb4/icon.webp",
-                                  "copyright": "",
-                                  "fieldtype": "asset",
-                                  "meta_data": {
-                                    "alt": "",
-                                    "title": "",
-                                    "source": "",
-                                    "copyright": ""
-                                  },
-                                  "is_external_url": false
-                                },
-                                "component": "image",
-                                "aspectRatio": "1/1"
-                              }
-                            ],
-                            "title": "Easy Deployment: ",
-                            "rounded": "none",
-                            "component": "defaultCard",
-                            "description": "Deploy both your studio and frontend seamlessly. Enjoy a smooth transition from setup to live site",
-                            "alignVariant": "left",
-                            "backgroundColor": "light-gray"
-                          },
-                          {
-                            "_uid": "23d3a11d-86fd-4626-b099-9d82ca831b99",
-                            "link": [],
-                            "image": [
-                              {
-                                "_uid": "7edfb590-0f3e-4ba8-b555-d26cbfde7605",
-                                "asset": {
-                                  "id": 17287559,
-                                  "alt": "",
-                                  "name": "",
-                                  "focus": "",
-                                  "title": "",
-                                  "source": "",
-                                  "filename": "https://a.storyblok.com/f/293915/15x15/6d170b1cb4/icon.webp",
-                                  "copyright": "",
-                                  "fieldtype": "asset",
-                                  "meta_data": {
-                                    "alt": "",
-                                    "title": "",
-                                    "source": "",
-                                    "copyright": ""
-                                  },
-                                  "is_external_url": false
-                                },
-                                "component": "image",
-                                "aspectRatio": "1/1"
-                              }
-                            ],
-                            "title": "Visual Editing: ",
-                            "rounded": "none",
-                            "component": "defaultCard",
-                            "description": "Utilize our enhanced visual editing tools within the CMS. Create and manage content with a user-friendly interface",
-                            "alignVariant": "left",
-                            "backgroundColor": "light-gray"
-                          }
-                        ],
-                        "theme": "",
-                        "columns": "2",
-                        "maxWidth": "base",
-                        "paddingX": "base",
-                        "paddingY": "base",
-                        "component": "cardsGrid",
-                        "marginTop": "none",
-                        "marginBottom": "none"
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            "component": "richText",
-            "alignVariant": "center",
-            "removeInnerMargins": false
-          }
-        ],
-        "maxWidth": "base",
-        "paddingX": "base",
-        "paddingY": "base",
-        "component": "copy",
-        "marginTop": "base",
-        "marginBottom": "base",
-        "isReversedOnMobile": false
-      },
-      "component_id": 6030874,
-      "space_id": 293915,
-      "created_at": "2024-09-10T14:35:11.067Z",
-      "updated_at": "2025-03-06T07:14:53.989Z",
-      "image": "//a.storyblok.com/f/293915/x/d647e4ac83/screenshot-2024-09-10-at-16-34-53.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
       "id": 2282748,
       "name": "Clickable logo",
       "preset": {
@@ -874,11 +581,11 @@
       "component_id": 6275709,
       "space_id": 293915,
       "created_at": "2024-09-10T14:36:27.751Z",
-      "updated_at": "2024-11-07T10:29:56.528Z",
+      "updated_at": "2025-08-22T09:04:23.438Z",
       "image": "//a.storyblok.com/f/293915/x/cbb2ba4bd0/screenshot-2024-09-10-at-16-36-10.png",
       "color": "",
       "icon": "",
-      "description": ""
+      "description": "Horizontal list of logos, can be multiline and images"
     },
     {
       "id": 2344449,
@@ -1998,311 +1705,6 @@
       "description": ""
     },
     {
-      "id": 2312484,
-      "name": "Default",
-      "preset": {
-        "_uid": "4ad7fd52-a576-4601-9889-04b46142e382",
-        "image": [
-          {
-            "_uid": "106d9002-a1c3-4f45-a2aa-8ff515b167e5",
-            "asset": {
-              "id": 17593700,
-              "alt": "",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/3840x2160/2e8c505a38/nike-logo.png",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {},
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "16/9"
-          }
-        ],
-        "links": [
-          {
-            "_uid": "892b4038-4a39-473f-b3b6-b9b0b2c853bd",
-            "link": {
-              "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
-              "url": "",
-              "linktype": "story",
-              "fieldtype": "multilink",
-              "cached_url": "maks"
-            },
-            "size": "base",
-            "text": "Home",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "42da28cf-0299-4a13-a006-a1813862fe91",
-            "link": {
-              "id": "5d416347-de08-4adb-b496-00b0a083de3a",
-              "url": "",
-              "linktype": "story",
-              "fieldtype": "multilink",
-              "cached_url": "blog"
-            },
-            "size": "base",
-            "text": "Blog",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "e60a7e37-87dc-4ce8-b6a5-70c3c7d4cecc",
-            "link": {
-              "id": "",
-              "url": "https://app.storyblok.com/#/me/spaces/293915",
-              "target": "_blank",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://app.storyblok.com/#/me/spaces/293915"
-            },
-            "size": "base",
-            "text": "Storyblok",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "3d6ad342-43b8-4b71-ad05-d9b581d76a0b",
-            "link": {
-              "id": "",
-              "url": "https://github.com/focusreactive/turbo-cms-kit",
-              "target": "_blank",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://github.com/focusreactive/turbo-cms-kit"
-            },
-            "size": "base",
-            "text": "GitHub",
-            "variant": "default",
-            "component": "link"
-          },
-          {
-            "_uid": "f52b36a2-29d5-4b86-a79b-ddd7d135b274",
-            "link": {
-              "id": "",
-              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
-            },
-            "size": "base",
-            "text": "Vercel",
-            "variant": "default",
-            "component": "link"
-          }
-        ],
-        "component": "header",
-        "alignVariant": "right"
-      },
-      "component_id": 6394530,
-      "space_id": 293915,
-      "created_at": "2024-10-09T05:55:35.787Z",
-      "updated_at": "2025-03-06T15:00:37.788Z",
-      "image": "//a.storyblok.com/f/293915/x/beab857f5f/screenshot-2024-10-08-at-13-37-02.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
-      "id": 2311975,
-      "name": "Default",
-      "preset": {
-        "_uid": "a3e625da-0ccb-4b6a-a379-d3518d374e59",
-        "text": [
-          {
-            "_uid": "2089c560-f262-4041-ab8e-ce0a11b1595a",
-            "content": {
-              "type": "doc",
-              "content": [
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 2
-                  },
-                  "content": [
-                    {
-                      "text": "In Notion, work feels better.",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 2
-                  },
-                  "content": [
-                    {
-                      "text": "With a little help from AI.",
-                      "type": "text"
-                    }
-                  ]
-                }
-              ]
-            },
-            "component": "richText",
-            "alignVariant": "left",
-            "removeInnerMargins": true
-          }
-        ],
-        "image": [
-          {
-            "_uid": "77e8a791-b426-4101-8b49-0967cd14b17c",
-            "asset": {
-              "id": 17600300,
-              "alt": "",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/2474x1318/df22f90af3/screenshot-2024-10-08-at-16-53-38.png",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {},
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "16/9"
-          }
-        ],
-        "links": [
-          {
-            "_uid": "8db7eb44-74dc-4549-8e71-3386251dceb7",
-            "link": {
-              "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
-              "url": "",
-              "linktype": "story",
-              "fieldtype": "multilink",
-              "cached_url": "maks"
-            },
-            "size": "lg",
-            "text": "Get for free",
-            "variant": "primary",
-            "component": "link"
-          },
-          {
-            "_uid": "9a58e8b0-bc14-4dd4-ae15-eb1d98d6bef8",
-            "link": {
-              "id": "",
-              "url": "https://focusreactive.com/#mail-us",
-              "target": "_blank",
-              "linktype": "url",
-              "fieldtype": "multilink",
-              "cached_url": "https://focusreactive.com/#mail-us"
-            },
-            "size": "lg",
-            "text": "Request a demo",
-            "variant": "secondary",
-            "component": "link"
-          }
-        ],
-        "theme": "",
-        "title": "Write. Plan. Collaborate.",
-        "maxWidth": "base",
-        "paddingX": "large",
-        "paddingY": "large",
-        "component": "hero",
-        "marginTop": "base",
-        "globalData": "",
-        "marginBottom": "base",
-        "backgroundImage": {
-          "id": null,
-          "alt": null,
-          "name": "",
-          "focus": null,
-          "title": null,
-          "source": null,
-          "filename": "",
-          "copyright": null,
-          "fieldtype": "asset",
-          "meta_data": {}
-        }
-      },
-      "component_id": 6391508,
-      "space_id": 293915,
-      "created_at": "2024-10-08T15:14:26.596Z",
-      "updated_at": "2025-03-06T07:07:01.241Z",
-      "image": "//a.storyblok.com/f/293915/x/9118f0bd1b/screenshot-2024-10-08-at-17-14-10.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
-      "id": 2311925,
-      "name": "Default",
-      "preset": {
-        "_uid": "785ab1c4-8866-4814-aa5d-ba91483fb0b8",
-        "text": [
-          {
-            "_uid": "f7ffe359-618f-4c4d-b217-94e28e7e239f",
-            "content": {
-              "type": "doc",
-              "content": [
-                {
-                  "type": "heading",
-                  "attrs": {
-                    "level": 3
-                  },
-                  "content": [
-                    {
-                      "text": "Phasellus ut sagittis sapien",
-                      "type": "text"
-                    }
-                  ]
-                },
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel congue est, sed ullamcorper sapien. Cras purus leo, rutrum tincidunt lacus id, pretium commodo risus. Maecenas auctor erat vel pretium sagittis.",
-                      "type": "text"
-                    }
-                  ]
-                }
-              ]
-            },
-            "component": "richText",
-            "alignVariant": "left",
-            "removeInnerMargins": false
-          }
-        ],
-        "image": [
-          {
-            "_uid": "46c9b4d4-1925-4196-8053-f2675a3a5323",
-            "asset": {
-              "id": 18057065,
-              "alt": "",
-              "name": "",
-              "focus": "",
-              "title": "",
-              "source": "",
-              "filename": "https://a.storyblok.com/f/293915/960x960/ffc4b04f00/app-launch.svg",
-              "copyright": "",
-              "fieldtype": "asset",
-              "meta_data": {},
-              "is_external_url": false
-            },
-            "component": "image",
-            "aspectRatio": "1/1"
-          }
-        ],
-        "component": "carouselSlide"
-      },
-      "component_id": 6391277,
-      "space_id": 293915,
-      "created_at": "2024-10-08T14:31:37.528Z",
-      "updated_at": "2024-11-07T10:13:13.893Z",
-      "image": "//a.storyblok.com/f/293915/x/86f4dd871f/screenshot-2024-11-07-at-11-12-52.png",
-      "color": "",
-      "icon": "",
-      "description": ""
-    },
-    {
       "id": 2313388,
       "name": "Default",
       "preset": {
@@ -2549,6 +1951,311 @@
       "created_at": "2024-10-09T16:11:27.599Z",
       "updated_at": "2025-03-06T14:59:39.948Z",
       "image": "//a.storyblok.com/f/293915/x/40181ec8c4/screenshot-2024-10-09-at-18-11-17.png",
+      "color": "",
+      "icon": "",
+      "description": ""
+    },
+    {
+      "id": 2312484,
+      "name": "Default",
+      "preset": {
+        "_uid": "4ad7fd52-a576-4601-9889-04b46142e382",
+        "image": [
+          {
+            "_uid": "106d9002-a1c3-4f45-a2aa-8ff515b167e5",
+            "asset": {
+              "id": 17593700,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/293915/3840x2160/2e8c505a38/nike-logo.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "image",
+            "aspectRatio": "16/9"
+          }
+        ],
+        "links": [
+          {
+            "_uid": "892b4038-4a39-473f-b3b6-b9b0b2c853bd",
+            "link": {
+              "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
+              "url": "",
+              "linktype": "story",
+              "fieldtype": "multilink",
+              "cached_url": "maks"
+            },
+            "size": "base",
+            "text": "Home",
+            "variant": "default",
+            "component": "link"
+          },
+          {
+            "_uid": "42da28cf-0299-4a13-a006-a1813862fe91",
+            "link": {
+              "id": "5d416347-de08-4adb-b496-00b0a083de3a",
+              "url": "",
+              "linktype": "story",
+              "fieldtype": "multilink",
+              "cached_url": "blog"
+            },
+            "size": "base",
+            "text": "Blog",
+            "variant": "default",
+            "component": "link"
+          },
+          {
+            "_uid": "e60a7e37-87dc-4ce8-b6a5-70c3c7d4cecc",
+            "link": {
+              "id": "",
+              "url": "https://app.storyblok.com/#/me/spaces/293915",
+              "target": "_blank",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://app.storyblok.com/#/me/spaces/293915"
+            },
+            "size": "base",
+            "text": "Storyblok",
+            "variant": "default",
+            "component": "link"
+          },
+          {
+            "_uid": "3d6ad342-43b8-4b71-ad05-d9b581d76a0b",
+            "link": {
+              "id": "",
+              "url": "https://github.com/focusreactive/turbo-cms-kit",
+              "target": "_blank",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://github.com/focusreactive/turbo-cms-kit"
+            },
+            "size": "base",
+            "text": "GitHub",
+            "variant": "default",
+            "component": "link"
+          },
+          {
+            "_uid": "f52b36a2-29d5-4b86-a79b-ddd7d135b274",
+            "link": {
+              "id": "",
+              "url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://vercel.com/focusreactive/turbo-cms-kit-storyblok"
+            },
+            "size": "base",
+            "text": "Vercel",
+            "variant": "default",
+            "component": "link"
+          }
+        ],
+        "component": "header",
+        "alignVariant": "right"
+      },
+      "component_id": 6394530,
+      "space_id": 293915,
+      "created_at": "2024-10-09T05:55:35.787Z",
+      "updated_at": "2025-03-06T15:00:37.788Z",
+      "image": "//a.storyblok.com/f/293915/x/beab857f5f/screenshot-2024-10-08-at-13-37-02.png",
+      "color": "",
+      "icon": "",
+      "description": ""
+    },
+    {
+      "id": 2311975,
+      "name": "Default",
+      "preset": {
+        "_uid": "a3e625da-0ccb-4b6a-a379-d3518d374e59",
+        "text": [
+          {
+            "_uid": "2089c560-f262-4041-ab8e-ce0a11b1595a",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "In Notion, work feels better.",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "With a little help from AI.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "richText",
+            "alignVariant": "left",
+            "removeInnerMargins": true
+          }
+        ],
+        "image": [
+          {
+            "_uid": "77e8a791-b426-4101-8b49-0967cd14b17c",
+            "asset": {
+              "id": 17600300,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/293915/2474x1318/df22f90af3/screenshot-2024-10-08-at-16-53-38.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "image",
+            "aspectRatio": "16/9"
+          }
+        ],
+        "links": [
+          {
+            "_uid": "8db7eb44-74dc-4549-8e71-3386251dceb7",
+            "link": {
+              "id": "100e8f7a-3486-44da-b6f1-d4e5fb131247",
+              "url": "",
+              "linktype": "story",
+              "fieldtype": "multilink",
+              "cached_url": "maks"
+            },
+            "size": "lg",
+            "text": "Get for free",
+            "variant": "primary",
+            "component": "link"
+          },
+          {
+            "_uid": "9a58e8b0-bc14-4dd4-ae15-eb1d98d6bef8",
+            "link": {
+              "id": "",
+              "url": "https://focusreactive.com/#mail-us",
+              "target": "_blank",
+              "linktype": "url",
+              "fieldtype": "multilink",
+              "cached_url": "https://focusreactive.com/#mail-us"
+            },
+            "size": "lg",
+            "text": "Request a demo",
+            "variant": "secondary",
+            "component": "link"
+          }
+        ],
+        "theme": "",
+        "title": "Write. Plan. Collaborate.",
+        "maxWidth": "base",
+        "paddingX": "large",
+        "paddingY": "large",
+        "component": "hero",
+        "marginTop": "base",
+        "globalData": "",
+        "marginBottom": "base",
+        "backgroundImage": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "source": null,
+          "filename": "",
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {}
+        }
+      },
+      "component_id": 6391508,
+      "space_id": 293915,
+      "created_at": "2024-10-08T15:14:26.596Z",
+      "updated_at": "2025-08-22T09:02:54.422Z",
+      "image": "//a.storyblok.com/f/293915/x/9118f0bd1b/screenshot-2024-10-08-at-17-14-10.png",
+      "color": "",
+      "icon": "",
+      "description": "Two columns hero with text and CTAs on the left and image on the right"
+    },
+    {
+      "id": 2311925,
+      "name": "Default",
+      "preset": {
+        "_uid": "785ab1c4-8866-4814-aa5d-ba91483fb0b8",
+        "text": [
+          {
+            "_uid": "f7ffe359-618f-4c4d-b217-94e28e7e239f",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 3
+                  },
+                  "content": [
+                    {
+                      "text": "Phasellus ut sagittis sapien",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel congue est, sed ullamcorper sapien. Cras purus leo, rutrum tincidunt lacus id, pretium commodo risus. Maecenas auctor erat vel pretium sagittis.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "richText",
+            "alignVariant": "left",
+            "removeInnerMargins": false
+          }
+        ],
+        "image": [
+          {
+            "_uid": "46c9b4d4-1925-4196-8053-f2675a3a5323",
+            "asset": {
+              "id": 18057065,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/293915/960x960/ffc4b04f00/app-launch.svg",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "image",
+            "aspectRatio": "1/1"
+          }
+        ],
+        "component": "carouselSlide"
+      },
+      "component_id": 6391277,
+      "space_id": 293915,
+      "created_at": "2024-10-08T14:31:37.528Z",
+      "updated_at": "2024-11-07T10:13:13.893Z",
+      "image": "//a.storyblok.com/f/293915/x/86f4dd871f/screenshot-2024-11-07-at-11-12-52.png",
       "color": "",
       "icon": "",
       "description": ""
@@ -7015,6 +6722,138 @@
       "description": ""
     },
     {
+      "id": 2282712,
+      "name": "Text",
+      "preset": {
+        "_uid": "4119d1ef-903d-4c07-a46e-23c89a98708c",
+        "theme": "",
+        "columns": [
+          {
+            "_uid": "a8f23af7-06e5-4bb7-87d2-261c85926fd5",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Discover Health Solutions in Action",
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "Begin Fostering Wellness Right Here",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Welcome! Explore and embrace healthier habits. Every improvement you adopt here is immediately visible on your path to well-being on the left. This is the beauty of transformation.",
+                      "type": "text"
+                    },
+                    {
+                      "text": "\"Promoting Holistic Wellness\"",
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    },
+                    {
+                      "text": ", promoting effortless and intuitive approaches to health management.",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "At this moment, you are focusing on enhancing your personal health and well-being.",
+                      "type": "text"
+                    },
+                    {
+                      "text": "\"Wellness Tips\"",
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "text": "area. You can share insights or incorporate more sophisticated elements such as",
+                      "type": "text"
+                    },
+                    {
+                      "text": "\"Wellness\"",
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "text": "Health and well-being are crucial aspects of our daily lives. They encompass not just physical fitness, but also mental and emotional stability. Prioritizing a balanced diet, regular exercise, and mindfulness practices can significantly improve overall wellness. It's essential to engage in activities that reduce stress, foster connections with others, and encourage self-care. Incorporating healthy habits into our routines leads to a more fulfilling and vibrant life.",
+                      "type": "text"
+                    },
+                    {
+                      "text": "Wellness Hub",
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "text": "\"better choices ahead.\"",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "richText",
+            "alignVariant": "center",
+            "removeInnerMargins": false
+          }
+        ],
+        "maxWidth": "base",
+        "paddingX": "base",
+        "paddingY": "base",
+        "component": "copy",
+        "marginTop": "base",
+        "marginBottom": "base",
+        "isReversedOnMobile": false
+      },
+      "component_id": 6030874,
+      "space_id": 293915,
+      "created_at": "2024-09-10T14:35:11.067Z",
+      "updated_at": "2025-08-22T16:33:14.450Z",
+      "image": "//a.storyblok.com/f/293915/x/d647e4ac83/screenshot-2024-09-10-at-16-34-53.png",
+      "color": "",
+      "icon": "",
+      "description": ""
+    },
+    {
       "id": 2282728,
       "name": "Text with CMS logos",
       "preset": {
@@ -7479,11 +7318,11 @@
       "component_id": 6275958,
       "space_id": 293915,
       "created_at": "2024-09-10T14:39:36.681Z",
-      "updated_at": "2025-03-06T07:09:59.607Z",
+      "updated_at": "2025-08-22T09:05:19.018Z",
       "image": "//a.storyblok.com/f/293915/x/88c459b916/screenshot-2024-09-10-at-16-38-56.png",
       "color": "",
       "icon": "",
-      "description": ""
+      "description": "Blog section with text on top and grid of 3 three columns with cards under the text. "
     }
   ]
 }
