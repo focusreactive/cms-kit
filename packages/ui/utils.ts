@@ -8,9 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getLinkClickParams(disabled = false) {
   return {
-    // "aria-disabled": disabled,
-    // className: disabled ? "pointer-events-none" : "",
-    // onClick: disabled ? (e: any) => e.preventDefault() : undefined,
+    "aria-disabled": disabled,
+    className: disabled ? "pointer-events-none" : "",
+    onClick: disabled ? (e: any) => e.preventDefault() : undefined,
   };
 }
 
