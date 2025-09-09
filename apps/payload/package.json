@@ -1,0 +1,67 @@
+{
+  "name": "payload",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
+    "dev": "next dev --turbopack --port=3000",
+    "dev:prod": "rm -rf .next && pnpm build && pnpm start",
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types",
+    "ii": "pnpm --ignore-workspace install",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "payload": "PAYLOAD_CONFIG_PATH=/src/lib/payload/payload.config.ts payload",
+    "reinstall": "rm -rf node_modules && rm pnpm-lock.yaml && pnpm --ignore-workspace install",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.54.0",
+    "@payloadcms/live-preview-react": "3.54.0",
+    "@payloadcms/next": "3.54.0",
+    "@payloadcms/payload-cloud": "3.54.0",
+    "@payloadcms/plugin-seo": "3.54.0",
+    "@payloadcms/richtext-lexical": "3.54.0",
+    "@payloadcms/ui": "3.54.0",
+    "@shared/ui": "workspace:*",
+    "cross-env": "^7.0.3",
+    "dotenv": "16.4.7",
+    "next": "15.4.4",
+    "next-sitemap": "^4.2.3",
+    "payload": "3.54.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sharp": "0.34.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@shared/eslint-config": "workspace:*",
+    "@shared/tailwind-config": "workspace:*",
+    "@shared/ts-config": "workspace:*",
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/node": "22.5.4",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.4.4",
+    "postcss": "^8.4.38",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.3",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0",
+    "pnpm": "^9 || ^10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}
