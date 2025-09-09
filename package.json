@@ -17,6 +17,7 @@
     "build:sa": "turbo run build --filter=sanity",
     "start:sa": "turbo run start --filter=sanity",
     "proxy:sa": "turbo run proxy --filter=sanity",
+    "dev:pl": "turbo run dev --filter=payload",
     "lint": "turbo run lint",
     "lint:fix": "turbo lint -- --fix && manypkg fix",
     "manypkg:fix": "manypkg fix",

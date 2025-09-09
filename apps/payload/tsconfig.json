@@ -1,0 +1,21 @@
+{
+  "extends": "@shared/ts-config/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@payload-config": ["src/lib/payload/payload.config.ts"],
+      "react": ["./node_modules/@types/react"],
+      "@/*": ["./src/*"],
+      "@shared/*": ["../../packages/ui/*"]
+    },
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mdx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
