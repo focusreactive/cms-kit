@@ -1,7 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 
-// import { Providers } from "@/lib/providers";
 import { mergeOpenGraph } from "@/lib/utilities/mergeOpenGraph";
 
 import "./globals.css";
@@ -18,16 +17,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <InitTheme /> */}
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        {/* <link href="/favicon.svg" rel="icon" type="image/svg+xml" /> */}
       </head>
       <body>
-        {/* <Providers> */}
         <Header />
         {children}
         <Footer />
-        {/* </Providers> */}
       </body>
     </html>
   );

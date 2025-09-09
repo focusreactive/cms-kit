@@ -40,7 +40,8 @@ export default function SectionContainer({
           "bg-bgColor": !!theme && !backgroundGradient,
         },
       )}
-      id={String(id)}
+      // TO-DO: fix it, id can't be undefined
+      id={id ? String(id) : "fakeId"}
       style={style}
     >
       <div

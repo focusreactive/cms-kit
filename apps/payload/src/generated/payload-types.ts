@@ -336,8 +336,11 @@ export interface HeroBlock {
         id?: string | null;
       }[]
     | null;
-  image: number | Media;
-  theme?: ('light' | 'dark' | 'lightGray' | 'darkGray') | null;
+  image: {
+    image: number | Media;
+    aspectRatio: '16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto';
+  };
+  theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
   marginTop: 'none' | 'base' | 'large';
   paddingX: 'none' | 'base' | 'large';
   paddingY: 'none' | 'base' | 'large';
@@ -617,7 +620,12 @@ export interface HeroBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  image?: T;
+  image?:
+    | T
+    | {
+        image?: T;
+        aspectRatio?: T;
+      };
   theme?: T;
   marginTop?: T;
   paddingX?: T;

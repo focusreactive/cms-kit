@@ -1,4 +1,3 @@
-// import { hero } from "@/contentSections/heros/config";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -13,7 +12,7 @@ import { authenticated } from "@/lib/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/lib/payload/access/authenticatedOrPublished";
 import { generatePreviewPath } from "@/lib/utilities/generatePreviewPath";
 import { Content } from "@/components/blocks/Content/config";
-// import { Hero } from "@/components/blocks/Hero/config";
+import { Hero } from "@/components/blocks/Hero/config";
 import { MediaBlock } from "@/components/blocks/MediaBlock/config";
 import { slugField } from "@/components/fields/slug";
 
@@ -69,8 +68,7 @@ export const Pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [Content, MediaBlock],
-              // blocks: [Content, MediaBlock, Hero],
+              blocks: [Content, MediaBlock, Hero],
               required: true,
               admin: {
                 initCollapsed: true,

@@ -1,21 +1,9 @@
-// import { ImageAspectRatio } from "@shared/ui/components/ui/image/types";
 import type { GlobalConfig } from "payload";
 
+import { ImageAspectRatio } from "@/lib/sharedTypes";
 import { link } from "@/components/fields/link";
 
 import { revalidateHeader } from "./hooks/revalidateHeader";
-
-enum ImageAspectRatio {
-  "16/9" = "16/9",
-  "3/2" = "3/2",
-  "4/3" = "4/3",
-  "1/1" = "1/1",
-  "9/16" = "9/16",
-  "1/2" = "1/2",
-  "4/1" = "4/1",
-  "3/1" = "3/1",
-  "auto" = "auto",
-}
 
 export const Header: GlobalConfig = {
   slug: "header",
@@ -103,42 +91,3 @@ export const Header: GlobalConfig = {
     afterChange: [revalidateHeader],
   },
 };
-
-// [
-//       {
-//         label: "16/9",
-//         value: "16/9",
-//       },
-//       {
-//         label: "3/2",
-//         value: "3/2",
-//       },
-//       {
-//         label: "4/3",
-//         value: "4/3",
-//       },
-//       {
-//         label: "1/1",
-//         value: "1/1",
-//       },
-//       {
-//         label: "9/16",
-//         value: "9/16",
-//       },
-//       {
-//         label: "1/2",
-//         value: "1/2",
-//       },
-//       {
-//         label: "4/1",
-//         value: "4/1",
-//       },
-//       {
-//         label: "3/1",
-//         value: "3/1",
-//       },
-//       {
-//         label: "auto",
-//         value: "auto",
-//       },
-//     ],

@@ -6,17 +6,7 @@ import {
 
 interface IProps {
   image: number | Media;
-  aspectRatio:
-    | "16/9"
-    | "3/2"
-    | "4/3"
-    | "1/1"
-    | "9/16"
-    | "1/2"
-    | "4/1"
-    | "3/1"
-    | "auto";
-  // aspectRatio: ImageAspectRatio;
+  aspectRatio: ImageAspectRatio;
 }
 
 export const prepareImageProps = ({
@@ -32,7 +22,7 @@ export const prepareImageProps = ({
       fit: "cover",
     };
   }
-  image.sizes;
+
   return {
     src: image.url,
     alt: image.alt || "",

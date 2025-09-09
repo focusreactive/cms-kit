@@ -47,10 +47,11 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug,
   });
 
+  // TO-DO: add default page template for case when there is no home page
   if (!page) {
     return (
       <div>
-        <h1>EMPTY</h1>
+        <h1>EMPTY PAGE</h1>
       </div>
     );
   }

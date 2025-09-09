@@ -11,7 +11,7 @@ import SectionContainer from "@/components/SectionContainer";
 
 export default async function Footer() {
   const footerData: Footer = await getCachedGlobal("footer", 1)();
-  console.log("footerData===========>", footerData);
+
   const { links, text, copywriteText, image } = footerData;
 
   if ((!links || links.length === 0) && !image && !copywriteText && !text)

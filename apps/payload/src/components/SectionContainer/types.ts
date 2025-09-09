@@ -1,17 +1,13 @@
-// import type { AssetStoryblok } from "@/generated/extracted-types";
-// import type { SbBlokData } from "@storyblok/react/rsc";
-
-// export interface ISectionContainer extends SbBlokData {
 export interface ISectionContainer {
-  id: number;
+  id?: number | string | null;
   maxWidth?: "none" | "base" | "small";
   marginTop?: "none" | "base" | "large";
   marginBottom?: "none" | "base" | "large";
   paddingX?: "none" | "base" | "large";
   paddingY?: "none" | "base" | "large";
-  theme?: "light" | "dark" | "light-gray" | "dark-gray" | "none";
+  theme?: "light" | "dark" | "light-gray" | "dark-gray" | null;
+  // TO-DO: add correct type for backgroundImage
   backgroundImage?: { filename: string };
-  // backgroundImage?: AssetStoryblok;
   backgroundGradient?: "gradient-1";
 }
 

@@ -16,7 +16,8 @@ export const prepareRichTextProps = (props?: any): IRichTextProps => {
 
   return {
     richText: renderRichText({ data: props }),
-    //     removeInnerMargins: props.removeInnerMargins,
+    // TO-DO: add style fields to RichText: removeInnerMargins
+    //     removeInnerMargins: props.removeInnerMargins and alignVariant
     // alignVariant: props.alignVariant as AlignVariant,
     removeInnerMargins: false,
     alignVariant: AlignVariant.Center,

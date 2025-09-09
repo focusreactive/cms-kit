@@ -10,8 +10,8 @@ import { getCachedGlobal } from "@/lib/utilities/getGlobals";
 import SectionContainer from "@/components/SectionContainer";
 
 export default async function Header() {
+  // TO-DO: fix type error
   const headerData: Header = await getCachedGlobal("header", 1)();
-  console.log("headerData===========>", headerData);
 
   const { links, image, alignVariant } = headerData;
 

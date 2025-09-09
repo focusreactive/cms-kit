@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import type { Page } from "@/generated/payload-types";
 
 import { ContentBlock } from "@/components/blocks/Content/Component";
-// import { HeroSection } from "@/components/blocks/Hero/Component";
+import { HeroSection } from "@/components/blocks/Hero/Component";
 import { MediaBlock } from "@/components/blocks/MediaBlock/Component";
 
 const blockComponents = {
   content: ContentBlock,
   mediaBlock: MediaBlock,
-  // hero: HeroSection,
+  hero: HeroSection,
 };
 
 export const RenderBlocks: React.FC<{

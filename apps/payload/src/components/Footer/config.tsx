@@ -4,27 +4,14 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
+// TO-DO: when run pnpm generate:types - get error: The requested module '@shared/ui/components/ui/image/types' does not provide an export named 'ImageAspectRatio'
 // import { ImageAspectRatio } from "@shared/ui/components/ui/image/types";
 import type { GlobalConfig } from "payload";
 
+import { ImageAspectRatio } from "@/lib/sharedTypes";
 import { link } from "@/components/fields/link";
 
-// import { ImageAspectRatio } from "../../../../../packages/ui/components/ui/image/types";
 import { revalidateFooter } from "./hooks/revalidateFooter";
-
-// import { ImageAspectRatio } from "./types";
-
-enum ImageAspectRatio {
-  "16/9" = "16/9",
-  "3/2" = "3/2",
-  "4/3" = "4/3",
-  "1/1" = "1/1",
-  "9/16" = "9/16",
-  "1/2" = "1/2",
-  "4/1" = "4/1",
-  "3/1" = "3/1",
-  "auto" = "auto",
-}
 
 export const Footer: GlobalConfig = {
   slug: "footer",

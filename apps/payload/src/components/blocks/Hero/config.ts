@@ -6,6 +6,7 @@ import {
 } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload";
 
+import { ImageAspectRatio } from "@/lib/sharedTypes";
 import { linkGroup } from "@/components/fields/linkGroup";
 
 export const Hero: Block = {
@@ -63,10 +64,30 @@ export const Hero: Block = {
             }),
             {
               name: "image",
-              type: "upload",
+              type: "group",
               label: "Image",
-              relationTo: "media",
               required: true,
+              fields: [
+                {
+                  name: "image",
+                  type: "upload",
+                  relationTo: "media",
+                  required: true,
+                },
+                {
+                  name: "aspectRatio",
+                  type: "select",
+                  defaultValue: "1/1",
+                  label: "Aspect Ratio",
+                  required: true,
+                  options: Object.values(ImageAspectRatio).map(
+                    (aspectRatio) => ({
+                      label: aspectRatio,
+                      value: aspectRatio,
+                    }),
+                  ),
+                },
+              ],
             },
           ],
         },
@@ -88,11 +109,11 @@ export const Hero: Block = {
                 },
                 {
                   label: "light gray",
-                  value: "lightGray",
+                  value: "light-gray",
                 },
                 {
                   label: "dark gray",
-                  value: "darkGray",
+                  value: "dark-gray",
                 },
               ],
             },
@@ -183,7 +204,7 @@ export const Hero: Block = {
             {
               name: "maxWidth",
               type: "select",
-              defaultValue: "large",
+              defaultValue: "base",
               label: "Max Width",
               required: true,
               options: [

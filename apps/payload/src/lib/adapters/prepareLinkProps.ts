@@ -1,10 +1,7 @@
-import React from "react";
-import type { Page, Post } from "@/generated/payload-types";
-import { ButtonProps } from "@/payloadComponents/ui/button";
+import type { Page } from "@/generated/payload-types";
 import {
   ButtonSize,
   ButtonVariant,
-  type ButtonVariantProps,
 } from "@shared/ui/components/ui/button/types";
 import { type LinkProps } from "@shared/ui/components/ui/link/types";
 
@@ -13,12 +10,11 @@ type PayloadLinkType = {
   newTab?: boolean | null;
   reference?: {
     relationTo: "pages";
-    value: Page | Post | string | number;
+    value: Page | string | number;
   } | null;
   url?: string | null;
-  // size?: ButtonSize | null;
-  // variant?: ButtonVariant| null
-  size?: "base" | "sm" | "lg" | null | undefined;
+  // TO-DO: fix size and variant types
+  size?: ButtonSize | null;
   variant?: ButtonVariant | null;
   type?: "custom" | "reference" | null;
 };
@@ -61,9 +57,7 @@ export const prepareLinkProps = (props?: Props): LinkProps => {
     text: label,
     href: href ?? "",
     variant,
-    // size,
-    // variant: appearance as ButtonVariantProps["variant"],
-    size: size as ButtonVariantProps["size"],
+    size,
     className: undefined,
   };
 };
