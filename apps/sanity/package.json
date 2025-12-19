@@ -22,7 +22,7 @@
     "@shared/ui": "workspace:*",
     "@tailwindcss/typography": "0.5.10",
     "@tinloof/sanity-studio": "0.0.0-20250507100413",
-    "next": "15.3.3",
+    "next": "15.5.9",
     "next-sanity": "9.12.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
