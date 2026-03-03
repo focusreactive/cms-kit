@@ -52,7 +52,7 @@ export default async function Page({ params }: Args) {
           locale={locale}
           domain={domain}
           blog={{
-            title: blogSettings.title || 'Blog',
+            title: blogSettings.blogTitle || 'Blog',
             post: {
               title: post.title,
               slug: post.slug ?? decodedSlug,

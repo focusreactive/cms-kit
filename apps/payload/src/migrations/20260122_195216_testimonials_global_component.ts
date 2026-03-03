@@ -92,17 +92,15 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   ALTER TABLE "testimonials" DISABLE ROW LEVEL SECURITY;
   ALTER TABLE "testimonials_presets" DISABLE ROW LEVEL SECURITY;
   ALTER TABLE "testimonials_presets_rels" DISABLE ROW LEVEL SECURITY;
+  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_testimonials_fk";
+  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_testimonials_presets_fk";
+  DROP INDEX "payload_locked_documents_rels_testimonials_id_idx";
+  DROP INDEX "payload_locked_documents_rels_testimonials_presets_id_idx";
   DROP TABLE "page_blocks_testimonials_preset" CASCADE;
   DROP TABLE "_page_v_blocks_testimonials_preset" CASCADE;
   DROP TABLE "testimonials" CASCADE;
   DROP TABLE "testimonials_presets" CASCADE;
   DROP TABLE "testimonials_presets_rels" CASCADE;
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_testimonials_fk";
-  
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_testimonials_presets_fk";
-  
-  DROP INDEX "payload_locked_documents_rels_testimonials_id_idx";
-  DROP INDEX "payload_locked_documents_rels_testimonials_presets_id_idx";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "testimonials_id";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "testimonials_presets_id";`)
 }

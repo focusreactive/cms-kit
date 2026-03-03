@@ -16,7 +16,6 @@ const collections: CollectionSlug[] = [
   'site-settings',
   'header',
   'footer',
-  'blog-page-settings',
 ]
 
 const generateCollectionsConfig = () => {

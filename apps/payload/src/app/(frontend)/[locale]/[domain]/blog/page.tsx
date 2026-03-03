@@ -55,13 +55,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return generateMeta({
     doc: {
-      title: blogSettings.title || '',
+      title: blogSettings.blogTitle || '',
       slug: BLOG_CONFIG.slug,
       meta: {
-        title: blogSettings.meta?.title,
-        description: blogSettings.meta?.description || blogSettings.description,
-        image: blogSettings.meta?.image,
-        robots: blogSettings.meta?.robots,
+        title: blogSettings.blogMeta?.title,
+        description: blogSettings.blogMeta?.description || blogSettings.blogDescription,
+        image: blogSettings.blogMeta?.image,
+        robots: blogSettings.blogMeta?.robots,
       },
     },
     collection: 'posts',

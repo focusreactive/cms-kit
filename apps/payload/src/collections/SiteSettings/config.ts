@@ -9,6 +9,7 @@ import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { SITE_SETTINGS_DEFAULT_VALUES } from './defaultValues'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
 import { isTenantEnabled } from '@/shared/config/tenant'
+import { generateSeoFields } from '@/shared/lib/seoFields'
 
 export const SiteSettings: CollectionConfig<'site-settings'> = {
   slug: 'site-settings',
@@ -405,6 +406,54 @@ export const SiteSettings: CollectionConfig<'site-settings'> = {
                   es: 'Texto mostrado en la página 404',
                 },
               },
+              localized: true,
+            },
+          ],
+        },
+        {
+          name: 'blog',
+          label: {
+            en: 'Blog',
+            es: 'Blog',
+          },
+          fields: [
+            {
+              name: 'blogTitle',
+              type: 'text',
+              defaultValue: createLocalizedDefault({ en: 'Blog', es: 'Blog' }),
+              localized: true,
+              label: { en: 'Blog Page Title', es: 'Título de la página de blog' },
+              admin: {
+                description: {
+                  en: 'The main title for the blog page',
+                  es: 'El título principal para la página de blog',
+                },
+              },
+            },
+            {
+              name: 'blogDescription',
+              type: 'textarea',
+              localized: true,
+              label: {
+                en: 'Blog Page Description',
+                es: 'Descripción de la página de blog',
+              },
+              defaultValue: createLocalizedDefault({
+                en: 'Blog page description',
+                es: 'Descripción de la página de blog',
+              }),
+              admin: {
+                description: {
+                  en: 'Used for meta description if not overridden',
+                  es: 'Usada para la descripción meta si no se sobreescribe',
+                },
+              },
+            },
+            {
+              name: 'blogMeta',
+              type: 'group',
+              label: { en: 'Blog SEO', es: 'SEO del blog' },
+              fields: generateSeoFields(),
               localized: true,
             },
           ],

@@ -100,7 +100,7 @@ async function generateSitemap(): Promise<Sitemap> {
           })
 
           const blogLastModified =
-            getLastModifiedDate(posts[0]?.publishedAt, blogSettings.updatedAt) || new Date()
+            getLastModifiedDate(posts[0]?.publishedAt) || new Date()
 
           sitemap.push({
             url: buildUrl({ collection: 'posts', locale, domain }),

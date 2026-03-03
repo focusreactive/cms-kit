@@ -24,15 +24,6 @@ export const afterCreateTenant: CollectionAfterChangeHook<Tenant> = async ({
       overrideAccess: true,
     })
 
-    await req.payload.create({
-      collection: 'blog-page-settings',
-      data: {
-        tenant: doc.id,
-      },
-      req,
-      overrideAccess: true,
-    })
-
     const publicPath = path.join(process.cwd(), 'public', 'empty-placeholder.jpg')
 
     if (fs.existsSync(publicPath)) {

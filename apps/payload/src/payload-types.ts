@@ -78,7 +78,6 @@ export interface Config {
     header: Header;
     footer: Footer;
     'site-settings': SiteSetting;
-    'blog-page-settings': BlogPageSetting;
     'page-variants': PageVariant;
     redirects: Redirect;
     presets: Preset;
@@ -105,7 +104,6 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
-    'blog-page-settings': BlogPageSettingsSelect<false> | BlogPageSettingsSelect<true>;
     'page-variants': PageVariantsSelect<false> | PageVariantsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
@@ -891,42 +889,27 @@ export interface SiteSetting {
    * Text displayed on 404 page
    */
   notFoundDescription?: string | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-page-settings".
- */
-export interface BlogPageSetting {
-  id: number;
-  /**
-   * The main title for the blog page
-   */
-  title?: string | null;
-  /**
-   * Description of the blog page (used for meta description if not overridden)
-   */
-  description?: string | null;
-  meta?: {
-    title?: string | null;
+  blog?: {
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * The main title for the blog page
      */
-    image?: (number | null) | Media;
-    description?: string | null;
+    blogTitle?: string | null;
     /**
-     * Allow search engines to index this page
+     * Used for meta description if not overridden
      */
-    robots?: ('index' | 'noindex') | null;
+    blogDescription?: string | null;
+    blogMeta?: {
+      title?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
+      image?: (number | null) | Media;
+      description?: string | null;
+      /**
+       * Allow search engines to index this page
+       */
+      robots?: ('index' | 'noindex') | null;
+    };
   };
   tenants?:
     | {
@@ -1186,10 +1169,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'site-settings';
         value: number | SiteSetting;
-      } | null)
-    | ({
-        relationTo: 'blog-page-settings';
-        value: number | BlogPageSetting;
       } | null)
     | ({
         relationTo: 'page-variants';
@@ -1722,31 +1701,19 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   defaultTwitterCard?: T;
   notFoundTitle?: T;
   notFoundDescription?: T;
-  tenants?:
+  blog?:
     | T
     | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-page-settings_select".
- */
-export interface BlogPageSettingsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-        robots?: T;
+        blogTitle?: T;
+        blogDescription?: T;
+        blogMeta?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+              description?: T;
+              robots?: T;
+            };
       };
   tenants?:
     | T

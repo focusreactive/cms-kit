@@ -237,12 +237,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "page_variants_blocks_testimonials_list_testimonial_items" CASCADE;
   DROP TABLE "page_variants_blocks_testimonials_list" CASCADE;
   DROP TABLE "page_variants_tenants" CASCADE;
+  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_page_variants_fk";
+  DROP INDEX "payload_locked_documents_rels_page_variants_id_idx";
   DROP TABLE "page_variants" CASCADE;
   DROP TABLE "page_variants_locales" CASCADE;
   DROP TABLE "page_variants_rels" CASCADE;
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_page_variants_fk";
-  
-  DROP INDEX "payload_locked_documents_rels_page_variants_id_idx";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "page_variants_id";
   DROP TYPE "public"."enum_page_variants_blocks_hero_actions_type";
   DROP TYPE "public"."enum_page_variants_blocks_hero_actions_appearance";

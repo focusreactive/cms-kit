@@ -1,4 +1,5 @@
-import type { BlogPageSetting, Media, Post } from '@/payload-types'
+import type { Media, Post } from '@/payload-types'
+import type { BlogPageSettingsData } from '@/shared/lib/getBlogPageSettings'
 import { getServerSideURL } from '@/shared/lib/getURL'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import { formatAuthorsToSchema } from '../lib/formatAuthorsToSchema'
@@ -7,7 +8,7 @@ import { Locale } from '@/shared/types'
 type PostPreview = Pick<Post, 'title' | 'slug' | 'publishedAt' | 'updatedAt' | 'authors' | 'meta'>
 
 interface BlogSchemaParams {
-  settings: BlogPageSetting
+  settings: BlogPageSettingsData
   posts: PostPreview[]
   siteName?: string
   locale: Locale
@@ -18,7 +19,7 @@ export function createBlogSchema({ settings, posts, siteName, locale, domain }: 
   const baseUrl = getServerSideURL()
   const blogUrl = buildUrl({ collection: 'posts', locale, domain })
 
-  const description = settings.meta?.description || settings.description || ''
+  const description = settings.blogMeta?.description || settings.blogDescription || ''
 
   const publisher = siteName
     ? {
@@ -61,7 +62,7 @@ export function createBlogSchema({ settings, posts, siteName, locale, domain }: 
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: settings.title,
+    name: settings.blogTitle,
     url: blogUrl,
     inLanguage: locale,
     mainEntityOfPage: {

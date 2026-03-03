@@ -40,7 +40,7 @@ export async function BlogPageDynamic({ searchParams, locale, domain }: BlogPage
       currentPage={posts.page}
       totalPages={posts.totalPages}
       totalDocs={posts.totalDocs}
-      title={blogSettings.title}
+      title={blogSettings.blogTitle}
     />
   )
 }

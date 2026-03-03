@@ -1,5 +1,6 @@
 import React from 'react'
-import type { BlogPageSetting, Post } from '@/payload-types'
+import type { Post } from '@/payload-types'
+import type { BlogPageSettingsData } from '@/shared/lib/getBlogPageSettings'
 import { createBlogSchema } from '@/shared/seo/schemas'
 import { JsonLd } from '../JsonLd'
 import { Locale } from '@/shared/types'
@@ -7,7 +8,7 @@ import { Locale } from '@/shared/types'
 type PostPreview = Pick<Post, 'title' | 'slug' | 'publishedAt' | 'updatedAt' | 'authors' | 'meta'>
 
 interface BlogJsonLdProps {
-  settings: BlogPageSetting
+  settings: BlogPageSettingsData
   posts: PostPreview[]
   siteName?: string
   locale: Locale

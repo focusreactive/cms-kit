@@ -39,7 +39,7 @@ export async function BlogJsonLdWrapper({ searchParams, locale, domain }: BlogJs
         locale={locale}
         domain={domain}
         blog={{
-          title: blogSettings.title || 'Blog',
+          title: blogSettings.blogTitle || 'Blog',
           ...(pageNumber > 1 && { page: pageNumber }),
         }}
       />

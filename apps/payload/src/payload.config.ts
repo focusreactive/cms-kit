@@ -20,7 +20,6 @@ import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Header } from '@/collections/Header/config'
 import { SiteSettings } from '@/collections/SiteSettings/config'
 import { Footer } from '@/collections/Footer/config'
-import { BlogPageSettings } from '@/collections/BlogPageSettings/config'
 import { onInit } from '@/hooks/onInit'
 import { PageVariants } from './collections/PageVariants'
 
@@ -76,7 +75,6 @@ export default buildConfig({
     Header,
     Footer,
     SiteSettings,
-    BlogPageSettings,
     PageVariants,
   ],
   editor: lexicalEditor(),

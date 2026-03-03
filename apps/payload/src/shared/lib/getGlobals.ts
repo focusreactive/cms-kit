@@ -6,7 +6,7 @@ import { resolveLocale } from './resolveLocale'
 import { getDomainByTenantId, getTenantByDomain } from './getTenantByDomain'
 import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
-type GlobalCollection = 'site-settings' | 'blog-page-settings'
+type GlobalCollection = 'site-settings'
 
 export function formatGlobalCacheTag(
   collection: GlobalCollection,
@@ -87,7 +87,7 @@ async function getGlobal(
  */
 export const getCachedGlobal = (
   collection: GlobalCollection,
-  depth: number = collection === 'site-settings' ? 2 : 0,
+  depth: number = 2,
   domain: string,
   locale?: Locale,
   draft?: boolean,
