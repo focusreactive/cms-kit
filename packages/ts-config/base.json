@@ -9,12 +9,14 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
-    "moduleResolution": "Bundler",
-    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "bundler",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2021"
+    "target": "ES2022",
+    "lib": ["ES2022"]
   },
   "exclude": ["node_modules"]
 }
