@@ -59,6 +59,9 @@
     "devsafe": {
       "cache": false,
       "persistent": true
+    },
+    "generate:experiments": {
+      "cache": false
     }
   }
 }

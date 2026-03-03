@@ -1,5 +1,4 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import '@shared/tailwind-config/base.css';
 
 @source inline("border-border bg-card");
 

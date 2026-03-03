@@ -58,6 +58,9 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@shared/eslint-config": "workspace:*",
+    "@shared/tailwind-config": "workspace:*",
+    "@shared/ts-config": "workspace:*",
     "@playwright/test": "1.56.1",
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",

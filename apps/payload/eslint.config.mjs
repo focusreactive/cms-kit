@@ -2,6 +2,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import { globalIgnores } from 'eslint/config'
+import sharedConfig from '@shared/eslint-config'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -11,9 +12,11 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
+  ...sharedConfig,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     rules: {
+      '@typescript-eslint/consistent-type-imports': 'off',
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
