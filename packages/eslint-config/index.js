@@ -13,6 +13,9 @@ export default [
         project: true,
       },
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
     rules: {
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-explicit-any": "off",
@@ -24,6 +27,5 @@ export default [
       ],
       "react/jsx-key": "off",
     },
-    reportUnusedDisableDirectives: true,
   },
 ];
