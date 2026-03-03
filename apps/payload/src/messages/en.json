@@ -1,0 +1,39 @@
+{
+  "common": {
+    "goToHomepage": "Go to Homepage",
+    "page": "Page",
+    "exitPreview": "Exit Preview",
+    "returnToHome": "Return to home",
+    "somethingWentWrong": "Something went wrong",
+    "anErrorOccurredWhileLoadingTheBlog": "An error occurred while loading the blog: {errorMessage}",
+    "anErrorOccurredWhileLoadingTheSite": "An error occurred while loading the site: {errorMessage}"
+  },
+  "pageRange": {
+    "docs": {
+      "plural": "Docs",
+      "singular": "Doc"
+    },
+    "posts": {
+      "plural": "Posts",
+      "singular": "Post"
+    },
+    "noResults": "Search produced no results.",
+    "showing": "Showing {start}{end} of {total} {label}",
+    "showingEnd": " - {end}"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "morePages": "More pages"
+  },
+  "announcements": {
+    "title": "Announcements",
+    "noAnnouncements": "No announcements available.",
+    "metadata": {
+      "title": "Announcements",
+      "description": "{count, plural, =0 {No announcements} =1 {1 announcement} other {# announcements}} for tenant {tenant}"
+    }
+  }
+}
