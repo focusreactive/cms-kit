@@ -49,7 +49,7 @@ export const Header: CollectionConfig<'header'> = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Settings',
+    group: 'Global Components',
     defaultColumns: ['name', 'logo', ...(isTenantEnabled() ? ['tenant'] : [])],
   },
   fields: [

@@ -5,7 +5,7 @@ import { FaqBlock } from '@/blocks/Faq/config'
 import { HeroBlock } from '@/blocks/Hero/config'
 import { TestimonialsListBlock } from '@/blocks/TestimonialsList/config'
 import { generateSeoFields } from '@/shared/lib/seoFields'
-import { getBlocksFieldWithPresetsPath } from '@/plugins/presetsPlugin'
+import { getBlocksFieldWithPresetsPath } from '@focus-reactive/payload-plugin-presets'
 
 export function createBasePageFields({ withBlocksDefaultValue = false } = {}): Field[] {
   return [

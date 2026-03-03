@@ -6,7 +6,7 @@ import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
-import { createResolveAbRewrite } from '@kiryl.pekarski/payload-plugin-ab/middleware'
+import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './shared/lib/abTesting/abCookies'
 
 const intlMiddleware = createMiddleware(routing)

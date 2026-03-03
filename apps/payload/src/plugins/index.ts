@@ -17,8 +17,8 @@ import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePage
 import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
 import { stripUnusedPresetGroups } from '@/hooks/presets/stripUnusedPresetGroups'
 import { PRESET_TYPES_CONFIG } from '@/shared/constants/presets'
-import { presetsPlugin } from './presetsPlugin'
-import { abTestingPlugin } from '@kiryl.pekarski/payload-plugin-ab'
+import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
+import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
 import { createValidateSlugTenantUnique } from '@/shared/lib/validateSlugTenantUnique'
@@ -168,6 +168,7 @@ export const plugins: Plugin[] = [
   }),
 
   presetsPlugin({
+    packageName: '@focus-reactive/payload-plugin-presets',
     labels: {
       singular: { en: 'Preset', es: 'Preset' },
       plural: { en: 'Presets', es: 'Presets' },

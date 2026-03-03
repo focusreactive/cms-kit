@@ -1,4 +1,4 @@
-import { AbCookieConfig } from '@kiryl.pekarski/payload-plugin-ab'
+import { AbCookieConfig } from '@focus-reactive/payload-plugin-ab'
 import { manifestKeyToExpCookieName } from './cookieName'
 
 export const abCookies: AbCookieConfig = {

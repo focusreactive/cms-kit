@@ -40,7 +40,7 @@ export const Footer: CollectionConfig<'footer'> = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Settings',
+    group: 'Global Components',
     defaultColumns: ['name', 'logo', ...(isTenantEnabled() ? ['tenant'] : [])],
   },
   fields: [

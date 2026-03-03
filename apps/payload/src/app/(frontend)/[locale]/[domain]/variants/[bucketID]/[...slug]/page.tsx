@@ -16,8 +16,8 @@ import { parseSlugToPath } from '@/shared/lib/parseSlugToPath'
 import { PayloadRedirects } from '@/features'
 import { redirect } from '@/i18n/navigation'
 import { manifestKeyToExpId } from '@/shared/lib/abTesting/cookieName'
-import { ExperimentTracker } from '@kiryl.pekarski/payload-plugin-ab/analytics/client'
-import { resolveAbCookieNames } from '@kiryl.pekarski/payload-plugin-ab/analytics'
+import { ExperimentTracker } from '@focus-reactive/payload-plugin-ab/analytics/client'
+import { resolveAbCookieNames } from '@focus-reactive/payload-plugin-ab/analytics'
 import { abCookies } from '@/shared/lib/abTesting/abCookies'
 
 interface Props {

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { NextIntlClientProvider } from 'next-intl'
-import { ABAnalyticsProvider } from '@kiryl.pekarski/payload-plugin-ab/analytics/client'
+import { ABAnalyticsProvider } from '@focus-reactive/payload-plugin-ab/analytics/client'
 import { ThemeProvider } from './Theme'
 import { Locale } from '../types'
 import { analyticsAdapter } from '../lib/abTesting/analyticsAdapter'

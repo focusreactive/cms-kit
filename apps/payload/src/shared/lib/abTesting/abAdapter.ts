@@ -1,5 +1,5 @@
 // import { payloadGlobalAdapter } from 'payload-plugin-ab'
-import { vercelEdgeAdapter } from '@kiryl.pekarski/payload-plugin-ab/adapters/vercel-edge'
+import { vercelEdgeAdapter } from '@focus-reactive/payload-plugin-ab/adapters/vercel-edge'
 import { ABVariantData } from './types'
 
 // export const abAdapter = payloadGlobalAdapter<ABVariantData>({

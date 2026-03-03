@@ -26,8 +26,8 @@ import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_e70f5e05f09f93e0
 import { FolderTableCell as FolderTableCell_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 import { FolderField as FolderField_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 import { RowLabel as RowLabel_3fba6d633734bb53096dfe7d1bb5f4d4 } from '@/shared/ui/components/RowLabel'
-import { PresetActionsField as PresetActionsField_833de3eaeed52b465120a00120e118f7 } from '@/plugins/presetsPlugin/components/presetActions/PresetActionsField'
-import { BlocksFieldWithPresets as BlocksFieldWithPresets_d3fe4cadcc8a10c9954550ae8a812947 } from '@/plugins/presetsPlugin/components/blocksDrawer/BlocksFieldWithPresets'
+import { PresetActionsField as PresetActionsField_f0a4a6f21f15d606fa328a5e35f17d11 } from '@focus-reactive/payload-plugin-presets/client'
+import { BlocksFieldWithPresets as BlocksFieldWithPresets_f0a4a6f21f15d606fa328a5e35f17d11 } from '@focus-reactive/payload-plugin-presets/client'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
@@ -36,8 +36,8 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugField as SlugField_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
 import { WatchTenantCollection as WatchTenantCollection_1d0591e3cf4f332c83a86da13a0de59a } from '@payloadcms/plugin-multi-tenant/client'
 import { RowLabelGroupName as RowLabelGroupName_3fba6d633734bb53096dfe7d1bb5f4d4 } from '@/shared/ui/components/RowLabel'
-import { PresetAdminComponentPreview as PresetAdminComponentPreview_3428cb49c3dbaa50dbc210468bbcd66c } from '@/plugins/presetsPlugin/components/PresetAdminComponentPreview'
-import { PresetAdminComponentCell as PresetAdminComponentCell_0ecaed4f3c8f05fda3ffa2e12579c1c8 } from '@/plugins/presetsPlugin/components/PresetAdminComponentCell'
+import { PresetAdminComponentPreview as PresetAdminComponentPreview_f0a4a6f21f15d606fa328a5e35f17d11 } from '@focus-reactive/payload-plugin-presets/client'
+import { PresetAdminComponentCell as PresetAdminComponentCell_f0a4a6f21f15d606fa328a5e35f17d11 } from '@focus-reactive/payload-plugin-presets/client'
 import { FolderTypeField as FolderTypeField_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
 import { default as default_75577dd22fb2677020516641b30fe96b } from '../../../shared/ui/components/Admin/Icon'
 import { default as default_877049f721f99a2bfc5082452cc327ad } from '../../../shared/ui/components/Admin/Logo'
@@ -77,8 +77,8 @@ export const importMap = {
   "@payloadcms/ui/rsc#FolderTableCell": FolderTableCell_ab83ff7e88da8d3530831f296ec4756a,
   "@payloadcms/ui/rsc#FolderField": FolderField_ab83ff7e88da8d3530831f296ec4756a,
   "@/shared/ui/components/RowLabel#RowLabel": RowLabel_3fba6d633734bb53096dfe7d1bb5f4d4,
-  "@/plugins/presetsPlugin/components/presetActions/PresetActionsField#PresetActionsField": PresetActionsField_833de3eaeed52b465120a00120e118f7,
-  "@/plugins/presetsPlugin/components/blocksDrawer/BlocksFieldWithPresets#BlocksFieldWithPresets": BlocksFieldWithPresets_d3fe4cadcc8a10c9954550ae8a812947,
+  "@focus-reactive/payload-plugin-presets/client#PresetActionsField": PresetActionsField_f0a4a6f21f15d606fa328a5e35f17d11,
+  "@focus-reactive/payload-plugin-presets/client#BlocksFieldWithPresets": BlocksFieldWithPresets_f0a4a6f21f15d606fa328a5e35f17d11,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860,
@@ -87,8 +87,8 @@ export const importMap = {
   "@payloadcms/ui#SlugField": SlugField_3817bf644402e67bfe6577f60ef982de,
   "@payloadcms/plugin-multi-tenant/client#WatchTenantCollection": WatchTenantCollection_1d0591e3cf4f332c83a86da13a0de59a,
   "@/shared/ui/components/RowLabel#RowLabelGroupName": RowLabelGroupName_3fba6d633734bb53096dfe7d1bb5f4d4,
-  "@/plugins/presetsPlugin/components/PresetAdminComponentPreview#PresetAdminComponentPreview": PresetAdminComponentPreview_3428cb49c3dbaa50dbc210468bbcd66c,
-  "@/plugins/presetsPlugin/components/PresetAdminComponentCell#PresetAdminComponentCell": PresetAdminComponentCell_0ecaed4f3c8f05fda3ffa2e12579c1c8,
+  "@focus-reactive/payload-plugin-presets/client#PresetAdminComponentPreview": PresetAdminComponentPreview_f0a4a6f21f15d606fa328a5e35f17d11,
+  "@focus-reactive/payload-plugin-presets/client#PresetAdminComponentCell": PresetAdminComponentCell_f0a4a6f21f15d606fa328a5e35f17d11,
   "@payloadcms/ui#FolderTypeField": FolderTypeField_3817bf644402e67bfe6577f60ef982de,
   "/shared/ui/components/Admin/Icon#default": default_75577dd22fb2677020516641b30fe96b,
   "/shared/ui/components/Admin/Logo#default": default_877049f721f99a2bfc5082452cc327ad,

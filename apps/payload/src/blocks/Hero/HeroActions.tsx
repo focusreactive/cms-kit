@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import {
   resolveAbCookieNames,
   useABConversion,
-} from '@kiryl.pekarski/payload-plugin-ab/analytics/client'
+} from '@focus-reactive/payload-plugin-ab/analytics/client'
 
 import type { HeroBlock } from '@/payload-types'
 import { CMSLink } from '@/shared/ui'

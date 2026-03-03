@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { toast, useTranslation } from '@payloadcms/ui'
-import { BeforeOpenDrawerProvider } from '@/plugins/presetsPlugin/components/blocksDrawer'
+import { BeforeOpenDrawerProvider } from '@focus-reactive/payload-plugin-presets/client'
 import { isTenantEnabled } from '@/shared/config/tenant'
 
 export default function BeforeOpenDrawerWrapper({ children }: { children: React.ReactNode }) {
