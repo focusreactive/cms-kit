@@ -1,4 +1,5 @@
 @import "@shared/tailwind-config/base.css";
+@source "..";
 
 /* App-specific theme tokens (was in tailwind.config.ts theme.extend) */
 @theme {

@@ -1,18 +1,19 @@
-@import "tailwindcss";
+@reference "tailwindcss";
 
 @layer utilities {
   .no-children-margins {
     & > * {
-      @apply !my-0;
+      @apply my-0!;
     }
   }
 }
 
-/* todo: add layer */
-.swiper-wrapper {
-  display: flex;
-}
+@layer components {
+  .swiper-wrapper {
+    display: flex;
+  }
 
-.swiper-slide {
-  flex-shrink: 0;
+  .swiper-slide {
+    flex-shrink: 0;
+  }
 }
