@@ -1,5 +1,3 @@
-@import "@shared/tailwind-config/base.css";
-
 @layer utilities {
   .no-children-margins {
     & > * {
@@ -8,11 +6,12 @@
   }
 }
 
-/* todo: add layer */
-.swiper-wrapper {
-  display: flex;
-}
+@layer components {
+  .swiper-wrapper {
+    display: flex;
+  }
 
-.swiper-slide {
-  flex-shrink: 0;
+  .swiper-slide {
+    flex-shrink: 0;
+  }
 }
