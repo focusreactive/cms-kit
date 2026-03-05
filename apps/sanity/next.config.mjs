@@ -1,5 +1,13 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const config = {
+  turbopack: {
+    root: path.resolve(__dirname, "../.."),
+  },
   images: {
     remotePatterns: [{ hostname: "cdn.sanity.io", protocol: "https" }],
   },
@@ -18,6 +26,8 @@ const config = {
   },
   experimental: {
     taint: true,
+    inlineCss: true,
+    reactCompiler: true,
   },
 };
 

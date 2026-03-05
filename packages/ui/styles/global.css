@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "@shared/tailwind-config/base.css";
 
 @layer utilities {
   .no-children-margins {

@@ -3,6 +3,9 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+/* Scan shared UI package (pnpm symlinks not auto-detected by Tailwind v4) */
+@source "../ui";
+
 /* Dark mode: class-based */
 @variant dark (&:where(.dark, .dark *));
 
