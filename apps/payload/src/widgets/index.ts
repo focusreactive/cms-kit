@@ -1,0 +1,6 @@
+export { Header } from '@/collections/Header/Component'
+export { Header as HeaderConfig } from '@/collections/Header/config'
+export { Footer } from '@/collections/Footer/Component'
+export { Footer as FooterConfig } from '@/collections/Footer/config'
+export { BlogPageContent } from './BlogPageContent'
+export { PostContent } from './PostContent'

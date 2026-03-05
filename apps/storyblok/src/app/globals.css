@@ -1,6 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@shared/tailwind-config/base.css";
+
+/* App-specific theme tokens (was in tailwind.config.ts theme.extend) */
+@theme {
+  --color-bgColor: var(--bg);
+  --color-textColor: var(--text);
+  --color-textSecondaryColor: var(--text-secondary);
+  --color-primaryColor: var(--primary);
+  --color-primaryLightColor: var(--primary-light);
+  --color-primary2Color: var(--primary-2);
+  --color-primary2LightColor: var(--primary-2-light);
+  --spacing-sectionBase: var(--section-margin-base);
+  --spacing-sectionLarge: var(--section-margin-large);
+}
 
 :root {
   --section-margin-base: 24px;

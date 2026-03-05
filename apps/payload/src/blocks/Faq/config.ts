@@ -1,0 +1,62 @@
+import { Block } from 'payload'
+import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
+import {
+  createLocalizedDefault,
+  createLocalizedRichText,
+  createRichTextState,
+} from '@/shared/lib/createLocalizedDefault'
+import { generateRichText } from '@/shared/lib/generateRichText'
+import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+import type { Locale } from '@/shared/types'
+
+function buildFaqItems(locale: Locale) {
+  const { question, answer } = DEFAULT_VALUES.blocks.faq
+  return Array.from({ length: 3 }, () => ({
+    question: question[locale],
+    answer: createRichTextState(answer[locale].heading, answer[locale].paragraph),
+  }))
+}
+
+export const FaqBlock: Block = {
+  slug: 'faq',
+  interfaceName: 'FaqBlock',
+  ...getBlockPreviewImage('FAQ Section'),
+  labels: {
+    singular: { en: 'FAQ Section', es: 'Sección de FAQ' },
+    plural: { en: 'FAQ Sections', es: 'Secciones de FAQ' },
+  },
+  fields: [
+    {
+      name: 'heading',
+      type: 'text',
+      required: true,
+      label: { en: 'Heading', es: 'Encabezado' },
+      localized: true,
+      defaultValue: createLocalizedDefault(DEFAULT_VALUES.blocks.faq.heading),
+    },
+    {
+      name: 'items',
+      type: 'array',
+      minRows: 1,
+      required: true,
+      localized: true,
+      defaultValue: createLocalizedDefault({ en: buildFaqItems('en'), es: buildFaqItems('es') }),
+      fields: [
+        {
+          name: 'question',
+          type: 'text',
+          required: true,
+          label: { en: 'Question', es: 'Pregunta' },
+        },
+        {
+          name: 'answer',
+          type: 'richText',
+          editor: generateRichText(),
+          required: true,
+          label: { en: 'Answer', es: 'Respuesta' },
+          defaultValue: createLocalizedRichText(DEFAULT_VALUES.blocks.faq.answer),
+        },
+      ],
+    },
+  ],
+}

@@ -1,0 +1,39 @@
+{
+  "common": {
+    "goToHomepage": "Ir a la página principal",
+    "page": "Página",
+    "exitPreview": "Salir de la vista previa",
+    "returnToHome": "Volver a la página principal",
+    "somethingWentWrong": "Algo salió mal",
+    "anErrorOccurredWhileLoadingTheBlog": "Ocurrió un error al cargar el blog: {errorMessage}",
+    "anErrorOccurredWhileLoadingTheSite": "Ocurrió un error al cargar el sitio: {errorMessage}"
+  },
+  "pageRange": {
+    "docs": {
+      "plural": "Documentos",
+      "singular": "Documento"
+    },
+    "posts": {
+      "plural": "Publicaciones",
+      "singular": "Publicación"
+    },
+    "noResults": "La búsqueda no produjo resultados.",
+    "showing": "Mostrando {start}{end} de {total} {label}",
+    "showingEnd": " - {end}"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "goToPreviousPage": "Ir a la página anterior",
+    "goToNextPage": "Ir a la página siguiente",
+    "morePages": "Más páginas"
+  },
+  "announcements": {
+    "title": "Anuncios",
+    "noAnnouncements": "No hay anuncios disponibles.",
+    "metadata": {
+      "title": "Anuncios",
+      "description": "{count, plural, =0 {No hay anuncios} =1 {1 anuncio} other {# anuncios}} para el tenant {tenant}"
+    }
+  }
+}

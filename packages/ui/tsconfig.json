@@ -1,5 +1,5 @@
 {
   "extends": "@shared/ts-config/react-library.json",
-  "include": [".", "../../apps/sanity/src/contentSections/Blog"],
-  "exclude": ["node_modules"]
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
 }

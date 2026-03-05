@@ -24,6 +24,7 @@ This production ready boilerplate accumulating the experience and best practices
 
 - [Sanity](https://turbo-cms-kit-sanity.vercel.app/)
 - [Storyblok](https://turbo-cms-kit-storyblok.vercel.app/)
+- Payload (self-hosted, requires PostgreSQL)
 
 **Editing experience**
 - Sanity
@@ -140,8 +141,67 @@ This process ensures that global component updates are displayed on all pages.
 
 🏁 Your CMS-based project is ready 🏁
 
+### Payload
+
+Payload CMS with PostgreSQL, multi-tenancy, i18n, and A/B testing.
+
+**Prerequisites:**
+- Docker (for PostgreSQL)
+- Node.js ≥20, pnpm ≥9
+
+**Setup:**
+
+1. Start PostgreSQL:
+```bash
+cd apps/payload
+docker-compose up -d
+```
+
+2. Copy and fill environment variables:
+```bash
+cp apps/payload/.env.local.example apps/payload/.env.local
+```
+
+Required env vars:
+```bash
+DATABASE_URI="postgresql://postgres:password@localhost:5432/payload"
+PAYLOAD_SECRET="your-secret-key"
+NEXT_PUBLIC_SERVER_URL="http://localhost:3000"
+# Auth0 (optional, for admin auth):
+AUTH0_SECRET="..."
+AUTH0_BASE_URL="http://localhost:3000"
+AUTH0_ISSUER_BASE_URL="https://your-tenant.auth0.com"
+AUTH0_CLIENT_ID="..."
+AUTH0_CLIENT_SECRET="..."
+```
+
+3. Run migrations and generate types:
+```bash
+pnpm --filter payload payload migrate
+pnpm --filter payload generate:types
+pnpm --filter payload generate:importmap
+```
+
+4. Start dev server:
+```bash
+pnpm --filter payload dev
+# or from monorepo root:
+turbo dev --filter=payload
+```
+
+Admin panel: `http://localhost:3000/admin`
+
+**Migrations:**
+```bash
+pnpm --filter payload payload migrate:create  # create new migration
+pnpm --filter payload payload migrate          # run pending migrations
+```
+
+---
+
 ## Repo structure
 
+- `apps/payload`: CMS app (Payload CMS + PostgreSQL)
 - `apps/storyblok`: CMS app
 - `apps/sanity`: CMS app
 - `packages/ui`: UI components library, shared between both CMS apps
