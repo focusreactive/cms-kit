@@ -19,6 +19,13 @@ const defaultHeroLinkItem = (label: string) => ({
 
 export const heroFields: Field[] = [
   {
+    name: 'title',
+    type: 'text',
+    label: { en: 'Title', es: 'Título' },
+    localized: true,
+    defaultValue: createLocalizedDefault(DEFAULT_VALUES.blocks.hero.title ?? { en: 'Hero Title', es: 'Título Hero' }),
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: generateRichText('hero'),

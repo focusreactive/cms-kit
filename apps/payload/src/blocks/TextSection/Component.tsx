@@ -1,12 +1,13 @@
+import React from 'react'
 import type { TextSectionBlock as TextSectionBlockProps } from '@/payload-types'
-import { Section, Container, RichText } from '@/shared/ui'
+import { Copy } from '@shared/ui'
+import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
 
 export const TextSectionBlockComponent: React.FC<TextSectionBlockProps> = ({ text }) => {
   return (
-    <Section>
-      <Container maxWidth="4xl">
-        <RichText content={text} />
-      </Container>
-    </Section>
+    <Copy
+      columns={[prepareRichTextProps(text)]}
+      isReversedOnMobile={false}
+    />
   )
 }

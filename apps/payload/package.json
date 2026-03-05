@@ -22,6 +22,7 @@
     "migrate:down": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:down"
   },
   "dependencies": {
+    "@shared/ui": "workspace:*",
     "@ai-sdk/openai": "^3.0.25",
     "@auth0/nextjs-auth0": "^4.14.1",
     "@focus-reactive/payload-plugin-ab": "^1.1.2",
