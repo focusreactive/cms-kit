@@ -351,7 +351,18 @@ export interface Page {
    * The footer to display on the page
    */
   footer?: (number | null) | Footer;
-  blocks: (HeroBlock | TextSectionBlock | ContentBlock | FaqBlock | TestimonialsListBlock)[];
+  blocks: (
+    | HeroBlock
+    | TextSectionBlock
+    | ContentBlock
+    | FaqBlock
+    | TestimonialsListBlock
+    | CardsGridBlock
+    | CarouselBlock
+    | LogosBlock
+    | LinksListBlock
+    | BlogSectionBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -636,6 +647,7 @@ export interface Footer {
  * via the `definition` "HeroBlock".
  */
 export interface HeroBlock {
+  title?: string | null;
   richText?: {
     root: {
       type: string;
@@ -811,6 +823,175 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsGridBlock".
+ */
+export interface CardsGridBlock {
+  columns?: number | null;
+  items: {
+    title: string;
+    description?: string | null;
+    image: number | Media;
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'page';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    alignVariant?: ('left' | 'center' | 'right') | null;
+    rounded?: ('none' | 'large') | null;
+    backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardsGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
+  slides: {
+    image: number | Media;
+    text?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogosBlock".
+ */
+export interface LogosBlock {
+  alignVariant?: ('left' | 'center' | 'right') | null;
+  items: {
+    image: number | Media;
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'page';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinksListBlock".
+ */
+export interface LinksListBlock {
+  alignVariant?: ('left' | 'center' | 'right') | null;
+  links: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'page';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'linksList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSectionBlock".
+ */
+export interface BlogSectionBlock {
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  style?: ('three-column' | 'three-column-with-images' | 'three-column-with-background-images') | null;
+  postsLimit?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blogSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
@@ -942,7 +1123,18 @@ export interface PageVariant {
    * The footer to display on the page
    */
   footer?: (number | null) | Footer;
-  blocks: (HeroBlock | TextSectionBlock | ContentBlock | FaqBlock | TestimonialsListBlock)[];
+  blocks: (
+    | HeroBlock
+    | TextSectionBlock
+    | ContentBlock
+    | FaqBlock
+    | TestimonialsListBlock
+    | CardsGridBlock
+    | CarouselBlock
+    | LogosBlock
+    | LinksListBlock
+    | BlogSectionBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1031,6 +1223,7 @@ export interface Preset {
    */
   type: 'hero' | 'testimonialsList';
   hero?: {
+    title?: string | null;
     richText?: {
       root: {
         type: string;
@@ -1377,6 +1570,11 @@ export interface PageSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
         testimonialsList?: T | TestimonialsListBlockSelect<T>;
+        cardsGrid?: T | CardsGridBlockSelect<T>;
+        carousel?: T | CarouselBlockSelect<T>;
+        logos?: T | LogosBlockSelect<T>;
+        linksList?: T | LinksListBlockSelect<T>;
+        blogSection?: T | BlogSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1414,6 +1612,7 @@ export interface PageSelect<T extends boolean = true> {
  * via the `definition` "HeroBlock_select".
  */
 export interface HeroBlockSelect<T extends boolean = true> {
+  title?: T;
   richText?: T;
   actions?:
     | T
@@ -1486,6 +1685,112 @@ export interface TestimonialsListBlockSelect<T extends boolean = true> {
   duration?: T;
   showRating?: T;
   showAvatar?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsGridBlock_select".
+ */
+export interface CardsGridBlockSelect<T extends boolean = true> {
+  columns?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        alignVariant?: T;
+        rounded?: T;
+        backgroundColor?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  text?: T;
+  effect?: T;
+  slides?:
+    | T
+    | {
+        image?: T;
+        text?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogosBlock_select".
+ */
+export interface LogosBlockSelect<T extends boolean = true> {
+  alignVariant?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinksListBlock_select".
+ */
+export interface LinksListBlockSelect<T extends boolean = true> {
+  alignVariant?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogSectionBlock_select".
+ */
+export interface BlogSectionBlockSelect<T extends boolean = true> {
+  text?: T;
+  style?: T;
+  postsLimit?: T;
   id?: T;
   blockName?: T;
 }
@@ -1742,6 +2047,11 @@ export interface PageVariantsSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
         testimonialsList?: T | TestimonialsListBlockSelect<T>;
+        cardsGrid?: T | CardsGridBlockSelect<T>;
+        carousel?: T | CarouselBlockSelect<T>;
+        logos?: T | LogosBlockSelect<T>;
+        linksList?: T | LinksListBlockSelect<T>;
+        blogSection?: T | BlogSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1797,6 +2107,7 @@ export interface PresetsSelect<T extends boolean = true> {
   hero?:
     | T
     | {
+        title?: T;
         richText?: T;
         actions?:
           | T
