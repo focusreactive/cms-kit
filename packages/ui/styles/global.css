@@ -1,7 +1,9 @@
+@reference "tailwindcss";
+
 @layer utilities {
   .no-children-margins {
     & > * {
-      @apply !my-0;
+      @apply my-0!;
     }
   }
 }
