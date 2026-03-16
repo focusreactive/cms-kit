@@ -16,7 +16,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className="z-20 sticky top-0 bg-background border-b"
+      className="z-20 sticky top-0 bg-bgColor border-b border-primaryLightColor"
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <Section as="div" block="header">
