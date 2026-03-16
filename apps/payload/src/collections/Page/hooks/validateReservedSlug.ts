@@ -3,9 +3,9 @@ import type { Page } from '@/payload-types'
 import { BLOG_CONFIG } from '@/shared/config/blog'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { getDefaultDomain } from '@/shared/config/tenant'
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
-const RESERVED_SLUGS: readonly string[] = [BLOG_CONFIG.slug, getDefaultDomain()]
+const RESERVED_SLUGS: readonly string[] = [BLOG_CONFIG.slug, DEFAULT_DOMAIN]
 
 const generateErrorMessage = (slug: string) => {
   return `Slug "${slug}" is reserved and cannot be used for pages`

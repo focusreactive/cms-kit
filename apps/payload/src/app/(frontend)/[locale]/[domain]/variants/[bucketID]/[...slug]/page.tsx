@@ -7,9 +7,10 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/shared/lib/generateMeta'
 import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
 import { I18N_CONFIG } from '@/shared/config/i18n'
-import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
 import { Header, Footer } from '@/widgets'
-import type { Footer as FooterType, Header as HeaderType, Page, Tenant } from '@/payload-types'
+import type { Footer as FooterType, Header as HeaderType, Page } from '@/payload-types'
+
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 import type { Locale } from '@/shared/types'
 import { findPageVariantBySlug } from '@/shared/lib/page/findPageVariantBySlug'
 import { parseSlugToPath } from '@/shared/lib/parseSlugToPath'
@@ -124,13 +125,7 @@ export async function generateStaticParams() {
     const page = typeof variant.page === 'object' ? (variant.page as Page) : null
     if (!page) continue
 
-    const domain = isTenantEnabled()
-      ? typeof page.tenant === 'object'
-        ? ((page.tenant as Tenant)?.domain ?? null)
-        : null
-      : getDefaultDomain()
-
-    if (!domain) continue
+    const domain = DEFAULT_DOMAIN
 
     for (const locale of locales) {
       const localePage = await payload.findByID({

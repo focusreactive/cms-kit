@@ -11,7 +11,6 @@ import { getAllDocuments } from '@/shared/lib/getAllDocuments'
 import { cacheTag } from '@/shared/lib/cacheTags'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import type { Locale } from '@/shared/types'
-import { isTenantEnabled, getDefaultTenantId, getDefaultDomain } from '@/shared/config/tenant'
 
 type Sitemap = MetadataRoute.Sitemap
 
@@ -20,56 +19,45 @@ async function generateSitemap(): Promise<Sitemap> {
   const baseUrl = getServerSideURL()
   const changeFrequency: Sitemap[number]['changeFrequency'] = 'weekly'
   const locales = I18N_CONFIG.locales.map((locale) => locale.code) as Locale[]
+  const domain = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
   try {
     const sitemap: Sitemap = []
 
-    const tenants = isTenantEnabled()
-      ? await getAllDocuments(payload, 'tenants', {
-          depth: 0,
-          overrideAccess: true,
-          locale: locales[0],
-        })
-      : [{ id: getDefaultTenantId(), domain: getDefaultDomain() }]
-
     await Promise.all(
-      tenants.flatMap((tenant) =>
-        locales.map(async (locale) => {
-          const domain = tenant.domain
-          const [allPages, allPosts, blogSettings] = await Promise.all([
-            getAllDocuments(payload, 'page', {
-              where: {
-                _status: { equals: 'published' },
-                tenant: { equals: tenant.id },
-              },
-              select: {
-                slug: true,
-                updatedAt: true,
-                meta: true,
-                breadcrumbs: true,
-              },
-              depth: 1,
-              sort: '-updatedAt',
-              overrideAccess: false,
-              locale,
-            }),
-            getAllDocuments(payload, BLOG_CONFIG.collection, {
-              where: {
-                _status: { equals: 'published' },
-                tenant: { equals: tenant.id },
-              },
-              select: {
-                slug: true,
-                publishedAt: true,
-                updatedAt: true,
-                meta: true,
-              },
-              sort: '-publishedAt',
-              overrideAccess: false,
-              locale,
-            }),
-            getBlogPageSettings({ locale, domain }),
-          ])
+      locales.map(async (locale) => {
+        const [allPages, allPosts, blogSettings] = await Promise.all([
+          getAllDocuments(payload, 'page', {
+            where: {
+              _status: { equals: 'published' },
+            },
+            select: {
+              slug: true,
+              updatedAt: true,
+              meta: true,
+              breadcrumbs: true,
+            },
+            depth: 1,
+            sort: '-updatedAt',
+            overrideAccess: false,
+            locale,
+          }),
+          getAllDocuments(payload, BLOG_CONFIG.collection, {
+            where: {
+              _status: { equals: 'published' },
+            },
+            select: {
+              slug: true,
+              publishedAt: true,
+              updatedAt: true,
+              meta: true,
+            },
+            sort: '-publishedAt',
+            overrideAccess: false,
+            locale,
+          }),
+          getBlogPageSettings({ locale, domain }),
+        ])
 
           const pages = allPages.filter((page) => {
             const robots = page.meta?.robots
@@ -126,8 +114,7 @@ async function generateSitemap(): Promise<Sitemap> {
               priority: 0.7,
             })
           })
-        }),
-      ),
+      }),
     )
 
     return sitemap

@@ -1,13 +1,13 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSideURL } from '@/shared/lib/getURL'
-import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './shared/lib/abTesting/abCookies'
+
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -24,82 +24,39 @@ const resolveAbRewrite = createResolveAbRewrite<ABVariantData>({
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const localeMatch = pathname.match(localeRegex)
 
-  if (!isTenantEnabled()) {
-    const domain = getDefaultDomain()
-    const localeMatch = pathname.match(localeRegex)
+  if (localeMatch) {
+    const [, locale, rest = ''] = localeMatch
+    const isNextRoute = pathname.startsWith(`/${locale}/next/`)
 
-    if (localeMatch) {
-      const [, locale, rest = ''] = localeMatch
-      const isNextRoute = pathname.startsWith(`/${locale}/next/`)
-
-      // Redirect /en/{domain}/page → /en/page (strip internal domain from visible URL)
-      if (!isNextRoute && rest.startsWith(`/${domain}`)) {
-        const cleanRest = rest.slice(domain.length + 1) || '/'
-        const url = request.nextUrl.clone()
-        url.pathname = `/${locale}${cleanRest}`
-        return NextResponse.redirect(url, 301)
-      }
-
-      if (!isNextRoute) {
-        const rewritePath = `/${locale}/${domain}${rest || '/'}`
-        const abResponse = await resolveAbRewrite(request, pathname, rewritePath, rewritePath)
-
-        if (abResponse) {
-          abResponse.headers.set('x-pathname', pathname)
-          return abResponse
-        }
-
-        // No A/B variant — standard domain-injection rewrite
-        const url = request.nextUrl.clone()
-        url.pathname = rewritePath
-        const response = NextResponse.rewrite(url)
-        response.headers.set('x-pathname', pathname)
-        return response
-      }
+    // Redirect /en/{domain}/page → /en/page (strip internal domain from visible URL)
+    if (!isNextRoute && rest.startsWith(`/${DEFAULT_DOMAIN}`)) {
+      const cleanRest = rest.slice(DEFAULT_DOMAIN.length + 1) || '/'
+      const url = request.nextUrl.clone()
+      url.pathname = `/${locale}${cleanRest}`
+      return NextResponse.redirect(url, 301)
     }
 
-    // No locale yet — let intlMiddleware handle redirect (e.g. / → /en/)
-    const response = intlMiddleware(request)
-    response.headers.set('x-pathname', pathname)
-    return response
-  }
+    if (!isNextRoute) {
+      const rewritePath = `/${locale}/${DEFAULT_DOMAIN}${rest || '/'}`
+      const abResponse = await resolveAbRewrite(request, pathname, rewritePath, rewritePath)
 
-  const hostHeader = request.headers.get('host') || ''
-  const [hostname] = hostHeader.split(':')
-
-  const baseUrl = getServerSideURL()
-  const baseUrlObj = new URL(baseUrl)
-  const baseHostname = baseUrlObj.hostname
-  const tenantRegex = new RegExp(`^(.+)\\.${baseHostname.replace(/\./g, '\\.')}$`)
-
-  const tenantMatch = hostname.match(tenantRegex)
-  const tenant = tenantMatch ? tenantMatch[1] : null
-
-  if (tenant) {
-    const localeMatch = pathname.match(localeRegex)
-    if (localeMatch) {
-      const [, locale, rest = ''] = localeMatch
-      const isNextRoute = pathname.startsWith(`/${locale}/next/`)
-
-      if (!isNextRoute) {
-        const rewritePath = `/${locale}/${tenant}${rest}`
-        const abResponse = await resolveAbRewrite(request, pathname, rewritePath, rewritePath)
-
-        if (abResponse) {
-          abResponse.headers.set('x-pathname', rewritePath)
-          return abResponse
-        }
-
-        const url = request.nextUrl.clone()
-        url.pathname = rewritePath
-        const response = NextResponse.rewrite(url)
-        response.headers.set('x-pathname', rewritePath)
-        return response
+      if (abResponse) {
+        abResponse.headers.set('x-pathname', pathname)
+        return abResponse
       }
+
+      // No A/B variant — standard domain-injection rewrite
+      const url = request.nextUrl.clone()
+      url.pathname = rewritePath
+      const response = NextResponse.rewrite(url)
+      response.headers.set('x-pathname', pathname)
+      return response
     }
   }
 
+  // No locale yet — let intlMiddleware handle redirect (e.g. / → /en/)
   const response = intlMiddleware(request)
   response.headers.set('x-pathname', pathname)
   return response

@@ -1,14 +1,11 @@
 import type { CollectionConfig } from 'payload'
 import { tenantAdmin, anyone, or, user, superAdmin } from '@/shared/lib/access'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { link } from '@/fields/link'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
 import type { Locale } from '@/shared/types'
 import { revalidateResourcesUsingFooter } from './hooks/revalidateResourcesUsingFooter'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 const footerNavGroup = (groupName: string, linkLabel: string) => ({
   groupName,
@@ -41,7 +38,7 @@ export const Footer: CollectionConfig<'footer'> = {
   admin: {
     useAsTitle: 'name',
     group: 'Global Components',
-    defaultColumns: ['name', 'logo', ...(isTenantEnabled() ? ['tenant'] : [])],
+    defaultColumns: ['name', 'logo'],
   },
   fields: [
     {
@@ -120,10 +117,8 @@ export const Footer: CollectionConfig<'footer'> = {
       },
       defaultValue: createLocalizedDefault(DEFAULT_FOOTER_NAV_ITEMS),
     },
-    ...tenantFields({ collection: 'footer' }),
   ],
   hooks: {
-    beforeChange: [beforeChangeTenant],
     afterChange: [revalidateResourcesUsingFooter],
   },
   versions: {

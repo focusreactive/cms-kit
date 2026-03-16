@@ -2,18 +2,14 @@ import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
-import { createValidateSlugTenantUnique } from '@/shared/lib/validateSlugTenantUnique'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
 import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import { createParentField, createBreadcrumbsField } from '@payloadcms/plugin-nested-docs'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import type { Page as PageType } from '@/payload-types'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 import { createBasePageFields } from './basePageFields'
 
 export const Page: CollectionConfig<'page'> = {
@@ -36,15 +32,12 @@ export const Page: CollectionConfig<'page'> = {
   },
   folders: true,
   admin: {
-    defaultColumns: ['title', 'slug', ...(isTenantEnabled() ? ['tenant'] : []), 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'updatedAt'],
     useAsTitle: 'title',
     group: 'Content',
     livePreview: {
       url: ({ data, req }) => {
-        const tenantId = data?.tenant || getDefaultTenantId()
-
         return generatePreviewPath({
-          tenantId: tenantId,
           slug: data?.slug,
           path: buildUrl({
             collection: 'page',
@@ -53,15 +46,11 @@ export const Page: CollectionConfig<'page'> = {
             locale: getLocaleFromRequest(req),
           }),
           collection: 'page',
-          req,
         })
       },
     },
     preview: (data, { req }) => {
-      const tenantId = String(data?.tenant || getDefaultTenantId())
-
       return generatePreviewPath({
-        tenantId: tenantId,
         slug: data?.slug as string,
         path: buildUrl({
           collection: 'page',
@@ -70,7 +59,6 @@ export const Page: CollectionConfig<'page'> = {
           locale: getLocaleFromRequest(req),
         }),
         collection: 'page',
-        req,
       })
     },
   },
@@ -98,7 +86,6 @@ export const Page: CollectionConfig<'page'> = {
         return field
       },
     }),
-    ...tenantFields({ collection: 'page' }),
     createParentField('page', {
       admin: {
         position: 'sidebar',
@@ -125,12 +112,7 @@ export const Page: CollectionConfig<'page'> = {
     }),
   ],
   hooks: {
-    beforeChange: [
-      beforeChangeTenant,
-      createValidateSlugTenantUnique('page'),
-      validateReservedSlug,
-      validateReservedPath,
-    ],
+    beforeChange: [validateReservedSlug, validateReservedPath],
     afterChange: [revalidatePage],
     afterDelete: [revalidateDelete],
   },

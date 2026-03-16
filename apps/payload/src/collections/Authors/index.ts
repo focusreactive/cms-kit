@@ -1,8 +1,5 @@
 import type { CollectionConfig } from 'payload'
 import { or, user, author, superAdmin } from '@/shared/lib/access'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 export const Authors: CollectionConfig<'authors'> = {
   slug: 'authors',
@@ -24,11 +21,11 @@ export const Authors: CollectionConfig<'authors'> = {
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', ...(isTenantEnabled() ? ['tenant'] : []), 'updatedAt'],
+    defaultColumns: ['name', 'updatedAt'],
     pagination: {
       limits: [20, 50, 100],
     },
-    group: 'Content',
+    group: 'Blog',
   },
   fields: [
     {
@@ -46,9 +43,5 @@ export const Authors: CollectionConfig<'authors'> = {
         },
       },
     },
-    ...tenantFields({ collection: 'authors' }),
   ],
-  hooks: {
-    beforeChange: [beforeChangeTenant],
-  },
 }

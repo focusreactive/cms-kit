@@ -12,15 +12,13 @@ import { Posts } from '@/collections/Posts'
 import { Categories } from '@/collections/Categories'
 import { Authors } from '@/collections/Authors'
 import { Testimonials } from '@/collections/Testimonials'
-import { Tenants } from '@/collections/Tenants'
 import { plugins } from '@/plugins'
 import { en } from '@payloadcms/translations/languages/en'
 import { es } from '@payloadcms/translations/languages/es'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Header } from '@/collections/Header/config'
-import { SiteSettings } from '@/collections/SiteSettings/config'
 import { Footer } from '@/collections/Footer/config'
-import { onInit } from '@/hooks/onInit'
+import { SiteSettings } from '@/globals/SiteSettings/config'
 import { PageVariants } from './collections/PageVariants'
 
 const filename = fileURLToPath(import.meta.url)
@@ -71,10 +69,8 @@ export default buildConfig({
     Authors,
     Posts,
     Testimonials,
-    Tenants,
     Header,
     Footer,
-    SiteSettings,
     PageVariants,
   ],
   editor: lexicalEditor(),
@@ -90,8 +86,7 @@ export default buildConfig({
   }),
   sharp,
   plugins,
-  onInit,
-  globals: [],
+  globals: [SiteSettings],
   i18n: {
     fallbackLanguage: 'en',
     supportedLanguages: { en, es },
@@ -101,17 +96,11 @@ export default buildConfig({
           dividerLabel: 'SSO',
           signInWith: 'Sign in with {{provider}}',
         },
-        beforeOpenDrawer: {
-          tenantRequired: 'Please select a tenant',
-        },
       },
       es: {
         sso: {
           dividerLabel: 'SSO',
           signInWith: 'Iniciar sesión con {{provider}}',
-        },
-        beforeOpenDrawer: {
-          tenantRequired: 'Por favor seleccione un tenant',
         },
       },
     },

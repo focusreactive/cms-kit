@@ -1,15 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
 import { tenantAdmin, anyone, or, user, superAdmin } from '@/shared/lib/access'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { link } from '@/fields/link'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
 import type { Locale } from '@/shared/types'
 import { revalidateResourcesUsingHeader } from './hooks/revalidateResourcesUsingHeader'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 const navLink = (label: string) => ({
   type: 'link' as const,
@@ -50,7 +47,7 @@ export const Header: CollectionConfig<'header'> = {
   admin: {
     useAsTitle: 'name',
     group: 'Global Components',
-    defaultColumns: ['name', 'logo', ...(isTenantEnabled() ? ['tenant'] : [])],
+    defaultColumns: ['name', 'logo'],
   },
   fields: [
     {
@@ -167,10 +164,8 @@ export const Header: CollectionConfig<'header'> = {
       },
       defaultValue: createLocalizedDefault(DEFAULT_HEADER_NAV_ITEMS),
     },
-    ...tenantFields({ collection: 'header' }),
   ],
   hooks: {
-    beforeChange: [beforeChangeTenant],
     afterChange: [revalidateResourcesUsingHeader],
   },
   versions: {

@@ -19,7 +19,7 @@ export const PageVariants: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    group: 'A/B Testing',
+    group: 'Settings',
     defaultColumns: ['title', 'page', 'bucketID', 'updatedAt'],
     description: {
       en: 'Page variants for A/B testing. Each variant holds alternative content for a specific page.',

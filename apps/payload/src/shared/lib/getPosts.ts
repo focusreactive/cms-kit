@@ -5,7 +5,6 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import { Locale } from '@/shared/types'
 import { cacheTag } from './cacheTags'
 import { resolveLocale } from './resolveLocale'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 export interface GetPostsOptions {
   page?: number
@@ -21,29 +20,7 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
     limit = BLOG_CONFIG.postsPerPage,
     overrideAccess = false,
     locale,
-    domain,
   } = options
-
-  let tenantId: number | undefined
-
-  if (isTenantEnabled()) {
-    if (domain) {
-      const tenants = await payload.find({
-        collection: 'tenants',
-        depth: 0,
-        limit: 1,
-        pagination: false,
-        where: {
-          domain: {
-            equals: domain,
-          },
-        },
-      })
-      tenantId = tenants.docs?.[0]?.id as number | undefined
-    }
-  } else {
-    tenantId = getDefaultTenantId()
-  }
 
   return await payload.find({
     collection: BLOG_CONFIG.collection,
@@ -57,11 +34,6 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
       _status: {
         equals: 'published',
       },
-      ...(tenantId && {
-        tenant: {
-          equals: tenantId,
-        },
-      }),
     },
     select: {
       title: true,

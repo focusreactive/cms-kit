@@ -7,9 +7,7 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import type { Post } from '@/payload-types'
 import { Locale } from '../types'
 import { cacheTag } from './cacheTags'
-import { getTenantByDomain } from './getTenantByDomain'
 import { resolveLocale } from './resolveLocale'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 async function getPostBySlugQuery(
   slug: string,
@@ -18,14 +16,6 @@ async function getPostBySlugQuery(
   draft: boolean,
 ): Promise<Post | null> {
   const payload = await getPayload({ config: configPromise })
-
-  let tenantId: number | undefined
-  if (isTenantEnabled()) {
-    const tenantDoc = domain ? await getTenantByDomain(domain) : null
-    tenantId = tenantDoc?.id
-  } else {
-    tenantId = getDefaultTenantId()
-  }
 
   const result = await payload.find({
     collection: BLOG_CONFIG.collection,
@@ -36,7 +26,6 @@ async function getPostBySlugQuery(
     locale: resolvedLocale,
     where: {
       slug: { equals: slug },
-      ...(tenantId && { tenant: { equals: tenantId } }),
       ...(!draft && { _status: { equals: 'published' } }),
     },
   })

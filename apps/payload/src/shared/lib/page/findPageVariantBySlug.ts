@@ -1,7 +1,6 @@
-import { PageVariant, Tenant } from '@/payload-types'
+import { PageVariant } from '@/payload-types'
 import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
-import { getDefaultDomain, isTenantEnabled } from '@/shared/config/tenant'
 
 export async function findPageVariantBySlug({
   bucketID,
@@ -34,14 +33,6 @@ export async function findPageVariantBySlug({
     docs.find((v) => {
       const page = typeof v.page === 'object' ? v.page : null
       if (!page) return false
-
-      const tenantDomain = isTenantEnabled()
-        ? typeof page.tenant === 'object'
-          ? (page.tenant as Tenant)?.domain
-          : null
-        : getDefaultDomain()
-
-      if (tenantDomain !== domain) return false
 
       const lastUrl = (page.breadcrumbs ?? []).at(-1)?.url ?? ''
 

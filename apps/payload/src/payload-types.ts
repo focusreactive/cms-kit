@@ -74,10 +74,8 @@ export interface Config {
     authors: Author;
     posts: Post;
     testimonials: Testimonial;
-    tenants: Tenant;
     header: Header;
     footer: Footer;
-    'site-settings': SiteSetting;
     'page-variants': PageVariant;
     redirects: Redirect;
     presets: Preset;
@@ -100,10 +98,8 @@ export interface Config {
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    tenants: TenantsSelect<false> | TenantsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'page-variants': PageVariantsSelect<false> | PageVariantsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
@@ -117,8 +113,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'es') | ('en' | 'es')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: 'en' | 'es';
   user: User & {
     collection: 'users';
@@ -160,13 +160,6 @@ export interface User {
    * The role of the user
    */
   role: 'admin' | 'author' | 'user';
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -184,20 +177,6 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenants".
- */
-export interface Tenant {
-  id: number;
-  name: string;
-  /**
-   * Used for domain, [domain].site.com. Only Latin letters, numbers, hyphens; spaces are replaced with hyphen.
-   */
-  domain: string;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -225,13 +204,6 @@ export interface Media {
    * Use this file as default when no image is selected.
    */
   defaultFor?: 'platform_default'[] | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -380,13 +352,6 @@ export interface Page {
    */
   generateSlug?: boolean | null;
   slug?: string | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   parent?: (number | null) | Page;
   breadcrumbs?:
     | {
@@ -472,13 +437,6 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -531,13 +489,6 @@ export interface Post {
    */
   generateSlug?: boolean | null;
   slug?: string | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -554,13 +505,6 @@ export interface Category {
    */
   generateSlug?: boolean | null;
   slug?: string | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -574,13 +518,6 @@ export interface Author {
    * The name of the author
    */
   name: string;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -631,13 +568,6 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -811,13 +741,6 @@ export interface Testimonial {
   avatar?: (number | null) | Media;
   content: string;
   rating?: number | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -991,119 +914,6 @@ export interface BlogSectionBlock {
   blockType: 'blogSection';
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-settings".
- */
-export interface SiteSetting {
-  id: number;
-  /**
-   * The name of your website
-   */
-  siteName?: string | null;
-  /**
-   * The header to display on the blog page
-   */
-  header?: (number | null) | Header;
-  /**
-   * The footer to display on the blog page
-   */
-  footer?: (number | null) | Footer;
-  /**
-   * Logo displayed in the admin panel sidebar (recommended: SVG or PNG, ~150x40px)
-   */
-  adminLogo?: (number | null) | Media;
-  /**
-   * Icon displayed when sidebar is collapsed (recommended: SVG or PNG, 32x32px)
-   */
-  adminIcon?: (number | null) | Media;
-  theme?: {
-    /**
-     * CSS variables in CSS format, e.g.: :root { --primary-color: #007bff; --font-size: 16px; }
-     */
-    config?: string | null;
-  };
-  /**
-   * Character used to separate page title from site name
-   */
-  seoTitleSeparator?: ('|' | '-' | '•') | null;
-  /**
-   * Text added after separator (defaults to Site Name if empty)
-   */
-  seoTitleSuffix?: string | null;
-  /**
-   * Fallback title for Open Graph when page has no title
-   */
-  defaultOgTitle?: string | null;
-  /**
-   * Fallback description when page has no description
-   */
-  defaultDescription?: string | null;
-  /**
-   * Fallback description for Open Graph (uses Meta Description if empty)
-   */
-  defaultOgDescription?: string | null;
-  /**
-   * Fallback image for social media sharing
-   */
-  defaultOgImage?: (number | null) | Media;
-  /**
-   * Site name for Open Graph. Defaults to Site Name if empty
-   */
-  ogSiteName?: string | null;
-  /**
-   * Twitter/X username for the website (e.g., @yoursite)
-   */
-  twitterSite?: string | null;
-  /**
-   * Default Twitter/X username for content creator (e.g., @author)
-   */
-  twitterCreator?: string | null;
-  /**
-   * Type of Twitter Card to display
-   */
-  defaultTwitterCard?: ('summary_large_image' | 'summary') | null;
-  /**
-   * Heading displayed on 404 page
-   */
-  notFoundTitle?: string | null;
-  /**
-   * Text displayed on 404 page
-   */
-  notFoundDescription?: string | null;
-  blog?: {
-    /**
-     * The main title for the blog page
-     */
-    blogTitle?: string | null;
-    /**
-     * Used for meta description if not overridden
-     */
-    blogDescription?: string | null;
-    blogMeta?: {
-      title?: string | null;
-      /**
-       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-       */
-      image?: (number | null) | Media;
-      description?: string | null;
-      /**
-       * Allow search engines to index this page
-       */
-      robots?: ('index' | 'noindex') | null;
-    };
-  };
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
  * Page variants for A/B testing. Each variant holds alternative content for a specific page.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1195,13 +1005,6 @@ export interface Redirect {
    * Whether the redirect is active.
    */
   isActive: boolean;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -1285,13 +1088,6 @@ export interface Preset {
     showRating?: boolean | null;
     showAvatar?: boolean | null;
   };
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        id?: string | null;
-      }[]
-    | null;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -1348,20 +1144,12 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
-        relationTo: 'tenants';
-        value: number | Tenant;
-      } | null)
-    | ({
         relationTo: 'header';
         value: number | Header;
       } | null)
     | ({
         relationTo: 'footer';
         value: number | Footer;
-      } | null)
-    | ({
-        relationTo: 'site-settings';
-        value: number | SiteSetting;
       } | null)
     | ({
         relationTo: 'page-variants';
@@ -1428,13 +1216,6 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1460,13 +1241,6 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   defaultFor?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1586,13 +1360,6 @@ export interface PageSelect<T extends boolean = true> {
       };
   generateSlug?: T;
   slug?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   parent?: T;
   breadcrumbs?:
     | T
@@ -1802,13 +1569,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   generateSlug?: T;
   slug?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1818,13 +1578,6 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1851,13 +1604,6 @@ export interface PostsSelect<T extends boolean = true> {
   authors?: T;
   generateSlug?: T;
   slug?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1873,23 +1619,6 @@ export interface TestimonialsSelect<T extends boolean = true> {
   avatar?: T;
   content?: T;
   rating?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenants_select".
- */
-export interface TenantsSelect<T extends boolean = true> {
-  name?: T;
-  domain?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1930,13 +1659,6 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1968,65 +1690,6 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-settings_select".
- */
-export interface SiteSettingsSelect<T extends boolean = true> {
-  siteName?: T;
-  header?: T;
-  footer?: T;
-  adminLogo?: T;
-  adminIcon?: T;
-  theme?:
-    | T
-    | {
-        config?: T;
-      };
-  seoTitleSeparator?: T;
-  seoTitleSuffix?: T;
-  defaultOgTitle?: T;
-  defaultDescription?: T;
-  defaultOgDescription?: T;
-  defaultOgImage?: T;
-  ogSiteName?: T;
-  twitterSite?: T;
-  twitterCreator?: T;
-  defaultTwitterCard?: T;
-  notFoundTitle?: T;
-  notFoundDescription?: T;
-  blog?:
-    | T
-    | {
-        blogTitle?: T;
-        blogDescription?: T;
-        blogMeta?:
-          | T
-          | {
-              title?: T;
-              image?: T;
-              description?: T;
-              robots?: T;
-            };
-      };
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2086,13 +1749,6 @@ export interface RedirectsSelect<T extends boolean = true> {
       };
   type?: T;
   isActive?: T;
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2140,13 +1796,6 @@ export interface PresetsSelect<T extends boolean = true> {
         showRating?: T;
         showAvatar?: T;
       };
-  tenants?:
-    | T
-    | {
-        tenant?: T;
-        id?: T;
-      };
-  tenant?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2201,6 +1850,158 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  /**
+   * The name of your website
+   */
+  siteName?: string | null;
+  /**
+   * The header to display on the blog page
+   */
+  header?: (number | null) | Header;
+  /**
+   * The footer to display on the blog page
+   */
+  footer?: (number | null) | Footer;
+  /**
+   * Logo displayed in the admin panel sidebar (recommended: SVG or PNG, ~150x40px)
+   */
+  adminLogo?: (number | null) | Media;
+  /**
+   * Icon displayed when sidebar is collapsed (recommended: SVG or PNG, 32x32px)
+   */
+  adminIcon?: (number | null) | Media;
+  theme?: {
+    /**
+     * CSS variables in CSS format, e.g.: :root { --primary-color: #007bff; --font-size: 16px; }
+     */
+    config?: string | null;
+  };
+  /**
+   * Character used to separate page title from site name
+   */
+  seoTitleSeparator?: ('|' | '-' | '•') | null;
+  /**
+   * Text added after separator (defaults to Site Name if empty)
+   */
+  seoTitleSuffix?: string | null;
+  /**
+   * Fallback title for Open Graph when page has no title
+   */
+  defaultOgTitle?: string | null;
+  /**
+   * Fallback description when page has no description
+   */
+  defaultDescription?: string | null;
+  /**
+   * Fallback description for Open Graph (uses Meta Description if empty)
+   */
+  defaultOgDescription?: string | null;
+  /**
+   * Fallback image for social media sharing
+   */
+  defaultOgImage?: (number | null) | Media;
+  /**
+   * Site name for Open Graph. Defaults to Site Name if empty
+   */
+  ogSiteName?: string | null;
+  /**
+   * Twitter/X username for the website (e.g., @yoursite)
+   */
+  twitterSite?: string | null;
+  /**
+   * Default Twitter/X username for content creator (e.g., @author)
+   */
+  twitterCreator?: string | null;
+  /**
+   * Type of Twitter Card to display
+   */
+  defaultTwitterCard?: ('summary_large_image' | 'summary') | null;
+  /**
+   * Heading displayed on 404 page
+   */
+  notFoundTitle?: string | null;
+  /**
+   * Text displayed on 404 page
+   */
+  notFoundDescription?: string | null;
+  blog?: {
+    /**
+     * The main title for the blog page
+     */
+    blogTitle?: string | null;
+    /**
+     * Used for meta description if not overridden
+     */
+    blogDescription?: string | null;
+    blogMeta?: {
+      title?: string | null;
+      /**
+       * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+       */
+      image?: (number | null) | Media;
+      description?: string | null;
+      /**
+       * Allow search engines to index this page
+       */
+      robots?: ('index' | 'noindex') | null;
+    };
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  header?: T;
+  footer?: T;
+  adminLogo?: T;
+  adminIcon?: T;
+  theme?:
+    | T
+    | {
+        config?: T;
+      };
+  seoTitleSeparator?: T;
+  seoTitleSuffix?: T;
+  defaultOgTitle?: T;
+  defaultDescription?: T;
+  defaultOgDescription?: T;
+  defaultOgImage?: T;
+  ogSiteName?: T;
+  twitterSite?: T;
+  twitterCreator?: T;
+  defaultTwitterCard?: T;
+  notFoundTitle?: T;
+  notFoundDescription?: T;
+  blog?:
+    | T
+    | {
+        blogTitle?: T;
+        blogDescription?: T;
+        blogMeta?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+              description?: T;
+              robots?: T;
+            };
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -5,10 +5,11 @@ import configPromise from '@payload-config'
 import { generateMeta } from '@/shared/lib/generateMeta'
 import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
 import { I18N_CONFIG } from '@/shared/config/i18n'
-import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
-import type { Page, Tenant } from '@/payload-types'
+import type { Page } from '@/payload-types'
 import type { Locale } from '@/shared/types'
 import { findPageVariantBySlug } from '@/shared/lib/page/findPageVariantBySlug'
+
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
 interface Props {
   params: Promise<{
@@ -55,14 +56,6 @@ export async function generateStaticParams() {
     const page = typeof variant.page === 'object' ? (variant.page as Page) : null
     if (!page) continue
 
-    const domain = isTenantEnabled()
-      ? typeof page.tenant === 'object'
-        ? ((page.tenant as Tenant)?.domain ?? null)
-        : null
-      : getDefaultDomain()
-
-    if (!domain) continue
-
     for (const locale of locales) {
       const localePage = await payload.findByID({
         collection: 'page',
@@ -78,7 +71,7 @@ export async function generateStaticParams() {
       const isHome = !lastUrl || lastUrl === '/home' || lastUrl === '/'
       if (!isHome) continue
 
-      results.push({ locale, domain, bucketID: variant.bucketID as string })
+      results.push({ locale, domain: DEFAULT_DOMAIN, bucketID: variant.bucketID as string })
     }
   }
 

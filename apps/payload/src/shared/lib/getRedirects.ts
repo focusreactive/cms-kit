@@ -1,27 +1,14 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { unstable_cache } from 'next/cache'
-import { getTenantByDomain } from '@/shared/lib/getTenantByDomain'
 import { Locale } from '../types'
 import { cacheTag } from './cacheTags'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 export async function getRedirects(domain: string, locale: Locale) {
   const payload = await getPayload({ config: configPromise })
 
-  let tenantId: number | null = null
-
-  if (isTenantEnabled()) {
-    const tenant = await getTenantByDomain(domain)
-    if (!tenant) return []
-    tenantId = tenant.id
-  } else {
-    tenantId = getDefaultTenantId()
-  }
-
   const { docs: redirects } = await payload.find({
     collection: 'redirects',
-    where: tenantId !== null ? { tenant: { equals: tenantId } } : {},
     depth: 2,
     limit: 0,
     locale,

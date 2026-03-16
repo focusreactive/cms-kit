@@ -5,9 +5,7 @@ import { unstable_cache } from 'next/cache'
 import { cache } from 'react'
 import { Locale } from '../types'
 import { cacheTag } from './cacheTags'
-import { getTenantByDomain } from './getTenantByDomain'
 import { resolveLocale } from './resolveLocale'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 import { getAllDocuments } from './getAllDocuments'
 
 async function getPageBySlugQuery(
@@ -20,25 +18,12 @@ async function getPageBySlugQuery(
   const targetUrl = `/${fullPath}`
   const payload = await getPayload({ config: configPromise })
 
-  let tenantId: number | null = null
-  if (isTenantEnabled()) {
-    const tenantDoc = domain ? await getTenantByDomain(domain) : null
-    tenantId = tenantDoc?.id || null
-  } else {
-    tenantId = getDefaultTenantId()
-  }
-
   const result = await getAllDocuments(payload, 'page', {
     draft,
     depth: 4,
     overrideAccess: true,
     locale: resolvedLocale,
     where: {
-      ...(tenantId !== null && {
-        tenant: {
-          equals: tenantId,
-        },
-      }),
       ...(!draft && {
         _status: { equals: 'published' },
       }),
@@ -49,8 +34,6 @@ async function getPageBySlugQuery(
       generateSlug: false,
     },
   })
-
-  // TODO - integrate breadcrumbs filter into query
 
   const doc = result.find((p) => p?.breadcrumbs?.length && p.breadcrumbs.at(-1)?.url === targetUrl)
 

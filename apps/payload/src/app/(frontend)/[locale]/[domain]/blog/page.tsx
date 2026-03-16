@@ -9,11 +9,11 @@ import { BlogPageSkeleton } from './_components/BlogPageSkeleton'
 import { BlogJsonLdWrapper } from './_components/BlogJsonLdWrapper'
 import { Locale } from '@/shared/types'
 import { I18N_CONFIG } from '@/shared/config/i18n'
-import { getAllTenantDomains } from '@/shared/lib/staticParams/tenants'
 import { getSiteSettings } from '@/shared/lib/getSiteSettings'
 import { Footer, Header } from '@/widgets'
 import { Footer as FooterType, Header as HeaderType } from '@/payload-types'
-import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
+
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
 type Props = {
   searchParams: Promise<{
@@ -71,15 +71,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  if (!isTenantEnabled()) {
-    return I18N_CONFIG.locales.map((locale) => ({
-      locale: locale.code,
-      domain: getDefaultDomain(),
-    }))
-  }
-
-  const tenants = await getAllTenantDomains()
-  return I18N_CONFIG.locales.flatMap((locale) =>
-    tenants.map((t) => ({ locale: locale.code, domain: t.domain })),
-  )
+  return I18N_CONFIG.locales.map((locale) => ({
+    locale: locale.code,
+    domain: DEFAULT_DOMAIN,
+  }))
 }

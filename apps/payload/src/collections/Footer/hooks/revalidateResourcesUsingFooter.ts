@@ -1,9 +1,10 @@
 import type { CollectionAfterChangeHook } from 'payload'
 import type { Footer } from '@/payload-types'
-
-import { getDomainFromGlobalDoc, revalidateGlobalTags } from '@/shared/lib/getGlobals'
+import { revalidateGlobalTags } from '@/shared/lib/getGlobals'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
 import { revalidatePageCache } from '@/shared/lib/revalidatePageCache'
+
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
 export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> = async ({
   doc,
@@ -13,21 +14,16 @@ export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> =
 
   if (!context.disableRevalidate) {
     const locale = getLocaleFromRequest(req)
-    const domain = await getDomainFromGlobalDoc(doc)
 
-    const siteSettings = await payload.find({
-      collection: 'site-settings',
-      where: {
-        footer: {
-          equals: doc.id,
-        },
-      },
-      locale,
+    const siteSettings = await payload.findGlobal({
+      slug: 'site-settings',
+      depth: 1,
     })
 
-    if (siteSettings.docs.length > 0) {
-      revalidateGlobalTags({ collection: 'site-settings', domain, locale })
-      payload.logger?.info?.(`Revalidated site-settings for domain: ${domain}, locale: ${locale}`)
+    const footerId = typeof siteSettings?.footer === 'object' ? siteSettings.footer?.id : siteSettings?.footer
+    if (footerId === doc.id) {
+      revalidateGlobalTags({ collection: 'site-settings', domain: DEFAULT_DOMAIN, locale })
+      payload.logger?.info?.(`Revalidated site-settings for locale: ${locale}`)
     }
 
     const pages = await payload.find({
@@ -40,12 +36,11 @@ export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> =
       select: {
         id: true,
         breadcrumbs: true,
-        tenant: true,
       },
     })
 
     for (const page of pages.docs) {
-      revalidatePageCache({ doc: page, domain, locale, payload })
+      revalidatePageCache({ doc: page, domain: DEFAULT_DOMAIN, locale, payload })
     }
   }
 

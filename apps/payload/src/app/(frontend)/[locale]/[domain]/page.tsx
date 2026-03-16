@@ -4,8 +4,7 @@ import { getPageBySlug } from '@/shared/lib/getPageBySlug'
 import type { Locale } from '@/shared/types'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
-import { getAllTenantDomains } from '@/shared/lib/staticParams/tenants'
-import { isTenantEnabled, getDefaultDomain } from '@/shared/config/tenant'
+const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
 export { default } from './[...slug]/page'
 
@@ -19,15 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  if (!isTenantEnabled()) {
-    return I18N_CONFIG.locales.map((locale) => ({
-      locale: locale.code,
-      domain: getDefaultDomain(),
-    }))
-  }
-
-  const tenants = await getAllTenantDomains()
-  return I18N_CONFIG.locales.flatMap((locale) =>
-    tenants.map((t) => ({ locale: locale.code, domain: t.domain })),
-  )
+  return I18N_CONFIG.locales.map((locale) => ({
+    locale: locale.code,
+    domain: DEFAULT_DOMAIN,
+  }))
 }
