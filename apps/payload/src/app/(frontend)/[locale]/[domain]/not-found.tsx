@@ -2,7 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { getSiteSettings } from '@/shared/lib/getSiteSettings'
-import { Section, Container, Button, Link } from '@/shared/ui'
+import { Section, Container, buttonVariants, ButtonVariant, Link } from '@/shared/ui'
 import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
 import { Locale } from '@/shared/types'
 import { resolveLocale } from '@/shared/lib/resolveLocale'
@@ -43,9 +43,9 @@ export default async function NotFound() {
             <Link
               href="/"
               locale={locale}
-              className="inline-block px-6 py-3 text rounded-lg transition-colors"
+              className={buttonVariants({ variant: ButtonVariant.Primary })}
             >
-              <Button>{t('goToHomepage')}</Button>
+              {t('goToHomepage')}
             </Link>
           </Container>
         </Section>

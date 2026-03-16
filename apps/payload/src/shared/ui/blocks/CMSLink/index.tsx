@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 import type { Page, Post } from '@/payload-types'
 import { cn } from '@/shared/lib/utils'
-import { Button, Link } from '@/shared/ui'
+import { Button, ButtonVariant, ButtonSize, Link } from '@/shared/ui'
 import { BLOG_CONFIG } from '@/shared/config/blog'
 
 type ButtonProps = React.ComponentProps<typeof Button>
@@ -25,8 +25,11 @@ const collectionPaths: Record<string, string> = {
   page: '',
 }
 
+// Legacy shadcn variants from Payload CMS field definitions
+type LegacyAppearance = 'default' | 'outline'
+
 type Props = {
-  appearance?: VariantProps<typeof linkVariants>['appearance'] | ButtonProps['variant']
+  appearance?: VariantProps<typeof linkVariants>['appearance'] | ButtonProps['variant'] | LegacyAppearance | null
   children?: React.ReactNode
   className?: string
   label?: string | null
@@ -39,6 +42,12 @@ type Props = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
+}
+
+function mapAppearanceToVariant(appearance: Props['appearance']): ButtonProps['variant'] {
+  if (appearance === 'default') return ButtonVariant.Primary
+  if (appearance === 'outline') return ButtonVariant.Secondary
+  return appearance as ButtonProps['variant']
 }
 
 export const CMSLink: React.FC<Props> = (props) => {
@@ -89,7 +98,7 @@ export const CMSLink: React.FC<Props> = (props) => {
       asChild
       className={className}
       size={size}
-      variant={appearance as Exclude<ButtonProps['variant'], 'link'>}
+      variant={mapAppearanceToVariant(appearance)}
     >
       <Link href={href || url || ''} onClick={onClick} {...newTabProps}>
         {label && label}

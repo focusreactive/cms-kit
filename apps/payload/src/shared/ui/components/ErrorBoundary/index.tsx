@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Container, Section, Button } from '@/shared/ui'
+import { Container, Section, Button, ButtonVariant } from '@/shared/ui'
 import { Link } from '@/shared/ui'
 import { useTranslations } from 'next-intl'
 
@@ -50,11 +50,11 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
               )}
 
               <div className="flex gap-4 justify-center">
-                <Button onClick={reset} variant="default">
+                <Button onClick={reset} variant={ButtonVariant.Primary}>
                   Try again
                 </Button>
                 {backLink && (
-                  <Button asChild variant="outline">
+                  <Button asChild variant={ButtonVariant.Secondary}>
                     <Link href={backLink.href}>{backLink.label}</Link>
                   </Button>
                 )}
