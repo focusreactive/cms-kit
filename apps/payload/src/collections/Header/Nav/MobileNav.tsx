@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronRight } from 'lucide-react'
-import { CMSLink, Link } from '@/shared/ui'
+import { CMSLink } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 import type { Header as HeaderType } from '@/payload-types'
 import { LocaleSelector } from '@/features/LocaleSelector'
@@ -116,15 +116,10 @@ export const MobileNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         <div className="border-t border-primaryLightColor px-4 py-4">
           <LocaleSelector
             render={(locale) => (
-              <Link
-                href="/"
-                locale={locale}
-                className="flex items-center justify-between ml-2 rounded-lg px-3 py-2.5 text-sm no-underline text-textSecondaryColor hover:bg-primaryLightColor hover:text-textColor transition-colors"
-                onClick={() => setOpen(false)}
-              >
+              <span className="flex items-center justify-between ml-2 rounded-lg px-3 py-2.5 text-sm text-textSecondaryColor hover:bg-primaryLightColor hover:text-textColor transition-colors cursor-pointer">
                 {locale}
                 <ChevronRight className="size-3.5 text-textSecondaryColor" aria-hidden />
-              </Link>
+              </span>
             )}
           />
         </div>
