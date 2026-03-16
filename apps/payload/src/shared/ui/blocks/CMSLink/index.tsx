@@ -60,7 +60,7 @@ export const CMSLink: React.FC<Props> = (props) => {
     newTab,
     onClick,
     reference,
-    size: size,
+    size,
     url,
   } = props
 
