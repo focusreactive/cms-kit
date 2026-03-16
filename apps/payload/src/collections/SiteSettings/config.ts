@@ -6,7 +6,6 @@ import { tenantFields } from '@/fields/tenantFields'
 import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { beforeChangeUniqueTenant } from '@/hooks/beforeChangeUniqueTenant'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
-import { SITE_SETTINGS_DEFAULT_VALUES } from './defaultValues'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
 import { isTenantEnabled } from '@/shared/config/tenant'
 import { generateSeoFields } from '@/shared/lib/seoFields'
@@ -117,30 +116,6 @@ export const SiteSettings: CollectionConfig<'site-settings'> = {
                   es: 'Icono mostrado cuando la barra lateral está colapsada (recomendado: SVG o PNG, 32x32px)',
                 },
               },
-            },
-          ],
-        },
-        {
-          name: 'theme',
-          label: {
-            en: 'Theme',
-            es: 'Tema',
-          },
-          fields: [
-            {
-              name: 'config',
-              label: {
-                en: 'Theme Configuration (CSS Variables)',
-                es: 'Configuración del Tema (Variables CSS)',
-              },
-              type: 'textarea',
-              admin: {
-                description: {
-                  en: 'CSS variables in CSS format, e.g.: :root { --primary-color: #007bff; --font-size: 16px; }',
-                  es: 'Variables CSS en formato CSS, por ejemplo: :root { --primary-color: #007bff; --font-size: 16px; }',
-                },
-              },
-              defaultValue: SITE_SETTINGS_DEFAULT_VALUES.theme,
             },
           ],
         },
