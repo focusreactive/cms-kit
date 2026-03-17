@@ -32,7 +32,7 @@ type BuildUrlOptions = (
 ) & {
   absolute?: boolean
   slug?: string | null
-  locale: Locale
+  locale: string
 }
 
 export function buildUrl({

@@ -9,7 +9,6 @@ import { generateSeoFields } from '@/shared/lib/seoFields'
 import { BLOG_CONFIG } from '@/shared/config/blog'
 import { generateRichText } from '@/shared/lib/generateRichText'
 import { buildUrl } from '@/shared/lib/buildUrl'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
 import {
   createLocalizedDefault,
   createLocalizedRichText,
@@ -53,20 +52,20 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     group: 'Blog',
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({ data, locale }) => {
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'posts',
             slug: data?.slug,
             absolute: false,
-            locale: getLocaleFromRequest(req),
+            locale: locale.code ?? locale.fallbackLocale,
           }),
           collection: BLOG_CONFIG.collection,
         })
       },
     },
-    preview: (data, { req }) => {
+    preview: (data, { locale }) => {
       return generatePreviewPath({
         slug: data?.slug as string,
         collection: BLOG_CONFIG.collection,
@@ -74,7 +73,7 @@ export const Posts: CollectionConfig<'posts'> = {
           collection: 'posts',
           slug: data?.slug as string,
           absolute: false,
-          locale: getLocaleFromRequest(req),
+          locale,
         }),
       })
     },
