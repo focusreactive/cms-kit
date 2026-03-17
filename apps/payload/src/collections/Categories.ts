@@ -42,7 +42,7 @@ export const Categories: CollectionConfig<'categories'> = {
     },
     slugField({
       useAsSlug: 'title',
-      required: false,
+      required: true,
       overrides: (field) => {
         const slugSub = field.fields?.[1] as { unique?: boolean } | undefined
         if (slugSub && 'unique' in slugSub) slugSub.unique = false
