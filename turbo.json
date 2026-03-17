@@ -79,6 +79,9 @@
     },
     "generate:experiments": {
       "cache": false
+    },
+    "migrate": {
+      "cache": false
     }
   }
 }
