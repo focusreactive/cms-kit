@@ -1,4 +1,4 @@
-# Ideal CMS
+# 🚀 Ideal CMS
 
 A production-ready content management system built with [Payload CMS 3](https://payloadcms.com/) and [Next.js 15](https://nextjs.org/), featuring multi-tenancy, internationalization, A/B testing, and a modular block-based page builder.
 
