@@ -4,8 +4,7 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
 
-// 'main' is reserved because middleware injects it as the internal domain segment in URLs
-const RESERVED_SLUGS: readonly string[] = [BLOG_CONFIG.slug, 'main']
+const RESERVED_SLUGS: readonly string[] = [BLOG_CONFIG.slug]
 
 const generateErrorMessage = (slug: string) => {
   return `Slug "${slug}" is reserved and cannot be used for pages`
