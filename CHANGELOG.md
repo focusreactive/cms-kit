@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/focusreactive/cms-kit/compare/v1.0.14...v1.0.15) (2026-03-17)
+
+
+### Features
+
+* **payload:** generate bulk migration with adding blocks cards grid, carousel, logos, links list, blog section ([dc4f3e7](https://github.com/focusreactive/cms-kit/commit/dc4f3e7111114a6d462be315e70614f9132dc77c))
+
 ## [1.0.14](https://github.com/focusreactive/cms-kit/compare/v1.0.13...v1.0.14) (2025-06-09)
 
 
