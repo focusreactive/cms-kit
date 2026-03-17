@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Container, Section, Button } from '@/shared/ui'
+import { Container, Section, Button, ButtonVariant } from '@/shared/ui'
 import { Link } from '@/shared/ui'
 import { useTranslations } from 'next-intl'
 
@@ -40,21 +40,21 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
             <div className="space-y-6">
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold tracking-tight">{title}</h1>
-                <p className="text-muted-foreground text-lg">{errorMessage}</p>
+                <p className="text-textSecondaryColor text-lg">{errorMessage}</p>
               </div>
 
               {error.message && process.env.NODE_ENV === 'development' && (
-                <div className="mx-auto p-4 bg-destructive/10 border border-destructive/20 rounded-lg max-w-2xl">
+                <div className="mx-auto p-4 bg-error/10 border border-error/20 rounded-lg max-w-2xl">
                   <p className="text-sm font-mono text-left break-words">{error.message}</p>
                 </div>
               )}
 
               <div className="flex gap-4 justify-center">
-                <Button onClick={reset} variant="default">
+                <Button onClick={reset} variant={ButtonVariant.Primary}>
                   Try again
                 </Button>
                 {backLink && (
-                  <Button asChild variant="outline">
+                  <Button asChild variant={ButtonVariant.Secondary}>
                     <Link href={backLink.href}>{backLink.label}</Link>
                   </Button>
                 )}

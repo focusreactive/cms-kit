@@ -1,3 +1,3 @@
 export { Section, Container, SectionHeader, CMSLink, HeroOverlay, Media, RichText, } from './blocks'
-export { Accordion, Button, NavigationMenu, Sheet, buttonVariants, DropdownMenu } from './shadcn'
+export { Button, buttonVariants, ButtonVariant, ButtonSize } from '@shared/ui'
 export { Logo, PostHero, Card, EmptyState, PageRange, Pagination, ErrorBoundary, Link } from './components'

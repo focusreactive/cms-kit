@@ -17,3 +17,5 @@ export * from "./components/ui/richText";
 // end component exports
 
 export { cn, cva } from "./utils";
+export { Button, buttonVariants } from "./components/ui/button";
+export { ButtonVariant, ButtonSize } from "./components/ui/button/types";

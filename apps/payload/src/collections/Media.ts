@@ -1,4 +1,4 @@
-import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import type { CollectionConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 import { generateRichText } from '@/shared/lib/generateRichText'
@@ -17,10 +17,10 @@ export const Media: CollectionConfig<'media'> = {
     },
   },
   access: {
-    create: or(superAdmin, tenantAdmin, user, author),
-    delete: or(superAdmin, tenantAdmin, user, author),
+    create: or(superAdmin, user, author),
+    delete: or(superAdmin, user, author),
     read: anyone,
-    update: or(superAdmin, tenantAdmin, user, author),
+    update: or(superAdmin, user, author),
   },
   folders: true,
   admin: {
@@ -28,7 +28,7 @@ export const Media: CollectionConfig<'media'> = {
       limits: [20, 50, 100],
     },
     defaultColumns: ['filename', 'alt'],
-    group: 'Media',
+    group: 'Content',
   },
   fields: [
     {

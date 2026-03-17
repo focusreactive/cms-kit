@@ -6,9 +6,8 @@ import { validateRedirectPath } from '@/shared/lib/redirectUrl'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-import { tenantAdmin, superAdmin, or, authenticated, user } from '@/shared/lib/access'
+import { superAdmin, or, authenticated, user } from '@/shared/lib/access'
 import seoPlugin from './seoPlugin'
-import { aiSeoPlugin } from './aiSeo/plugin'
 import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
 import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
 import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
@@ -125,10 +124,10 @@ export const plugins: Plugin[] = [
         afterChange: [revalidateRedirects],
       },
       access: {
-        read: or(superAdmin, tenantAdmin),
-        create: or(superAdmin, tenantAdmin),
-        delete: or(superAdmin, tenantAdmin),
-        update: or(superAdmin, tenantAdmin),
+        read: or(superAdmin, user),
+        create: or(superAdmin, user),
+        delete: or(superAdmin, user),
+        update: or(superAdmin, user),
       },
     },
   }),
@@ -140,21 +139,6 @@ export const plugins: Plugin[] = [
     generateLabel: (_, doc: unknown) => {
       return (doc as Page).title
     },
-  }),
-
-  aiSeoPlugin({
-    enabled: process.env.NODE_ENV === 'production',
-    apiKey: process.env.OPENAI_API_KEY || '',
-    collections: [
-      {
-        collection: 'page',
-        seoFields: {
-          title: 'meta.title',
-          description: 'meta.description',
-        },
-        contentFields: ['title', 'content', 'blocks'],
-      },
-    ],
   }),
 
   presetsPlugin({
@@ -170,10 +154,10 @@ export const plugins: Plugin[] = [
         defaultColumns: ['name', 'preview', 'type', 'updatedAt'],
       },
       access: {
-        create: or(superAdmin, tenantAdmin, user),
-        delete: or(superAdmin, tenantAdmin, user),
+        create: or(superAdmin, user),
+        delete: or(superAdmin, user),
         read: authenticated,
-        update: or(superAdmin, tenantAdmin, user),
+        update: or(superAdmin, user),
       },
       fields: (defaultFields) => defaultFields,
       hooks: {
@@ -214,4 +198,5 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+
 ]

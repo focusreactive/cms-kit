@@ -2,8 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
-import { slugField } from 'payload'
-import { anyone, tenantAdmin, author, or, user, superAdmin } from '@/shared/lib/access'
+import { createSharedSlugField } from '@/fields/slugField'
+import { anyone, author, or, user, superAdmin } from '@/shared/lib/access'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
 import { generateSeoFields } from '@/shared/lib/seoFields'
 import { BLOG_CONFIG } from '@/shared/config/blog'
@@ -31,10 +31,10 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   access: {
-    create: or(superAdmin, tenantAdmin, user, author),
-    delete: or(superAdmin, tenantAdmin, user, author),
+    create: or(superAdmin, user, author),
+    delete: or(superAdmin, user, author),
     read: anyone,
-    update: or(superAdmin, tenantAdmin, user, author),
+    update: or(superAdmin, user, author),
   },
   defaultPopulate: {
     title: true,
@@ -235,15 +235,7 @@ export const Posts: CollectionConfig<'posts'> = {
         es: 'Autores',
       },
     },
-    slugField({
-      useAsSlug: 'title',
-      required: false,
-      overrides: (field) => {
-        const slugSub = field.fields?.[1] as { unique?: boolean } | undefined
-        if (slugSub && 'unique' in slugSub) slugSub.unique = false
-        return field
-      },
-    }),
+    createSharedSlugField('posts'),
   ],
   hooks: {
     afterChange: [revalidatePost],

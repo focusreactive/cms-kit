@@ -15,9 +15,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         className,
       )}
     >
-      {icon && <div className="mb-4 text-muted-foreground">{icon}</div>}
+      {icon && <div className="mb-4 text-textSecondaryColor">{icon}</div>}
       <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      {description && <p className="text-sm text-muted-foreground max-w-md">{description}</p>}
+      {description && <p className="text-sm text-textSecondaryColor max-w-md">{description}</p>}
     </div>
   )
 }

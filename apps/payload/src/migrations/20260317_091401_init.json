@@ -17144,13 +17144,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "theme_config": {
-          "name": "theme_config",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'\n:root {\n  --font-mono: ''Roboto Mono'', monospace;\n  --background-color: white;\n  --text-color: black;\n  --radius: 0.625rem;\n  --background: oklch(1 0 0);\n  --foreground: oklch(0.13 0.028 261.692);\n  --card: oklch(1 0 0);\n  --card-foreground: oklch(0.13 0.028 261.692);\n  --popover: oklch(1 0 0);\n  --popover-foreground: oklch(0.13 0.028 261.692);\n  --primary: oklch(0.21 0.034 264.665);\n  --primary-foreground: oklch(0.985 0.002 247.839);\n  --secondary: oklch(0.967 0.003 264.542);\n  --secondary-foreground: oklch(0.21 0.034 264.665);\n  --muted: oklch(0.967 0.003 264.542);\n  --muted-foreground: oklch(0.551 0.027 264.364);\n  --accent: oklch(0.967 0.003 264.542);\n  --accent-foreground: oklch(0.21 0.034 264.665);\n  --destructive: oklch(0.577 0.245 27.325);\n  --border: oklch(0.928 0.006 264.531);\n  --input: oklch(0.928 0.006 264.531);\n  --ring: oklch(0.707 0.022 261.325);\n  --chart-1: oklch(0.646 0.222 41.116);\n  --chart-2: oklch(0.6 0.118 184.704);\n  --chart-3: oklch(0.398 0.07 227.392);\n  --chart-4: oklch(0.828 0.189 84.429);\n  --chart-5: oklch(0.769 0.188 70.08);\n  --sidebar: oklch(0.985 0.002 247.839);\n  --sidebar-foreground: oklch(0.13 0.028 261.692);\n  --sidebar-primary: oklch(0.21 0.034 264.665);\n  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-accent: oklch(0.967 0.003 264.542);\n  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);\n  --sidebar-border: oklch(0.928 0.006 264.531);\n  --sidebar-ring: oklch(0.707 0.022 261.325);\n}\n\n[data-theme=''dark''] {\n  --background: oklch(0.13 0.028 261.692);\n  --foreground: oklch(0.985 0.002 247.839);\n  --card: oklch(0.21 0.034 264.665);\n  --card-foreground: oklch(0.985 0.002 247.839);\n  --popover: oklch(0.21 0.034 264.665);\n  --popover-foreground: oklch(0.985 0.002 247.839);\n  --primary: oklch(0.928 0.006 264.531);\n  --primary-foreground: oklch(0.21 0.034 264.665);\n  --secondary: oklch(0.278 0.033 256.848);\n  --secondary-foreground: oklch(0.985 0.002 247.839);\n  --muted: oklch(0.278 0.033 256.848);\n  --muted-foreground: oklch(0.707 0.022 261.325);\n  --accent: oklch(0.278 0.033 256.848);\n  --accent-foreground: oklch(0.985 0.002 247.839);\n  --destructive: oklch(0.704 0.191 22.216);\n  --border: oklch(1 0 0 / 10%);\n  --input: oklch(1 0 0 / 15%);\n  --ring: oklch(0.551 0.027 264.364);\n  --chart-1: oklch(0.488 0.243 264.376);\n  --chart-2: oklch(0.696 0.17 162.48);\n  --chart-3: oklch(0.769 0.188 70.08);\n  --chart-4: oklch(0.627 0.265 303.9);\n  --chart-5: oklch(0.645 0.246 16.439);\n  --sidebar: oklch(0.21 0.034 264.665);\n  --sidebar-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-primary: oklch(0.488 0.243 264.376);\n  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-accent: oklch(0.278 0.033 256.848);\n  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);\n  --sidebar-border: oklch(1 0 0 / 10%);\n  --sidebar-ring: oklch(0.551 0.027 264.364);\n}\n'"
-        },
         "seo_title_separator": {
           "name": "seo_title_separator",
           "type": "enum_site_settings_seo_title_separator",
@@ -17586,13 +17579,6 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
-        },
-        "version_theme_config": {
-          "name": "version_theme_config",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'\n:root {\n  --font-mono: ''Roboto Mono'', monospace;\n  --background-color: white;\n  --text-color: black;\n  --radius: 0.625rem;\n  --background: oklch(1 0 0);\n  --foreground: oklch(0.13 0.028 261.692);\n  --card: oklch(1 0 0);\n  --card-foreground: oklch(0.13 0.028 261.692);\n  --popover: oklch(1 0 0);\n  --popover-foreground: oklch(0.13 0.028 261.692);\n  --primary: oklch(0.21 0.034 264.665);\n  --primary-foreground: oklch(0.985 0.002 247.839);\n  --secondary: oklch(0.967 0.003 264.542);\n  --secondary-foreground: oklch(0.21 0.034 264.665);\n  --muted: oklch(0.967 0.003 264.542);\n  --muted-foreground: oklch(0.551 0.027 264.364);\n  --accent: oklch(0.967 0.003 264.542);\n  --accent-foreground: oklch(0.21 0.034 264.665);\n  --destructive: oklch(0.577 0.245 27.325);\n  --border: oklch(0.928 0.006 264.531);\n  --input: oklch(0.928 0.006 264.531);\n  --ring: oklch(0.707 0.022 261.325);\n  --chart-1: oklch(0.646 0.222 41.116);\n  --chart-2: oklch(0.6 0.118 184.704);\n  --chart-3: oklch(0.398 0.07 227.392);\n  --chart-4: oklch(0.828 0.189 84.429);\n  --chart-5: oklch(0.769 0.188 70.08);\n  --sidebar: oklch(0.985 0.002 247.839);\n  --sidebar-foreground: oklch(0.13 0.028 261.692);\n  --sidebar-primary: oklch(0.21 0.034 264.665);\n  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-accent: oklch(0.967 0.003 264.542);\n  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);\n  --sidebar-border: oklch(0.928 0.006 264.531);\n  --sidebar-ring: oklch(0.707 0.022 261.325);\n}\n\n[data-theme=''dark''] {\n  --background: oklch(0.13 0.028 261.692);\n  --foreground: oklch(0.985 0.002 247.839);\n  --card: oklch(0.21 0.034 264.665);\n  --card-foreground: oklch(0.985 0.002 247.839);\n  --popover: oklch(0.21 0.034 264.665);\n  --popover-foreground: oklch(0.985 0.002 247.839);\n  --primary: oklch(0.928 0.006 264.531);\n  --primary-foreground: oklch(0.21 0.034 264.665);\n  --secondary: oklch(0.278 0.033 256.848);\n  --secondary-foreground: oklch(0.985 0.002 247.839);\n  --muted: oklch(0.278 0.033 256.848);\n  --muted-foreground: oklch(0.707 0.022 261.325);\n  --accent: oklch(0.278 0.033 256.848);\n  --accent-foreground: oklch(0.985 0.002 247.839);\n  --destructive: oklch(0.704 0.191 22.216);\n  --border: oklch(1 0 0 / 10%);\n  --input: oklch(1 0 0 / 15%);\n  --ring: oklch(0.551 0.027 264.364);\n  --chart-1: oklch(0.488 0.243 264.376);\n  --chart-2: oklch(0.696 0.17 162.48);\n  --chart-3: oklch(0.769 0.188 70.08);\n  --chart-4: oklch(0.627 0.265 303.9);\n  --chart-5: oklch(0.645 0.246 16.439);\n  --sidebar: oklch(0.21 0.034 264.665);\n  --sidebar-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-primary: oklch(0.488 0.243 264.376);\n  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);\n  --sidebar-accent: oklch(0.278 0.033 256.848);\n  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);\n  --sidebar-border: oklch(1 0 0 / 10%);\n  --sidebar-ring: oklch(0.551 0.027 264.364);\n}\n'"
         },
         "version_seo_title_separator": {
           "name": "version_seo_title_separator",
@@ -18900,6 +18886,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "31b65d6c-fd43-447e-b0fc-dca9d349b860",
+  "id": "5c85b1ff-4f75-478e-8438-ae17bdf6fb82",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

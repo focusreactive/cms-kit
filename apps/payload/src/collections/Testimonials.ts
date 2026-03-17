@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { anyone, tenantAdmin, or, user, superAdmin } from '@/shared/lib/access'
+import { anyone, or, user, superAdmin } from '@/shared/lib/access'
 
 export const Testimonials: CollectionConfig<'testimonials'> = {
   slug: 'testimonials',
@@ -14,15 +14,15 @@ export const Testimonials: CollectionConfig<'testimonials'> = {
     },
   },
   access: {
-    create: or(superAdmin, tenantAdmin, user),
-    delete: or(superAdmin, tenantAdmin, user),
+    create: or(superAdmin, user),
+    delete: or(superAdmin, user),
     read: anyone,
-    update: or(superAdmin, tenantAdmin, user),
+    update: or(superAdmin, user),
   },
   admin: {
     useAsTitle: 'author',
     defaultColumns: ['author', 'company', 'rating', 'createdAt'],
-    group: 'Collections',
+    group: 'Content',
   },
   fields: [
     {

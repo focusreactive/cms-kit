@@ -1877,12 +1877,6 @@ export interface SiteSetting {
    * Icon displayed when sidebar is collapsed (recommended: SVG or PNG, 32x32px)
    */
   adminIcon?: (number | null) | Media;
-  theme?: {
-    /**
-     * CSS variables in CSS format, e.g.: :root { --primary-color: #007bff; --font-size: 16px; }
-     */
-    config?: string | null;
-  };
   /**
    * Character used to separate page title from site name
    */
@@ -1967,11 +1961,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   footer?: T;
   adminLogo?: T;
   adminIcon?: T;
-  theme?:
-    | T
-    | {
-        config?: T;
-      };
   seoTitleSeparator?: T;
   seoTitleSuffix?: T;
   defaultOgTitle?: T;
