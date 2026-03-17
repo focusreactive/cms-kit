@@ -11,33 +11,35 @@ services:
     working_dir: /home/node/app/
     command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
     depends_on:
-      - mongo
-      # - postgres
+      # - mongo
+      - postgres
     env_file:
       - .env
 
   # Ensure your DATABASE_URL uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
-  mongo:
-    image: mongo:latest
-    ports:
-      - '27017:27017'
-    command:
-      - --storageEngine=wiredTiger
-    volumes:
-      - data:/data/db
-    logging:
-      driver: none
+  # mongo:
+  #   image: mongo:latest
+  #   ports:
+  #     - '27017:27017'
+  #   command:
+  #     - --storageEngine=wiredTiger
+  #   volumes:
+  #     - data:/data/db
+  #   logging:
+  #     driver: none
 
   # Uncomment the following to use postgres
-  # postgres:
-  #   restart: always
-  #   image: postgres:latest
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
+  postgres:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - pgdata:/var/lib/postgresql
+    ports:
+      - '5433:5432'
+    env_file:
+      - .env
 
 volumes:
   data:
-  # pgdata:
+  pgdata:
   node_modules:

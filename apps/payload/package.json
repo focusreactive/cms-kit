@@ -19,7 +19,12 @@
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "migrate:status": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:status",
-    "migrate:down": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:down"
+    "migrate:down": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:down",
+    "docker:up": "docker compose up",
+    "docker:up:detach": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:db:up": "docker compose up postgres -d",
+    "docker:db:down": "docker compose down postgres"
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.25",
