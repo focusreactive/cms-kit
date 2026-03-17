@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { tenantAdmin, anyone, or, user, superAdmin } from '@/shared/lib/access'
+import { anyone, or, user, superAdmin } from '@/shared/lib/access'
 import { link } from '@/fields/link'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
@@ -21,9 +21,9 @@ export const Footer: CollectionConfig<'footer'> = {
   slug: 'footer',
   access: {
     read: anyone,
-    create: or(superAdmin, tenantAdmin, user),
-    delete: or(superAdmin, tenantAdmin, user),
-    update: or(superAdmin, tenantAdmin, user),
+    create: or(superAdmin, user),
+    delete: or(superAdmin, user),
+    update: or(superAdmin, user),
   },
   labels: {
     singular: {

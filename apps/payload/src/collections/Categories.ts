@@ -1,4 +1,4 @@
-import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import type { CollectionConfig } from 'payload'
 
 import { slugField } from 'payload'
@@ -18,10 +18,10 @@ export const Categories: CollectionConfig<'categories'> = {
     },
   },
   access: {
-    create: or(superAdmin, tenantAdmin, author, user),
-    delete: or(superAdmin, tenantAdmin, author, user),
+    create: or(superAdmin, user, author),
+    delete: or(superAdmin, user, author),
     read: anyone,
-    update: or(superAdmin, tenantAdmin, author, user),
+    update: or(superAdmin, user, author),
   },
   admin: {
     useAsTitle: 'title',

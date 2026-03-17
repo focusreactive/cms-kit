@@ -1,5 +1,5 @@
 import { type CollectionConfig } from 'payload'
-import { authenticated, onlySelf, or, superAdmin, tenantAdmin } from '@/shared/lib/access'
+import { authenticated, onlySelf, or, superAdmin, user } from '@/shared/lib/access'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',
@@ -23,7 +23,7 @@ export const Users: CollectionConfig<'users'> = {
   },
   access: {
     admin: authenticated,
-    create: or(superAdmin, tenantAdmin),
+    create: or(superAdmin, user),
     read: ({ req: { user } }) => {
       if (!user) return false
       return true
@@ -41,7 +41,7 @@ export const Users: CollectionConfig<'users'> = {
 
       if (superAdmin({ req: { user } }) && id !== user.id) return true
 
-      if (tenantAdmin({ req: { user } })) {
+      if (user?.role === 'admin') {
         if (id === user.id) return false
         return true
       }
@@ -110,7 +110,7 @@ export const Users: CollectionConfig<'users'> = {
         update: ({ req: { user }, doc }) => {
           if (!user) return false
           if (superAdmin({ req: { user } }) && user.id !== doc?.id) return true
-          if (tenantAdmin({ req: { user } }) && user.id !== doc?.id) return true
+          if (user?.role === 'admin' && user.id !== doc?.id) return true
 
           return false
         },

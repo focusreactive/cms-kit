@@ -1,7 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { revalidateSiteSettings } from './hooks/revalidateSiteSettings'
-import { tenantAdmin, anyone, or, user, superAdmin } from '@/shared/lib/access'
+import { anyone, or, user, superAdmin } from '@/shared/lib/access'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
 import { generateSeoFields } from '@/shared/lib/seoFields'
@@ -14,7 +14,7 @@ export const SiteSettings: GlobalConfig = {
   },
   access: {
     read: anyone,
-    update: or(superAdmin, tenantAdmin, user),
+    update: or(superAdmin, user),
   },
   admin: {
     group: 'Settings',

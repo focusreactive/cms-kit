@@ -3,7 +3,7 @@ import { slugField } from 'payload'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
-import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import { createParentField, createBreadcrumbsField } from '@payloadcms/plugin-nested-docs'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import type { Page as PageType } from '@/payload-types'
@@ -26,9 +26,9 @@ export const Page: CollectionConfig<'page'> = {
   },
   access: {
     read: anyone,
-    create: or(superAdmin, tenantAdmin, user, author),
-    update: or(superAdmin, tenantAdmin, user, author),
-    delete: or(superAdmin, tenantAdmin, user, author),
+    create: or(superAdmin, user, author),
+    update: or(superAdmin, user, author),
+    delete: or(superAdmin, user, author),
   },
   folders: true,
   admin: {

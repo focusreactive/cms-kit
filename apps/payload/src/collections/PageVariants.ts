@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import { abTestingRulesFields } from '@/fields/abTestingRulesFields'
 import { createBasePageFields } from './Page/basePageFields'
 
@@ -13,9 +13,9 @@ export const PageVariants: CollectionConfig = {
   },
   access: {
     read: anyone,
-    create: or(superAdmin, tenantAdmin, user, author),
-    update: or(superAdmin, tenantAdmin, user, author),
-    delete: or(superAdmin, tenantAdmin, user, author),
+    create: or(superAdmin, user, author),
+    update: or(superAdmin, user, author),
+    delete: or(superAdmin, user, author),
   },
   admin: {
     useAsTitle: 'title',
