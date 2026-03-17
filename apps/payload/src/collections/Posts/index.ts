@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
-import { slugField } from 'payload'
+import { createSharedSlugField } from '@/fields/slugField'
 import { anyone, author, or, user, superAdmin } from '@/shared/lib/access'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
 import { generateSeoFields } from '@/shared/lib/seoFields'
@@ -235,15 +235,7 @@ export const Posts: CollectionConfig<'posts'> = {
         es: 'Autores',
       },
     },
-    slugField({
-      useAsSlug: 'title',
-      required: false,
-      overrides: (field) => {
-        const slugSub = field.fields?.[1] as { unique?: boolean } | undefined
-        if (slugSub && 'unique' in slugSub) slugSub.unique = false
-        return field
-      },
-    }),
+    createSharedSlugField('posts'),
   ],
   hooks: {
     afterChange: [revalidatePost],

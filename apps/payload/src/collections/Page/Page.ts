@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { slugField } from 'payload'
+import { createSharedSlugField } from '@/fields/slugField'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
@@ -77,15 +77,7 @@ export const Page: CollectionConfig<'page'> = {
       },
     },
     ...createBasePageFields({ withBlocksDefaultValue: true }),
-    slugField({
-      useAsSlug: 'title',
-      required: false,
-      overrides: (field) => {
-        const slugSub = field.fields?.[1] as { unique?: boolean } | undefined
-        if (slugSub && 'unique' in slugSub) slugSub.unique = false
-        return field
-      },
-    }),
+    createSharedSlugField('page'),
     createParentField('page', {
       admin: {
         position: 'sidebar',
