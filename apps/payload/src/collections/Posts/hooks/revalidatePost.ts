@@ -7,13 +7,11 @@ import type { Locale } from '@/shared/types'
 import { cacheTag } from '@/shared/lib/cacheTags'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
-function revalidatePostTags(domain: string, slug: string, locale: Locale, payload: Payload) {
+function revalidatePostTags(slug: string, locale: Locale, payload: Payload) {
   payload.logger?.info?.(`Revalidating post with slug: ${slug}`)
 
-  revalidateTag(cacheTag({ type: 'post', domain, slug, locale }))
-  revalidateTag(cacheTag({ type: 'postsList', domain, locale }))
+  revalidateTag(cacheTag({ type: 'post', slug, locale }))
+  revalidateTag(cacheTag({ type: 'postsList', locale }))
 }
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = async ({
@@ -27,12 +25,12 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = async ({
     const locale = getLocaleFromRequest(req)
 
     if (doc._status === 'published') {
-      revalidatePostTags(DEFAULT_DOMAIN, doc?.slug ?? '', locale, payload)
+      revalidatePostTags(doc?.slug ?? '', locale, payload)
       revalidateTag(cacheTag({ type: 'sitemap' }))
     }
 
     if (previousDoc?._status === 'published' && doc._status !== 'published') {
-      revalidatePostTags(DEFAULT_DOMAIN, previousDoc?.slug ?? '', locale, payload)
+      revalidatePostTags(previousDoc?.slug ?? '', locale, payload)
       revalidateTag(cacheTag({ type: 'sitemap' }))
     }
   }
@@ -45,7 +43,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Post> = async ({ doc, r
   if (!context.disableRevalidate) {
     const locale = getLocaleFromRequest(req)
 
-    revalidatePostTags(DEFAULT_DOMAIN, doc?.slug ?? '', locale, payload)
+    revalidatePostTags(doc?.slug ?? '', locale, payload)
     revalidateTag(cacheTag({ type: 'sitemap' }))
   }
 

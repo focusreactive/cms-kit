@@ -5,13 +5,11 @@ import configPromise from '@/payload.config'
 export async function findPageVariantBySlug({
   bucketID,
   slug,
-  domain,
   locale,
   draft,
 }: {
   bucketID: string
   slug: string[]
-  domain: string
   locale: string
   draft: boolean
 }): Promise<PageVariant | null> {

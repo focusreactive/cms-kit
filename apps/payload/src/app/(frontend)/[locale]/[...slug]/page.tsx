@@ -18,22 +18,21 @@ type Args = {
   params: Promise<{
     slug?: string[]
     locale: Locale
-    domain: string
   }>
 }
 
 export default async function Page({ params }: Args) {
-  const { slug = [], locale, domain } = await params
+  const { slug = [], locale } = await params
   const { decodedSegments, url } = parseSlugToPath(slug)
 
   if (decodedSegments[0] === 'home') {
     return redirect({ href: '/' + decodedSegments.slice(1).join('/'), locale })
   }
 
-  const page = await getPageBySlug(decodedSegments, domain, locale)
+  const page = await getPageBySlug(decodedSegments, locale)
 
   if (!page) {
-    return <PayloadRedirects url={url} locale={locale} domain={domain} />
+    return <PayloadRedirects url={url} locale={locale} />
   }
 
   return (
@@ -41,9 +40,9 @@ export default async function Page({ params }: Args) {
       <Header data={page.header as HeaderType} />
       <main>
         <div>
-          <BreadcrumbsJsonLd items={page.breadcrumbs} locale={locale} domain={domain} />
+          <BreadcrumbsJsonLd items={page.breadcrumbs} locale={locale} />
 
-          <PayloadRedirects disableNotFound url={url} locale={locale} domain={domain} />
+          <PayloadRedirects disableNotFound url={url} locale={locale} />
 
           <RenderBlocks blocks={page.blocks} />
         </div>
@@ -54,20 +53,19 @@ export default async function Page({ params }: Args) {
 }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { slug = [], locale, domain } = await params
+  const { slug = [], locale } = await params
   const { decodedSegments } = parseSlugToPath(slug)
 
-  const page = await getPageBySlug(decodedSegments, domain, locale)
+  const page = await getPageBySlug(decodedSegments, locale)
 
   if (!page) {
-    return generateNotFoundMeta({ locale, domain })
+    return generateNotFoundMeta({ locale })
   }
 
   return generateMeta({
     doc: page,
     collection: 'page',
     locale,
-    domain,
   })
 }
 

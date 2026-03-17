@@ -6,15 +6,13 @@ import { getServerSideURL } from '@/shared/lib/getURL'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateDescription, GenerateURL } from '@payloadcms/plugin-seo/types'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
 const generateTitle: GenerateTitle<Page | Post> = async ({ doc }) => {
-  const settings = await getSiteSettings({ domain: DEFAULT_DOMAIN })
+  const settings = await getSiteSettings({})
   return doc.title || settings?.defaultOgTitle || ''
 }
 
 const generateDescription: GenerateDescription<Page | Post> = async ({ doc }) => {
-  const settings = await getSiteSettings({ domain: DEFAULT_DOMAIN })
+  const settings = await getSiteSettings({})
   return doc?.meta?.description || settings.defaultDescription || ''
 }
 
@@ -24,11 +22,11 @@ const generateURL: GenerateURL<Page | Post> = async ({ doc, collectionSlug, req 
   switch (collectionSlug) {
     case 'page': {
       const pageDoc = doc as Page
-      return buildUrl({ collection: 'page', breadcrumbs: pageDoc.breadcrumbs, locale, domain: DEFAULT_DOMAIN })
+      return buildUrl({ collection: 'page', breadcrumbs: pageDoc.breadcrumbs, locale })
     }
     case 'posts': {
       const postDoc = doc as Post
-      return buildUrl({ collection: 'posts', slug: postDoc?.slug, locale, domain: DEFAULT_DOMAIN })
+      return buildUrl({ collection: 'posts', slug: postDoc?.slug, locale })
     }
     default:
       return baseUrl

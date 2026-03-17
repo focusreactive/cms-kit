@@ -11,7 +11,6 @@ export interface GetPostsOptions {
   limit?: number
   overrideAccess?: boolean
   locale?: Locale
-  domain: string
 }
 
 const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) => {
@@ -49,15 +48,15 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
 })
 
 export const getPosts = async (payload: Payload, options: GetPostsOptions) => {
-  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale, domain } = options
+  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale } = options
 
   const resolvedLocale = await resolveLocale(locale)
 
   return unstable_cache(
-    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale, domain }),
-    [page.toString(), limit.toString(), resolvedLocale, domain],
+    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale }),
+    [page.toString(), limit.toString(), resolvedLocale],
     {
-      tags: [cacheTag({ type: 'postsList', domain, locale: resolvedLocale })],
+      tags: [cacheTag({ type: 'postsList', locale: resolvedLocale })],
     },
   )()
 }

@@ -19,23 +19,22 @@ type Args = {
   params: Promise<{
     slug?: string
     locale: Locale
-    domain: string
   }>
 }
 
 export default async function Page({ params }: Args) {
-  const { slug = '', locale, domain } = await params
+  const { slug = '', locale } = await params
   const decodedSlug = decodeURIComponent(slug)
-  const url = buildUrl({ collection: 'posts', slug: decodedSlug, locale, domain })
+  const url = buildUrl({ collection: 'posts', slug: decodedSlug, locale })
 
   const [post, siteSettings, blogSettings] = await Promise.all([
-    getPostBySlug({ slug: decodedSlug, locale, domain }),
-    getSiteSettings({ locale, domain }),
-    getBlogPageSettings({ locale, domain }),
+    getPostBySlug({ slug: decodedSlug, locale }),
+    getSiteSettings({ locale }),
+    getBlogPageSettings({ locale }),
   ])
 
   if (!post) {
-    return <PayloadRedirects url={url} locale={locale} domain={domain} />
+    return <PayloadRedirects url={url} locale={locale} />
   }
 
   return (
@@ -46,11 +45,9 @@ export default async function Page({ params }: Args) {
           post={post}
           siteName={siteSettings.siteName as string}
           locale={locale}
-          domain={domain}
         />
         <BreadcrumbsJsonLd
           locale={locale}
-          domain={domain}
           blog={{
             title: blogSettings.blogTitle || 'Blog',
             post: {
@@ -60,7 +57,7 @@ export default async function Page({ params }: Args) {
           }}
         />
 
-        <PayloadRedirects disableNotFound url={url} locale={locale} domain={domain} />
+        <PayloadRedirects disableNotFound url={url} locale={locale} />
 
         <PostContent post={post} />
       </main>
@@ -70,19 +67,18 @@ export default async function Page({ params }: Args) {
 }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { slug = '', locale, domain } = await params
+  const { slug = '', locale } = await params
   const decodedSlug = decodeURIComponent(slug)
-  const post = await getPostBySlug({ slug: decodedSlug, locale, domain })
+  const post = await getPostBySlug({ slug: decodedSlug, locale })
 
   if (!post) {
-    return generateNotFoundMeta({ locale, domain })
+    return generateNotFoundMeta({ locale })
   }
 
   return generateMeta({
     doc: post,
     collection: 'posts',
     locale,
-    domain,
   })
 }
 

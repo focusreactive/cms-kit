@@ -12,10 +12,9 @@ type BlogPageDynamicProps = {
     page?: string
   }>
   locale: Locale
-  domain: string
 }
 
-export async function BlogPageDynamic({ searchParams, locale, domain }: BlogPageDynamicProps) {
+export async function BlogPageDynamic({ searchParams, locale }: BlogPageDynamicProps) {
   const { page } = await searchParams
   const pageNumber = page ? parseInt(page, 10) : 1
 
@@ -26,8 +25,8 @@ export async function BlogPageDynamic({ searchParams, locale, domain }: BlogPage
   const payload = await getPayload({ config: configPromise })
 
   const [posts, blogSettings] = await Promise.all([
-    getPosts(payload, { page: pageNumber, locale, domain }),
-    getBlogPageSettings({ locale, domain }),
+    getPosts(payload, { page: pageNumber, locale }),
+    getBlogPageSettings({ locale }),
   ])
 
   if (pageNumber > posts.totalPages && posts.totalPages > 0) {

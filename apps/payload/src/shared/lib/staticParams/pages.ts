@@ -2,9 +2,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Locale } from '@/shared/types'
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
-export type PageStaticParams = Array<{ locale: string; domain: string; slug: string[] }>
+export type PageStaticParams = Array<{ locale: string; slug: string[] }>
 
 function isHomeSlug(slug: string[]): boolean {
   if (slug.length === 0) return true
@@ -47,7 +46,6 @@ export async function getMainSitePageStaticParams(): Promise<PageStaticParams> {
 
       results.push({
         locale,
-        domain: DEFAULT_DOMAIN,
         slug,
       })
     }

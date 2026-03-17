@@ -33,7 +33,6 @@ type BuildUrlOptions = (
   absolute?: boolean
   slug?: string | null
   locale: Locale
-  domain?: string
 }
 
 export function buildUrl({
@@ -43,7 +42,6 @@ export function buildUrl({
   page,
   slug,
   locale,
-  domain,
 }: BuildUrlOptions): string {
   const baseUrl = getServerSideURL()
   let relativePath: string = ''

@@ -11,7 +11,6 @@ import { resolveLocale } from './resolveLocale'
 
 async function getPostBySlugQuery(
   slug: string,
-  domain: string,
   resolvedLocale: Locale,
   draft: boolean,
 ): Promise<Post | null> {
@@ -37,26 +36,24 @@ export const getPostBySlug = cache(
   async ({
     slug,
     locale,
-    domain = '',
   }: {
     slug: string
     locale?: Locale
-    domain?: string
   }): Promise<Post | null> => {
     const { isEnabled: draft } = await draftMode()
     const resolvedLocale = await resolveLocale(locale)
 
     if (draft) {
-      return getPostBySlugQuery(slug, domain, resolvedLocale, true)
+      return getPostBySlugQuery(slug, resolvedLocale, true)
     }
 
     return unstable_cache(
-      () => getPostBySlugQuery(slug, domain, resolvedLocale, false),
-      [slug, domain, resolvedLocale],
+      () => getPostBySlugQuery(slug, resolvedLocale, false),
+      [slug, resolvedLocale],
       {
         tags: [
-          cacheTag({ type: 'post', domain, slug, locale: resolvedLocale }),
-          cacheTag({ type: 'postsList', domain, locale: resolvedLocale }),
+          cacheTag({ type: 'post', slug, locale: resolvedLocale }),
+          cacheTag({ type: 'postsList', locale: resolvedLocale }),
         ],
       },
     )()

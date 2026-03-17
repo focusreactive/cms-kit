@@ -198,18 +198,16 @@ export const plugins: Plugin[] = [
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-          const domain = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-          return `/${locale}/${domain}${restPath}`
+          return `/${locale}${restPath}`
         },
         generateVariantData: ({ doc: docProp, variantDoc, locale }): ABVariantData => {
           const doc = docProp as unknown as Page
-          const domain = process.env.NEXT_PUBLIC_DOMAIN || 'main'
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
           return {
             bucket: variantDoc.bucketID as string,
-            rewritePath: `/${locale}/${domain}/variants/${variantDoc.bucketID}${restPath}`,
+            rewritePath: `/${locale}/variants/${variantDoc.bucketID}${restPath}`,
             passPercentage: (variantDoc.abTestingRules as any).passPercentage,
           }
         },

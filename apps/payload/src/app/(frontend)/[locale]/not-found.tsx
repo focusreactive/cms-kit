@@ -11,7 +11,7 @@ import { Header as HeaderType, Footer as FooterType } from '@/payload-types'
 import { headers } from 'next/headers'
 
 type Props = {
-  params?: Promise<{ locale: Locale; domain: string }>
+  params?: Promise<{ locale: Locale }>
 }
 
 export default async function NotFound() {
@@ -20,10 +20,9 @@ export default async function NotFound() {
 
   const segments = pathname.split('/').filter(Boolean)
   const locale = segments[0] as Locale
-  const domain = segments[1]
 
   const [settings, t] = await Promise.all([
-    getSiteSettings({ locale, domain }),
+    getSiteSettings({ locale }),
     getTranslations({ locale, namespace: 'common' }),
   ])
 
@@ -58,5 +57,5 @@ export default async function NotFound() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = params ? await params : undefined
   const locale = await resolveLocale(resolvedParams?.locale)
-  return generateNotFoundMeta({ locale, domain: resolvedParams?.domain ?? '' })
+  return generateNotFoundMeta({ locale })
 }

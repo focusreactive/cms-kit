@@ -1,25 +1,25 @@
 import type { Locale } from '@/shared/types'
 
 export type CacheTagParams =
-  | { type: 'post'; domain: string; slug: string; locale: Locale }
-  | { type: 'postsList'; domain: string; locale: Locale }
-  | { type: 'page'; domain: string; path: string; locale: Locale }
-  | { type: 'redirect'; domain: string; locale: Locale }
+  | { type: 'post'; slug: string; locale: Locale }
+  | { type: 'postsList'; locale: Locale }
+  | { type: 'page'; path: string; locale: Locale }
+  | { type: 'redirect'; locale: Locale }
   | { type: 'sitemap' }
 
 export function cacheTag(params: CacheTagParams): string {
   if (params.type === 'sitemap') return 'sitemap'
 
-  const { type, domain, locale } = params
+  const { type, locale } = params
 
   switch (type) {
     case 'page':
-      return `page_${domain}_${params.path}_${locale}`
+      return `page_${params.path}_${locale}`
     case 'post':
-      return `post_${domain}_${params.slug}_${locale}`
+      return `post_${params.slug}_${locale}`
     case 'postsList':
-      return `posts_${domain}_${locale}`
+      return `posts_${locale}`
     case 'redirect':
-      return `redirect_${domain}_${locale}`
+      return `redirect_${locale}`
   }
 }

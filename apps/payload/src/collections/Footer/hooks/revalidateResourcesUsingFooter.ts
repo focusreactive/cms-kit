@@ -4,8 +4,6 @@ import { revalidateGlobalTags } from '@/shared/lib/getGlobals'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
 import { revalidatePageCache } from '@/shared/lib/revalidatePageCache'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
 export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> = async ({
   doc,
   req,
@@ -22,7 +20,7 @@ export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> =
 
     const footerId = typeof siteSettings?.footer === 'object' ? siteSettings.footer?.id : siteSettings?.footer
     if (footerId === doc.id) {
-      revalidateGlobalTags({ collection: 'site-settings', domain: DEFAULT_DOMAIN, locale })
+      revalidateGlobalTags({ collection: 'site-settings', locale })
       payload.logger?.info?.(`Revalidated site-settings for locale: ${locale}`)
     }
 
@@ -40,7 +38,7 @@ export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> =
     })
 
     for (const page of pages.docs) {
-      revalidatePageCache({ doc: page, domain: DEFAULT_DOMAIN, locale, payload })
+      revalidatePageCache({ doc: page, locale, payload })
     }
   }
 

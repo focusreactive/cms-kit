@@ -13,34 +13,31 @@ import { getSiteSettings } from '@/shared/lib/getSiteSettings'
 import { Footer, Header } from '@/widgets'
 import { Footer as FooterType, Header as HeaderType } from '@/payload-types'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
 type Props = {
   searchParams: Promise<{
     page?: string
   }>
   params: Promise<{
     locale: Locale
-    domain: string
   }>
 }
 
 export const experimental_ppr = true
 
 export default async function Page({ searchParams, params }: Props) {
-  const { locale, domain } = await params
+  const { locale } = await params
 
-  const siteSettings = await getSiteSettings({ locale, domain })
+  const siteSettings = await getSiteSettings({ locale })
 
   return (
     <>
       <Header data={siteSettings.header as HeaderType} />
       <main>
         <Suspense>
-          <BlogJsonLdWrapper searchParams={searchParams} locale={locale} domain={domain} />
+          <BlogJsonLdWrapper searchParams={searchParams} locale={locale} />
         </Suspense>
         <Suspense fallback={<BlogPageSkeleton />}>
-          <BlogPageDynamic searchParams={searchParams} locale={locale} domain={domain} />
+          <BlogPageDynamic searchParams={searchParams} locale={locale} />
         </Suspense>
       </main>
       <Footer data={siteSettings.footer as FooterType} />
@@ -49,9 +46,9 @@ export default async function Page({ searchParams, params }: Props) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, domain } = await params
+  const { locale } = await params
 
-  const blogSettings = await getBlogPageSettings({ locale, domain })
+  const blogSettings = await getBlogPageSettings({ locale })
 
   return generateMeta({
     doc: {
@@ -66,13 +63,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     collection: 'posts',
     locale,
-    domain,
   })
 }
 
 export async function generateStaticParams() {
   return I18N_CONFIG.locales.map((locale) => ({
     locale: locale.code,
-    domain: DEFAULT_DOMAIN,
   }))
 }

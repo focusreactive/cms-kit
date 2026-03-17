@@ -20,14 +20,14 @@ export const viewport: Viewport = {
 
 type Props = {
   children: React.ReactNode
-  params: Promise<{ locale: Locale; domain: string }>
+  params: Promise<{ locale: Locale }>
 }
 
 export default async function RootLayout({ children, params }: Props) {
-  const { locale, domain } = await params
+  const { locale } = await params
   const { isEnabled: draft } = await draftMode()
   const messages = await getMessages()
-  const siteSettings = await getSiteSettings({ domain })
+  const siteSettings = await getSiteSettings({ locale })
 
   return (
     <html lang={locale}>

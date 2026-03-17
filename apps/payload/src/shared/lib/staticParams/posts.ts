@@ -3,9 +3,8 @@ import { getPayload } from 'payload'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { BLOG_CONFIG } from '@/shared/config/blog'
 import { Locale } from '@/shared/types'
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 
-export type BlogPostStaticParams = Array<{ locale: string; domain: string; slug: string }>
+export type BlogPostStaticParams = Array<{ locale: string; slug: string }>
 
 export async function getBlogPostStaticParams(): Promise<BlogPostStaticParams> {
   const payload = await getPayload({ config: configPromise })
@@ -32,7 +31,6 @@ export async function getBlogPostStaticParams(): Promise<BlogPostStaticParams> {
       if (post.slug) {
         results.push({
           locale,
-          domain: DEFAULT_DOMAIN,
           slug: post.slug,
         })
       }

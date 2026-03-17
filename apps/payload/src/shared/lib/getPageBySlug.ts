@@ -10,7 +10,6 @@ import { getAllDocuments } from './getAllDocuments'
 
 async function getPageBySlugQuery(
   pathSegmentsNorm: string[],
-  domain: string,
   resolvedLocale: Locale,
   draft: boolean,
 ): Promise<RequiredDataFromCollectionSlug<'page'> | null> {
@@ -43,7 +42,6 @@ async function getPageBySlugQuery(
 export const getPageBySlug = cache(
   async (
     pathSegments: string[],
-    domain: string,
     locale?: Locale,
   ): Promise<RequiredDataFromCollectionSlug<'page'> | null> => {
     const { isEnabled: draft } = await draftMode()
@@ -52,14 +50,14 @@ export const getPageBySlug = cache(
     const pathKey = pathSegmentsNorm.join('/')
 
     if (draft) {
-      return getPageBySlugQuery(pathSegmentsNorm, domain, resolvedLocale, draft)
+      return getPageBySlugQuery(pathSegmentsNorm, resolvedLocale, draft)
     }
 
-    const res = cacheTag({ type: 'page', domain, path: pathKey, locale: resolvedLocale })
+    const res = cacheTag({ type: 'page', path: pathKey, locale: resolvedLocale })
 
     return unstable_cache(
-      () => getPageBySlugQuery(pathSegmentsNorm, domain, resolvedLocale, false),
-      [pathKey, domain, resolvedLocale],
+      () => getPageBySlugQuery(pathSegmentsNorm, resolvedLocale, false),
+      [pathKey, resolvedLocale],
       {
         tags: [res],
       },

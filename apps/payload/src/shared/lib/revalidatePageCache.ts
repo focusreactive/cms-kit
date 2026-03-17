@@ -7,12 +7,11 @@ import { Locale } from '../types'
 
 export function revalidatePageCache(params: {
   doc: Page
-  domain: string
   locale: Locale
   payload: Payload
 }): void {
   const path = getPathFromBreadcrumbs(params.doc.breadcrumbs) ?? 'home'
   params.payload.logger?.info?.(`Revalidating page with slug: ${params.doc.slug}`)
-  revalidateTag(cacheTag({ type: 'page', domain: params.domain, path, locale: params.locale }))
+  revalidateTag(cacheTag({ type: 'page', path, locale: params.locale }))
   revalidateTag(cacheTag({ type: 'sitemap' }))
 }

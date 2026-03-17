@@ -9,8 +9,6 @@ import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Header, Footer } from '@/widgets'
 import type { Footer as FooterType, Header as HeaderType, Page } from '@/payload-types'
-
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
 import type { Locale } from '@/shared/types'
 import { findPageVariantBySlug } from '@/shared/lib/page/findPageVariantBySlug'
 import { parseSlugToPath } from '@/shared/lib/parseSlugToPath'
@@ -24,14 +22,13 @@ import { abCookies } from '@/shared/lib/abTesting/abCookies'
 interface Props {
   params: Promise<{
     locale: Locale
-    domain: string
     slug?: string[]
     bucketID: string
   }>
 }
 
 export default async function VariantSlugPage({ params }: Props) {
-  const { locale, domain, slug = [], bucketID } = await params
+  const { locale, slug = [], bucketID } = await params
   const { isEnabled: draft } = await draftMode()
 
   const { decodedSegments, url } = parseSlugToPath(slug)
@@ -39,7 +36,6 @@ export default async function VariantSlugPage({ params }: Props) {
   const variant = await findPageVariantBySlug({
     bucketID,
     slug: decodedSegments,
-    domain,
     locale,
     draft,
   })
@@ -49,7 +45,7 @@ export default async function VariantSlugPage({ params }: Props) {
   }
 
   if (!variant) {
-    return <PayloadRedirects url={url} locale={locale} domain={domain} />
+    return <PayloadRedirects url={url} locale={locale} />
   }
 
   const parentPage = typeof variant.page === 'object' ? (variant.page as Page) : null
@@ -57,14 +53,14 @@ export default async function VariantSlugPage({ params }: Props) {
   const footer = (variant.footer ?? parentPage?.footer) as FooterType
 
   const experimentId = manifestKeyToExpId(
-    `/${locale}/${domain}${slug.length ? '/' + slug.join('/') : ''}`,
+    `/${locale}${slug.length ? '/' + slug.join('/') : ''}`,
   )
 
   const cookieNames = resolveAbCookieNames(abCookies, experimentId)
 
   return (
     <>
-      <PayloadRedirects disableNotFound url={url} locale={locale} domain={domain} />
+      <PayloadRedirects disableNotFound url={url} locale={locale} />
       <ExperimentTracker experimentId={experimentId} {...cookieNames} />
 
       <Header data={header} />
@@ -79,18 +75,17 @@ export default async function VariantSlugPage({ params }: Props) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, domain, slug = [], bucketID } = await params
+  const { locale, slug = [], bucketID } = await params
   const { isEnabled: draft } = await draftMode()
   const { decodedSegments } = parseSlugToPath(slug)
 
   const variant = await findPageVariantBySlug({
     bucketID,
     slug: decodedSegments,
-    domain,
     locale,
     draft,
   })
-  if (!variant) return generateNotFoundMeta({ locale, domain })
+  if (!variant) return generateNotFoundMeta({ locale })
 
   const parentPage = typeof variant.page === 'object' ? (variant.page as Page) : null
 
@@ -103,7 +98,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     doc: docForMeta,
     collection: 'page',
     locale,
-    domain,
   })
 }
 
@@ -119,13 +113,11 @@ export async function generateStaticParams() {
   })
 
   const locales = I18N_CONFIG.locales.map((l) => l.code as Locale)
-  const results: Array<{ locale: string; domain: string; slug: string[]; bucketID: string }> = []
+  const results: Array<{ locale: string; slug: string[]; bucketID: string }> = []
 
   for (const variant of variants) {
     const page = typeof variant.page === 'object' ? (variant.page as Page) : null
     if (!page) continue
-
-    const domain = DEFAULT_DOMAIN
 
     for (const locale of locales) {
       const localePage = await payload.findByID({
@@ -145,7 +137,7 @@ export async function generateStaticParams() {
       const slugParts = lastUrl.replace(/^\//, '').split('/').filter(Boolean)
       if (!slugParts.length) continue
 
-      results.push({ locale, domain, slug: slugParts, bucketID: variant.bucketID as string })
+      results.push({ locale, slug: slugParts, bucketID: variant.bucketID as string })
     }
   }
 

@@ -7,8 +7,6 @@ import type { ABVariantData } from '@/shared/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './shared/lib/abTesting/abCookies'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
 const intlMiddleware = createMiddleware(routing)
 
 const localeCodes = I18N_CONFIG.locales.map((l) => l.code).join('|')
@@ -30,29 +28,13 @@ export default async function middleware(request: NextRequest) {
     const [, locale, rest = ''] = localeMatch
     const isNextRoute = pathname.startsWith(`/${locale}/next/`)
 
-    // Redirect /en/{domain}/page → /en/page (strip internal domain from visible URL)
-    if (!isNextRoute && rest.startsWith(`/${DEFAULT_DOMAIN}`)) {
-      const cleanRest = rest.slice(DEFAULT_DOMAIN.length + 1) || '/'
-      const url = request.nextUrl.clone()
-      url.pathname = `/${locale}${cleanRest}`
-      return NextResponse.redirect(url, 301)
-    }
-
     if (!isNextRoute) {
-      const rewritePath = `/${locale}/${DEFAULT_DOMAIN}${rest || '/'}`
-      const abResponse = await resolveAbRewrite(request, pathname, rewritePath, rewritePath)
+      const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
 
       if (abResponse) {
         abResponse.headers.set('x-pathname', pathname)
         return abResponse
       }
-
-      // No A/B variant — standard domain-injection rewrite
-      const url = request.nextUrl.clone()
-      url.pathname = rewritePath
-      const response = NextResponse.rewrite(url)
-      response.headers.set('x-pathname', pathname)
-      return response
     }
   }
 

@@ -19,8 +19,6 @@ async function generateSitemap(): Promise<Sitemap> {
   const baseUrl = getServerSideURL()
   const changeFrequency: Sitemap[number]['changeFrequency'] = 'weekly'
   const locales = I18N_CONFIG.locales.map((locale) => locale.code) as Locale[]
-  const domain = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
   try {
     const sitemap: Sitemap = []
 
@@ -56,7 +54,7 @@ async function generateSitemap(): Promise<Sitemap> {
             overrideAccess: false,
             locale,
           }),
-          getBlogPageSettings({ locale, domain }),
+          getBlogPageSettings({ locale }),
         ])
 
           const pages = allPages.filter((page) => {
@@ -69,14 +67,13 @@ async function generateSitemap(): Promise<Sitemap> {
             return robots === 'index' || robots === undefined
           })
 
-          const homeUrl = buildUrl({ collection: 'page', locale, domain })
+          const homeUrl = buildUrl({ collection: 'page', locale })
 
           pages.forEach((page) => {
             const url = buildUrl({
               collection: 'page',
               breadcrumbs: page.breadcrumbs,
               locale,
-              domain,
             })
             const isHome = url === homeUrl
             sitemap.push({
@@ -91,7 +88,7 @@ async function generateSitemap(): Promise<Sitemap> {
             getLastModifiedDate(posts[0]?.publishedAt) || new Date()
 
           sitemap.push({
-            url: buildUrl({ collection: 'posts', locale, domain }),
+            url: buildUrl({ collection: 'posts', locale }),
             lastModified: blogLastModified,
             changeFrequency,
             priority: 0.9,
@@ -103,7 +100,6 @@ async function generateSitemap(): Promise<Sitemap> {
                 collection: 'posts',
                 slug: post.slug,
                 locale,
-                domain,
               }),
               lastModified: post.publishedAt
                 ? new Date(post.publishedAt)

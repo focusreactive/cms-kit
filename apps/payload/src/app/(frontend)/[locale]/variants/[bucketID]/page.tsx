@@ -9,12 +9,9 @@ import type { Page } from '@/payload-types'
 import type { Locale } from '@/shared/types'
 import { findPageVariantBySlug } from '@/shared/lib/page/findPageVariantBySlug'
 
-const DEFAULT_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'main'
-
 interface Props {
   params: Promise<{
     locale: Locale
-    domain: string
     bucketID: string
   }>
 }
@@ -22,11 +19,11 @@ interface Props {
 export { default } from './[...slug]/page'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, domain, bucketID } = await params
+  const { locale, bucketID } = await params
   const { isEnabled: draft } = await draftMode()
 
-  const variant = await findPageVariantBySlug({ bucketID, slug: [], domain, locale, draft })
-  if (!variant) return generateNotFoundMeta({ locale, domain })
+  const variant = await findPageVariantBySlug({ bucketID, slug: [], locale, draft })
+  if (!variant) return generateNotFoundMeta({ locale })
 
   const parentPage = typeof variant.page === 'object' ? (variant.page as Page) : null
 
@@ -35,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     meta: { ...(parentPage?.meta ?? {}), ...(variant.meta ?? {}) } as Page['meta'],
   }
 
-  return generateMeta({ doc: docForMeta, collection: 'page', locale, domain })
+  return generateMeta({ doc: docForMeta, collection: 'page', locale })
 }
 
 export async function generateStaticParams() {
@@ -50,7 +47,7 @@ export async function generateStaticParams() {
   })
 
   const locales = I18N_CONFIG.locales.map((l) => l.code as Locale)
-  const results: Array<{ locale: string; domain: string; bucketID: string }> = []
+  const results: Array<{ locale: string; bucketID: string }> = []
 
   for (const variant of variants) {
     const page = typeof variant.page === 'object' ? (variant.page as Page) : null
@@ -71,7 +68,7 @@ export async function generateStaticParams() {
       const isHome = !lastUrl || lastUrl === '/home' || lastUrl === '/'
       if (!isHome) continue
 
-      results.push({ locale, domain: DEFAULT_DOMAIN, bucketID: variant.bucketID as string })
+      results.push({ locale, bucketID: variant.bucketID as string })
     }
   }
 
