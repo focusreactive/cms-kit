@@ -2,10 +2,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Locale } from '@/shared/types'
-import { getAllTenantDomains } from './tenants'
-import { isTenantEnabled, getDefaultTenantId, getDefaultDomain } from '@/shared/config/tenant'
 
-export type PageStaticParams = Array<{ locale: string; domain: string; slug: string[] }>
+export type PageStaticParams = Array<{ locale: string; slug: string[] }>
 
 function isHomeSlug(slug: string[]): boolean {
   if (slug.length === 0) return true
@@ -16,48 +14,40 @@ function isHomeSlug(slug: string[]): boolean {
 export async function getMainSitePageStaticParams(): Promise<PageStaticParams> {
   const payload = await getPayload({ config: configPromise })
 
-  const tenants = isTenantEnabled()
-    ? await getAllTenantDomains()
-    : [{ id: getDefaultTenantId(), domain: getDefaultDomain() }]
-
   const results: PageStaticParams = []
 
   for (const localeConfig of I18N_CONFIG.locales) {
     const locale = localeConfig.code as Locale
 
-    for (const tenant of tenants) {
-      const pages = await payload.find({
-        collection: 'page',
-        draft: false,
-        limit: 1000,
-        depth: 2,
-        overrideAccess: true,
-        pagination: false,
+    const pages = await payload.find({
+      collection: 'page',
+      draft: false,
+      limit: 1000,
+      depth: 2,
+      overrideAccess: true,
+      pagination: false,
+      locale,
+      where: {
+        _status: { equals: 'published' },
+      },
+      select: {
+        slug: true,
+        breadcrumbs: true,
+      },
+    })
+
+    for (const page of pages.docs) {
+      const slug =
+        (page?.breadcrumbs?.length
+          ? page.breadcrumbs?.at(-1)?.url?.split('/')?.filter(Boolean)
+          : page?.slug?.split('/')) ?? []
+
+      if (isHomeSlug(slug)) continue
+
+      results.push({
         locale,
-        where: {
-          _status: { equals: 'published' },
-          tenant: { equals: tenant.id },
-        },
-        select: {
-          slug: true,
-          breadcrumbs: true,
-        },
+        slug,
       })
-
-      for (const page of pages.docs) {
-        const slug =
-          (page?.breadcrumbs?.length
-            ? page.breadcrumbs?.at(-1)?.url?.split('/')?.filter(Boolean)
-            : page?.slug?.split('/')) ?? []
-
-        if (isHomeSlug(slug)) continue
-
-        results.push({
-          locale,
-          domain: tenant.domain,
-          slug,
-        })
-      }
     }
   }
 

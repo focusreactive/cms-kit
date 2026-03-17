@@ -7,25 +7,14 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import type { Post } from '@/payload-types'
 import { Locale } from '../types'
 import { cacheTag } from './cacheTags'
-import { getTenantByDomain } from './getTenantByDomain'
 import { resolveLocale } from './resolveLocale'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 async function getPostBySlugQuery(
   slug: string,
-  domain: string,
   resolvedLocale: Locale,
   draft: boolean,
 ): Promise<Post | null> {
   const payload = await getPayload({ config: configPromise })
-
-  let tenantId: number | undefined
-  if (isTenantEnabled()) {
-    const tenantDoc = domain ? await getTenantByDomain(domain) : null
-    tenantId = tenantDoc?.id
-  } else {
-    tenantId = getDefaultTenantId()
-  }
 
   const result = await payload.find({
     collection: BLOG_CONFIG.collection,
@@ -36,7 +25,6 @@ async function getPostBySlugQuery(
     locale: resolvedLocale,
     where: {
       slug: { equals: slug },
-      ...(tenantId && { tenant: { equals: tenantId } }),
       ...(!draft && { _status: { equals: 'published' } }),
     },
   })
@@ -48,26 +36,24 @@ export const getPostBySlug = cache(
   async ({
     slug,
     locale,
-    domain = '',
   }: {
     slug: string
     locale?: Locale
-    domain?: string
   }): Promise<Post | null> => {
     const { isEnabled: draft } = await draftMode()
     const resolvedLocale = await resolveLocale(locale)
 
     if (draft) {
-      return getPostBySlugQuery(slug, domain, resolvedLocale, true)
+      return getPostBySlugQuery(slug, resolvedLocale, true)
     }
 
     return unstable_cache(
-      () => getPostBySlugQuery(slug, domain, resolvedLocale, false),
-      [slug, domain, resolvedLocale],
+      () => getPostBySlugQuery(slug, resolvedLocale, false),
+      [slug, resolvedLocale],
       {
         tags: [
-          cacheTag({ type: 'post', domain, slug, locale: resolvedLocale }),
-          cacheTag({ type: 'postsList', domain, locale: resolvedLocale }),
+          cacheTag({ type: 'post', slug, locale: resolvedLocale }),
+          cacheTag({ type: 'postsList', locale: resolvedLocale }),
         ],
       },
     )()

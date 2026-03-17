@@ -20,12 +20,11 @@ export type CreateBreadcrumbsOptions = (
     }
 ) & {
   locale: Locale
-  domain: string
 }
 
 export async function createBreadcrumbsSchema(options: CreateBreadcrumbsOptions) {
   const baseUrl = getServerSideURL()
-  const settings = await getSiteSettings({ locale: options.locale, domain: options.domain })
+  const settings = await getSiteSettings({ locale: options.locale })
 
   const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -34,7 +33,6 @@ export async function createBreadcrumbsSchema(options: CreateBreadcrumbsOptions)
         collection: 'page',
         locale: options.locale,
         slug: 'home',
-        domain: options.domain,
       }),
     },
   ]
@@ -60,7 +58,6 @@ export async function createBreadcrumbsSchema(options: CreateBreadcrumbsOptions)
       url: buildUrl({
         collection: 'posts',
         locale: options.locale,
-        domain: options.domain,
       }),
     })
 
@@ -71,7 +68,6 @@ export async function createBreadcrumbsSchema(options: CreateBreadcrumbsOptions)
           collection: 'posts',
           slug: blog.post.slug,
           locale: options.locale,
-          domain: options.domain,
         }),
       })
     }
@@ -83,7 +79,6 @@ export async function createBreadcrumbsSchema(options: CreateBreadcrumbsOptions)
           collection: 'posts',
           page: blog.page,
           locale: options.locale,
-          domain: options.domain,
         }),
       })
     }

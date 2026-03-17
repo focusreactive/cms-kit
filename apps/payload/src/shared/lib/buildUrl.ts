@@ -4,7 +4,6 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import { Locale } from '@/shared/types'
 import { routing } from '@/i18n/routing'
 import { I18N_CONFIG } from '@/shared/config/i18n'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 export function getPathFromBreadcrumbs(breadcrumbs?: Page['breadcrumbs']): string | undefined {
   if (!Array.isArray(breadcrumbs) || breadcrumbs.length === 0) {
@@ -34,7 +33,6 @@ type BuildUrlOptions = (
   absolute?: boolean
   slug?: string | null
   locale: Locale
-  domain?: string
 }
 
 export function buildUrl({
@@ -44,7 +42,6 @@ export function buildUrl({
   page,
   slug,
   locale,
-  domain,
 }: BuildUrlOptions): string {
   const baseUrl = getServerSideURL()
   let relativePath: string = ''
@@ -77,12 +74,6 @@ export function buildUrl({
   const fullPath = `${localePrefix}${relativePath}`
 
   if (!absolute) return fullPath
-
-  if (isTenantEnabled() && domain) {
-    const base = new URL(baseUrl)
-    base.host = `${domain}.${base.host}`
-    return `${base.origin}${fullPath}`
-  }
 
   return `${baseUrl}${fullPath}`
 }

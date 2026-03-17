@@ -12,10 +12,8 @@ export type BlogPageSettingsData = {
 
 export const getBlogPageSettings = async ({
   locale,
-  domain,
 }: {
   locale?: Locale
-  domain: string
 }): Promise<BlogPageSettingsData> => {
   const { isEnabled: draft } = await draftMode()
   const resolvedLocale = await resolveLocale(locale)
@@ -23,7 +21,6 @@ export const getBlogPageSettings = async ({
   const settings = (await getCachedGlobal(
     'site-settings',
     1,
-    domain,
     resolvedLocale,
     draft,
   )()) as SiteSetting

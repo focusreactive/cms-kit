@@ -5,7 +5,7 @@ import { Media } from '@/shared/ui'
 import type { Media as MediaType } from '@/payload-types'
 
 export default async function Icon() {
-  const settings = await getSiteSettings({ domain: '' })
+  const settings = await getSiteSettings({})
 
   const icon = settings?.adminIcon as MediaType | null
 

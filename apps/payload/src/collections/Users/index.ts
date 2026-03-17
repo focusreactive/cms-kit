@@ -1,9 +1,5 @@
-import { Where, type CollectionConfig } from 'payload'
+import { type CollectionConfig } from 'payload'
 import { authenticated, onlySelf, or, superAdmin, tenantAdmin } from '@/shared/lib/access'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
-import { extractTenantId } from '@/shared/lib/extractTenantId'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',
@@ -23,43 +19,19 @@ export const Users: CollectionConfig<'users'> = {
     pagination: {
       limits: [20, 50, 100],
     },
-    group: 'Collections',
+    group: 'Settings',
   },
   access: {
     admin: authenticated,
     create: or(superAdmin, tenantAdmin),
     read: ({ req: { user } }) => {
       if (!user) return false
-
-      if (superAdmin({ req: { user } })) return true
-
-      if (!isTenantEnabled()) {
-        return true
-      }
-
-      const userTenantIds = (user.tenants || [])
-        .map((tenant) => extractTenantId(tenant.tenant))
-        .filter(Boolean) as number[]
-
-      if (userTenantIds.length === 0) return false
-
-      return userTenantIds.length > 0
-        ? ({
-            tenants: {
-              some: {
-                tenant: {
-                  in: userTenantIds,
-                },
-              },
-            },
-          } as Where)
-        : false
+      return true
     },
 
     update: ({ req: { user } }) => {
       if (!user) return false
       if (superAdmin({ req: { user } })) return true
-      if (tenantAdmin({ req: { user } })) return true
 
       return onlySelf({ req: { user } } as { req: { user: typeof user } })
     },
@@ -71,26 +43,7 @@ export const Users: CollectionConfig<'users'> = {
 
       if (tenantAdmin({ req: { user } })) {
         if (id === user.id) return false
-
-        if (!isTenantEnabled()) {
-          return true
-        }
-
-        const userTenantIds = user.tenants
-          ?.map((tenant) => extractTenantId(tenant.tenant))
-          .filter((id): id is number => id !== undefined && id !== null)
-
-        if (!userTenantIds || userTenantIds.length === 0) return false
-
-        return {
-          tenants: {
-            some: {
-              tenant: {
-                in: userTenantIds,
-              },
-            },
-          },
-        } as Where
+        return true
       }
       return false
     },
@@ -163,9 +116,5 @@ export const Users: CollectionConfig<'users'> = {
         },
       },
     },
-    ...tenantFields({ collection: 'users' }),
   ],
-  hooks: {
-    beforeChange: [beforeChangeTenant],
-  },
 }

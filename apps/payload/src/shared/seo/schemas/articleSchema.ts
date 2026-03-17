@@ -8,15 +8,13 @@ interface ArticleSchemaParams {
   post: Post
   siteName?: string
   locale: Locale
-  domain: string
 }
 
-export function createArticleSchema({ post, siteName, locale, domain }: ArticleSchemaParams) {
+export function createArticleSchema({ post, siteName, locale }: ArticleSchemaParams) {
   const postUrl = buildUrl({
     collection: 'posts',
     slug: post.slug,
     locale,
-    domain,
   })
   const baseUrl = getServerSideURL()
   const image = post.meta?.image as Media | undefined
@@ -27,7 +25,7 @@ export function createArticleSchema({ post, siteName, locale, domain }: ArticleS
     ? {
         '@type': 'Organization',
         name: siteName,
-        url: buildUrl({ collection: 'page', locale, domain }),
+        url: buildUrl({ collection: 'page', locale }),
       }
     : undefined
 

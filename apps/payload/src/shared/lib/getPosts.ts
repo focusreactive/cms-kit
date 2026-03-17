@@ -5,14 +5,12 @@ import { BLOG_CONFIG } from '@/shared/config/blog'
 import { Locale } from '@/shared/types'
 import { cacheTag } from './cacheTags'
 import { resolveLocale } from './resolveLocale'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 export interface GetPostsOptions {
   page?: number
   limit?: number
   overrideAccess?: boolean
   locale?: Locale
-  domain: string
 }
 
 const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) => {
@@ -21,29 +19,7 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
     limit = BLOG_CONFIG.postsPerPage,
     overrideAccess = false,
     locale,
-    domain,
   } = options
-
-  let tenantId: number | undefined
-
-  if (isTenantEnabled()) {
-    if (domain) {
-      const tenants = await payload.find({
-        collection: 'tenants',
-        depth: 0,
-        limit: 1,
-        pagination: false,
-        where: {
-          domain: {
-            equals: domain,
-          },
-        },
-      })
-      tenantId = tenants.docs?.[0]?.id as number | undefined
-    }
-  } else {
-    tenantId = getDefaultTenantId()
-  }
 
   return await payload.find({
     collection: BLOG_CONFIG.collection,
@@ -57,11 +33,6 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
       _status: {
         equals: 'published',
       },
-      ...(tenantId && {
-        tenant: {
-          equals: tenantId,
-        },
-      }),
     },
     select: {
       title: true,
@@ -77,15 +48,15 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
 })
 
 export const getPosts = async (payload: Payload, options: GetPostsOptions) => {
-  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale, domain } = options
+  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale } = options
 
   const resolvedLocale = await resolveLocale(locale)
 
   return unstable_cache(
-    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale, domain }),
-    [page.toString(), limit.toString(), resolvedLocale, domain],
+    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale }),
+    [page.toString(), limit.toString(), resolvedLocale],
     {
-      tags: [cacheTag({ type: 'postsList', domain, locale: resolvedLocale })],
+      tags: [cacheTag({ type: 'postsList', locale: resolvedLocale })],
     },
   )()
 }
