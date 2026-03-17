@@ -19,7 +19,6 @@ import { I18N_CONFIG } from '@/shared/config/i18n'
 import { Header } from '@/collections/Header/config'
 import { Footer } from '@/collections/Footer/config'
 import { SiteSettings } from '@/globals/SiteSettings/config'
-import { PageVariants } from './collections/PageVariants'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -61,18 +60,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [
-    Users,
-    Media,
-    Page,
-    Categories,
-    Authors,
-    Posts,
-    Testimonials,
-    Header,
-    Footer,
-    PageVariants,
-  ],
+  collections: [Users, Media, Page, Categories, Authors, Posts, Testimonials, Header, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

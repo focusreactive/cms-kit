@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { I18N_CONFIG } from '@/shared/config/i18n'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'

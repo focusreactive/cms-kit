@@ -17,7 +17,7 @@ import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
-import { pageVariantsSlug } from '@/collections/PageVariants'
+import { isDev } from '@/shared/utils/isDev'
 
 export const plugins: Plugin[] = [
   vercelBlobStorage({
@@ -118,9 +118,7 @@ export const plugins: Plugin[] = [
         })
       },
       hooks: {
-        beforeChange: [
-          normalizeRedirectFields,
-        ],
+        beforeChange: [normalizeRedirectFields],
         afterChange: [revalidateRedirects],
       },
       access: {
@@ -170,33 +168,20 @@ export const plugins: Plugin[] = [
   }),
 
   abTestingPlugin<ABVariantData>({
-    debug: true,
+    debug: isDev(),
     storage: abAdapter,
     collections: {
       page: {
-        variantCollectionSlug: pageVariantsSlug,
-        parentField: 'page',
-        passPercentageField: 'abTestingRules.passPercentage',
         generatePath: ({ doc: docProp, locale }) => {
           const doc = docProp as unknown as Page
+
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
+
           return `/${locale}${restPath}`
-        },
-        generateVariantData: ({ doc: docProp, variantDoc, locale }): ABVariantData => {
-          const doc = docProp as unknown as Page
-          const breadcrumbs = doc.breadcrumbs ?? []
-          const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
-          const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-          return {
-            bucket: variantDoc.bucketID as string,
-            rewritePath: `/${locale}/variants/${variantDoc.bucketID}${restPath}`,
-            passPercentage: (variantDoc.abTestingRules as any).passPercentage,
-          }
         },
       },
     },
   }),
-
 ]

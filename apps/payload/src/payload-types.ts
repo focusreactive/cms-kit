@@ -76,7 +76,6 @@ export interface Config {
     testimonials: Testimonial;
     header: Header;
     footer: Footer;
-    'page-variants': PageVariant;
     redirects: Redirect;
     presets: Preset;
     'payload-kv': PayloadKv;
@@ -100,7 +99,6 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    'page-variants': PageVariantsSelect<false> | PageVariantsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -115,9 +113,11 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'es') | ('en' | 'es')[];
   globals: {
     'site-settings': SiteSetting;
+    _abManifest: _AbManifest;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    _abManifest: _AbManifestSelect<false> | _AbManifestSelect<true>;
   };
   locale: 'en' | 'es';
   user: User & {
@@ -311,6 +311,7 @@ export interface FolderInterface {
  */
 export interface Page {
   id: number;
+  _abPassPercentage?: number | null;
   /**
    * The title of the page
    */
@@ -360,6 +361,19 @@ export interface Page {
         label?: string | null;
         id?: string | null;
       }[]
+    | null;
+  /**
+   * The original page this variant belongs to.
+   */
+  _abVariantOf?: (number | null) | Page;
+  _abVariantPercentages?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
     | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
@@ -914,67 +928,6 @@ export interface BlogSectionBlock {
   blockType: 'blogSection';
 }
 /**
- * Page variants for A/B testing. Each variant holds alternative content for a specific page.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-variants".
- */
-export interface PageVariant {
-  id: number;
-  /**
-   * The title shown in the admin panel to identify this variant.
-   */
-  title: string;
-  /**
-   * The header to display on the page
-   */
-  header?: (number | null) | Header;
-  /**
-   * The footer to display on the page
-   */
-  footer?: (number | null) | Footer;
-  blocks: (
-    | HeroBlock
-    | TextSectionBlock
-    | ContentBlock
-    | FaqBlock
-    | TestimonialsListBlock
-    | CardsGridBlock
-    | CarouselBlock
-    | LogosBlock
-    | LinksListBlock
-    | BlogSectionBlock
-  )[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-    /**
-     * Allow search engines to index this page
-     */
-    robots?: ('index' | 'noindex') | null;
-  };
-  /**
-   * The page this variant belongs to.
-   */
-  page: number | Page;
-  /**
-   * Variant identifier used in the URL and cookie. Each page can have at most one variant per bucket.
-   */
-  bucketID: 'a' | 'b' | 'c';
-  abTestingRules: {
-    /**
-     * Percentage of visitors routed to this variant. All variants for the same page must sum to ≤ 100%; the remainder is served the original page.
-     */
-    passPercentage: number;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1150,10 +1103,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'footer';
         value: number | Footer;
-      } | null)
-    | ({
-        relationTo: 'page-variants';
-        value: number | PageVariant;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1333,6 +1282,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "page_select".
  */
 export interface PageSelect<T extends boolean = true> {
+  _abPassPercentage?: T;
   title?: T;
   header?: T;
   footer?: T;
@@ -1369,6 +1319,8 @@ export interface PageSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  _abVariantOf?: T;
+  _abVariantPercentages?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1696,46 +1648,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-variants_select".
- */
-export interface PageVariantsSelect<T extends boolean = true> {
-  title?: T;
-  header?: T;
-  footer?: T;
-  blocks?:
-    | T
-    | {
-        hero?: T | HeroBlockSelect<T>;
-        textSection?: T | TextSectionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        faq?: T | FaqBlockSelect<T>;
-        testimonialsList?: T | TestimonialsListBlockSelect<T>;
-        cardsGrid?: T | CardsGridBlockSelect<T>;
-        carousel?: T | CarouselBlockSelect<T>;
-        logos?: T | LogosBlockSelect<T>;
-        linksList?: T | LinksListBlockSelect<T>;
-        blogSection?: T | BlogSectionBlockSelect<T>;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-        robots?: T;
-      };
-  page?: T;
-  bucketID?: T;
-  abTestingRules?:
-    | T
-    | {
-        passPercentage?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -1953,6 +1865,27 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "_abManifest".
+ */
+export interface _AbManifest {
+  id: number;
+  /**
+   * A/B testing manifest. Managed automatically — do not edit manually.
+   */
+  manifest?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1988,6 +1921,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
             };
       };
   _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "_abManifest_select".
+ */
+export interface _AbManifestSelect<T extends boolean = true> {
+  manifest?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

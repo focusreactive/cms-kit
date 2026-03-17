@@ -22,10 +22,9 @@
     "migrate:down": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:down"
   },
   "dependencies": {
-    "@shared/ui": "workspace:*",
     "@ai-sdk/openai": "^3.0.25",
     "@auth0/nextjs-auth0": "^4.14.1",
-    "@focus-reactive/payload-plugin-ab": "^1.1.2",
+    "@focus-reactive/payload-plugin-ab": "^2.3.2",
     "@focus-reactive/payload-plugin-presets": "^0.2.0",
     "@payloadcms/db-postgres": "3.73.0",
     "@payloadcms/live-preview-react": "3.73.0",
@@ -43,6 +42,7 @@
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-slot": "^1.2.4",
+    "@shared/ui": "workspace:*",
     "@vercel/edge-config": "^1.4.3",
     "ai": "^6.0.68",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -97,5 +97,6 @@
       "esbuild",
       "unrs-resolver"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
 }
