@@ -28,7 +28,7 @@ export const Media: CollectionConfig<'media'> = {
       limits: [20, 50, 100],
     },
     defaultColumns: ['filename', 'alt'],
-    group: 'Media',
+    group: 'Content',
   },
   fields: [
     {

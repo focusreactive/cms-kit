@@ -22,7 +22,7 @@ export const Testimonials: CollectionConfig<'testimonials'> = {
   admin: {
     useAsTitle: 'author',
     defaultColumns: ['author', 'company', 'rating', 'createdAt'],
-    group: 'Collections',
+    group: 'Content',
   },
   fields: [
     {
