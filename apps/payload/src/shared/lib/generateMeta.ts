@@ -36,9 +36,8 @@ export const generateMeta = async (args: {
   locale: Locale
   collection: 'page' | 'posts'
   page?: number
-  domain: string
 }): Promise<Metadata> => {
-  const { doc, overrides, locale, collection, page, domain } = args
+  const { doc, overrides, locale, collection, page } = args
 
   const {
     openGraph: overridesOpenGraph = {},
@@ -47,7 +46,7 @@ export const generateMeta = async (args: {
     ...overridesRest
   } = overrides || {}
 
-  const settings = await getSiteSettings({ locale, domain })
+  const settings = await getSiteSettings({ locale })
 
   const siteName = settings?.siteName || 'Site'
   const separator = settings?.seoTitleSeparator || '|'
@@ -72,14 +71,13 @@ export const generateMeta = async (args: {
 
   let canonical: string
   if (collection === 'posts') {
-    canonical = buildUrl({ collection: 'posts', slug: doc?.slug || null, locale, domain })
+    canonical = buildUrl({ collection: 'posts', slug: doc?.slug || null, locale })
   } else {
     canonical = buildUrl({
       collection: 'page',
       slug: doc?.slug || null,
       breadcrumbs: (doc as Page)?.breadcrumbs,
       locale,
-      domain,
     })
   }
 
@@ -97,14 +95,12 @@ export const generateMeta = async (args: {
         collection: 'posts',
         page,
         currentLocale: locale,
-        domain,
       })
     } else if (doc?.slug) {
       languages = await getAlternateLocales({
         collection: 'posts',
         slug: doc.slug,
         currentLocale: locale,
-        domain,
       })
     }
   } else if (collection === 'page') {
@@ -113,7 +109,6 @@ export const generateMeta = async (args: {
       breadcrumbs: (doc as Page)?.breadcrumbs,
       slug: doc?.slug || undefined,
       currentLocale: locale,
-      domain,
     })
   }
 

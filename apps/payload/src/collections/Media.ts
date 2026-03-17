@@ -3,10 +3,6 @@ import type { CollectionConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
 import { generateRichText } from '@/shared/lib/generateRichText'
 import { DEFAULT_MEDIA_CACHE_TAG } from '@/shared/lib/getDefaultMediaId'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
-import { ensureSingleDefaultMediaPerTenant } from '@/hooks/ensureSingleDefaultMediaPerTenant'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 export const Media: CollectionConfig<'media'> = {
   slug: 'media',
@@ -31,7 +27,7 @@ export const Media: CollectionConfig<'media'> = {
     pagination: {
       limits: [20, 50, 100],
     },
-    defaultColumns: ['filename', 'alt', ...(isTenantEnabled() ? ['tenant'] : [])],
+    defaultColumns: ['filename', 'alt'],
     group: 'Media',
   },
   fields: [
@@ -75,7 +71,6 @@ export const Media: CollectionConfig<'media'> = {
         },
       },
     },
-    ...tenantFields({ collection: 'media' }),
   ],
   upload: {
     adminThumbnail: 'thumbnail',
@@ -117,7 +112,6 @@ export const Media: CollectionConfig<'media'> = {
     ],
   },
   hooks: {
-    beforeChange: [beforeChangeTenant, ensureSingleDefaultMediaPerTenant],
     afterChange: [
       () => {
         revalidateTag(DEFAULT_MEDIA_CACHE_TAG)

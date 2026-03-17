@@ -5,12 +5,10 @@ import { Locale } from '../types'
 
 export async function generateNotFoundMeta({
   locale,
-  domain,
 }: {
   locale: Locale
-  domain: string
 }): Promise<Metadata> {
-  const settings = await getSiteSettings({ locale, domain })
+  const settings = await getSiteSettings({ locale })
 
   const baseTitle = settings.notFoundTitle || '404 - Page not found'
   const description =

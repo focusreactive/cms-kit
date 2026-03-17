@@ -12,12 +12,11 @@ interface BlogSchemaParams {
   posts: PostPreview[]
   siteName?: string
   locale: Locale
-  domain: string
 }
 
-export function createBlogSchema({ settings, posts, siteName, locale, domain }: BlogSchemaParams) {
+export function createBlogSchema({ settings, posts, siteName, locale }: BlogSchemaParams) {
   const baseUrl = getServerSideURL()
-  const blogUrl = buildUrl({ collection: 'posts', locale, domain })
+  const blogUrl = buildUrl({ collection: 'posts', locale })
 
   const description = settings.blogMeta?.description || settings.blogDescription || ''
 
@@ -30,7 +29,7 @@ export function createBlogSchema({ settings, posts, siteName, locale, domain }: 
     : undefined
 
   const blogPostings = posts.map((post) => {
-    const postUrl = buildUrl({ collection: 'posts', slug: post.slug, locale, domain })
+    const postUrl = buildUrl({ collection: 'posts', slug: post.slug, locale })
     const image = post.meta?.image as Media | undefined
     const imageUrl = image && typeof image === 'object' ? `${baseUrl}${image.url}` : undefined
 

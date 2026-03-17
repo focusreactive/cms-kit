@@ -13,16 +13,14 @@ interface Props {
   disableNotFound?: boolean
   url: string
   locale: Locale
-  domain: string
 }
 
 export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
   url,
   locale,
-  domain,
 }) => {
-  const redirects = await getCachedRedirects({ domain, locale })()
+  const redirects = await getCachedRedirects({ locale })()
   const canonicalUrl = canonicalRedirectFrom(url)
   const redirectItem = redirects.find((r) => canonicalRedirectFrom(r.from) === canonicalUrl)
 
@@ -47,7 +45,6 @@ export const PayloadRedirects: React.FC<Props> = async ({
           collection: 'page',
           breadcrumbs: document.breadcrumbs,
           locale,
-          domain,
         })
       } else if (
         collection === BLOG_CONFIG.collection &&
@@ -55,13 +52,12 @@ export const PayloadRedirects: React.FC<Props> = async ({
         'slug' in document &&
         document.slug
       ) {
-        redirectUrl = buildUrl({ collection: 'posts', slug: document.slug, locale, domain })
+        redirectUrl = buildUrl({ collection: 'posts', slug: document.slug, locale })
       } else if (document && 'slug' in document && document.slug && 'breadcrumbs' in document) {
         redirectUrl = buildUrl({
           collection: 'page',
           breadcrumbs: document.breadcrumbs,
           locale,
-          domain,
         })
       }
     } else if (typeof reference.value === 'object' && reference.value?.slug) {
@@ -70,21 +66,18 @@ export const PayloadRedirects: React.FC<Props> = async ({
           collection: 'page',
           breadcrumbs: reference.value.breadcrumbs,
           locale,
-          domain,
         })
       } else if (collection === BLOG_CONFIG.collection) {
         redirectUrl = buildUrl({
           collection: 'posts',
           slug: reference.value.slug || '',
           locale,
-          domain,
         })
       } else {
         redirectUrl = buildUrl({
           collection: 'page',
           breadcrumbs: reference.value.breadcrumbs,
           locale,
-          domain,
         })
       }
     }

@@ -12,20 +12,17 @@ type GetAlternateLocalesOptions =
       breadcrumbs?: Page['breadcrumbs']
       slug?: string
       currentLocale: Locale
-      domain: string
     }
   | {
       collection: 'posts'
       slug?: string
       currentLocale: Locale
       page?: number
-      domain: string
     }
 
 export async function getAlternateLocales(
   options: GetAlternateLocalesOptions,
 ): Promise<Record<string, string>> {
-  const { domain } = options
   const payload = await getPayload({ config: configPromise })
   const locales = I18N_CONFIG.locales.map((l) => l.code as Locale)
   const languages: Partial<Record<Locale | 'x-default', string>> = {}
@@ -37,7 +34,6 @@ export async function getAlternateLocales(
           collection: 'posts',
           page: options.page > 1 ? options.page : undefined,
           locale,
-          domain,
         })
         languages[locale] = url
       }
@@ -45,7 +41,6 @@ export async function getAlternateLocales(
         collection: 'posts',
         page: options.page > 1 ? options.page : undefined,
         locale: I18N_CONFIG.defaultLocale as Locale,
-        domain,
       })
       return languages
     }
@@ -76,7 +71,6 @@ export async function getAlternateLocales(
             collection: 'posts',
             slug: options.slug,
             locale,
-            domain,
           })
           languages[locale] = url
         }
@@ -133,7 +127,6 @@ export async function getAlternateLocales(
           collection: 'page',
           breadcrumbs: result.docs[0].breadcrumbs,
           locale,
-          domain,
         })
         languages[locale] = url
       }

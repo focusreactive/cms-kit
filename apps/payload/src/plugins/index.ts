@@ -7,11 +7,8 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { tenantAdmin, superAdmin, or, authenticated, user } from '@/shared/lib/access'
-import { tenantFields } from '@/fields/tenantFields'
-import { multiTenant } from './multiTenant'
 import seoPlugin from './seoPlugin'
 import { aiSeoPlugin } from './aiSeo/plugin'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
 import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
 import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
@@ -21,9 +18,6 @@ import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
-import { createValidateSlugTenantUnique } from '@/shared/lib/validateSlugTenantUnique'
-import { isTenantEnabled } from '@/shared/config/tenant'
-import { getDefaultDomain } from '@/shared/config/tenant'
 import { pageVariantsSlug } from '@/collections/PageVariants'
 
 export const plugins: Plugin[] = [
@@ -52,6 +46,7 @@ export const plugins: Plugin[] = [
     },
     redirectTypes: ['307', '308'],
     overrides: {
+      admin: { group: 'Settings' },
       // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
       fields: ({ defaultFields }) => {
         const customFields: Field[] = [
@@ -72,7 +67,6 @@ export const plugins: Plugin[] = [
               },
             },
           },
-          ...tenantFields({ collection: 'redirects' }),
         ]
 
         return defaultFields.concat(customFields).map((field) => {
@@ -127,10 +121,6 @@ export const plugins: Plugin[] = [
       hooks: {
         beforeChange: [
           normalizeRedirectFields,
-          beforeChangeTenant,
-          createValidateSlugTenantUnique('redirects', {
-            titleField: 'from',
-          }),
         ],
         afterChange: [revalidateRedirects],
       },
@@ -175,27 +165,22 @@ export const plugins: Plugin[] = [
     },
     presetTypes: [PRESET_TYPES_CONFIG.hero, PRESET_TYPES_CONFIG.testimonialsList],
     overrides: {
+      admin: {
+        group: 'Settings',
+        defaultColumns: ['name', 'preview', 'type', 'updatedAt'],
+      },
       access: {
         create: or(superAdmin, tenantAdmin, user),
         delete: or(superAdmin, tenantAdmin, user),
         read: authenticated,
         update: or(superAdmin, tenantAdmin, user),
       },
-      fields: (defaultFields) => defaultFields.concat(tenantFields({ collection: 'presets' })),
+      fields: (defaultFields) => defaultFields,
       hooks: {
-        beforeChange: [stripUnusedPresetGroups, beforeChangeTenant],
+        beforeChange: [stripUnusedPresetGroups],
         afterChange: [revalidatePagesAfterPresetChange],
         beforeDelete: [preventDeleteIfPresetInUse],
         afterDelete: [revalidatePagesAfterPresetDelete],
-      },
-      admin: {
-        defaultColumns: [
-          'name',
-          'preview',
-          'type',
-          ...(isTenantEnabled() ? ['tenant'] : []),
-          'updatedAt',
-        ],
       },
     },
   }),
@@ -208,41 +193,25 @@ export const plugins: Plugin[] = [
         variantCollectionSlug: pageVariantsSlug,
         parentField: 'page',
         passPercentageField: 'abTestingRules.passPercentage',
-        tenantField: 'tenant',
         generatePath: ({ doc: docProp, locale }) => {
           const doc = docProp as unknown as Page
-
-          const domain =
-            typeof doc.tenant === 'object' ? (doc.tenant as { domain?: string })?.domain : null
-          if (!domain) return null
-
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-
-          return `/${locale}/${domain}${restPath}`
+          return `/${locale}${restPath}`
         },
         generateVariantData: ({ doc: docProp, variantDoc, locale }): ABVariantData => {
           const doc = docProp as unknown as Page
-
-          const domain =
-            typeof doc.tenant === 'object'
-              ? ((doc.tenant as { domain?: string })?.domain ?? getDefaultDomain())
-              : getDefaultDomain()
-
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-
           return {
             bucket: variantDoc.bucketID as string,
-            rewritePath: `/${locale}/${domain}/variants/${variantDoc.bucketID}${restPath}`,
+            rewritePath: `/${locale}/variants/${variantDoc.bucketID}${restPath}`,
             passPercentage: (variantDoc.abTestingRules as any).passPercentage,
           }
         },
       },
     },
   }),
-
-  multiTenant,
 ]

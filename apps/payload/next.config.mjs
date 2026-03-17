@@ -33,6 +33,12 @@ const nextConfig = {
         pathname: '/api/media/**',
       },
       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3333',
+        pathname: '/api/media/**',
+      },
+      {
         protocol: 'https',
         hostname: '**.public.blob.vercel-storage.com',
       },

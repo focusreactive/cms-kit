@@ -12,10 +12,9 @@ interface BlogJsonLdProps {
   posts: PostPreview[]
   siteName?: string
   locale: Locale
-  domain: string
 }
 
-export function BlogJsonLd({ settings, posts, siteName, locale, domain }: BlogJsonLdProps) {
-  const structuredData = createBlogSchema({ settings, posts, siteName, locale, domain })
+export function BlogJsonLd({ settings, posts, siteName, locale }: BlogJsonLdProps) {
+  const structuredData = createBlogSchema({ settings, posts, siteName, locale })
   return <JsonLd data={structuredData} />
 }

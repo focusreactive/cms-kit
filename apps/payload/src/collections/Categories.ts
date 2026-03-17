@@ -1,13 +1,9 @@
-import { tenantFields } from '@/fields/tenantFields'
 import { tenantAdmin, anyone, author, or, superAdmin, user } from '@/shared/lib/access'
 import type { CollectionConfig } from 'payload'
 
 import { slugField } from 'payload'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import { createValidateSlugTenantUnique } from '@/shared/lib/validateSlugTenantUnique'
-import { isTenantEnabled } from '@/shared/config/tenant'
 
 export const Categories: CollectionConfig<'categories'> = {
   slug: 'categories',
@@ -29,8 +25,8 @@ export const Categories: CollectionConfig<'categories'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', ...(isTenantEnabled() ? ['tenant'] : [])],
-    group: 'Content',
+    defaultColumns: ['title'],
+    group: 'Blog',
   },
   fields: [
     {
@@ -53,9 +49,5 @@ export const Categories: CollectionConfig<'categories'> = {
         return field
       },
     }),
-    ...tenantFields({ collection: 'categories' }),
   ],
-  hooks: {
-    beforeChange: [beforeChangeTenant, createValidateSlugTenantUnique('categories')],
-  },
 }

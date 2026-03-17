@@ -4,15 +4,12 @@ import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
 import { slugField } from 'payload'
 import { anyone, tenantAdmin, author, or, user, superAdmin } from '@/shared/lib/access'
-import { createValidateSlugTenantUnique } from '@/shared/lib/validateSlugTenantUnique'
 import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
 import { generateSeoFields } from '@/shared/lib/seoFields'
 import { BLOG_CONFIG } from '@/shared/config/blog'
 import { generateRichText } from '@/shared/lib/generateRichText'
 import { buildUrl } from '@/shared/lib/buildUrl'
 import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { tenantFields } from '@/fields/tenantFields'
-import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import {
   createLocalizedDefault,
   createLocalizedRichText,
@@ -20,7 +17,6 @@ import {
 import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
 import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import { isTenantEnabled, getDefaultTenantId } from '@/shared/config/tenant'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: BLOG_CONFIG.collection,
@@ -51,17 +47,14 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', ...(isTenantEnabled() ? ['tenant'] : []), 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'updatedAt'],
     pagination: {
       limits: [20, 50, 100],
     },
-    group: 'Content',
+    group: 'Blog',
     livePreview: {
       url: ({ data, req }) => {
-        const tenantId = data?.tenant || getDefaultTenantId()
-
         return generatePreviewPath({
-          tenantId: tenantId,
           slug: data?.slug,
           path: buildUrl({
             collection: 'posts',
@@ -70,15 +63,11 @@ export const Posts: CollectionConfig<'posts'> = {
             locale: getLocaleFromRequest(req),
           }),
           collection: BLOG_CONFIG.collection,
-          req,
         })
       },
     },
     preview: (data, { req }) => {
-      const tenantId = String(data?.tenant || getDefaultTenantId())
-
       return generatePreviewPath({
-        tenantId: tenantId,
         slug: data?.slug as string,
         collection: BLOG_CONFIG.collection,
         path: buildUrl({
@@ -87,7 +76,6 @@ export const Posts: CollectionConfig<'posts'> = {
           absolute: false,
           locale: getLocaleFromRequest(req),
         }),
-        req,
       })
     },
     useAsTitle: 'title',
@@ -256,12 +244,10 @@ export const Posts: CollectionConfig<'posts'> = {
         return field
       },
     }),
-    ...tenantFields({ collection: 'posts' }),
   ],
   hooks: {
     afterChange: [revalidatePost],
     afterDelete: [revalidateDelete],
-    beforeChange: [beforeChangeTenant, createValidateSlugTenantUnique('posts')],
   },
   versions: {
     drafts: true,

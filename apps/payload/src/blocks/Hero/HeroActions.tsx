@@ -15,14 +15,13 @@ import { abCookies } from '@/shared/lib/abTesting/abCookies'
 type Action = NonNullable<HeroBlock['actions']>[number]
 
 export function HeroActions({ actions }: { actions: Action[] }) {
-  const { locale, domain, slug } = useParams<{
+  const { locale, slug } = useParams<{
     locale?: string
-    domain?: string
     slug?: string[]
   }>()
 
   const slugPath = Array.isArray(slug) && slug.length ? '/' + slug.join('/') : ''
-  const experimentId = locale && domain ? manifestKeyToExpId(`/${locale}/${domain}${slugPath}`) : ''
+  const experimentId = locale ? manifestKeyToExpId(`/${locale}${slugPath}`) : ''
   const cookieNames = resolveAbCookieNames(abCookies, experimentId)
 
   const trackConversion = useABConversion({ experimentId, ...cookieNames })
