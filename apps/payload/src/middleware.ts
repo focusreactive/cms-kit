@@ -26,9 +26,11 @@ export default async function middleware(request: NextRequest) {
 
   if (localeMatch) {
     const [, locale, rest = ''] = localeMatch
-    const isNextRoute = pathname.startsWith(`/${locale}/next/`)
 
-    if (!isNextRoute) {
+    const isNextRoute = pathname.startsWith(`/${locale}/next/`)
+    const isDraftMode = request.cookies.has('__prerender_bypass')
+
+    if (!isNextRoute && !isDraftMode) {
       const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
 
       if (abResponse) {
