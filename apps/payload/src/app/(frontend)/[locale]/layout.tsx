@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 
 type Props = {
   children: React.ReactNode
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }
 
 export default async function RootLayout({ children, params }: Props) {
