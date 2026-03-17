@@ -75,6 +75,7 @@ import * as migration_20260223_203419_create_ab_manifest_global from './20260223
 import * as migration_20260224_093858_drop_ab_manifest_global from './20260224_093858_drop_ab_manifest_global';
 import * as migration_20260225_163031_add_ab_testing_rules_to_page_variants_collection from './20260225_163031_add_ab_testing_rules_to_page_variants_collection';
 import * as migration_20260226_195958_remove_tenant_field_from_page_variants_collection from './20260226_195958_remove_tenant_field_from_page_variants_collection';
+import * as migration_20260317_011918_add_blocks_cards_grid_carousel_logos_links_list_blog_section from './20260317_011918_add_blocks_cards_grid_carousel_logos_links_list_blog_section';
 
 export const migrations = [
   {
@@ -460,6 +461,11 @@ export const migrations = [
   {
     up: migration_20260226_195958_remove_tenant_field_from_page_variants_collection.up,
     down: migration_20260226_195958_remove_tenant_field_from_page_variants_collection.down,
-    name: '20260226_195958_remove_tenant_field_from_page_variants_collection'
+    name: '20260226_195958_remove_tenant_field_from_page_variants_collection',
+  },
+  {
+    up: migration_20260317_011918_add_blocks_cards_grid_carousel_logos_links_list_blog_section.up,
+    down: migration_20260317_011918_add_blocks_cards_grid_carousel_logos_links_list_blog_section.down,
+    name: '20260317_011918_add_blocks_cards_grid_carousel_logos_links_list_blog_section'
   },
 ];
