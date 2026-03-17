@@ -10,7 +10,6 @@ import { tenantAdmin, superAdmin, or, authenticated, user } from '@/shared/lib/a
 import { tenantFields } from '@/fields/tenantFields'
 import { multiTenant } from './multiTenant'
 import seoPlugin from './seoPlugin'
-import { aiSeoPlugin } from './aiSeo/plugin'
 import { beforeChangeTenant } from '@/hooks/beforeChangeTenant'
 import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
 import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
@@ -150,21 +149,6 @@ export const plugins: Plugin[] = [
     generateLabel: (_, doc: unknown) => {
       return (doc as Page).title
     },
-  }),
-
-  aiSeoPlugin({
-    enabled: process.env.NODE_ENV === 'production',
-    apiKey: process.env.OPENAI_API_KEY || '',
-    collections: [
-      {
-        collection: 'page',
-        seoFields: {
-          title: 'meta.title',
-          description: 'meta.description',
-        },
-        contentFields: ['title', 'content', 'blocks'],
-      },
-    ],
   }),
 
   presetsPlugin({
