@@ -1,5 +1,6 @@
 import { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { sectionFields } from '@/fields/sectionFields'
 import { createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
 import { generateRichText } from '@/core/lib/generateRichText'
 import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
@@ -31,5 +32,6 @@ export const TextSectionBlock: Block = {
       localized: true,
       defaultValue: createLocalizedRichText(DEFAULT_VALUES.richText.text),
     },
+    sectionFields,
   ],
 }

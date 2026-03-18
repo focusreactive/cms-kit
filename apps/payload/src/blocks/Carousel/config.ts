@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { generateRichText } from '@/core/lib/generateRichText'
+import { sectionFields } from '@/fields/sectionFields'
 
 export const CarouselBlock: Block = {
   slug: 'carousel',
@@ -55,5 +56,6 @@ export const CarouselBlock: Block = {
         },
       ],
     },
+    sectionFields,
   ],
 }

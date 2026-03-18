@@ -12,13 +12,15 @@ export const TestimonialsListBlockComponent: React.FC<Props> = ({
   showRating = true,
   showAvatar = true,
   duration = 60,
+  section,
+  id,
 }) => {
   const testimonials = (testimonialItems ?? [])
     .map((item) => item.testimonial)
     .filter((t): t is Testimonial => typeof t !== 'number' && t !== null && t !== undefined)
 
   return (
-    <SectionContainer maxWidth="full">
+    <SectionContainer sectionData={{ ...section, id }}>
       <TestimonialsHeading heading={heading} subheading={subheading} />
       <AnimatedCarousel
         testimonials={testimonials}

@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { link } from '@/fields/link'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { sectionFields } from '@/fields/sectionFields'
 
 export const CardsGridBlock: Block = {
   slug: 'cardsGrid',
@@ -83,5 +84,6 @@ export const CardsGridBlock: Block = {
         },
       ],
     },
+    sectionFields,
   ],
 }

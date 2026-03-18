@@ -6,7 +6,12 @@ import type { IDefaultCardProps } from '@shared/ui/components/sections/cardsGrid
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 
-export const CardsGridBlockComponent: React.FC<CardsGridBlock> = ({ items, columns }) => {
+export const CardsGridBlockComponent: React.FC<CardsGridBlock> = ({
+  items,
+  columns,
+  section,
+  id,
+}) => {
   const cards: IDefaultCardProps[] = (items ?? []).map((item) => ({
     title: item.title,
     description: item.description ?? undefined,
@@ -18,7 +23,7 @@ export const CardsGridBlockComponent: React.FC<CardsGridBlock> = ({ items, colum
   }))
 
   return (
-    <SectionContainer>
+    <SectionContainer sectionData={{ ...section, id }}>
       <CardsGrid items={cards} columns={columns ?? 3} />
     </SectionContainer>
   )

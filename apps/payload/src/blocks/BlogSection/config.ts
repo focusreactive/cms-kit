@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { generateRichText } from '@/core/lib/generateRichText'
+import { sectionFields } from '@/fields/sectionFields'
 
 export const BlogSectionBlock: Block = {
   slug: 'blogSection',
@@ -24,8 +25,17 @@ export const BlogSectionBlock: Block = {
       defaultValue: 'three-column',
       options: [
         { label: { en: 'Three Column', es: 'Tres columnas' }, value: 'three-column' },
-        { label: { en: 'Three Column with Images', es: 'Tres columnas con imágenes' }, value: 'three-column-with-images' },
-        { label: { en: 'Three Column with Background Images', es: 'Tres columnas con imágenes de fondo' }, value: 'three-column-with-background-images' },
+        {
+          label: { en: 'Three Column with Images', es: 'Tres columnas con imágenes' },
+          value: 'three-column-with-images',
+        },
+        {
+          label: {
+            en: 'Three Column with Background Images',
+            es: 'Tres columnas con imágenes de fondo',
+          },
+          value: 'three-column-with-background-images',
+        },
       ],
       label: { en: 'Style', es: 'Estilo' },
     },
@@ -37,5 +47,6 @@ export const BlogSectionBlock: Block = {
       max: 12,
       label: { en: 'Number of Posts', es: 'Número de publicaciones' },
     },
+    sectionFields,
   ],
 }

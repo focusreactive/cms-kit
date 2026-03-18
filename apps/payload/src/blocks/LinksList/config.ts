@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { link } from '@/fields/link'
+import { sectionFields } from '@/fields/sectionFields'
 
 export const LinksListBlock: Block = {
   slug: 'linksList',
@@ -31,5 +32,6 @@ export const LinksListBlock: Block = {
       localized: true,
       fields: [link()],
     },
+    sectionFields,
   ],
 }

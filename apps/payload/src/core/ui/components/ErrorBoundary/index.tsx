@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Container, Section, Button, ButtonVariant } from '@/core/ui'
+import { Button, ButtonVariant } from '@/core/ui'
 import { Link } from '@/core/ui'
 import { useTranslations } from 'next-intl'
 
@@ -34,8 +34,8 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
 
   return (
     <div className={wrapperClassName}>
-      <Section>
-        <Container maxWidth="4xl">
+      <div className="py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
+        <div className="mx-auto max-w-4xl">
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
             <div className="space-y-6">
               <div className="space-y-2">
@@ -61,8 +61,8 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({
               </div>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </div>
     </div>
   )
 }

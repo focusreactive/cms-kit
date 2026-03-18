@@ -1,6 +1,7 @@
 import type { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { link } from '@/fields/link'
+import { sectionFields } from '@/fields/sectionFields'
 
 export const LogosBlock: Block = {
   slug: 'logos',
@@ -39,5 +40,6 @@ export const LogosBlock: Block = {
         link({ appearances: false }),
       ],
     },
+    sectionFields,
   ],
 }

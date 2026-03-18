@@ -1,9 +1,7 @@
-import { Container, Section } from '@/core/ui'
-
 export function BlogPageSkeleton() {
   return (
-    <Section>
-      <Container maxWidth="7xl">
+    <section className="py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl">
         <div className="mb-16">
           <div className="prose dark:prose-invert max-w-none">
             <div className="animate-pulse rounded-md bg-primaryLightColor h-10 w-48" />
@@ -26,7 +24,7 @@ export function BlogPageSkeleton() {
             </div>
           ))}
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   )
 }

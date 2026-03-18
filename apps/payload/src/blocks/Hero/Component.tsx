@@ -8,9 +8,16 @@ import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
 
 type Props = HeroBlock
 
-export const HeroBlockComponent: React.FC<Props> = ({ title, richText, actions, media }) => {
+export const HeroBlockComponent: React.FC<Props> = ({
+  title,
+  richText,
+  actions,
+  media,
+  section,
+  id,
+}) => {
   return (
-    <SectionContainer>
+    <SectionContainer sectionData={{ ...section, id }}>
       <Hero
         title={title ?? ''}
         text={prepareRichTextProps(richText)}

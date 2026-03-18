@@ -1,4 +1,4 @@
-import { RichText, PostHero, Section, Container } from '@/core/ui'
+import { RichText, PostHero } from '@/core/ui'
 import type { Post } from '@/payload-types'
 import { RelatedPosts } from '@/entities'
 
@@ -13,8 +13,8 @@ export const PostContent: React.FC<PostContentProps> = ({
     <article className="py-16">
       <PostHero post={post} />
 
-      <Section className='py-4 px-4 sm:py-4 sm:px-6 md:py-4 md:px-8 lg:py-4'>
-        <Container maxWidth="4xl">
+      <div className="py-4 px-4 sm:py-4 sm:px-6 md:py-4 md:px-8 lg:py-4">
+        <div className="mx-auto max-w-4xl">
           <div className="flex flex-col items-center gap-4 pt-8">
             <RichText className="mx-auto" content={post.content} />
             {post.relatedPosts && post.relatedPosts.length > 0 && (
@@ -25,8 +25,8 @@ export const PostContent: React.FC<PostContentProps> = ({
               />
             )}
           </div>
-        </Container>
-      </Section>
+        </div>
+      </div>
     </article>
   )
 }

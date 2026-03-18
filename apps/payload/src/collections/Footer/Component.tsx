@@ -1,7 +1,7 @@
 import React from 'react'
 
 import type { Footer as FooterType, Media } from '@/payload-types'
-import { CMSLink, Container, Link, Logo, Section } from '@/core/ui'
+import { CMSLink, Link, Logo } from '@/core/ui'
 import { cn } from '@/core/lib/utils'
 
 const getGridCols = (count: number) => {
@@ -26,8 +26,8 @@ export async function Footer({ data }: Props) {
 
   return (
     <footer className="mt-auto border-t border-border bg-black text-white" aria-label="Site footer">
-      <Section as="div">
-        <Container>
+      <div className="py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl">
           <nav aria-label="Footer navigation">
             <ul className={cn('grid gap-8 md:gap-12 mb-12', getGridCols(colCount))} role="list">
               {navItems.map((group) => {
@@ -75,8 +75,8 @@ export async function Footer({ data }: Props) {
               © {new Date().getFullYear()} All rights reserved
             </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </div>
     </footer>
   )
 }

@@ -646,6 +646,15 @@ export interface HeroBlock {
    * Overlay opacity (0-100)
    */
   opacity?: number | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -669,6 +678,15 @@ export interface TextSectionBlock {
       version: number;
     };
     [k: string]: unknown;
+  };
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -696,6 +714,15 @@ export interface ContentBlock {
       version: number;
     };
     [k: string]: unknown;
+  };
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -726,6 +753,15 @@ export interface FaqBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq';
@@ -749,6 +785,15 @@ export interface TestimonialsListBlock {
   duration?: number | null;
   showRating?: boolean | null;
   showAvatar?: boolean | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonialsList';
@@ -802,6 +847,15 @@ export interface CardsGridBlock {
     backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'cardsGrid';
@@ -846,6 +900,15 @@ export interface CarouselBlock {
     } | null;
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'carousel';
@@ -875,6 +938,15 @@ export interface LogosBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'logos';
@@ -907,6 +979,15 @@ export interface LinksListBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'linksList';
@@ -933,6 +1014,15 @@ export interface BlogSectionBlock {
   } | null;
   style?: ('three-column' | 'three-column-with-images' | 'three-column-with-background-images') | null;
   postsLimit?: number | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'blogSection';
@@ -1488,6 +1578,17 @@ export interface HeroBlockSelect<T extends boolean = true> {
   enabled?: T;
   color?: T;
   opacity?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1497,6 +1598,17 @@ export interface HeroBlockSelect<T extends boolean = true> {
  */
 export interface TextSectionBlockSelect<T extends boolean = true> {
   text?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1509,6 +1621,17 @@ export interface ContentBlockSelect<T extends boolean = true> {
   layout?: T;
   image?: T;
   content?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1524,6 +1647,17 @@ export interface FaqBlockSelect<T extends boolean = true> {
         question?: T;
         answer?: T;
         id?: T;
+      };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
       };
   id?: T;
   blockName?: T;
@@ -1544,6 +1678,17 @@ export interface TestimonialsListBlockSelect<T extends boolean = true> {
   duration?: T;
   showRating?: T;
   showAvatar?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1574,6 +1719,17 @@ export interface CardsGridBlockSelect<T extends boolean = true> {
         backgroundColor?: T;
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1590,6 +1746,17 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         image?: T;
         text?: T;
         id?: T;
+      };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
       };
   id?: T;
   blockName?: T;
@@ -1615,6 +1782,17 @@ export interface LogosBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1639,6 +1817,17 @@ export interface LinksListBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1650,6 +1839,17 @@ export interface BlogSectionBlockSelect<T extends boolean = true> {
   text?: T;
   style?: T;
   postsLimit?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }

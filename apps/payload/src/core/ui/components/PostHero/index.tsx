@@ -4,7 +4,7 @@ import React from 'react'
 import type { Post } from '@/payload-types'
 import { formatAuthors } from '@/core/lib/formatAuthors'
 import { formatDateTime } from '@/core/lib/formatDateTime'
-import { Container, Media, Section } from '@/core/ui'
+import { Media } from '@/core/ui'
 
 export const PostHero: React.FC<{
   post: Post
@@ -16,8 +16,8 @@ export const PostHero: React.FC<{
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end min-h-[80vh]">
-      <Section className='py-6 px-4 sm:py-6 sm:px-6 md:py-6 md:px-8 lg:py-6 w-full'>
-        <Container className="z-10 relative" maxWidth="4xl">
+      <div className="py-6 px-4 sm:py-6 sm:px-6 md:py-6 md:px-8 lg:py-6 w-full">
+        <div className="mx-auto max-w-4xl z-10 relative">
           <div className="flex flex-col text-white max-w-4xl">
             <div className="space-y-8">
               <div className="flex gap-2 flex-wrap">
@@ -67,8 +67,8 @@ export const PostHero: React.FC<{
               </div>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </div>
       <div className="absolute inset-0 select-none">
         {heroImage && typeof heroImage !== 'number' && (
           <Media fill priority imgClassName="object-cover" resource={heroImage} />

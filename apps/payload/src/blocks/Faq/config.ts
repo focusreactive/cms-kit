@@ -1,5 +1,6 @@
 import { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { sectionFields } from '@/fields/sectionFields'
 import {
   createLocalizedDefault,
   createLocalizedRichText,
@@ -58,5 +59,6 @@ export const FaqBlock: Block = {
         },
       ],
     },
+    sectionFields,
   ],
 }

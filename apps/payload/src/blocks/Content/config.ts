@@ -1,5 +1,6 @@
 import { Block } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { sectionFields } from '@/fields/sectionFields'
 import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
@@ -80,5 +81,6 @@ export const ContentBlock: Block = {
       localized: true,
       defaultValue: createLocalizedRichText(DEFAULT_VALUES.richText.content),
     },
+    sectionFields,
   ],
 }

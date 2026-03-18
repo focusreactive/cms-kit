@@ -19,11 +19,12 @@ export const ContentBlockComponent: React.FC<ContentBlockProps> = ({
   layout,
   content,
   image,
+  section,
+  id,
 }) => {
   return (
-    <SectionContainer>
+    <SectionContainer sectionData={{ ...section, id }}>
       {heading && <SectionHeader heading={heading} />}
-
       <div className={variants({ layout })}>
         <Media
           resource={image}

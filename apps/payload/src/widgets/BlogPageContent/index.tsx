@@ -1,4 +1,4 @@
-import { Container, Section, PageRange, Pagination } from '@/core/ui'
+import { PageRange, Pagination } from '@/core/ui'
 import type { CardPostData } from '@/core/types'
 import { BlogPostsGrid } from '@/entities'
 import { BLOG_CONFIG } from '@/core/config/blog'
@@ -19,8 +19,8 @@ export const BlogPageContent: React.FC<BlogPageContentProps> = ({
   title,
 }) => {
   return (
-    <Section>
-      <Container maxWidth="7xl">
+    <section className="py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl">
         <div className="mb-16">
           <div className="prose dark:prose-invert max-w-none">
             <h1>{title}</h1>
@@ -43,7 +43,7 @@ export const BlogPageContent: React.FC<BlogPageContentProps> = ({
         {currentPage && totalPages && totalPages > 1 && (
           <Pagination basePath={BLOG_CONFIG.basePath} page={currentPage} totalPages={totalPages} />
         )}
-      </Container>
-    </Section>
+      </div>
+    </section>
   )
 }

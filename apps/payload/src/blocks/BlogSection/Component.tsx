@@ -15,6 +15,8 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   text,
   style,
   postsLimit,
+  section,
+  id,
 }) => {
   const payload = await getPayload({ config: configPromise })
 
@@ -41,7 +43,7 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   })
 
   return (
-    <SectionContainer className="py-0 px-0">
+    <SectionContainer sectionData={{ ...section, id, paddingX: 'none', paddingY: 'none' }}>
       <BlogSection
         text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
         posts={formattedPosts}
