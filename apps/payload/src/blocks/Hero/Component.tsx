@@ -5,7 +5,6 @@ import { SectionContainer } from '@/core/ui'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
-import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 type Props = HeroBlock
 
