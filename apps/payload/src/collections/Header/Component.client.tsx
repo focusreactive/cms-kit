@@ -16,19 +16,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className="z-20 sticky top-0 bg-bgColor border-b border-primaryLightColor"
+      className="flex justify-between gap-10 bg-white/30 p-3 backdrop-blur-md"
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="py-4 px-4 sm:py-4 sm:px-6 md:py-4 md:px-8 lg:py-4">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex justify-between">
-            <Link href="/" aria-label="Go to homepage">
-              <Logo resource={data.logo as Media} />
-            </Link>
-            <HeaderNav data={data} />
-          </div>
-        </div>
-      </div>
+      <Link href="/" aria-label="Go to homepage">
+        <Logo resource={data.logo as Media} />
+      </Link>
+      <HeaderNav data={data} />
     </header>
   )
 }
