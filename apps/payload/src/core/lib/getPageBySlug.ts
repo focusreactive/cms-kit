@@ -27,11 +27,6 @@ async function getPageBySlugQuery(
         _status: { equals: 'published' },
       }),
     },
-    select: {
-      parent: false,
-      folder: false,
-      generateSlug: false,
-    },
   })
 
   const doc = result.find((p) => p?.breadcrumbs?.length && p.breadcrumbs.at(-1)?.url === targetUrl)
