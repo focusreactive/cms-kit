@@ -6,6 +6,7 @@ import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/shared/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './shared/lib/abTesting/abCookies'
+import { draftMode } from 'next/headers'
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -28,7 +29,7 @@ export default async function middleware(request: NextRequest) {
     const [, locale, rest = ''] = localeMatch
 
     const isNextRoute = pathname.startsWith(`/${locale}/next/`)
-    const isDraftMode = request.cookies.has('__prerender_bypass')
+    const { isEnabled: isDraftMode } = await draftMode()
 
     if (!isNextRoute && !isDraftMode) {
       const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
