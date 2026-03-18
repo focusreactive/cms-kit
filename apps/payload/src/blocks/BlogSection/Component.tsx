@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import type { BlogSectionBlock } from '@/payload-types'
 import type { Post, Media } from '@/payload-types'
 import { BlogSection } from '@shared/ui'
+import { SectionContainer } from '@/shared/ui'
 import type { IBlogPostCardProps } from '@shared/ui/components/sections/blog/types'
 import { BlogStyle } from '@shared/ui/components/sections/blog/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
@@ -40,10 +41,12 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   })
 
   return (
-    <BlogSection
-      text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
-      posts={formattedPosts}
-      style={blogStyle}
-    />
+    <SectionContainer className="py-0 px-0">
+      <BlogSection
+        text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
+        posts={formattedPosts}
+        style={blogStyle}
+      />
+    </SectionContainer>
   )
 }

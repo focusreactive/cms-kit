@@ -1,6 +1,7 @@
 import React from 'react'
 import type { LogosBlock } from '@/payload-types'
 import { Logos } from '@shared/ui'
+import { SectionContainer } from '@/shared/ui'
 import { AlignVariant } from '@shared/ui/components/sections/logos/types'
 import type { ILogoItem } from '@shared/ui/components/sections/logos/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
@@ -13,9 +14,11 @@ export const LogosBlockComponent: React.FC<LogosBlock> = ({ items, alignVariant 
   }))
 
   return (
-    <Logos
-      items={logoItems}
-      alignVariant={(alignVariant as AlignVariant) ?? AlignVariant.Center}
-    />
+    <SectionContainer>
+      <Logos
+        items={logoItems}
+        alignVariant={(alignVariant as AlignVariant) ?? AlignVariant.Center}
+      />
+    </SectionContainer>
   )
 }

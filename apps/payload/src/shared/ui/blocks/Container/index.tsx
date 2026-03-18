@@ -17,9 +17,14 @@ const variants = cva('mx-auto', {
   },
 })
 
-type Props = ComponentProps<'div'> & VariantProps<typeof variants>
+export type ContainerProps = ComponentProps<'div'> & VariantProps<typeof variants>
 
-export const Container: React.FC<Props> = ({ className, maxWidth, children, ...props }) => {
+export const Container: React.FC<ContainerProps> = ({
+  className,
+  maxWidth,
+  children,
+  ...props
+}) => {
   return (
     <div className={cn(variants({ maxWidth }), className)} {...props}>
       {children}

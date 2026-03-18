@@ -18,13 +18,13 @@ export function Accordion({ items, className }: AccordionProps) {
   const [openId, setOpenId] = useState<string | null>(null)
 
   return (
-    <div className={cn('divide-y divide-primaryLightColor', className)}>
+    <div className={cn('space-y-3', className)}>
       {items.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="rounded-2xl border border-textSecondaryColor overflow-hidden">
           <button
             type="button"
             id={`accordion-trigger-${item.id}`}
-            className="flex w-full items-center justify-between py-4 text-left font-medium text-textColor hover:text-primaryColor transition-colors"
+            className="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-textColor hover:text-primaryColor transition-colors"
             onClick={() => setOpenId(openId === item.id ? null : item.id)}
             aria-expanded={openId === item.id}
             aria-controls={`accordion-panel-${item.id}`}
@@ -43,7 +43,7 @@ export function Accordion({ items, className }: AccordionProps) {
               id={`accordion-panel-${item.id}`}
               role="region"
               aria-labelledby={`accordion-trigger-${item.id}`}
-              className="pb-4 text-textSecondaryColor"
+              className="px-5 pb-5 text-textSecondaryColor"
             >
               {item.content}
             </div>

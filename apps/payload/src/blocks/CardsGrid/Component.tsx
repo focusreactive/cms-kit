@@ -1,6 +1,7 @@
 import React from 'react'
 import type { CardsGridBlock } from '@/payload-types'
 import { CardsGrid } from '@shared/ui'
+import { SectionContainer } from '@/shared/ui'
 import type { IDefaultCardProps } from '@shared/ui/components/sections/cardsGrid/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
@@ -16,5 +17,9 @@ export const CardsGridBlockComponent: React.FC<CardsGridBlock> = ({ items, colum
     backgroundColor: (item.backgroundColor as IDefaultCardProps['backgroundColor']) ?? 'none',
   }))
 
-  return <CardsGrid items={cards} columns={columns ?? 3} />
+  return (
+    <SectionContainer>
+      <CardsGrid items={cards} columns={columns ?? 3} />
+    </SectionContainer>
+  )
 }
