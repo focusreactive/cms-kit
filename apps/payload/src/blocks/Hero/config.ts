@@ -2,7 +2,7 @@ import type { Block } from 'payload'
 import { createPresetFields } from '@/fields/presetFields'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
-import { sectionFields } from '@/fields/sectionFields'
+import { embedSectionTab } from '@/fields/section/embedSectionTab'
 
 const { presetFields } = createPresetFields()
 
@@ -14,5 +14,5 @@ export const HeroBlock: Block = {
     singular: { en: 'Hero', es: 'Hero' },
     plural: { en: 'Heroes', es: 'Héroes' },
   },
-  fields: [...PRESET_TYPES_CONFIG.hero.fields, presetFields, sectionFields],
+  fields: embedSectionTab([...PRESET_TYPES_CONFIG.hero.fields, presetFields]),
 }

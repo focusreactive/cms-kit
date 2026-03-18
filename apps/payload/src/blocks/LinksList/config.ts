@@ -1,7 +1,30 @@
-import type { Block } from 'payload'
+import type { Block, Field } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { link } from '@/fields/link'
-import { sectionFields } from '@/fields/sectionFields'
+import { embedSectionTab } from '@/fields/section/embedSectionTab'
+
+const fields: Field[] = [
+  {
+    name: 'alignVariant',
+    type: 'select',
+    defaultValue: 'left',
+    options: [
+      { label: { en: 'Left', es: 'Izquierda' }, value: 'left' },
+      { label: { en: 'Center', es: 'Centro' }, value: 'center' },
+      { label: { en: 'Right', es: 'Derecha' }, value: 'right' },
+    ],
+    label: { en: 'Alignment', es: 'Alineación' },
+  },
+  {
+    name: 'links',
+    type: 'array',
+    label: { en: 'Links', es: 'Enlaces' },
+    minRows: 1,
+    required: true,
+    localized: true,
+    fields: [link()],
+  },
+]
 
 export const LinksListBlock: Block = {
   slug: 'linksList',
@@ -11,27 +34,5 @@ export const LinksListBlock: Block = {
     singular: { en: 'Links List', es: 'Lista de enlaces' },
     plural: { en: 'Links Lists', es: 'Listas de enlaces' },
   },
-  fields: [
-    {
-      name: 'alignVariant',
-      type: 'select',
-      defaultValue: 'left',
-      options: [
-        { label: { en: 'Left', es: 'Izquierda' }, value: 'left' },
-        { label: { en: 'Center', es: 'Centro' }, value: 'center' },
-        { label: { en: 'Right', es: 'Derecha' }, value: 'right' },
-      ],
-      label: { en: 'Alignment', es: 'Alineación' },
-    },
-    {
-      name: 'links',
-      type: 'array',
-      label: { en: 'Links', es: 'Enlaces' },
-      minRows: 1,
-      required: true,
-      localized: true,
-      fields: [link()],
-    },
-    sectionFields,
-  ],
+  fields: embedSectionTab(fields),
 }
