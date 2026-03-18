@@ -3,6 +3,7 @@ import type { GroupField } from 'payload'
 export const sectionFields: GroupField = {
   name: 'section',
   type: 'group',
+  label: false,
   fields: [
     {
       name: 'theme',
