@@ -1,7 +1,7 @@
 import React from 'react'
 import type { LogosBlock } from '@/payload-types'
 import { Logos } from '@shared/ui'
-import { SectionContainer } from '@/shared/ui'
+import { SectionContainer } from '@/core/ui'
 import { AlignVariant } from '@shared/ui/components/sections/logos/types'
 import type { ILogoItem } from '@shared/ui/components/sections/logos/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'

@@ -2,12 +2,12 @@ import type React from 'react'
 import type { Page } from '@/payload-types'
 import { redirect, permanentRedirect } from 'next/navigation'
 import { notFound } from 'next/navigation'
-import { getCachedRedirects } from '@/shared/lib/getRedirects'
-import { getCachedDocumentByID } from '@/shared/lib/getDocument'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import { buildUrl } from '@/shared/lib/buildUrl'
-import { canonicalRedirectFrom } from '@/shared/lib/redirectUrl'
-import { Locale } from '@/shared/types'
+import { getCachedRedirects } from '@/core/lib/getRedirects'
+import { getCachedDocumentByID } from '@/core/lib/getDocument'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import { buildUrl } from '@/core/lib/buildUrl'
+import { canonicalRedirectFrom } from '@/core/lib/redirectUrl'
+import { Locale } from '@/core/types'
 
 interface Props {
   disableNotFound?: boolean

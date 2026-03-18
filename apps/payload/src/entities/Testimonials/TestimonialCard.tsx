@@ -1,4 +1,4 @@
-import { Media } from '@/shared/ui'
+import { Media } from '@/core/ui'
 import type { Testimonial } from '@/payload-types'
 import { StarIcon } from 'lucide-react'
 

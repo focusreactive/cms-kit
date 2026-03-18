@@ -1,5 +1,5 @@
 import type { CollectionBeforeChangeHook } from 'payload'
-import { PRESET_BLOCK_TYPES, type PresetBlockType } from '@/shared/constants/presets'
+import { PRESET_BLOCK_TYPES, type PresetBlockType } from '@/core/constants/presets'
 
 export const stripUnusedPresetGroups: CollectionBeforeChangeHook = ({ data, req }) => {
   const type = data?.type as PresetBlockType

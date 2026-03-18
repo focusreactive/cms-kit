@@ -1,7 +1,7 @@
 import type { Field, GroupField } from 'payload'
 
-import deepMerge from '@/shared/lib/deepMerge'
-import { BLOG_CONFIG } from '@/shared/config/blog'
+import deepMerge from '@/core/lib/deepMerge'
+import { BLOG_CONFIG } from '@/core/config/blog'
 import { Option } from 'payload'
 
 export type LinkAppearances = 'default' | 'outline'

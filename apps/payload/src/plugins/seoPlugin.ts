@@ -1,8 +1,8 @@
 import { Page, Post } from '@/payload-types'
-import { buildUrl } from '@/shared/lib/buildUrl'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { getSiteSettings } from '@/shared/lib/getSiteSettings'
-import { getServerSideURL } from '@/shared/lib/getURL'
+import { buildUrl } from '@/core/lib/buildUrl'
+import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
+import { getSiteSettings } from '@/core/lib/getSiteSettings'
+import { getServerSideURL } from '@/core/lib/getURL'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateDescription, GenerateURL } from '@payloadcms/plugin-seo/types'
 

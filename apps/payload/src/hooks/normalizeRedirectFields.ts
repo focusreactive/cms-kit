@@ -1,5 +1,5 @@
 import type { CollectionBeforeChangeHook } from 'payload'
-import { normalizeRedirectPath, normalizeRedirectToUrl } from '@/shared/lib/redirectUrl'
+import { normalizeRedirectPath, normalizeRedirectToUrl } from '@/core/lib/redirectUrl'
 
 export const normalizeRedirectFields: CollectionBeforeChangeHook = ({ data, req }) => {
   req?.payload.logger?.info?.(`Normalizing redirect fields: ${data.from}`)

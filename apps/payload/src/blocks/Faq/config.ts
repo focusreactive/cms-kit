@@ -1,13 +1,13 @@
 import { Block } from 'payload'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import {
   createLocalizedDefault,
   createLocalizedRichText,
   createRichTextState,
-} from '@/shared/lib/createLocalizedDefault'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import type { Locale } from '@/shared/types'
+} from '@/core/lib/createLocalizedDefault'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
+import type { Locale } from '@/core/types'
 
 function buildFaqItems(locale: Locale) {
   const { question, answer } = DEFAULT_VALUES.blocks.faq

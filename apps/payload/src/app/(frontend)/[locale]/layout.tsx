@@ -1,11 +1,11 @@
 import React from 'react'
-import { Providers } from '@/shared/context'
+import { Providers } from '@/core/context'
 import { Viewport } from 'next'
-import { Locale } from '@/shared/types'
+import { Locale } from '@/core/types'
 import { getMessages } from 'next-intl/server'
 import { draftMode } from 'next/headers'
 import { LivePreviewListener } from '@/features'
-import { GoogleAnalyticsScript } from '@/shared/lib/analytics/GoogleAnalyticsScript'
+import { GoogleAnalyticsScript } from '@/core/lib/analytics/GoogleAnalyticsScript'
 
 export const viewport: Viewport = {
   width: 'device-width',

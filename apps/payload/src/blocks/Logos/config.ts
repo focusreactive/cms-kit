@@ -1,5 +1,5 @@
 import type { Block } from 'payload'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { link } from '@/fields/link'
 
 export const LogosBlock: Block = {

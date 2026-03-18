@@ -3,7 +3,7 @@ import type { ArrayField, Field } from 'payload'
 import type { LinkAppearances } from './link'
 
 import { link } from './link'
-import deepMerge from '@/shared/lib/deepMerge'
+import deepMerge from '@/core/lib/deepMerge'
 
 type LinkGroupType = (options?: {
   appearances?: LinkAppearances[] | false
@@ -24,7 +24,7 @@ export const linkGroup: LinkGroupType = ({ appearances, defaultValue, overrides 
     admin: {
       initCollapsed: true,
       components: {
-        RowLabel: '@/shared/ui/components/RowLabel#RowLabel',
+        RowLabel: '@/core/ui/components/RowLabel#RowLabel',
       },
     },
     ...(defaultValue !== undefined && { defaultValue }),

@@ -1,4 +1,4 @@
-import { SectionHeader } from '@/shared/ui'
+import { SectionHeader } from '@/core/ui'
 
 type Props = {
   heading?: string | null

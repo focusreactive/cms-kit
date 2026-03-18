@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority'
-import { RichText, SectionContainer, Media, SectionHeader } from '@/shared/ui'
+import { RichText, SectionContainer, Media, SectionHeader } from '@/core/ui'
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
 const variants = cva('flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center', {

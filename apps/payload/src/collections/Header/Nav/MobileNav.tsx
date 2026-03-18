@@ -1,8 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronRight } from 'lucide-react'
-import { CMSLink } from '@/shared/ui'
-import { cn } from '@/shared/lib/utils'
+import { CMSLink } from '@/core/ui'
+import { cn } from '@/core/lib/utils'
 import type { Header as HeaderType } from '@/payload-types'
 import { LocaleSelector } from '@/features/LocaleSelector'
 

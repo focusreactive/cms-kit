@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionContainer } from '@/shared/ui'
+import { SectionContainer } from '@/core/ui'
 import { AnimatedCarousel, TestimonialsHeading } from '@/entities'
 import type { Testimonial, TestimonialsListBlock } from '@/payload-types'
 

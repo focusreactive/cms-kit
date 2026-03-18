@@ -1,10 +1,10 @@
 import { Block } from 'payload'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
-import { createLocalizedDefault, createLocalizedRichText } from '@/shared/lib/createLocalizedDefault'
-import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
-import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
+import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
+import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 
 export const ContentBlock: Block = {
   slug: 'content',

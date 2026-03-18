@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
 import { link } from '@/fields/link'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 
 export const CardsGridBlock: Block = {
   slug: 'cardsGrid',

@@ -15,7 +15,7 @@ import { Testimonials } from '@/collections/Testimonials'
 import { plugins } from '@/plugins'
 import { en } from '@payloadcms/translations/languages/en'
 import { es } from '@payloadcms/translations/languages/es'
-import { I18N_CONFIG } from '@/shared/config/i18n'
+import { I18N_CONFIG } from '@/core/config/i18n'
 import { Header } from '@/collections/Header/config'
 import { Footer } from '@/collections/Footer/config'
 import { SiteSettings } from '@/globals/SiteSettings/config'
@@ -32,10 +32,10 @@ export default buildConfig({
     components: {
       providers: ['/providers/BeforeOpenDrawerWrapper'],
       graphics: {
-        Logo: '/shared/ui/components/Admin/Logo',
-        Icon: '/shared/ui/components/Admin/Icon',
+        Logo: '/core/ui/components/Admin/Logo',
+        Icon: '/core/ui/components/Admin/Icon',
       },
-      afterLogin: ['/shared/ui/components/Admin/SSOButtons'],
+      afterLogin: ['/core/ui/components/Admin/SSOButtons'],
     },
     livePreview: {
       breakpoints: [

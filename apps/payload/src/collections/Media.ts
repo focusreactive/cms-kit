@@ -1,8 +1,8 @@
-import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { anyone, author, or, superAdmin, user } from '@/core/lib/access'
 import type { CollectionConfig } from 'payload'
 import { revalidateTag } from 'next/cache'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { DEFAULT_MEDIA_CACHE_TAG } from '@/shared/lib/getDefaultMediaId'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { DEFAULT_MEDIA_CACHE_TAG } from '@/core/lib/getDefaultMediaId'
 
 export const Media: CollectionConfig<'media'> = {
   slug: 'media',

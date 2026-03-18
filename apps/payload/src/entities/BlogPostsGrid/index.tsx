@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, EmptyState } from '@/shared/ui'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import type { CardPostData } from '@/shared/types'
+import { Card, EmptyState } from '@/core/ui'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import type { CardPostData } from '@/core/types'
 
 export type Props = {
   posts: CardPostData[]

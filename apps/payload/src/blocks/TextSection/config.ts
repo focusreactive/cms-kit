@@ -1,8 +1,8 @@
 import { Block } from 'payload'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
-import { createLocalizedRichText } from '@/shared/lib/createLocalizedDefault'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 
 export const TextSectionBlock: Block = {
   slug: 'textSection',

@@ -1,8 +1,8 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
 import type { Header as HeaderType } from '@/payload-types'
-import { CMSLink } from '@/shared/ui'
-import { cn } from '@/shared/lib/utils'
+import { CMSLink } from '@/core/ui'
+import { cn } from '@/core/lib/utils'
 import { LocaleSelector } from '@/features/LocaleSelector'
 import { ChevronDownIcon } from 'lucide-react'
 

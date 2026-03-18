@@ -1,5 +1,5 @@
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
+import { createLocalizedDefault } from '@/core/lib/createLocalizedDefault'
 import type { Field } from 'payload'
 
 export const testimonialsListFields: Field[] = [

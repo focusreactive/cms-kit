@@ -1,4 +1,4 @@
-import { Container, Section } from '@/shared/ui'
+import { Container, Section } from '@/core/ui'
 
 export function BlogPageSkeleton() {
   return (

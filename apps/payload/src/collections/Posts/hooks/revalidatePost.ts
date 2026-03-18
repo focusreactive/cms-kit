@@ -3,9 +3,9 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, Payload } fr
 import { revalidateTag } from 'next/cache'
 
 import type { Post } from '@/payload-types'
-import type { Locale } from '@/shared/types'
-import { cacheTag } from '@/shared/lib/cacheTags'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
+import type { Locale } from '@/core/types'
+import { cacheTag } from '@/core/lib/cacheTags'
+import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
 
 function revalidatePostTags(slug: string, locale: Locale, payload: Payload) {
   payload.logger?.info?.(`Revalidating post with slug: ${slug}`)

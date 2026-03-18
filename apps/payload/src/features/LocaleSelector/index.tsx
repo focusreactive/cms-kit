@@ -2,9 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useLocale } from 'next-intl'
 import { usePathname } from '@/i18n/navigation'
-import { cn } from '@/shared/lib/utils'
-import { Link } from '@/shared/ui'
-import { I18N_CONFIG } from '@/shared/config/i18n'
+import { cn } from '@/core/lib/utils'
+import { Link } from '@/core/ui'
+import { I18N_CONFIG } from '@/core/config/i18n'
 
 type LocaleSelectorProps = {
   render: (locale: string) => React.ReactNode

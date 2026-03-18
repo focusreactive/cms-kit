@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 import { createPresetFields } from '@/fields/presetFields'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
-import { PRESET_TYPES_CONFIG } from '@/shared/constants/presets'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 
 const { presetFields } = createPresetFields()
 

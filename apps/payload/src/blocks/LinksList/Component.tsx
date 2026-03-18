@@ -1,7 +1,7 @@
 import React from 'react'
 import type { LinksListBlock } from '@/payload-types'
 import { LinksList } from '@shared/ui'
-import { SectionContainer } from '@/shared/ui'
+import { SectionContainer } from '@/core/ui'
 import { AlignVariant } from '@shared/ui/components/sections/linksList/types'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 

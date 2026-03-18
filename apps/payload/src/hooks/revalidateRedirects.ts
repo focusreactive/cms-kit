@@ -1,8 +1,8 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
 import { revalidateTag } from 'next/cache'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { cacheTag } from '@/shared/lib/cacheTags'
+import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
+import { cacheTag } from '@/core/lib/cacheTags'
 
 export const revalidateRedirects: CollectionAfterChangeHook = async ({ doc, req }) => {
   const { payload, context } = req

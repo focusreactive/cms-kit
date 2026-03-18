@@ -1,6 +1,6 @@
-import { RichText, SectionContainer, SectionHeader } from '@/shared/ui'
-import { Accordion, AccordionItemData } from '@/shared/ui/components/Accordion'
-import { FaqJsonLd } from '@/shared/seo/components'
+import { RichText, SectionContainer, SectionHeader } from '@/core/ui'
+import { Accordion, AccordionItemData } from '@/core/ui/components/Accordion'
+import { FaqJsonLd } from '@/core/seo/components'
 import type { FaqBlock as FaqBlockProps } from '@/payload-types'
 
 export const FaqBlockComponent: React.FC<FaqBlockProps> = ({ heading, items, ...rest }) => {

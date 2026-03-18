@@ -1,12 +1,9 @@
 import type { Field, GroupField } from 'payload'
-import {
-  createLocalizedDefault,
-  createLocalizedRichText,
-} from '@/shared/lib/createLocalizedDefault'
-import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
-import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
+import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
+import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 import { link } from '@/fields/link'
 
 const defaultHeroLinkItem = (label: string) => ({
@@ -23,7 +20,9 @@ export const heroFields: Field[] = [
     type: 'text',
     label: { en: 'Title', es: 'Título' },
     localized: true,
-    defaultValue: createLocalizedDefault(DEFAULT_VALUES.blocks.hero.title ?? { en: 'Hero Title', es: 'Título Hero' }),
+    defaultValue: createLocalizedDefault(
+      DEFAULT_VALUES.blocks.hero.title ?? { en: 'Hero Title', es: 'Título Hero' },
+    ),
   },
   {
     name: 'richText',
@@ -40,7 +39,7 @@ export const heroFields: Field[] = [
     admin: {
       initCollapsed: true,
       components: {
-        RowLabel: '@/shared/ui/components/RowLabel#RowLabel',
+        RowLabel: '@/core/ui/components/RowLabel#RowLabel',
       },
     },
     fields: (link() as GroupField).fields,

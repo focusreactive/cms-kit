@@ -1,4 +1,4 @@
-import { RichText, PostHero, Section, Container } from '@/shared/ui'
+import { RichText, PostHero, Section, Container } from '@/core/ui'
 import type { Post } from '@/payload-types'
 import { RelatedPosts } from '@/entities'
 

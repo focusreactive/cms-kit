@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
-import { getBlockPreviewImage } from '@/shared/lib/blockPreviewImage'
-import { generateRichText } from '@/shared/lib/generateRichText'
+import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
+import { generateRichText } from '@/core/lib/generateRichText'
 
 export const CarouselBlock: Block = {
   slug: 'carousel',

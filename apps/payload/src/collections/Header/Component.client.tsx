@@ -4,8 +4,8 @@ import React from 'react'
 import type { Header, Media } from '@/payload-types'
 
 import { HeaderNav } from './Nav'
-import { Container, Link, Logo, Section } from '@/shared/ui'
-import { useTheme } from '@/shared/context'
+import { Container, Link, Logo, Section } from '@/core/ui'
+import { useTheme } from '@/core/context'
 
 interface HeaderClientProps {
   data: Header

@@ -1,7 +1,7 @@
 import React from 'react'
 import type { CardsGridBlock } from '@/payload-types'
 import { CardsGrid } from '@shared/ui'
-import { SectionContainer } from '@/shared/ui'
+import { SectionContainer } from '@/core/ui'
 import type { IDefaultCardProps } from '@shared/ui/components/sections/cardsGrid/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'

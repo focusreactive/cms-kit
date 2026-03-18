@@ -1,7 +1,7 @@
-import { Container, Section, PageRange, Pagination } from '@/shared/ui'
-import type { CardPostData } from '@/shared/types'
+import { Container, Section, PageRange, Pagination } from '@/core/ui'
+import type { CardPostData } from '@/core/types'
 import { BlogPostsGrid } from '@/entities'
-import { BLOG_CONFIG } from '@/shared/config/blog'
+import { BLOG_CONFIG } from '@/core/config/blog'
 
 type BlogPageContentProps = {
   posts: CardPostData[]

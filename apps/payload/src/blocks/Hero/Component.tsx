@@ -1,7 +1,7 @@
 import React from 'react'
 import type { HeroBlock } from '@/payload-types'
 import { Hero } from '@shared/ui'
-import { SectionContainer } from '@/shared/ui'
+import { SectionContainer } from '@/core/ui'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'

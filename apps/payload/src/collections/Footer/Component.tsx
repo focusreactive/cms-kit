@@ -1,8 +1,8 @@
 import React from 'react'
 
 import type { Footer as FooterType, Media } from '@/payload-types'
-import { CMSLink, Container, Link, Logo, Section } from '@/shared/ui'
-import { cn } from '@/shared/lib/utils'
+import { CMSLink, Container, Link, Logo, Section } from '@/core/ui'
+import { cn } from '@/core/lib/utils'
 
 const getGridCols = (count: number) => {
   if (count <= 2) {
