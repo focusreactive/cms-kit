@@ -12,6 +12,19 @@ interface GetAllDocumentsOptions {
   draft?: boolean
 }
 
+interface FindOptions {
+  collection: CollectionSlug
+  where?: Where
+  select?: Record<string, boolean>
+  sort?: string
+  page?: number
+  limit?: number
+  depth?: number
+  overrideAccess?: boolean
+  locale?: Locale
+  draft?: boolean
+}
+
 export async function getAllDocuments<TSlug extends CollectionSlug>(
   payload: Payload,
   collection: TSlug,
@@ -28,8 +41,11 @@ export async function getAllDocuments<TSlug extends CollectionSlug>(
     draft,
   } = options
 
-  // @ts-expect-error
-  const firstPage = await payload.find({
+  const find = payload.find as unknown as (
+    args: FindOptions,
+  ) => Promise<{ docs: DataFromCollectionSlug<TSlug>[]; totalPages: number }>
+
+  const firstPage = await find({
     collection,
     where,
     select,
@@ -49,7 +65,7 @@ export async function getAllDocuments<TSlug extends CollectionSlug>(
   }
 
   for (let page = 2; page <= totalPages; page++) {
-    const result = await payload.find({
+    const result = await find({
       collection,
       where,
       select,
