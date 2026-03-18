@@ -4,6 +4,7 @@ import * as migration_20260317_150738_create_ab_manifest__remove_page_variants f
 import * as migration_20260317_181410_set_required_to_categories_slug from './20260317_181410_set_required_to_categories_slug';
 import * as migration_20260317_184349_forbid_localized_for_breadcrumbs from './20260317_184349_forbid_localized_for_breadcrumbs';
 import * as migration_20260317_195931_remove_localized_for_breadcrumbs from './20260317_195931_remove_localized_for_breadcrumbs';
+import * as migration_20260318_022640_create_comments from './20260318_022640_create_comments';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260317_195931_remove_localized_for_breadcrumbs.up,
     down: migration_20260317_195931_remove_localized_for_breadcrumbs.down,
-    name: '20260317_195931_remove_localized_for_breadcrumbs'
+    name: '20260317_195931_remove_localized_for_breadcrumbs',
+  },
+  {
+    up: migration_20260318_022640_create_comments.up,
+    down: migration_20260318_022640_create_comments.down,
+    name: '20260318_022640_create_comments'
   },
 ];

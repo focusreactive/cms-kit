@@ -15,6 +15,8 @@ import { stripUnusedPresetGroups } from '@/hooks/presets/stripUnusedPresetGroups
 import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
+import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
+import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
 import { isDev } from '@/core/utils/isDev'
@@ -166,6 +168,58 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+
+  commentsPlugin({
+    collections: [
+      { slug: 'page', titleField: 'title' },
+      { slug: 'posts', titleField: 'title' },
+      { slug: 'categories', titleField: 'title' },
+      { slug: 'authors', titleField: 'name' },
+      { slug: 'testimonials', titleField: 'author' },
+      { slug: 'header', titleField: 'name' },
+      { slug: 'footer', titleField: 'name' },
+    ],
+
+    usernameFieldPath: 'name',
+    translations: {
+      es: {
+        label: 'Comentarios',
+        openComments_one: '{{count}} comentario abierto',
+        openComments_other: '{{count}} comentarios abiertos',
+        add: 'Añadir comentario',
+        writeComment: 'Escribe un comentario',
+        comment: 'Comentario',
+        cancel: 'Cancelar',
+        posting: 'Publicando…',
+        resolve: 'Resolver',
+        reopen: 'Reabrir',
+        delete: 'Eliminar',
+        general: 'General',
+        close: 'Cerrar',
+        syncingComments: 'Sincronizando comentarios',
+        openCommentsAria: 'Abrir comentarios',
+        failedToPost: 'Error al publicar el comentario',
+        failedToUpdate: 'Error al actualizar el comentario',
+        failedToDelete: 'Error al eliminar el comentario',
+        failedToAdd: 'Error al añadir el comentario',
+        unknownAuthor: 'Desconocido',
+        deletedUser: 'Usuario eliminado',
+        noOpenComments: 'Sin comentarios abiertos',
+        noResolvedComments: 'Sin comentarios resueltos',
+        noMentionedComments: 'Sin comentarios que te mencionen',
+        filterOpen: 'Abiertos',
+        filterResolved: 'Resueltos',
+        filterMentioned: 'Me mencionan',
+        noMentionMatches: 'Sin coincidencias',
+      },
+    },
+  }) as unknown as Plugin,
+
+  schedulePublicationPlugin({
+    collections: ['page', 'posts'],
+    globals: ['site-settings'],
+    secret: process.env.CRON_SECRET!,
+  }) as unknown as Plugin,
 
   abTestingPlugin<ABVariantData>({
     debug: isDev(),

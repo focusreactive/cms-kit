@@ -1,3 +1,4 @@
+import { FieldCommentLabel as FieldCommentLabel_d1361f235be9df6e08bfd730fe68e7c8 } from '@focus-reactive/payload-plugin-comments/components/FieldCommentLabel'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -40,12 +41,16 @@ import { PresetAdminComponentCell as PresetAdminComponentCell_f0a4a6f21f15d606fa
 import { FolderTypeField as FolderTypeField_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
 import { default as default_7f68c8599c3d7b5d2129a6ae7f4980ff } from '../../../core/ui/components/Admin/Icon'
 import { default as default_5df3fc9f82e232c8de10a82a9a443e7d } from '../../../core/ui/components/Admin/Logo'
+import { CommentsHeaderButton as CommentsHeaderButton_30d38dd40c31eff500900a16a2792204 } from '@focus-reactive/payload-plugin-comments/components/CommentsHeaderButton'
 import { default as default_88a77bb5f874c6169bfbae723148426a } from '../../../core/ui/components/Admin/SSOButtons'
 import { default as default_00d3674195ceabea61e57994789ae3d5 } from '../../../providers/BeforeOpenDrawerWrapper'
 import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
+import { CommentsProviderWrapper as CommentsProviderWrapper_bc62ec20ac2037360812e296d7662f4a } from '@focus-reactive/payload-plugin-comments/providers/CommentsProviderWrapper'
+import { GlobalCommentsLoader as GlobalCommentsLoader_aab76b73fe41d8a0cecf342fe1e6f435 } from '@focus-reactive/payload-plugin-comments/providers/GlobalCommentsLoader'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 
 export const importMap = {
+  "@focus-reactive/payload-plugin-comments/components/FieldCommentLabel#FieldCommentLabel": FieldCommentLabel_d1361f235be9df6e08bfd730fe68e7c8,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -88,8 +93,11 @@ export const importMap = {
   "@payloadcms/ui#FolderTypeField": FolderTypeField_3817bf644402e67bfe6577f60ef982de,
   "/core/ui/components/Admin/Icon#default": default_7f68c8599c3d7b5d2129a6ae7f4980ff,
   "/core/ui/components/Admin/Logo#default": default_5df3fc9f82e232c8de10a82a9a443e7d,
+  "@focus-reactive/payload-plugin-comments/components/CommentsHeaderButton#CommentsHeaderButton": CommentsHeaderButton_30d38dd40c31eff500900a16a2792204,
   "/core/ui/components/Admin/SSOButtons#default": default_88a77bb5f874c6169bfbae723148426a,
   "/providers/BeforeOpenDrawerWrapper#default": default_00d3674195ceabea61e57994789ae3d5,
   "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
+  "@focus-reactive/payload-plugin-comments/providers/CommentsProviderWrapper#CommentsProviderWrapper": CommentsProviderWrapper_bc62ec20ac2037360812e296d7662f4a,
+  "@focus-reactive/payload-plugin-comments/providers/GlobalCommentsLoader#GlobalCommentsLoader": GlobalCommentsLoader_aab76b73fe41d8a0cecf342fe1e6f435,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a
 }
