@@ -25,11 +25,11 @@ export async function GET(req: NextRequest): Promise<Response> {
     return new Response('You are not allowed to preview this page', { status: 403 })
   }
 
-  if (!path || !collection || !slug) {
+  if ((!path && typeof path !== 'string') || !collection || !slug) {
     return new Response('Insufficient search params', { status: 404 })
   }
 
-  if (!path.startsWith('/')) {
+  if (!path.startsWith('/') && path !== '') {
     return new Response('This endpoint can only be used for relative previews', { status: 500 })
   }
 
