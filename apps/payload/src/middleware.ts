@@ -25,23 +25,23 @@ export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const localeMatch = pathname.match(localeRegex)
 
-  if (localeMatch) {
-    const [, locale, rest = ''] = localeMatch
+  const matchedLocale = localeMatch?.[1]
+  const isNextRoute = matchedLocale
+    ? pathname.startsWith(`/${matchedLocale}/next/`)
+    : pathname.startsWith('/next/')
 
-    const isNextRoute = pathname.startsWith(`/${locale}/next/`)
-    const { isEnabled: isDraftMode } = await draftMode()
+  const { isEnabled: isDraftMode } = await draftMode()
 
-    if (!isNextRoute && !isDraftMode) {
-      const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
+  if (!isNextRoute && !isDraftMode) {
+    const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
 
-      if (abResponse) {
-        abResponse.headers.set('x-pathname', pathname)
-        return abResponse
-      }
+    if (abResponse) {
+      abResponse.headers.set('x-pathname', pathname)
+      return abResponse
     }
   }
 
-  // No locale yet — let intlMiddleware handle redirect (e.g. / → /en/)
+  // Let intlMiddleware handle redirect
   const response = intlMiddleware(request)
   response.headers.set('x-pathname', pathname)
   return response

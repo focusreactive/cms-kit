@@ -19,6 +19,8 @@ import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
 import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
+import { I18N_CONFIG } from '@/core/config/i18n'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 import { isDev } from '@/core/utils/isDev'
 
 export const plugins: Plugin[] = [
@@ -233,7 +235,10 @@ export const plugins: Plugin[] = [
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
 
-          return `/${locale}${restPath}`
+          const resolvedLocale = locale ?? I18N_CONFIG.defaultLocale
+          return shouldIncludeLocalePrefix(resolvedLocale)
+            ? `/${resolvedLocale}${restPath}`
+            : restPath || '/'
         },
       },
     },

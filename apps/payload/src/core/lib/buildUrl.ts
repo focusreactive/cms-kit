@@ -3,7 +3,7 @@ import { getServerSideURL } from './getURL'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import { Locale } from '@/core/types'
 import { routing } from '@/i18n/routing'
-import { I18N_CONFIG } from '@/core/config/i18n'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 
 export function getPathFromBreadcrumbs(breadcrumbs?: Page['breadcrumbs']): string | undefined {
   if (!Array.isArray(breadcrumbs) || breadcrumbs.length === 0) {
@@ -46,8 +46,7 @@ export function buildUrl({
   const baseUrl = getServerSideURL()
   let relativePath: string = ''
   const currentLocale = locale || (routing.defaultLocale as Locale)
-  const includePrefix = I18N_CONFIG.localePrefix !== 'never'
-  const localePrefix = includePrefix ? `/${currentLocale}` : ''
+  const localePrefix = shouldIncludeLocalePrefix(currentLocale) ? `/${currentLocale}` : ''
 
   if (collection === 'posts') {
     if (page !== undefined && page > 1) {

@@ -14,7 +14,7 @@ export const LogosBlockComponent: React.FC<LogosBlock> = ({ items, alignVariant,
   }))
 
   return (
-    <SectionContainer sectionData={{ ...section, id }}>
+    <SectionContainer sectionData={{ ...section, id }} className="overflow-x-visible!">
       <Logos
         items={logoItems}
         alignVariant={(alignVariant as AlignVariant) ?? AlignVariant.Center}

@@ -22,5 +22,5 @@ export const I18N_CONFIG: {
     en: 'en_US',
     es: 'es_ES',
   },
-  localePrefix: 'always',
+  localePrefix: 'as-needed',
 }
