@@ -3,13 +3,13 @@
 @source "../..";
 
 @theme {
-  --color-bgColor: var(--bg);
-  --color-textColor: var(--text);
-  --color-textSecondaryColor: var(--text-secondary);
-  --color-primaryColor: var(--primary);
-  --color-primaryLightColor: var(--primary-light);
-  --color-primary2Color: var(--primary-2);
-  --color-primary2LightColor: var(--primary-2-light);
+  --color-bgColor: #fff;
+  --color-textColor: #222222;
+  --color-textSecondaryColor: #666666;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
+  --color-primary2Color: #ff0765;
+  --color-primary2LightColor: #ffe6f0;
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
 }
@@ -22,13 +22,43 @@
 }
 
 .light {
-  --bg: #fff;
-  --text: #222222;
-  --text-secondary: #666666;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #4f46e5;
-  --primary-2-light: #e4e1ff;
+  --color-bgColor: #fff;
+  --color-textColor: #222222;
+  --color-textSecondaryColor: #666666;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
+  --color-primary2Color: #ff0765;
+  --color-primary2LightColor: #ffe6f0;
+}
+
+.dark {
+  --color-bgColor: #222222;
+  --color-textColor: #f6f6f6;
+  --color-textSecondaryColor: #999999;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
+  --color-primary2Color: #ff0765;
+  --color-primary2LightColor: #ffe6f0;
+}
+
+.light-gray {
+  --color-bgColor: #f6f6f6;
+  --color-textColor: #222222;
+  --color-textSecondaryColor: #666666;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
+  --color-primary2Color: #ff0765;
+  --color-primary2LightColor: #ffe6f0;
+}
+
+.dark-gray {
+  --color-bgColor: #5b5b5b;
+  --color-textColor: #f6f6f6;
+  --color-textSecondaryColor: #bababa;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
+  --color-primary2Color: #ff0765;
+  --color-primary2LightColor: #ffe6f0;
 }
 
 @theme {
@@ -37,15 +67,32 @@
   --color-warning: oklch(0.75 0.15 85);
 }
 
+.prose {
+  --tw-prose-body: var(--color-textColor);
+  --tw-prose-headings: var(--color-textColor);
+  --tw-prose-lead: var(--color-textSecondaryColor);
+  --tw-prose-bold: var(--color-textColor);
+  --tw-prose-links: var(--color-primaryColor);
+  --tw-prose-counters: var(--color-textSecondaryColor);
+  --tw-prose-bullets: var(--color-textSecondaryColor);
+  --tw-prose-quotes: var(--color-textColor);
+  --tw-prose-code: var(--color-textColor);
+}
+
 .testimonials-carousel:hover .testimonials-carousel-group {
   animation-play-state: paused;
 }
 
 .testimonials-carousel-group {
-  animation: testimonials-carousel-scrolling var(--testimonials-carousel-duration, 60s) linear infinite;
+  animation: testimonials-carousel-scrolling var(--testimonials-carousel-duration, 60s) linear
+    infinite;
 }
 
 @keyframes testimonials-carousel-scrolling {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

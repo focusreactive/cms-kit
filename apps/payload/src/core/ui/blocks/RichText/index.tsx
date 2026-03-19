@@ -37,7 +37,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     const media = typeof uploadNode.value === 'object' ? (uploadNode.value as Media) : null
     const aspectRatio = uploadNode.fields?.aspectRatio ?? null
     const imageProps = prepareImageProps({ image: media, aspectRatio })
-    
+
     // eslint-disable-next-line jsx-a11y/alt-text
     return <Image {...imageProps} />
   },

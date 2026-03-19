@@ -18,7 +18,7 @@ type Props = {
   sectionData: SectionData
 }
 
-const outerVariants = cva('overflow-x-hidden', {
+const outerVariants = cva('', {
   variants: {
     marginTop: {
       none: 'mt-0',
@@ -72,14 +72,15 @@ export function SectionContainer({ children, className, sectionData }: Props) {
     <section
       id={id ?? undefined}
       className={cn(
+        'mx-auto max-w-screen-xl overflow-x-hidden rounded-2xl',
         outerVariants({
           marginTop,
           marginBottom,
         }),
+        theme,
         theme && 'bg-bgColor',
         className,
       )}
-      {...(theme ? { 'data-theme': theme } : {})}
       style={bgUrl ? { background: `url(${bgUrl}) no-repeat center/cover` } : undefined}
     >
       <div
