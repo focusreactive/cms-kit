@@ -12,7 +12,7 @@ export const HeroBlockComponent: React.FC<Props> = ({
   title,
   richText,
   actions,
-  media,
+  image,
   section,
   id,
 }) => {
@@ -21,7 +21,7 @@ export const HeroBlockComponent: React.FC<Props> = ({
       <Hero
         title={title ?? ''}
         text={prepareRichTextProps(richText)}
-        image={prepareImageProps(typeof media === 'object' ? media : null)}
+        image={prepareImageProps(image)}
         links={(actions ?? []).map((action) => prepareLinkProps(action))}
       />
     </SectionContainer>

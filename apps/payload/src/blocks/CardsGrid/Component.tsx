@@ -15,7 +15,7 @@ export const CardsGridBlockComponent: React.FC<CardsGridBlock> = ({
   const cards: IDefaultCardProps[] = (items ?? []).map((item) => ({
     title: item.title,
     description: item.description ?? undefined,
-    image: prepareImageProps(typeof item.image === 'object' ? item.image : null),
+    image: prepareImageProps(item.image ?? null),
     link: prepareLinkProps(item.link),
     alignVariant: (item.alignVariant as IDefaultCardProps['alignVariant']) ?? 'center',
     rounded: (item.rounded as IDefaultCardProps['rounded']) ?? 'none',

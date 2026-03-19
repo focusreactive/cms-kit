@@ -2,6 +2,7 @@ import type { Block, Field } from 'payload'
 import { link } from '@/fields/link'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { embedSectionTab } from '@/fields/section/embedSectionTab'
+import { imageField } from '@/fields/imageField'
 
 const fields: Field[] = [
   {
@@ -31,14 +32,8 @@ const fields: Field[] = [
         type: 'text',
         label: { en: 'Description', es: 'Descripción' },
       },
-      {
-        name: 'image',
-        type: 'upload',
-        relationTo: 'media',
-        required: true,
-        label: { en: 'Image', es: 'Imagen' },
-      },
-      link(),
+      imageField('image', { required: false }),
+      link({ required: false }),
       {
         name: 'alignVariant',
         type: 'select',

@@ -9,7 +9,7 @@ import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 
 export const LogosBlockComponent: React.FC<LogosBlock> = ({ items, alignVariant, section, id }) => {
   const logoItems: ILogoItem[] = (items ?? []).map((item) => ({
-    image: prepareImageProps(typeof item.image === 'object' ? item.image : null),
+    image: prepareImageProps(item.image),
     link: item.link ? prepareLinkProps(item.link) : undefined,
   }))
 
