@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload'
-import { anyone, or, user, superAdmin } from '@/shared/lib/access'
+import { anyone, or, user, superAdmin } from '@/core/lib/access'
 import { link } from '@/fields/link'
-import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
-import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
-import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
-import type { Locale } from '@/shared/types'
+import { createLocalizedDefault } from '@/core/lib/createLocalizedDefault'
+import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
+import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
+import type { Locale } from '@/core/types'
 import { revalidateResourcesUsingFooter } from './hooks/revalidateResourcesUsingFooter'
 
 const footerNavGroup = (groupName: string, linkLabel: string) => ({
@@ -112,7 +112,7 @@ export const Footer: CollectionConfig<'footer'> = {
         },
         initCollapsed: true,
         components: {
-          RowLabel: '@/shared/ui/components/RowLabel#RowLabelGroupName',
+          RowLabel: '@/core/ui/components/RowLabel#RowLabelGroupName',
         },
       },
       defaultValue: createLocalizedDefault(DEFAULT_FOOTER_NAV_ITEMS),

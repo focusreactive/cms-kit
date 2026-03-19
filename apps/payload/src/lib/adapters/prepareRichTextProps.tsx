@@ -1,7 +1,7 @@
 import React from 'react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { AlignVariant, type IRichTextProps } from '@shared/ui/components/ui/richText/types'
-import { RichText } from '@/shared/ui'
+import { RichText } from '@/core/ui'
 
 export function prepareRichTextProps(
   content: SerializedEditorState | null | undefined,

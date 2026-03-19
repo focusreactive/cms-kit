@@ -7,6 +7,10 @@ import { NextRequest } from 'next/server'
 
 import configPromise from '@payload-config'
 
+import { I18N_CONFIG } from '@/core/config/i18n'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
+import type { Locale } from '@/core/types'
+
 export async function GET(req: NextRequest): Promise<Response> {
   const payload = await getPayload({ config: configPromise })
 
@@ -17,7 +21,7 @@ export async function GET(req: NextRequest): Promise<Response> {
   const slug = searchParams.get('slug')
   const previewSecret = searchParams.get('previewSecret')
 
-  if (previewSecret !== process.env.PREVIEW_SECRET) {
+  if (previewSecret !== process.env.NEXT_PUBLIC_PREVIEW_SECRET) {
     return new Response('You are not allowed to preview this page', { status: 403 })
   }
 
@@ -51,8 +55,17 @@ export async function GET(req: NextRequest): Promise<Response> {
   const host = req.headers.get('host') ?? new URL(req.url).host
   const protocol =
     req.headers.get('x-forwarded-proto') ?? new URL(req.url).protocol.replace(':', '')
-  const locale = path.split('/')[1] || 'en'
 
-  const previewInitUrl = `${protocol}://${host}/${locale}/next/preview-init?redirect=${encodeURIComponent(path)}&previewSecret=${encodeURIComponent(previewSecret)}`
+  const pathSegments = path.split('/').filter(Boolean)
+  const firstSegment = pathSegments[0]
+
+  const localeCodes = I18N_CONFIG.locales.map((l) => l.code)
+  const locale: Locale = localeCodes.includes(firstSegment as Locale)
+    ? (firstSegment as Locale)
+    : (I18N_CONFIG.defaultLocale as Locale)
+
+  const localeSegment = shouldIncludeLocalePrefix(locale) ? `/${locale}` : ''
+  const previewInitUrl = `${protocol}://${host}${localeSegment}/next/preview-init?redirect=${encodeURIComponent(path)}&previewSecret=${encodeURIComponent(previewSecret)}`
+
   redirect(previewInitUrl)
 }

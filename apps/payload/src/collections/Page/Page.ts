@@ -2,15 +2,14 @@ import type { CollectionConfig } from 'payload'
 import { createSharedSlugField } from '@/fields/slugField'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
-import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
-import { anyone, author, or, superAdmin, user } from '@/shared/lib/access'
+import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
+import { anyone, author, or, superAdmin, user } from '@/core/lib/access'
 import { createParentField, createBreadcrumbsField } from '@payloadcms/plugin-nested-docs'
-import { buildUrl } from '@/shared/lib/buildUrl'
+import { buildUrl } from '@/core/lib/buildUrl'
 import type { Page as PageType } from '@/payload-types'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 import { createBasePageFields } from './basePageFields'
+import { createLocalizedDefault } from '@/core/lib/createLocalizedDefault'
 
 export const Page: CollectionConfig<'page'> = {
   slug: 'page',
@@ -36,27 +35,27 @@ export const Page: CollectionConfig<'page'> = {
     useAsTitle: 'title',
     group: 'Content',
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({ data, locale }) => {
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'page',
             breadcrumbs: data?.breadcrumbs,
             absolute: false,
-            locale: getLocaleFromRequest(req),
+            locale: locale.code ?? locale.fallbackLocale,
           }),
           collection: 'page',
         })
       },
     },
-    preview: (data, { req }) => {
+    preview: (data, { locale }) => {
       return generatePreviewPath({
         slug: data?.slug as string,
         path: buildUrl({
           collection: 'page',
           breadcrumbs: data?.breadcrumbs as PageType['breadcrumbs'],
           absolute: false,
-          locale: getLocaleFromRequest(req),
+          locale,
         }),
         collection: 'page',
       })

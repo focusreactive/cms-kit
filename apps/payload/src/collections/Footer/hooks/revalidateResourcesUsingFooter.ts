@@ -1,8 +1,8 @@
 import type { CollectionAfterChangeHook } from 'payload'
 import type { Footer } from '@/payload-types'
-import { revalidateGlobalTags } from '@/shared/lib/getGlobals'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
-import { revalidatePageCache } from '@/shared/lib/revalidatePageCache'
+import { revalidateGlobalTags } from '@/core/lib/getGlobals'
+import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
+import { revalidatePageCache } from '@/core/lib/revalidatePageCache'
 
 export const revalidateResourcesUsingFooter: CollectionAfterChangeHook<Footer> = async ({
   doc,

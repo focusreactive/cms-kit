@@ -1,6 +1,6 @@
 'use client'
 
-import { getClientSideURL } from '@/shared/lib/getURL'
+import { getClientSideURL } from '@/core/lib/getURL'
 import { RefreshRouteOnSave as PayloadLivePreview } from '@payloadcms/live-preview-react'
 import { useRouter, usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'

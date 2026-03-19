@@ -1,10 +1,10 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { getPosts } from '@/shared/lib/getPosts'
-import { getBlogPageSettings } from '@/shared/lib/getBlogPageSettings'
-import { getSiteSettings } from '@/shared/lib/getSiteSettings'
-import { BlogJsonLd, BreadcrumbsJsonLd } from '@/shared/seo/components'
-import { Locale } from '@/shared/types'
+import { getPosts } from '@/core/lib/getPosts'
+import { getBlogPageSettings } from '@/core/lib/getBlogPageSettings'
+import { getSiteSettings } from '@/core/lib/getSiteSettings'
+import { BlogJsonLd, BreadcrumbsJsonLd } from '@/core/seo/components'
+import { Locale } from '@/core/types'
 
 type BlogJsonLdWrapperProps = {
   searchParams: Promise<{

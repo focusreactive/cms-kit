@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { headers } from 'next/headers'
-import { getServerSideURL } from '@/shared/lib/getURL'
+import { getServerSideURL } from '@/core/lib/getURL'
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
   const baseUrl = getServerSideURL()

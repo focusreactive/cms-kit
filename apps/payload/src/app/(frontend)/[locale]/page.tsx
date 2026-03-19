@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { generateMeta } from '@/shared/lib/generateMeta'
-import { getPageBySlug } from '@/shared/lib/getPageBySlug'
-import type { Locale } from '@/shared/types'
-import { I18N_CONFIG } from '@/shared/config/i18n'
-import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
+import { generateMeta } from '@/core/lib/generateMeta'
+import { getPageBySlug } from '@/core/lib/getPageBySlug'
+import type { Locale } from '@/core/types'
+import { I18N_CONFIG } from '@/core/config/i18n'
+import { generateNotFoundMeta } from '@/core/lib/generateNotFoundMeta'
 
 export { default } from './[...slug]/page'
 

@@ -1,4 +1,4 @@
-import { I18N_CONFIG } from '@/shared/config/i18n'
+import { I18N_CONFIG } from '@/core/config/i18n'
 import { LocalizationConfig } from 'payload'
 
 export const localization: LocalizationConfig = {

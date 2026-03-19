@@ -3,7 +3,7 @@ import React from 'react'
 import type { Post } from '@/payload-types'
 
 import { BlogPostsGrid } from '../BlogPostsGrid'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/core/lib/utils'
 
 export type RelatedPostsProps = {
   className?: string

@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react'
 
-import { Button, ButtonVariant, ButtonSize } from '@/shared/ui'
+import { Button, ButtonVariant, ButtonSize } from '@/core/ui'
 import { MoonIcon, SunIcon } from 'lucide-react'
-import { Theme } from '@/shared/context'
-import { themeLocalStorageKey, useTheme } from '@/shared/context'
+import { Theme } from '@/core/context'
+import { themeLocalStorageKey, useTheme } from '@/core/context'
 
 export const ThemeSelector: React.FC = () => {
   const { setTheme } = useTheme()

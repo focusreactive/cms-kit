@@ -2,22 +2,26 @@ import type { Field, Plugin } from 'payload'
 import type { Page } from '@/payload-types'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { normalizeRedirectFields } from '@/hooks/normalizeRedirectFields'
-import { validateRedirectPath } from '@/shared/lib/redirectUrl'
+import { validateRedirectPath } from '@/core/lib/redirectUrl'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-import { superAdmin, or, authenticated, user } from '@/shared/lib/access'
+import { superAdmin, or, authenticated, user } from '@/core/lib/access'
 import seoPlugin from './seoPlugin'
 import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
 import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
 import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
 import { stripUnusedPresetGroups } from '@/hooks/presets/stripUnusedPresetGroups'
-import { PRESET_TYPES_CONFIG } from '@/shared/constants/presets'
+import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
-import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
-import type { ABVariantData } from '@/shared/lib/abTesting/types'
-import { pageVariantsSlug } from '@/collections/PageVariants'
+import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
+import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
+import { abAdapter } from '@/core/lib/abTesting/abAdapter'
+import type { ABVariantData } from '@/core/lib/abTesting/types'
+import { I18N_CONFIG } from '@/core/config/i18n'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
+import { isDev } from '@/core/utils/isDev'
 
 export const plugins: Plugin[] = [
   vercelBlobStorage({
@@ -118,9 +122,7 @@ export const plugins: Plugin[] = [
         })
       },
       hooks: {
-        beforeChange: [
-          normalizeRedirectFields,
-        ],
+        beforeChange: [normalizeRedirectFields],
         afterChange: [revalidateRedirects],
       },
       access: {
@@ -169,34 +171,76 @@ export const plugins: Plugin[] = [
     },
   }),
 
+  commentsPlugin({
+    collections: [
+      { slug: 'page', titleField: 'title' },
+      { slug: 'posts', titleField: 'title' },
+      { slug: 'categories', titleField: 'title' },
+      { slug: 'authors', titleField: 'name' },
+      { slug: 'testimonials', titleField: 'author' },
+      { slug: 'header', titleField: 'name' },
+      { slug: 'footer', titleField: 'name' },
+    ],
+
+    usernameFieldPath: 'name',
+    translations: {
+      es: {
+        label: 'Comentarios',
+        openComments_one: '{{count}} comentario abierto',
+        openComments_other: '{{count}} comentarios abiertos',
+        add: 'Añadir comentario',
+        writeComment: 'Escribe un comentario',
+        comment: 'Comentario',
+        cancel: 'Cancelar',
+        posting: 'Publicando…',
+        resolve: 'Resolver',
+        reopen: 'Reabrir',
+        delete: 'Eliminar',
+        general: 'General',
+        close: 'Cerrar',
+        syncingComments: 'Sincronizando comentarios',
+        openCommentsAria: 'Abrir comentarios',
+        failedToPost: 'Error al publicar el comentario',
+        failedToUpdate: 'Error al actualizar el comentario',
+        failedToDelete: 'Error al eliminar el comentario',
+        failedToAdd: 'Error al añadir el comentario',
+        unknownAuthor: 'Desconocido',
+        deletedUser: 'Usuario eliminado',
+        noOpenComments: 'Sin comentarios abiertos',
+        noResolvedComments: 'Sin comentarios resueltos',
+        noMentionedComments: 'Sin comentarios que te mencionen',
+        filterOpen: 'Abiertos',
+        filterResolved: 'Resueltos',
+        filterMentioned: 'Me mencionan',
+        noMentionMatches: 'Sin coincidencias',
+      },
+    },
+  }) as unknown as Plugin,
+
+  schedulePublicationPlugin({
+    collections: ['page', 'posts'],
+    globals: ['site-settings'],
+    secret: process.env.CRON_SECRET!,
+  }) as unknown as Plugin,
+
   abTestingPlugin<ABVariantData>({
-    debug: true,
+    debug: isDev(),
     storage: abAdapter,
     collections: {
       page: {
-        variantCollectionSlug: pageVariantsSlug,
-        parentField: 'page',
-        passPercentageField: 'abTestingRules.passPercentage',
         generatePath: ({ doc: docProp, locale }) => {
           const doc = docProp as unknown as Page
+
           const breadcrumbs = doc.breadcrumbs ?? []
           const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
           const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-          return `/${locale}${restPath}`
-        },
-        generateVariantData: ({ doc: docProp, variantDoc, locale }): ABVariantData => {
-          const doc = docProp as unknown as Page
-          const breadcrumbs = doc.breadcrumbs ?? []
-          const lastUrl = breadcrumbs[breadcrumbs.length - 1]?.url ?? ''
-          const restPath = !lastUrl || lastUrl === '/home' ? '' : lastUrl
-          return {
-            bucket: variantDoc.bucketID as string,
-            rewritePath: `/${locale}/variants/${variantDoc.bucketID}${restPath}`,
-            passPercentage: (variantDoc.abTestingRules as any).passPercentage,
-          }
+
+          const resolvedLocale = locale ?? I18N_CONFIG.defaultLocale
+          return shouldIncludeLocalePrefix(resolvedLocale)
+            ? `/${resolvedLocale}${restPath}`
+            : restPath || '/'
         },
       },
     },
   }),
-
 ]

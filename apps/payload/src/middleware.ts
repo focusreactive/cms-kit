@@ -1,11 +1,12 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
-import { NextRequest, NextResponse } from 'next/server'
-import { I18N_CONFIG } from '@/shared/config/i18n'
-import { abAdapter } from '@/shared/lib/abTesting/abAdapter'
-import type { ABVariantData } from '@/shared/lib/abTesting/types'
+import { NextRequest } from 'next/server'
+import { I18N_CONFIG } from '@/core/config/i18n'
+import { abAdapter } from '@/core/lib/abTesting/abAdapter'
+import type { ABVariantData } from '@/core/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
-import { abCookies } from './shared/lib/abTesting/abCookies'
+import { abCookies } from './core/lib/abTesting/abCookies'
+import { draftMode } from 'next/headers'
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -24,21 +25,23 @@ export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const localeMatch = pathname.match(localeRegex)
 
-  if (localeMatch) {
-    const [, locale, rest = ''] = localeMatch
-    const isNextRoute = pathname.startsWith(`/${locale}/next/`)
+  const matchedLocale = localeMatch?.[1]
+  const isNextRoute = matchedLocale
+    ? pathname.startsWith(`/${matchedLocale}/next/`)
+    : pathname.startsWith('/next/')
 
-    if (!isNextRoute) {
-      const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
+  const { isEnabled: isDraftMode } = await draftMode()
 
-      if (abResponse) {
-        abResponse.headers.set('x-pathname', pathname)
-        return abResponse
-      }
+  if (!isNextRoute && !isDraftMode) {
+    const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
+
+    if (abResponse) {
+      abResponse.headers.set('x-pathname', pathname)
+      return abResponse
     }
   }
 
-  // No locale yet — let intlMiddleware handle redirect (e.g. / → /en/)
+  // Let intlMiddleware handle redirect
   const response = intlMiddleware(request)
   response.headers.set('x-pathname', pathname)
   return response

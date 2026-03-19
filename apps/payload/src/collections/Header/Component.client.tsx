@@ -4,8 +4,8 @@ import React from 'react'
 import type { Header, Media } from '@/payload-types'
 
 import { HeaderNav } from './Nav'
-import { Container, Link, Logo, Section } from '@/shared/ui'
-import { useTheme } from '@/shared/context'
+import { Link, Logo } from '@/core/ui'
+import { useTheme } from '@/core/context'
 
 interface HeaderClientProps {
   data: Header
@@ -16,19 +16,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className="z-20 sticky top-0 bg-bgColor border-b border-primaryLightColor"
+      className="flex justify-between gap-10 bg-white/30 p-3 backdrop-blur-md"
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <Section as="div" block="header">
-        <Container>
-          <div className="flex justify-between">
-            <Link href="/" aria-label="Go to homepage">
-              <Logo resource={data.logo as Media} />
-            </Link>
-            <HeaderNav data={data} />
-          </div>
-        </Container>
-      </Section>
+      <Link href="/" aria-label="Go to homepage">
+        <Logo resource={data.logo as Media} />
+      </Link>
+      <HeaderNav data={data} />
     </header>
   )
 }

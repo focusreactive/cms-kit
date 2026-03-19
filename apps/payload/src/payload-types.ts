@@ -76,10 +76,11 @@ export interface Config {
     testimonials: Testimonial;
     header: Header;
     footer: Footer;
-    'page-variants': PageVariant;
     redirects: Redirect;
     presets: Preset;
+    comments: Comment;
     'payload-kv': PayloadKv;
+    'payload-jobs': PayloadJob;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -100,10 +101,11 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    'page-variants': PageVariantsSelect<false> | PageVariantsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
+    comments: CommentsSelect<false> | CommentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -115,16 +117,24 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'es') | ('en' | 'es')[];
   globals: {
     'site-settings': SiteSetting;
+    _abManifest: _AbManifest;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    _abManifest: _AbManifestSelect<false> | _AbManifestSelect<true>;
   };
   locale: 'en' | 'es';
   user: User & {
     collection: 'users';
   };
   jobs: {
-    tasks: unknown;
+    tasks: {
+      schedulePublish: TaskSchedulePublish;
+      inline: {
+        input: unknown;
+        output: unknown;
+      };
+    };
     workflows: unknown;
   };
 }
@@ -311,6 +321,7 @@ export interface FolderInterface {
  */
 export interface Page {
   id: number;
+  _abPassPercentage?: number | null;
   /**
    * The title of the page
    */
@@ -360,6 +371,19 @@ export interface Page {
         label?: string | null;
         id?: string | null;
       }[]
+    | null;
+  /**
+   * The original page this variant belongs to.
+   */
+  _abVariantOf?: (number | null) | Page;
+  _abVariantPercentages?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
     | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
@@ -504,7 +528,7 @@ export interface Category {
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
-  slug?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -622,6 +646,15 @@ export interface HeroBlock {
    * Overlay opacity (0-100)
    */
   opacity?: number | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
@@ -645,6 +678,15 @@ export interface TextSectionBlock {
       version: number;
     };
     [k: string]: unknown;
+  };
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -672,6 +714,15 @@ export interface ContentBlock {
       version: number;
     };
     [k: string]: unknown;
+  };
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -702,6 +753,15 @@ export interface FaqBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq';
@@ -725,6 +785,15 @@ export interface TestimonialsListBlock {
   duration?: number | null;
   showRating?: boolean | null;
   showAvatar?: boolean | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonialsList';
@@ -778,6 +847,15 @@ export interface CardsGridBlock {
     backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'cardsGrid';
@@ -822,6 +900,15 @@ export interface CarouselBlock {
     } | null;
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'carousel';
@@ -851,6 +938,15 @@ export interface LogosBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'logos';
@@ -883,6 +979,15 @@ export interface LinksListBlock {
     };
     id?: string | null;
   }[];
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'linksList';
@@ -909,70 +1014,18 @@ export interface BlogSectionBlock {
   } | null;
   style?: ('three-column' | 'three-column-with-images' | 'three-column-with-background-images') | null;
   postsLimit?: number | null;
+  section?: {
+    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+    marginTop?: ('none' | 'base' | 'large') | null;
+    marginBottom?: ('none' | 'base' | 'large') | null;
+    paddingX?: ('none' | 'base' | 'large') | null;
+    paddingY?: ('none' | 'base' | 'large') | null;
+    maxWidth?: ('none' | 'base' | 'small') | null;
+    backgroundImage?: (number | null) | Media;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'blogSection';
-}
-/**
- * Page variants for A/B testing. Each variant holds alternative content for a specific page.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-variants".
- */
-export interface PageVariant {
-  id: number;
-  /**
-   * The title shown in the admin panel to identify this variant.
-   */
-  title: string;
-  /**
-   * The header to display on the page
-   */
-  header?: (number | null) | Header;
-  /**
-   * The footer to display on the page
-   */
-  footer?: (number | null) | Footer;
-  blocks: (
-    | HeroBlock
-    | TextSectionBlock
-    | ContentBlock
-    | FaqBlock
-    | TestimonialsListBlock
-    | CardsGridBlock
-    | CarouselBlock
-    | LogosBlock
-    | LinksListBlock
-    | BlogSectionBlock
-  )[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-    /**
-     * Allow search engines to index this page
-     */
-    robots?: ('index' | 'noindex') | null;
-  };
-  /**
-   * The page this variant belongs to.
-   */
-  page: number | Page;
-  /**
-   * Variant identifier used in the URL and cookie. Each page can have at most one variant per bucket.
-   */
-  bucketID: 'a' | 'b' | 'c';
-  abTestingRules: {
-    /**
-     * Percentage of visitors routed to this variant. All variants for the same page must sum to ≤ 100%; the remainder is served the original page.
-     */
-    passPercentage: number;
-  };
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1093,6 +1146,40 @@ export interface Preset {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
+export interface Comment {
+  id: number;
+  documentId?: number | null;
+  collectionSlug?: string | null;
+  /**
+   * Slug of the Payload global being commented on. Null = collection document comment.
+   */
+  globalSlug?: string | null;
+  /**
+   * Dot-notation path of the field being commented on. Null = document-level.
+   */
+  fieldPath?: string | null;
+  /**
+   * Locale for field-level comments. Null = document-level (shown in all locales).
+   */
+  locale?: string | null;
+  text: string;
+  mentions?:
+    | {
+        user: number | User;
+        id?: string | null;
+      }[]
+    | null;
+  author: number | User;
+  isResolved?: boolean | null;
+  resolvedBy?: (number | null) | User;
+  resolvedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1107,6 +1194,98 @@ export interface PayloadKv {
     | number
     | boolean
     | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs".
+ */
+export interface PayloadJob {
+  id: number;
+  /**
+   * Input data provided to the job
+   */
+  input?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  taskStatus?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  completedAt?: string | null;
+  totalTried?: number | null;
+  /**
+   * If hasError is true this job will not be retried
+   */
+  hasError?: boolean | null;
+  /**
+   * If hasError is true, this is the error that caused it
+   */
+  error?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Task execution log
+   */
+  log?:
+    | {
+        executedAt: string;
+        completedAt: string;
+        taskSlug: 'inline' | 'schedulePublish';
+        taskID: string;
+        input?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        output?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        state: 'failed' | 'succeeded';
+        error?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  taskSlug?: ('inline' | 'schedulePublish') | null;
+  queue?: string | null;
+  waitUntil?: string | null;
+  processing?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1152,16 +1331,16 @@ export interface PayloadLockedDocument {
         value: number | Footer;
       } | null)
     | ({
-        relationTo: 'page-variants';
-        value: number | PageVariant;
-      } | null)
-    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
     | ({
         relationTo: 'presets';
         value: number | Preset;
+      } | null)
+    | ({
+        relationTo: 'comments';
+        value: number | Comment;
       } | null)
     | ({
         relationTo: 'payload-folders';
@@ -1333,6 +1512,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "page_select".
  */
 export interface PageSelect<T extends boolean = true> {
+  _abPassPercentage?: T;
   title?: T;
   header?: T;
   footer?: T;
@@ -1369,6 +1549,8 @@ export interface PageSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  _abVariantOf?: T;
+  _abVariantPercentages?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1396,6 +1578,17 @@ export interface HeroBlockSelect<T extends boolean = true> {
   enabled?: T;
   color?: T;
   opacity?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1405,6 +1598,17 @@ export interface HeroBlockSelect<T extends boolean = true> {
  */
 export interface TextSectionBlockSelect<T extends boolean = true> {
   text?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1417,6 +1621,17 @@ export interface ContentBlockSelect<T extends boolean = true> {
   layout?: T;
   image?: T;
   content?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1432,6 +1647,17 @@ export interface FaqBlockSelect<T extends boolean = true> {
         question?: T;
         answer?: T;
         id?: T;
+      };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
       };
   id?: T;
   blockName?: T;
@@ -1452,6 +1678,17 @@ export interface TestimonialsListBlockSelect<T extends boolean = true> {
   duration?: T;
   showRating?: T;
   showAvatar?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1482,6 +1719,17 @@ export interface CardsGridBlockSelect<T extends boolean = true> {
         backgroundColor?: T;
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1498,6 +1746,17 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         image?: T;
         text?: T;
         id?: T;
+      };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
       };
   id?: T;
   blockName?: T;
@@ -1523,6 +1782,17 @@ export interface LogosBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1547,6 +1817,17 @@ export interface LinksListBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1558,6 +1839,17 @@ export interface BlogSectionBlockSelect<T extends boolean = true> {
   text?: T;
   style?: T;
   postsLimit?: T;
+  section?:
+    | T
+    | {
+        theme?: T;
+        marginTop?: T;
+        marginBottom?: T;
+        paddingX?: T;
+        paddingY?: T;
+        maxWidth?: T;
+        backgroundImage?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1696,46 +1988,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-variants_select".
- */
-export interface PageVariantsSelect<T extends boolean = true> {
-  title?: T;
-  header?: T;
-  footer?: T;
-  blocks?:
-    | T
-    | {
-        hero?: T | HeroBlockSelect<T>;
-        textSection?: T | TextSectionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        faq?: T | FaqBlockSelect<T>;
-        testimonialsList?: T | TestimonialsListBlockSelect<T>;
-        cardsGrid?: T | CardsGridBlockSelect<T>;
-        carousel?: T | CarouselBlockSelect<T>;
-        logos?: T | LogosBlockSelect<T>;
-        linksList?: T | LinksListBlockSelect<T>;
-        blogSection?: T | BlogSectionBlockSelect<T>;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-        robots?: T;
-      };
-  page?: T;
-  bucketID?: T;
-  abTestingRules?:
-    | T
-    | {
-        passPercentage?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -1801,11 +2053,66 @@ export interface PresetsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments_select".
+ */
+export interface CommentsSelect<T extends boolean = true> {
+  documentId?: T;
+  collectionSlug?: T;
+  globalSlug?: T;
+  fieldPath?: T;
+  locale?: T;
+  text?: T;
+  mentions?:
+    | T
+    | {
+        user?: T;
+        id?: T;
+      };
+  author?: T;
+  isResolved?: T;
+  resolvedBy?: T;
+  resolvedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-jobs_select".
+ */
+export interface PayloadJobsSelect<T extends boolean = true> {
+  input?: T;
+  taskStatus?: T;
+  completedAt?: T;
+  totalTried?: T;
+  hasError?: T;
+  error?: T;
+  log?:
+    | T
+    | {
+        executedAt?: T;
+        completedAt?: T;
+        taskSlug?: T;
+        taskID?: T;
+        input?: T;
+        output?: T;
+        state?: T;
+        error?: T;
+        id?: T;
+      };
+  taskSlug?: T;
+  queue?: T;
+  waitUntil?: T;
+  processing?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1953,6 +2260,27 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "_abManifest".
+ */
+export interface _AbManifest {
+  id: number;
+  /**
+   * A/B testing manifest. Managed automatically — do not edit manually.
+   */
+  manifest?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1991,6 +2319,38 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "_abManifest_select".
+ */
+export interface _AbManifestSelect<T extends boolean = true> {
+  manifest?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskSchedulePublish".
+ */
+export interface TaskSchedulePublish {
+  input: {
+    type?: ('publish' | 'unpublish') | null;
+    locale?: string | null;
+    doc?:
+      | ({
+          relationTo: 'page';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    global?: 'site-settings' | null;
+    user?: (number | null) | User;
+  };
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

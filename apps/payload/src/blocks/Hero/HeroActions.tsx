@@ -8,9 +8,9 @@ import {
 } from '@focus-reactive/payload-plugin-ab/analytics/client'
 
 import type { HeroBlock } from '@/payload-types'
-import { CMSLink } from '@/shared/ui'
-import { manifestKeyToExpId } from '@/shared/lib/abTesting/cookieName'
-import { abCookies } from '@/shared/lib/abTesting/abCookies'
+import { CMSLink } from '@/core/ui'
+import { manifestKeyToExpId } from '@/core/lib/abTesting/cookieName'
+import { abCookies } from '@/core/lib/abTesting/abCookies'
 
 type Action = NonNullable<HeroBlock['actions']>[number]
 

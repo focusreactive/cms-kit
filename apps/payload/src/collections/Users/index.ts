@@ -1,5 +1,5 @@
 import { type CollectionConfig } from 'payload'
-import { authenticated, onlySelf, or, superAdmin, user } from '@/shared/lib/access'
+import { authenticated, onlySelf, or, superAdmin, user } from '@/core/lib/access'
 
 export const Users: CollectionConfig<'users'> = {
   slug: 'users',

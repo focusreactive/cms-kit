@@ -3,7 +3,7 @@ import { ImageAspectRatio, type IImageProps } from '@shared/ui/components/ui/ima
 
 export function prepareImageProps(
   media: Media | number | null | undefined,
-  aspectRatio: ImageAspectRatio = ImageAspectRatio['16/9'],
+  aspectRatio: ImageAspectRatio = ImageAspectRatio['1/1'],
 ): IImageProps {
   if (!media || typeof media !== 'object') {
     return {

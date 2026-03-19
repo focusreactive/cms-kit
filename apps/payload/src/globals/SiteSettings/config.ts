@@ -1,10 +1,10 @@
 import type { GlobalConfig } from 'payload'
 
 import { revalidateSiteSettings } from './hooks/revalidateSiteSettings'
-import { anyone, or, user, superAdmin } from '@/shared/lib/access'
-import { createLocalizedDefault } from '@/shared/lib/createLocalizedDefault'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
-import { generateSeoFields } from '@/shared/lib/seoFields'
+import { anyone, or, user, superAdmin } from '@/core/lib/access'
+import { createLocalizedDefault } from '@/core/lib/createLocalizedDefault'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
+import { generateSeoFields } from '@/core/lib/seoFields'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',

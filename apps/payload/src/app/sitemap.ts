@@ -2,15 +2,15 @@ import type { MetadataRoute } from 'next'
 import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { getServerSideURL } from '@/shared/lib/getURL'
-import { buildUrl } from '@/shared/lib/buildUrl'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import { getBlogPageSettings } from '@/shared/lib/getBlogPageSettings'
-import { getLastModifiedDate } from '@/shared/lib/getLastModifiedDate'
-import { getAllDocuments } from '@/shared/lib/getAllDocuments'
-import { cacheTag } from '@/shared/lib/cacheTags'
-import { I18N_CONFIG } from '@/shared/config/i18n'
-import type { Locale } from '@/shared/types'
+import { getServerSideURL } from '@/core/lib/getURL'
+import { buildUrl } from '@/core/lib/buildUrl'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import { getBlogPageSettings } from '@/core/lib/getBlogPageSettings'
+import { getLastModifiedDate } from '@/core/lib/getLastModifiedDate'
+import { getAllDocuments } from '@/core/lib/getAllDocuments'
+import { cacheTag } from '@/core/lib/cacheTags'
+import { I18N_CONFIG } from '@/core/config/i18n'
+import type { Locale } from '@/core/types'
 
 type Sitemap = MetadataRoute.Sitemap
 
@@ -57,59 +57,58 @@ async function generateSitemap(): Promise<Sitemap> {
           getBlogPageSettings({ locale }),
         ])
 
-          const pages = allPages.filter((page) => {
-            const robots = page.meta?.robots
-            return robots === 'index' || robots === undefined
+        const pages = allPages.filter((page) => {
+          const robots = page.meta?.robots
+          return robots === 'index' || robots === undefined
+        })
+
+        const posts = allPosts.filter((post) => {
+          const robots = post.meta?.robots
+          return robots === 'index' || robots === undefined
+        })
+
+        const homeUrl = buildUrl({ collection: 'page', locale })
+
+        pages.forEach((page) => {
+          const url = buildUrl({
+            collection: 'page',
+            breadcrumbs: page.breadcrumbs,
+            locale,
           })
-
-          const posts = allPosts.filter((post) => {
-            const robots = post.meta?.robots
-            return robots === 'index' || robots === undefined
-          })
-
-          const homeUrl = buildUrl({ collection: 'page', locale })
-
-          pages.forEach((page) => {
-            const url = buildUrl({
-              collection: 'page',
-              breadcrumbs: page.breadcrumbs,
-              locale,
-            })
-            const isHome = url === homeUrl
-            sitemap.push({
-              url,
-              lastModified: page.updatedAt ? new Date(page.updatedAt) : new Date(),
-              changeFrequency,
-              priority: isHome ? 1.0 : 0.8,
-            })
-          })
-
-          const blogLastModified =
-            getLastModifiedDate(posts[0]?.publishedAt) || new Date()
-
+          const isHome = url === homeUrl
           sitemap.push({
-            url: buildUrl({ collection: 'posts', locale }),
-            lastModified: blogLastModified,
+            url,
+            lastModified: page.updatedAt ? new Date(page.updatedAt) : new Date(),
             changeFrequency,
-            priority: 0.9,
+            priority: isHome ? 1.0 : 0.8,
           })
+        })
 
-          posts.forEach((post) => {
-            sitemap.push({
-              url: buildUrl({
-                collection: 'posts',
-                slug: post.slug,
-                locale,
-              }),
-              lastModified: post.publishedAt
-                ? new Date(post.publishedAt)
-                : post.updatedAt
-                  ? new Date(post.updatedAt)
-                  : new Date(),
-              changeFrequency: 'monthly',
-              priority: 0.7,
-            })
+        const blogLastModified = getLastModifiedDate(posts[0]?.publishedAt) || new Date()
+
+        sitemap.push({
+          url: buildUrl({ collection: 'posts', locale }),
+          lastModified: blogLastModified,
+          changeFrequency,
+          priority: 0.9,
+        })
+
+        posts.forEach((post) => {
+          sitemap.push({
+            url: buildUrl({
+              collection: 'posts',
+              slug: post.slug,
+              locale,
+            }),
+            lastModified: post.publishedAt
+              ? new Date(post.publishedAt)
+              : post.updatedAt
+                ? new Date(post.updatedAt)
+                : new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
           })
+        })
       }),
     )
 

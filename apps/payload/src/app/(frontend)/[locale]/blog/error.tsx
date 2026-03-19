@@ -1,5 +1,5 @@
 'use client'
-import { ErrorBoundary } from '@/shared/ui'
+import { ErrorBoundary } from '@/core/ui'
 import { useTranslations } from 'next-intl'
 
 export default function BlogError({

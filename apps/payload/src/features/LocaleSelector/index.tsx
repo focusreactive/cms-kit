@@ -2,9 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useLocale } from 'next-intl'
 import { usePathname } from '@/i18n/navigation'
-import { cn } from '@/shared/lib/utils'
-import { Link } from '@/shared/ui'
-import { I18N_CONFIG } from '@/shared/config/i18n'
+import { Button, Link } from '@shared/ui'
+import { Link as LocaleLink } from '@/i18n/navigation'
+import { I18N_CONFIG } from '@/core/config/i18n'
 
 type LocaleSelectorProps = {
   render: (locale: string) => React.ReactNode
@@ -51,18 +51,16 @@ export const LocaleSelector = ({ render }: LocaleSelectorProps) => {
       {open && (
         <ul className="absolute right-0 top-full z-50 mt-1 min-w-[120px] rounded-md border border-primaryLightColor bg-bgColor py-1 shadow-lg">
           {I18N_CONFIG.locales.map((loc) => (
-            <li key={loc.code}>
-              <Link
-                href={pathname}
-                locale={loc.code}
-                className={cn(
-                  'block px-4 py-2 text-sm text-textColor hover:bg-primaryLightColor hover:text-primaryColor transition-colors no-underline',
-                  loc.code === locale && 'text-textSecondaryColor pointer-events-none cursor-default',
-                )}
+            <li className="px-1" key={loc.code}>
+              <Button
+                key={loc.code}
+                clickDisabled={loc.code === locale}
                 onClick={() => setOpen(false)}
               >
-                {loc.label}
-              </Link>
+                <LocaleLink href={pathname} locale={loc.code}>
+                  {loc.label}
+                </LocaleLink>
+              </Button>
             </li>
           ))}
         </ul>

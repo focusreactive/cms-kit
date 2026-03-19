@@ -1,10 +1,10 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { getPosts } from '@/shared/lib/getPosts'
-import { getBlogPageSettings } from '@/shared/lib/getBlogPageSettings'
+import { getPosts } from '@/core/lib/getPosts'
+import { getBlogPageSettings } from '@/core/lib/getBlogPageSettings'
 import { BlogPageContent } from '@/widgets'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import { Locale } from '@/shared/types'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import { Locale } from '@/core/types'
 import { redirect } from '@/i18n/navigation'
 
 type BlogPageDynamicProps = {

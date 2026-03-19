@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { or, user, author, superAdmin } from '@/shared/lib/access'
+import { or, user, author, superAdmin } from '@/core/lib/access'
 
 export const Authors: CollectionConfig<'authors'> = {
   slug: 'authors',

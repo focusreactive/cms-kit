@@ -1,11 +1,11 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { getSiteSettings } from '@/shared/lib/getSiteSettings'
-import { Section, Container, buttonVariants, ButtonVariant, Link } from '@/shared/ui'
-import { generateNotFoundMeta } from '@/shared/lib/generateNotFoundMeta'
-import { Locale } from '@/shared/types'
-import { resolveLocale } from '@/shared/lib/resolveLocale'
+import { getSiteSettings } from '@/core/lib/getSiteSettings'
+import { buttonVariants, ButtonVariant, Link } from '@/core/ui'
+import { generateNotFoundMeta } from '@/core/lib/generateNotFoundMeta'
+import { Locale } from '@/core/types'
+import { resolveLocale } from '@/core/lib/resolveLocale'
 import { Footer, Header } from '@/widgets'
 import { Header as HeaderType, Footer as FooterType } from '@/payload-types'
 import { headers } from 'next/headers'
@@ -30,8 +30,8 @@ export default async function NotFound() {
     <>
       <Header data={settings.header as HeaderType} />
       <main>
-        <Section className="flex items-center justify-center min-h-[60vh]">
-          <Container className="text-center">
+        <section className="flex items-center justify-center min-h-[60vh] py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
+          <div className="mx-auto max-w-7xl text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               {settings.notFoundTitle || '404 - Page not found'}
             </h1>
@@ -46,8 +46,8 @@ export default async function NotFound() {
             >
               {t('goToHomepage')}
             </Link>
-          </Container>
-        </Section>
+          </div>
+        </section>
       </main>
       <Footer data={settings.footer as FooterType} />
     </>

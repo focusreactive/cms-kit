@@ -3,20 +3,19 @@ import type { CollectionConfig } from 'payload'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
 import { createSharedSlugField } from '@/fields/slugField'
-import { anyone, author, or, user, superAdmin } from '@/shared/lib/access'
-import { generatePreviewPath } from '@/shared/lib/generatePreviewPath'
-import { generateSeoFields } from '@/shared/lib/seoFields'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import { generateRichText } from '@/shared/lib/generateRichText'
-import { buildUrl } from '@/shared/lib/buildUrl'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
+import { anyone, author, or, user, superAdmin } from '@/core/lib/access'
+import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
+import { generateSeoFields } from '@/core/lib/seoFields'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import { generateRichText } from '@/core/lib/generateRichText'
+import { buildUrl } from '@/core/lib/buildUrl'
 import {
   createLocalizedDefault,
   createLocalizedRichText,
-} from '@/shared/lib/createLocalizedDefault'
-import { getDefaultMediaId } from '@/shared/lib/getDefaultMediaId'
-import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/shared/constants/mediaDefaults'
-import { DEFAULT_VALUES } from '@/shared/constants/defaultValues'
+} from '@/core/lib/createLocalizedDefault'
+import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
+import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
+import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: BLOG_CONFIG.collection,
@@ -53,20 +52,20 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     group: 'Blog',
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({ data, locale }) => {
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'posts',
             slug: data?.slug,
             absolute: false,
-            locale: getLocaleFromRequest(req),
+            locale: locale.code ?? locale.fallbackLocale,
           }),
           collection: BLOG_CONFIG.collection,
         })
       },
     },
-    preview: (data, { req }) => {
+    preview: (data, { locale }) => {
       return generatePreviewPath({
         slug: data?.slug as string,
         collection: BLOG_CONFIG.collection,
@@ -74,7 +73,7 @@ export const Posts: CollectionConfig<'posts'> = {
           collection: 'posts',
           slug: data?.slug as string,
           absolute: false,
-          locale: getLocaleFromRequest(req),
+          locale,
         }),
       })
     },

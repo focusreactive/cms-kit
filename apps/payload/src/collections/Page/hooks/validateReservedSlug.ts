@@ -1,8 +1,8 @@
 import { APIError, type CollectionBeforeChangeHook } from 'payload'
 import type { Page } from '@/payload-types'
-import { BLOG_CONFIG } from '@/shared/config/blog'
-import { buildUrl } from '@/shared/lib/buildUrl'
-import { getLocaleFromRequest } from '@/shared/lib/getLocaleFromRequest'
+import { BLOG_CONFIG } from '@/core/config/blog'
+import { buildUrl } from '@/core/lib/buildUrl'
+import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
 
 const RESERVED_SLUGS: readonly string[] = [BLOG_CONFIG.slug]
 
