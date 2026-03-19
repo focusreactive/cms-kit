@@ -14,7 +14,7 @@ export const CarouselBlockComponent: React.FC<CarouselBlock> = ({
   id,
 }) => {
   const cards: ICarouselCardProps[] = (slides ?? []).map((slide) => ({
-    image: prepareImageProps(typeof slide.image === 'object' ? slide.image : null),
+    image: prepareImageProps(slide.image),
     text: slide.text ? prepareRichTextProps(slide.text) : undefined,
     effect: (effect as ICarouselCardProps['effect']) ?? 'slide',
   }))

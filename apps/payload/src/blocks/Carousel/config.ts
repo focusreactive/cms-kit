@@ -2,6 +2,7 @@ import type { Block, Field } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { generateRichText } from '@/core/lib/generateRichText'
 import { embedSectionTab } from '@/fields/section/embedSectionTab'
+import { imageField } from '@/fields/imageField'
 
 const fields: Field[] = [
   {
@@ -33,13 +34,7 @@ const fields: Field[] = [
     required: true,
     localized: true,
     fields: [
-      {
-        name: 'image',
-        type: 'upload',
-        relationTo: 'media',
-        required: true,
-        label: { en: 'Image', es: 'Imagen' },
-      },
+      imageField(),
       {
         name: 'text',
         type: 'richText',

@@ -1,10 +1,9 @@
 import type { Field, GroupField } from 'payload'
 import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
-import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
-import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
 import { generateRichText } from '@/core/lib/generateRichText'
 import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 import { link } from '@/fields/link'
+import { imageField } from '@/fields/imageField'
 
 const defaultHeroLinkItem = (label: string) => ({
   type: 'custom' as const,
@@ -48,14 +47,7 @@ export const heroFields: Field[] = [
       es: [defaultHeroLinkItem('Saber más')],
     }),
   },
-  {
-    name: 'media',
-    type: 'upload',
-    relationTo: 'media',
-    required: true,
-    label: { en: 'Media', es: 'Medio' },
-    defaultValue: async () => getDefaultMediaId(PLATFORM_DEFAULT_MEDIA_SLOT),
-  },
+  imageField('image', { withDefaultMedia: true }),
   {
     label: { en: 'Overlay', es: 'Overlay' },
     type: 'group',

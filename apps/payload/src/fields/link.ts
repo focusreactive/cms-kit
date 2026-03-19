@@ -26,10 +26,11 @@ export const appearanceOptions: Record<LinkAppearances, Option> = {
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
+  required?: boolean
   overrides?: Partial<GroupField>
 }) => Field
 
-export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+export const link: LinkType = ({ appearances, disableLabel = false, required = true, overrides = {} } = {}) => {
   const linkResult: GroupField = {
     name: 'link',
     type: 'group',
@@ -96,7 +97,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         es: 'Documento al que enlazar',
       },
       relationTo: ['page', BLOG_CONFIG.collection],
-      required: true,
+      required,
     },
     {
       name: 'url',
@@ -108,7 +109,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         en: 'Custom URL',
         es: 'URL personalizada',
       },
-      required: true,
+      required,
     },
   ]
 
@@ -135,7 +136,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
             en: 'Label',
             es: 'Etiqueta',
           },
-          required: true,
+          required,
         },
       ],
     })

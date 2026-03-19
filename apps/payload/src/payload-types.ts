@@ -639,7 +639,10 @@ export interface HeroBlock {
         id?: string | null;
       }[]
     | null;
-  media: number | Media;
+  image: {
+    image: number | Media;
+    aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+  };
   enabled?: boolean | null;
   color?: ('black' | 'white') | null;
   /**
@@ -822,8 +825,11 @@ export interface CardsGridBlock {
   items: {
     title: string;
     description?: string | null;
-    image: number | Media;
-    link: {
+    image?: {
+      image?: (number | null) | Media;
+      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+    };
+    link?: {
       type?: ('reference' | 'custom') | null;
       newTab?: boolean | null;
       reference?:
@@ -836,7 +842,7 @@ export interface CardsGridBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      label: string;
+      label?: string | null;
       /**
        * Choose how the link should be rendered.
        */
@@ -882,7 +888,10 @@ export interface CarouselBlock {
   } | null;
   effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
   slides: {
-    image: number | Media;
+    image: {
+      image: number | Media;
+      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+    };
     text?: {
       root: {
         type: string;
@@ -920,7 +929,10 @@ export interface CarouselBlock {
 export interface LogosBlock {
   alignVariant?: ('left' | 'center' | 'right') | null;
   items: {
-    image: number | Media;
+    image: {
+      image: number | Media;
+      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+    };
     link: {
       type?: ('reference' | 'custom') | null;
       newTab?: boolean | null;
@@ -1013,16 +1025,11 @@ export interface BlogSectionBlock {
     [k: string]: unknown;
   } | null;
   style?: ('three-column' | 'three-column-with-images' | 'three-column-with-background-images') | null;
+  /**
+   * Aspect ratio applied to all post images in this section
+   */
+  aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
   postsLimit?: number | null;
-  section?: {
-    theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
-    paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
-  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'blogSection';
@@ -1117,7 +1124,10 @@ export interface Preset {
           id?: string | null;
         }[]
       | null;
-    media: number | Media;
+    image: {
+      image: number | Media;
+      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+    };
     enabled?: boolean | null;
     color?: ('black' | 'white') | null;
     /**
@@ -1574,7 +1584,12 @@ export interface HeroBlockSelect<T extends boolean = true> {
         appearance?: T;
         id?: T;
       };
-  media?: T;
+  image?:
+    | T
+    | {
+        image?: T;
+        aspectRatio?: T;
+      };
   enabled?: T;
   color?: T;
   opacity?: T;
@@ -1703,7 +1718,12 @@ export interface CardsGridBlockSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
-        image?: T;
+        image?:
+          | T
+          | {
+              image?: T;
+              aspectRatio?: T;
+            };
         link?:
           | T
           | {
@@ -1743,7 +1763,12 @@ export interface CarouselBlockSelect<T extends boolean = true> {
   slides?:
     | T
     | {
-        image?: T;
+        image?:
+          | T
+          | {
+              image?: T;
+              aspectRatio?: T;
+            };
         text?: T;
         id?: T;
       };
@@ -1770,7 +1795,12 @@ export interface LogosBlockSelect<T extends boolean = true> {
   items?:
     | T
     | {
-        image?: T;
+        image?:
+          | T
+          | {
+              image?: T;
+              aspectRatio?: T;
+            };
         link?:
           | T
           | {
@@ -1838,18 +1868,8 @@ export interface LinksListBlockSelect<T extends boolean = true> {
 export interface BlogSectionBlockSelect<T extends boolean = true> {
   text?: T;
   style?: T;
+  aspectRatio?: T;
   postsLimit?: T;
-  section?:
-    | T
-    | {
-        theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
-        paddingY?: T;
-        maxWidth?: T;
-        backgroundImage?: T;
-      };
   id?: T;
   blockName?: T;
 }
@@ -2028,7 +2048,12 @@ export interface PresetsSelect<T extends boolean = true> {
               appearance?: T;
               id?: T;
             };
-        media?: T;
+        image?:
+          | T
+          | {
+              image?: T;
+              aspectRatio?: T;
+            };
         enabled?: T;
         color?: T;
         opacity?: T;

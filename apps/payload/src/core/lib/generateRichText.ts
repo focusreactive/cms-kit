@@ -17,6 +17,7 @@ import {
   AlignFeature,
   FeatureProviderServer,
   LinkFeature,
+  UploadFeature,
 } from '@payloadcms/richtext-lexical'
 import { BLOG_CONFIG } from '@/core/config/blog'
 
@@ -26,7 +27,7 @@ const toolbarFeatures = [FixedToolbarFeature(), InlineToolbarFeature()]
 
 export function generateRichText(preset: RichTextPreset = 'default') {
   return lexicalEditor({
-    features: ({ rootFeatures }) => {
+    features: ({ rootFeatures: _rootFeatures }) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let defaultFeatures: FeatureProviderServer<any, any, any>[] = []
 
@@ -53,7 +54,19 @@ export function generateRichText(preset: RichTextPreset = 'default') {
         case 'default':
           defaultFeatures = [
             ...toolbarFeatures,
-            ...rootFeatures,
+            HeadingFeature(),
+            ParagraphFeature(),
+            BoldFeature(),
+            ItalicFeature(),
+            UnderlineFeature(),
+            StrikethroughFeature(),
+            SubscriptFeature(),
+            SuperscriptFeature(),
+            InlineCodeFeature(),
+            UnorderedListFeature(),
+            OrderedListFeature(),
+            IndentFeature(),
+            AlignFeature(),
             LinkFeature({
               fields: ({ defaultFields }) => [
                 ...defaultFields,
@@ -65,6 +78,31 @@ export function generateRichText(preset: RichTextPreset = 'default') {
               ],
               enabledCollections: ['page', BLOG_CONFIG.collection],
               maxDepth: 2,
+            }),
+            UploadFeature({
+              collections: {
+                media: {
+                  fields: [
+                    {
+                      name: 'aspectRatio',
+                      type: 'select',
+                      defaultValue: '1/1',
+                      label: { en: 'Aspect Ratio', es: 'Relación de aspecto' },
+                      options: [
+                        { label: { en: '16/9', es: '16/9' }, value: '16/9' },
+                        { label: { en: '3/2', es: '3/2' }, value: '3/2' },
+                        { label: { en: '4/3', es: '4/3' }, value: '4/3' },
+                        { label: { en: '1/1', es: '1/1' }, value: '1/1' },
+                        { label: { en: '9/16', es: '9/16' }, value: '9/16' },
+                        { label: { en: '1/2', es: '1/2' }, value: '1/2' },
+                        { label: { en: '4/1', es: '4/1' }, value: '4/1' },
+                        { label: { en: '3/1', es: '3/1' }, value: '3/1' },
+                        { label: { en: 'Auto', es: 'Auto' }, value: 'auto' },
+                      ],
+                    },
+                  ],
+                },
+              },
             }),
           ]
           break

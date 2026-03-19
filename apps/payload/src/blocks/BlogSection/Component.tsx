@@ -4,7 +4,6 @@ import { getPayload } from 'payload'
 import type { BlogSectionBlock } from '@/payload-types'
 import type { Post, Media } from '@/payload-types'
 import { BlogSection } from '@shared/ui'
-import { SectionContainer } from '@/core/ui'
 import type { IBlogPostCardProps } from '@shared/ui/components/sections/blog/types'
 import { BlogStyle } from '@shared/ui/components/sections/blog/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
@@ -14,9 +13,8 @@ import { BLOG_CONFIG } from '@/core/config/blog'
 export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   text,
   style,
+  aspectRatio,
   postsLimit,
-  section,
-  id,
 }) => {
   const payload = await getPayload({ config: configPromise })
 
@@ -37,18 +35,16 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
     return {
       style: blogStyle,
       text: prepareRichTextProps(null),
-      image: prepareImageProps(heroImage),
+      image: prepareImageProps({ image: heroImage, aspectRatio: aspectRatio ?? null }),
       link: { text: post.title, href: postUrl },
     }
   })
 
   return (
-    <SectionContainer sectionData={{ ...section, id, paddingX: 'none', paddingY: 'none' }}>
-      <BlogSection
-        text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
-        posts={formattedPosts}
-        style={blogStyle}
-      />
-    </SectionContainer>
+    <BlogSection
+      text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
+      posts={formattedPosts}
+      style={blogStyle}
+    />
   )
 }

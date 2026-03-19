@@ -2,6 +2,7 @@ import type { Block, Field } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { link } from '@/fields/link'
 import { embedSectionTab } from '@/fields/section/embedSectionTab'
+import { imageField } from '@/fields/imageField'
 
 const fields: Field[] = [
   {
@@ -22,13 +23,7 @@ const fields: Field[] = [
     minRows: 1,
     required: true,
     fields: [
-      {
-        name: 'image',
-        type: 'upload',
-        relationTo: 'media',
-        required: true,
-        label: { en: 'Logo Image', es: 'Imagen del logo' },
-      },
+      imageField(),
       link({ appearances: false }),
     ],
   },
