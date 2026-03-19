@@ -410,13 +410,9 @@ export interface Header {
   navItems?:
     | {
         /**
-         * Navigation item type: single link or links group
-         */
-        type: 'link' | 'links_group';
-        /**
          * Link settings
          */
-        link?: {
+        link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -431,33 +427,6 @@ export interface Header {
           url?: string | null;
           label: string;
         };
-        /**
-         * Group name for dropdown menu display
-         */
-        groupName?: string | null;
-        /**
-         * Links in the dropdown menu (up to 10 items)
-         */
-        links?:
-          | {
-              link: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?:
-                  | ({
-                      relationTo: 'page';
-                      value: number | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'posts';
-                      value: number | Post;
-                    } | null);
-                url?: string | null;
-                label: string;
-              };
-              id?: string | null;
-            }[]
-          | null;
         id?: string | null;
       }[]
     | null;
@@ -560,38 +529,53 @@ export interface Footer {
    */
   logo: number | Media;
   /**
-   * Footer navigation link groups (2 to 4 groups)
+   * Footer navigation links (up to 10 items)
    */
-  navItems?:
+  links?:
     | {
         /**
-         * Footer links group name
+         * Link settings
          */
-        groupName: string;
-        /**
-         * Links in this group (up to 10 items)
-         */
-        links: {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'page';
-                  value: number | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: number | Post;
-                } | null);
-            url?: string | null;
-            label: string;
-          };
-          id?: string | null;
-        }[];
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'page';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
         id?: string | null;
       }[]
     | null;
+  /**
+   * Footer body text
+   */
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Copyright text shown at the bottom
+   */
+  copywriteText?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1944,7 +1928,6 @@ export interface HeaderSelect<T extends boolean = true> {
   navItems?:
     | T
     | {
-        type?: T;
         link?:
           | T
           | {
@@ -1953,21 +1936,6 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
-            };
-        groupName?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                  };
-              id?: T;
             };
         id?: T;
       };
@@ -1982,26 +1950,22 @@ export interface HeaderSelect<T extends boolean = true> {
 export interface FooterSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
-  navItems?:
+  links?:
     | T
     | {
-        groupName?: T;
-        links?:
+        link?:
           | T
           | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                  };
-              id?: T;
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
             };
         id?: T;
       };
+  text?: T;
+  copywriteText?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
