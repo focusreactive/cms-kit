@@ -17,6 +17,35 @@
 ### Features
 
 * **payload:** add comments and scheduling plugins ([923de42](https://github.com/focusreactive/cms-kit/commit/923de42fe934e1ed5ac2e260b0a2aec21825c912))
+* **payload:** add image group fields ([#110](https://github.com/focusreactive/cms-kit/issues/110)) ([5b6a753](https://github.com/focusreactive/cms-kit/commit/5b6a7535be2567d762223869f7bdef6e868ac206))
+* **payload:** bypass variant preview in preview and live preview modes ([92c7c78](https://github.com/focusreactive/cms-kit/commit/92c7c782da46806bbeedd6849a868bbf9705ec23))
+* **payload:** embed section tab in section blocks ([cd9507e](https://github.com/focusreactive/cms-kit/commit/cd9507e89216c639ca09f90b03b54b5612b0c9e3))
+* **payload:** hide default locale prefix ([15537fd](https://github.com/focusreactive/cms-kit/commit/15537fd2702ce0ac07070583ff0ee609b610b5a7))
+* **payload:** set required to category slug ([22564e0](https://github.com/focusreactive/cms-kit/commit/22564e02a987c7969216d3a09c8f86f174a7aca9))
+* **payload:** style sections ([ea887b9](https://github.com/focusreactive/cms-kit/commit/ea887b944a5f8f6559142ee9ff50480a1818c6ee))
+* **payload:** update header styles ([84bdb14](https://github.com/focusreactive/cms-kit/commit/84bdb14311d4de6ef0c95dc3e3f594523ab27551))
+* **payload:** update project according to the latest A/B testing plugin version ([2631645](https://github.com/focusreactive/cms-kit/commit/2631645546ba690a35dcaa0a0a30e77369132cb9))
+* **payload:** update SectionContainer ([f6c32f2](https://github.com/focusreactive/cms-kit/commit/f6c32f2c829fdf7d444645457a4f43de282f9bb2))
+
+## [1.0.15](https://github.com/focusreactive/cms-kit/compare/v1.0.14...v1.0.15) (2026-03-19)
+
+
+### Bug Fixes
+
+* **payload:** check draft mode using draftMode utility ([c29b528](https://github.com/focusreactive/cms-kit/commit/c29b528697d853f8d821cc1c7dfeb71f666a6b3c))
+* **payload:** get actual page data ([93ae3a4](https://github.com/focusreactive/cms-kit/commit/93ae3a4f519227876c2cf2085dec357efa2bda88))
+* **payload:** hide label for section group field ([9a40bec](https://github.com/focusreactive/cms-kit/commit/9a40bece8f239d6200a9bc50f90f08c855ec59de))
+* **payload:** open document page according to selected locale ([37dd98c](https://github.com/focusreactive/cms-kit/commit/37dd98c8ca1188e8cdb85f49cb1cf088e08dddcb))
+* **payload:** remove docker ([b8504a2](https://github.com/focusreactive/cms-kit/commit/b8504a26a9299d2f774b56c91781d92051d9d154))
+* **payload:** remove obsolete A/B testing logic ([ef00c99](https://github.com/focusreactive/cms-kit/commit/ef00c998515c6e65cee4d5f4230956326cd8f848))
+* **payload:** rename the folder with shared files to "core" ([0af97d5](https://github.com/focusreactive/cms-kit/commit/0af97d57db4c9201aea3c9ca436a0e7929ad3c5d))
+* **payload:** resolve ts error in getAllDocuments by casting payload.find ([b5c87b1](https://github.com/focusreactive/cms-kit/commit/b5c87b1d1dbf34b386782ff37ecd238af4923ee3))
+* **payload:** set 1/1 aspect ratio to image as a default ([87a0aad](https://github.com/focusreactive/cms-kit/commit/87a0aad93bf8e60c6bb4f09414391afc2a981627))
+
+
+### Features
+
+* **payload:** add comments and scheduling plugins ([923de42](https://github.com/focusreactive/cms-kit/commit/923de42fe934e1ed5ac2e260b0a2aec21825c912))
 * **payload:** bypass variant preview in preview and live preview modes ([92c7c78](https://github.com/focusreactive/cms-kit/commit/92c7c782da46806bbeedd6849a868bbf9705ec23))
 * **payload:** embed section tab in section blocks ([cd9507e](https://github.com/focusreactive/cms-kit/commit/cd9507e89216c639ca09f90b03b54b5612b0c9e3))
 * **payload:** hide default locale prefix ([15537fd](https://github.com/focusreactive/cms-kit/commit/15537fd2702ce0ac07070583ff0ee609b610b5a7))
