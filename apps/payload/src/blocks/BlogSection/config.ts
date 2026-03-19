@@ -1,7 +1,6 @@
 import type { Block, Field } from 'payload'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { generateRichText } from '@/core/lib/generateRichText'
-import { embedSectionTab } from '@/fields/section/embedSectionTab'
 
 const fields: Field[] = [
   {
