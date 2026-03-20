@@ -10,6 +10,9 @@ import { BLOG_CONFIG } from '@/core/config/blog'
 import { Image } from '@shared/ui/components/ui/image'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import type { Media } from '@/payload-types'
+import { CardsGridInlineComponent } from '@/blocks/CardsGrid/InlineComponent'
+import { LogosInlineComponent } from '@/blocks/Logos/InlineComponent'
+import { LinksListInlineComponent } from '@/blocks/LinksList/InlineComponent'
 
 type UploadNodeWithAspectRatio = DefaultNodeTypes & {
   type: 'upload'
@@ -37,9 +40,20 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     const media = typeof uploadNode.value === 'object' ? (uploadNode.value as Media) : null
     const aspectRatio = uploadNode.fields?.aspectRatio ?? null
     const imageProps = prepareImageProps({ image: media, aspectRatio })
-    
+
     // eslint-disable-next-line jsx-a11y/alt-text
     return <Image {...imageProps} />
+  },
+  blocks: {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    cardsGridInline: ({ node }: { node: any }) => (
+      <CardsGridInlineComponent {...(node.fields as any)} />
+    ),
+    logosInline: ({ node }: { node: any }) => <LogosInlineComponent {...(node.fields as any)} />,
+    linksListInline: ({ node }: { node: any }) => (
+      <LinksListInlineComponent {...(node.fields as any)} />
+    ),
+    /* eslint-enable @typescript-eslint/no-explicit-any */
   },
 })
 

@@ -18,14 +18,20 @@ import {
   FeatureProviderServer,
   LinkFeature,
   UploadFeature,
+  BlocksFeature,
 } from '@payloadcms/richtext-lexical'
+import { Block } from 'payload'
 import { BLOG_CONFIG } from '@/core/config/blog'
 
 export type RichTextPreset = 'default' | 'hero'
 
+interface Options {
+  blocks?: Block[]
+}
+
 const toolbarFeatures = [FixedToolbarFeature(), InlineToolbarFeature()]
 
-export function generateRichText(preset: RichTextPreset = 'default') {
+export function generateRichText(preset: RichTextPreset = 'default', options?: Options) {
   return lexicalEditor({
     features: ({ rootFeatures: _rootFeatures }) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,7 +117,11 @@ export function generateRichText(preset: RichTextPreset = 'default') {
           throw new Error('Invalid preset')
       }
 
-      return [...toolbarFeatures, ...defaultFeatures]
+      const blockFeatures = options?.blocks?.length
+        ? [BlocksFeature({ blocks: options.blocks })]
+        : []
+
+      return [...defaultFeatures, ...blockFeatures]
     },
   })
 }

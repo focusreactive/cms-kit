@@ -11,7 +11,7 @@ export async function GET(req: NextRequest): Promise<Response> {
   const redirectPath = searchParams.get('redirect') || '/'
   const previewSecret = searchParams.get('previewSecret')
 
-  if (previewSecret !== process.env.NEXT_PUBLIC_PREVIEW_SECRET) {
+  if (previewSecret !== process.env.PREVIEW_SECRET) {
     return new Response('Invalid preview secret', { status: 403 })
   }
 

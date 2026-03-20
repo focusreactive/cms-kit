@@ -34,7 +34,7 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
 
     return {
       style: blogStyle,
-      text: prepareRichTextProps(null),
+      text: prepareRichTextProps(post.content),
       image: prepareImageProps({ image: heroImage, aspectRatio: aspectRatio ?? null }),
       link: { text: post.title, href: postUrl },
     }

@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { createSharedSlugField } from '@/fields/slugField'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
+import { fixBreadcrumbDocIds } from './hooks/fixBreadcrumbDocIds'
 import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
 import { anyone, author, or, superAdmin, user } from '@/core/lib/access'
 import { createParentField, createBreadcrumbsField } from '@payloadcms/plugin-nested-docs'
@@ -103,7 +104,7 @@ export const Page: CollectionConfig<'page'> = {
     }),
   ],
   hooks: {
-    beforeChange: [validateReservedSlug, validateReservedPath],
+    beforeChange: [fixBreadcrumbDocIds, validateReservedSlug, validateReservedPath],
     afterChange: [revalidatePage],
     afterDelete: [revalidateDelete],
   },

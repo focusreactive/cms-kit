@@ -21,15 +21,15 @@ export async function GET(req: NextRequest): Promise<Response> {
   const slug = searchParams.get('slug')
   const previewSecret = searchParams.get('previewSecret')
 
-  if (previewSecret !== process.env.NEXT_PUBLIC_PREVIEW_SECRET) {
+  if (previewSecret !== process.env.PREVIEW_SECRET) {
     return new Response('You are not allowed to preview this page', { status: 403 })
   }
 
-  if (!path || !collection || !slug) {
+  if ((!path && typeof path !== 'string') || !collection || !slug) {
     return new Response('Insufficient search params', { status: 404 })
   }
 
-  if (!path.startsWith('/')) {
+  if (!path.startsWith('/') && path !== '') {
     return new Response('This endpoint can only be used for relative previews', { status: 500 })
   }
 
