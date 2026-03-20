@@ -5,7 +5,7 @@ import React from 'react'
 import { PayloadRedirects } from '@/features'
 import { generateMeta } from '@/core/lib/generateMeta'
 import { getSiteSettings } from '@/core/lib/getSiteSettings'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { getPostBySlug } from '@/core/lib/getPostBySlug'
 import { generateNotFoundMeta } from '@/core/lib/generateNotFoundMeta'
 import { getBlogPageSettings } from '@/core/lib/getBlogPageSettings'
@@ -41,11 +41,7 @@ export default async function Page({ params }: Args) {
     <>
       <Header data={siteSettings.header as HeaderType} />
       <main>
-        <ArticleJsonLd
-          post={post}
-          siteName={siteSettings.siteName as string}
-          locale={locale}
-        />
+        <ArticleJsonLd post={post} siteName={siteSettings.siteName as string} locale={locale} />
         <BreadcrumbsJsonLd
           locale={locale}
           blog={{

@@ -1,7 +1,7 @@
 import type { Media, Post } from '@/payload-types'
 import type { BlogPageSettingsData } from '@/core/lib/getBlogPageSettings'
 import { getServerSideURL } from '@/core/lib/getURL'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { formatAuthorsToSchema } from '../lib/formatAuthorsToSchema'
 import { Locale } from '@/core/types'
 

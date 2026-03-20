@@ -1,5 +1,5 @@
 import { Page, Post } from '@/payload-types'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
 import { getSiteSettings } from '@/core/lib/getSiteSettings'
 import { getServerSideURL } from '@/core/lib/getURL'

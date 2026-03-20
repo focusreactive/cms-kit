@@ -6,7 +6,7 @@ import { fixBreadcrumbDocIds } from './hooks/fixBreadcrumbDocIds'
 import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
 import { anyone, author, or, superAdmin, user } from '@/core/lib/access'
 import { createParentField, createBreadcrumbsField } from '@payloadcms/plugin-nested-docs'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import type { Page as PageType } from '@/payload-types'
 import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
 import { createBasePageFields } from './basePageFields'
@@ -36,16 +36,19 @@ export const Page: CollectionConfig<'page'> = {
     useAsTitle: 'title',
     group: 'Content',
     livePreview: {
-      url: ({ data, locale }) => {
+      url: ({ data, locale: localeProp }) => {
+        const locale = localeProp.code ?? localeProp.fallbackLocale
+
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'page',
             breadcrumbs: data?.breadcrumbs,
             absolute: false,
-            locale: locale.code ?? locale.fallbackLocale,
+            locale,
           }),
           collection: 'page',
+          locale,
         })
       },
     },
@@ -59,6 +62,7 @@ export const Page: CollectionConfig<'page'> = {
           locale,
         }),
         collection: 'page',
+        locale,
       })
     },
   },

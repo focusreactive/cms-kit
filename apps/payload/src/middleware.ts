@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { I18N_CONFIG } from '@/core/config/i18n'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
@@ -41,7 +41,13 @@ export default async function middleware(request: NextRequest) {
     }
   }
 
-  // Let intlMiddleware handle redirect
+  if (isNextRoute) {
+    const response = NextResponse.next()
+    response.headers.set('x-pathname', pathname)
+
+    return response
+  }
+
   const response = intlMiddleware(request)
   response.headers.set('x-pathname', pathname)
   return response
