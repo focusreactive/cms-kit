@@ -19,6 +19,7 @@ import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
 import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
+import { buildVariantData } from '@/core/lib/abTesting/buildVariantData'
 import { I18N_CONFIG } from '@/core/config/i18n'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 import { isDev } from '@/core/utils/isDev'
@@ -239,6 +240,12 @@ export const plugins: Plugin[] = [
           return shouldIncludeLocalePrefix(resolvedLocale)
             ? `/${resolvedLocale}${restPath}`
             : restPath || '/'
+        },
+        generateVariantData: ({ variantDoc, locale }) => {
+          return buildVariantData(
+            variantDoc as unknown as Page & { _abPassPercentage?: number },
+            locale,
+          )
         },
       },
     },

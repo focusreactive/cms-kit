@@ -7,6 +7,7 @@ import type { ABVariantData } from '@/core/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './core/lib/abTesting/abCookies'
 import { draftMode } from 'next/headers'
+import { buildInternalPathname } from '@/core/lib/abTesting/buildInternalPathname'
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -33,7 +34,8 @@ export default async function middleware(request: NextRequest) {
   const { isEnabled: isDraftMode } = await draftMode()
 
   if (!isNextRoute && !isDraftMode) {
-    const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
+    const internalPathname = buildInternalPathname(pathname, matchedLocale, I18N_CONFIG.defaultLocale)
+    const abResponse = await resolveAbRewrite(request, pathname, pathname, internalPathname)
 
     if (abResponse) {
       abResponse.headers.set('x-pathname', pathname)
