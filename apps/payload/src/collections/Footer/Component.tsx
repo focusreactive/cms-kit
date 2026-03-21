@@ -6,6 +6,7 @@ import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
 import { SectionContainer } from '@/core/ui'
+import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 type Props = {
   data: FooterType
@@ -15,7 +16,10 @@ export async function Footer({ data }: Props) {
   if (!data) return null
 
   const links = (data.links ?? []).map((item) => prepareLinkProps(item.link))
-  const image = prepareImageProps({ image: data.logo as Media })
+  const image = prepareImageProps({
+    image: data.logo as Media,
+    aspectRatio: ImageAspectRatio['1/1'],
+  })
   const text = prepareRichTextProps(data.text ?? null)
 
   return (

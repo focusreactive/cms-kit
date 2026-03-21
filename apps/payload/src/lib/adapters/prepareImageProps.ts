@@ -1,7 +1,7 @@
 import type { Media } from '@/payload-types'
 import { ImageAspectRatio, type IImageProps } from '@shared/ui/components/ui/image/types'
 
-export interface ImageFieldData {
+export interface ImageFieldData extends Partial<Omit<IImageProps, 'aspectRatio'>> {
   image?: Media | number | null
   aspectRatio?: ImageAspectRatio | string | null
 }
@@ -13,8 +13,9 @@ function resolveAspectRatio(raw: ImageAspectRatio | string | null | undefined): 
 }
 
 export function prepareImageProps(data: ImageFieldData | null | undefined): IImageProps {
-  const media = data?.image
-  const aspectRatio = resolveAspectRatio(data?.aspectRatio)
+  const { image: media, aspectRatio: aspectRatioProp, ...imageAttributes } = data ?? {}
+
+  const aspectRatio = resolveAspectRatio(aspectRatioProp)
 
   if (!media || typeof media !== 'object') {
     return {
@@ -23,6 +24,7 @@ export function prepareImageProps(data: ImageFieldData | null | undefined): IIma
       aspectRatio,
       fill: true,
       fit: 'cover',
+      ...imageAttributes,
     }
   }
 
@@ -33,5 +35,6 @@ export function prepareImageProps(data: ImageFieldData | null | undefined): IIma
     fill: true,
     fit: 'cover',
     sizes: '(max-width: 1280px) 100vw, 1280px',
+    ...imageAttributes,
   }
 }
