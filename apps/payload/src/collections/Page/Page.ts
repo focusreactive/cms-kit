@@ -36,19 +36,16 @@ export const Page: CollectionConfig<'page'> = {
     useAsTitle: 'title',
     group: 'Content',
     livePreview: {
-      url: ({ data, locale: localeProp }) => {
-        const locale = localeProp.code ?? localeProp.fallbackLocale
-
+      url: ({ data, locale }) => {
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'page',
             breadcrumbs: data?.breadcrumbs,
             absolute: false,
-            locale,
+            locale: locale.code ?? locale.fallbackLocale,
           }),
           collection: 'page',
-          locale,
         })
       },
     },
@@ -62,7 +59,6 @@ export const Page: CollectionConfig<'page'> = {
           locale,
         }),
         collection: 'page',
-        locale,
       })
     },
   },

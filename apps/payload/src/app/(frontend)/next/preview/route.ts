@@ -6,7 +6,6 @@ import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import configPromise from '@payload-config'
-import { resolveLocaleFromPath } from '@/core/utils/locale/resolveLocaleFromPath'
 
 export async function GET(req: NextRequest): Promise<Response> {
   const payload = await getPayload({ config: configPromise })
@@ -17,7 +16,6 @@ export async function GET(req: NextRequest): Promise<Response> {
   const collection = searchParams.get('collection') as CollectionSlug
   const slug = searchParams.get('slug')
   const previewSecret = searchParams.get('previewSecret')
-  const localeParam = searchParams.get('locale')
 
   if (previewSecret !== process.env.PREVIEW_SECRET) {
     return new Response('You are not allowed to preview this page', { status: 403 })
@@ -50,9 +48,7 @@ export async function GET(req: NextRequest): Promise<Response> {
   const protocol =
     req.headers.get('x-forwarded-proto') ?? new URL(req.url).protocol.replace(':', '')
 
-  const locale = resolveLocaleFromPath({ locale: localeParam, path })
-
-  const previewInitUrl = `${protocol}://${host}/next/preview-init?redirect=${encodeURIComponent(path)}&previewSecret=${encodeURIComponent(previewSecret)}&locale=${locale}`
+  const previewInitUrl = `${protocol}://${host}/next/preview-init?redirect=${encodeURIComponent(path)}&previewSecret=${encodeURIComponent(previewSecret)}`
 
   redirect(previewInitUrl)
 }
