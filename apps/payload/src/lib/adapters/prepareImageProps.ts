@@ -9,7 +9,7 @@ export interface ImageFieldData {
 const validRatios = Object.values(ImageAspectRatio) as string[]
 
 function resolveAspectRatio(raw: ImageAspectRatio | string | null | undefined): ImageAspectRatio {
-  return validRatios.includes(raw ?? '') ? (raw as ImageAspectRatio) : ImageAspectRatio['1/1']
+  return validRatios.includes(raw ?? '') ? (raw as ImageAspectRatio) : ImageAspectRatio['auto']
 }
 
 export function prepareImageProps(data: ImageFieldData | null | undefined): IImageProps {

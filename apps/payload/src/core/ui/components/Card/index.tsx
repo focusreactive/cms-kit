@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react'
-import { Link, Media } from '@/core/ui'
+import { Link } from '@/core/ui'
 import { cn } from '@/core/lib/utils'
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import type { CardPostData } from '@/core/types'
+import { Image } from '@shared/ui'
+import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
+import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -40,7 +43,7 @@ export const Card: React.FC<{
         <div className="relative w-full">
           {!heroImage && (
             <div className="relative w-full aspect-[4/3]">
-              <Image
+              <NextImage
                 src="/empty-placeholder.jpg"
                 alt={`${titleToUse} - Placeholder image`}
                 fill
@@ -50,12 +53,12 @@ export const Card: React.FC<{
             </div>
           )}
           {heroImage && typeof heroImage !== 'number' && (
-            <Media
+            // eslint-disable-next-line jsx-a11y/alt-text
+            <Image
               fill
               priority
-              imgClassName="object-cover"
-              resource={heroImage}
-              className="w-full aspect-[4/3]"
+              className="object-cover"
+              {...prepareImageProps({ image: heroImage, aspectRatio: ImageAspectRatio['4/3'] })}
             />
           )}
         </div>
