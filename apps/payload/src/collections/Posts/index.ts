@@ -61,7 +61,6 @@ export const Posts: CollectionConfig<'posts'> = {
             locale,
           }),
           collection: BLOG_CONFIG.collection,
-          locale,
         })
       },
     },
@@ -75,7 +74,6 @@ export const Posts: CollectionConfig<'posts'> = {
           absolute: false,
           locale,
         }),
-        locale,
       })
     },
     useAsTitle: 'title',
