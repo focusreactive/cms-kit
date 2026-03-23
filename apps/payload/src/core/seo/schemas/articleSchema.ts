@@ -1,5 +1,5 @@
 import type { Media, Post } from '@/payload-types'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { getServerSideURL } from '@/core/lib/getURL'
 import { formatAuthorsToSchema } from '../lib/formatAuthorsToSchema'
 import { Locale } from '@/core/types'

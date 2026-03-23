@@ -1,18 +1,17 @@
-
 import React from 'react'
 
 import type { Post } from '@/payload-types'
 import { formatAuthors } from '@/core/lib/formatAuthors'
 import { formatDateTime } from '@/core/lib/formatDateTime'
-import { Media } from '@/core/ui'
+import { Image } from '@shared/ui'
+import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 
 export const PostHero: React.FC<{
   post: Post
 }> = ({ post }) => {
   const { categories, heroImage, authors, publishedAt, title } = post
 
-  const hasAuthors =
-    authors && authors.length > 0 && formatAuthors(authors) !== ''
+  const hasAuthors = authors && authors.length > 0 && formatAuthors(authors) !== ''
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end min-h-[80vh]">
@@ -71,7 +70,13 @@ export const PostHero: React.FC<{
       </div>
       <div className="absolute inset-0 select-none">
         {heroImage && typeof heroImage !== 'number' && (
-          <Media fill priority imgClassName="object-cover" resource={heroImage} />
+          // eslint-disable-next-line jsx-a11y/alt-text
+          <Image
+            fill
+            priority
+            className="object-cover"
+            {...prepareImageProps({ image: heroImage })}
+          />
         )}
         <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
       </div>

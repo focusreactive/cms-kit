@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { getCachedRedirects } from '@/core/lib/getRedirects'
 import { getCachedDocumentByID } from '@/core/lib/getDocument'
 import { BLOG_CONFIG } from '@/core/config/blog'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { canonicalRedirectFrom } from '@/core/lib/redirectUrl'
 import { Locale } from '@/core/types'
 
@@ -15,11 +15,7 @@ interface Props {
   locale: Locale
 }
 
-export const PayloadRedirects: React.FC<Props> = async ({
-  disableNotFound,
-  url,
-  locale,
-}) => {
+export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url, locale }) => {
   const redirects = await getCachedRedirects({ locale })()
   const canonicalUrl = canonicalRedirectFrom(url)
   const redirectItem = redirects.find((r) => canonicalRedirectFrom(r.from) === canonicalUrl)

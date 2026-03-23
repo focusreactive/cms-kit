@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { I18N_CONFIG } from '@/core/config/i18n'
-import { buildUrl } from './buildUrl'
+import { buildUrl } from '../utils/path/buildUrl'
 import { Locale } from '../types'
 import type { Page } from '@/payload-types'
 import { BLOG_CONFIG } from '@/core/config/blog'

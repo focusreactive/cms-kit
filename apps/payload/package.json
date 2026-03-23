@@ -25,7 +25,7 @@
     "@ai-sdk/openai": "^3.0.25",
     "@auth0/nextjs-auth0": "^4.14.1",
     "@focus-reactive/payload-plugin-ab": "^2.3.2",
-    "@focus-reactive/payload-plugin-comments": "^1.0.2",
+    "@focus-reactive/payload-plugin-comments": "^1.1.1",
     "@focus-reactive/payload-plugin-presets": "^0.2.0",
     "@focus-reactive/payload-plugin-scheduling": "^1.0.1",
     "@payloadcms/db-postgres": "3.73.0",

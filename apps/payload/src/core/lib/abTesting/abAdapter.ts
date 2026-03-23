@@ -1,9 +1,10 @@
 import { payloadGlobalAdapter } from '@focus-reactive/payload-plugin-ab/adapters/payload-global'
 // import { vercelEdgeAdapter } from '@focus-reactive/payload-plugin-ab/adapters/vercel-edge'
 import { ABVariantData } from './types'
+import { getServerSideURL } from '../getURL'
 
 export const abAdapter = payloadGlobalAdapter<ABVariantData>({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  serverURL: getServerSideURL(),
 })
 
 // export const abAdapter = vercelEdgeAdapter<ABVariantData>({

@@ -1,5 +1,5 @@
 import type { Page } from '@/payload-types'
-import { buildUrl } from '@/core/lib/buildUrl'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { getSiteSettings } from '@/core/lib/getSiteSettings'
 import { getServerSideURL } from '@/core/lib/getURL'
 import type { BreadcrumbItem, Locale } from '@/core/types'

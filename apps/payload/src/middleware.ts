@@ -1,12 +1,13 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { I18N_CONFIG } from '@/core/config/i18n'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
 import { createResolveAbRewrite } from '@focus-reactive/payload-plugin-ab/middleware'
 import { abCookies } from './core/lib/abTesting/abCookies'
 import { draftMode } from 'next/headers'
+import { buildInternalPathname } from '@/core/lib/abTesting/buildInternalPathname'
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -33,7 +34,8 @@ export default async function middleware(request: NextRequest) {
   const { isEnabled: isDraftMode } = await draftMode()
 
   if (!isNextRoute && !isDraftMode) {
-    const abResponse = await resolveAbRewrite(request, pathname, pathname, pathname)
+    const internalPathname = buildInternalPathname(pathname, matchedLocale, I18N_CONFIG.defaultLocale)
+    const abResponse = await resolveAbRewrite(request, pathname, pathname, internalPathname)
 
     if (abResponse) {
       abResponse.headers.set('x-pathname', pathname)
@@ -41,7 +43,13 @@ export default async function middleware(request: NextRequest) {
     }
   }
 
-  // Let intlMiddleware handle redirect
+  if (isNextRoute) {
+    const response = NextResponse.next()
+    response.headers.set('x-pathname', pathname)
+
+    return response
+  }
+
   const response = intlMiddleware(request)
   response.headers.set('x-pathname', pathname)
   return response

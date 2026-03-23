@@ -8,11 +8,8 @@ import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
 import { generateSeoFields } from '@/core/lib/seoFields'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import { generateRichText } from '@/core/lib/generateRichText'
-import { buildUrl } from '@/core/lib/buildUrl'
-import {
-  createLocalizedDefault,
-  createLocalizedRichText,
-} from '@/core/lib/createLocalizedDefault'
+import { buildUrl } from '@/core/utils/path/buildUrl'
+import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
 import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
@@ -52,14 +49,16 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     group: 'Blog',
     livePreview: {
-      url: ({ data, locale }) => {
+      url: ({ data, locale: localeProp }) => {
+        const locale = localeProp.code ?? localeProp.fallbackLocale
+
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'posts',
             slug: data?.slug,
             absolute: false,
-            locale: locale.code ?? locale.fallbackLocale,
+            locale,
           }),
           collection: BLOG_CONFIG.collection,
         })

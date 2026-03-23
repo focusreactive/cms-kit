@@ -7,13 +7,14 @@ type Props = {
 }
 
 export const generatePreviewPath = ({ collection, slug, path }: Props) => {
-  const encodedParams = new URLSearchParams({
-    slug,
+  const params: Record<string, string> = {
     collection,
+    slug,
     path,
     previewSecret: process.env.PREVIEW_SECRET || '',
-  })
+  }
 
+  const encodedParams = new URLSearchParams(params)
   const url = `/next/preview?${encodedParams.toString()}`
 
   return url
