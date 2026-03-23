@@ -1,5 +1,6 @@
 import type { LinkProps } from '@shared/ui/components/ui/link/types'
 import { ButtonVariant } from '@shared/ui/components/ui/button/types'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 
 type PayloadLink = {
   type?: 'reference' | 'custom' | null
@@ -13,7 +14,7 @@ type PayloadLink = {
   newTab?: boolean | null
 }
 
-export function prepareLinkProps(link: PayloadLink | null | undefined): LinkProps {
+export function prepareLinkProps(link: PayloadLink | null | undefined, locale: string): LinkProps {
   if (!link) return { text: '', href: '' }
 
   let href = ''
@@ -24,7 +25,8 @@ export function prepareLinkProps(link: PayloadLink | null | undefined): LinkProp
     const value = link.reference.value as Record<string, unknown>
     if (typeof value === 'object' && value !== null) {
       const breadcrumbs = (value.breadcrumbs as Array<{ url?: string }>) ?? []
-      href = breadcrumbs[breadcrumbs.length - 1]?.url ?? (value.slug as string) ?? ''
+      const path = breadcrumbs[breadcrumbs.length - 1]?.url ?? (value.slug as string) ?? ''
+      href = shouldIncludeLocalePrefix(locale) ? `/${locale}${path}` : path
     }
   }
 

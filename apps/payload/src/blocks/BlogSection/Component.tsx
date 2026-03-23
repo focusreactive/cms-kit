@@ -9,6 +9,8 @@ import { BlogStyle } from '@shared/ui/components/sections/blog/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
 import { BLOG_CONFIG } from '@/core/config/blog'
+import { resolveLocale } from '@/core/lib/resolveLocale'
+import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 
 export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   text,
@@ -17,6 +19,7 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   postsLimit,
 }) => {
   const payload = await getPayload({ config: configPromise })
+  const locale = await resolveLocale()
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
@@ -24,13 +27,14 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
     depth: 1,
     sort: '-createdAt',
     overrideAccess: true,
+    locale,
   })
 
   const blogStyle = (style as BlogStyle) ?? BlogStyle.ThreeColumn
 
   const formattedPosts: IBlogPostCardProps[] = posts.map((post: Post) => {
     const heroImage = typeof post.heroImage === 'object' ? (post.heroImage as Media) : null
-    const postUrl = `${BLOG_CONFIG.basePath}/${post.slug}`
+    const postUrl = `${shouldIncludeLocalePrefix(locale) ? `/${locale}` : ''}${BLOG_CONFIG.basePath}/${post.slug}`
 
     return {
       style: blogStyle,

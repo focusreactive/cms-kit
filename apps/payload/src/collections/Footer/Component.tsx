@@ -3,6 +3,7 @@ import React from 'react'
 import type { Footer as FooterType, Media } from '@/payload-types'
 import { Footer as SharedFooter } from '@shared/ui'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
+import { resolveLocale } from '@/core/lib/resolveLocale'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
 import { SectionContainer } from '@/core/ui'
@@ -15,7 +16,8 @@ type Props = {
 export async function Footer({ data }: Props) {
   if (!data) return null
 
-  const links = (data.links ?? []).map((item) => prepareLinkProps(item.link))
+  const locale = await resolveLocale()
+  const links = (data.links ?? []).map((item) => prepareLinkProps(item.link, locale))
   const image = prepareImageProps({
     image: data.logo as Media,
     aspectRatio: ImageAspectRatio['1/1'],

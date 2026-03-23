@@ -6,6 +6,7 @@ import { AlignVariant } from '@shared/ui/components/sections/header/types'
 import { SectionContainer } from '@/core/ui'
 import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
+import { resolveLocale } from '@/core/lib/resolveLocale'
 import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 type Props = {
@@ -15,7 +16,8 @@ type Props = {
 export async function Header({ data }: Props) {
   if (!data) return null
 
-  const links = (data.navItems ?? []).map((item) => prepareLinkProps(item.link))
+  const locale = await resolveLocale()
+  const links = (data.navItems ?? []).map((item) => prepareLinkProps(item.link, locale))
   const image = prepareImageProps({
     image: data.logo as Media,
     aspectRatio: ImageAspectRatio['1/1'],
