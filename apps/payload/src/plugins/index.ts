@@ -208,7 +208,7 @@ export const plugins: Plugin[] = [
         unknownAuthor: 'Desconocido',
         deletedUser: 'Usuario eliminado',
         noMentionMatches: 'Sin coincidencias',
-        loadingComments: 'Loading...',
+        loadingComments: 'Cargando comentarios...',
       },
     },
   }) as unknown as Plugin,
