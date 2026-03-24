@@ -6,6 +6,51 @@
 * **payload:** add aspect ratio to logos ([587e985](https://github.com/focusreactive/cms-kit/commit/587e98587e3581226b9fd5efa87f5fe45e57a20c))
 * **payload:** check draft mode using draftMode utility ([c29b528](https://github.com/focusreactive/cms-kit/commit/c29b528697d853f8d821cc1c7dfeb71f666a6b3c))
 * **payload:** coerce the breadcrumb id to the number type ([0626ad3](https://github.com/focusreactive/cms-kit/commit/0626ad35cfdc004631389421ac6a9475b560d288))
+* **payload:** create links based on the locales for the sections ([e88ef34](https://github.com/focusreactive/cms-kit/commit/e88ef34a919033a2801c7ddcdab50a798260ce14))
+* **payload:** fix the error with the inability to open the preview page at empty path ([5d3519e](https://github.com/focusreactive/cms-kit/commit/5d3519e2db99b53ed734a815bccac0b9bd39c641))
+* **payload:** get actual page data ([93ae3a4](https://github.com/focusreactive/cms-kit/commit/93ae3a4f519227876c2cf2085dec357efa2bda88))
+* **payload:** hide label for section group field ([9a40bec](https://github.com/focusreactive/cms-kit/commit/9a40bece8f239d6200a9bc50f90f08c855ec59de))
+* **payload:** hide preview secret from client ([e48edec](https://github.com/focusreactive/cms-kit/commit/e48edeceef58dfd9dce0c4c22f8baf4e48674bdb))
+* **payload:** open document page according to selected locale ([37dd98c](https://github.com/focusreactive/cms-kit/commit/37dd98c8ca1188e8cdb85f49cb1cf088e08dddcb))
+* **payload:** provide locale to rewrite path for a/b testing ([ef0d389](https://github.com/focusreactive/cms-kit/commit/ef0d389c8555f56900b47ac19b3d898e49283843))
+* **payload:** remove deleted locale prop from generatePreviewPath in posts collection ([310bfab](https://github.com/focusreactive/cms-kit/commit/310bfab23b9562fb88cf7d2f24d2446f7cf52b99))
+* **payload:** remove docker ([b8504a2](https://github.com/focusreactive/cms-kit/commit/b8504a26a9299d2f774b56c91781d92051d9d154))
+* **payload:** remove locale from exit preview in LivePreviewListener ([02a1be2](https://github.com/focusreactive/cms-kit/commit/02a1be235854cc64afa65038e2f13e664c31b479))
+* **payload:** remove obsolete A/B testing logic ([ef00c99](https://github.com/focusreactive/cms-kit/commit/ef00c998515c6e65cee4d5f4230956326cd8f848))
+* **payload:** rename the folder with shared files to "core" ([0af97d5](https://github.com/focusreactive/cms-kit/commit/0af97d57db4c9201aea3c9ca436a0e7929ad3c5d))
+* **payload:** resolve ts error in getAllDocuments by casting payload.find ([b5c87b1](https://github.com/focusreactive/cms-kit/commit/b5c87b1d1dbf34b386782ff37ecd238af4923ee3))
+* **payload:** set 1/1 aspect ratio to image as a default ([87a0aad](https://github.com/focusreactive/cms-kit/commit/87a0aad93bf8e60c6bb4f09414391afc2a981627))
+* **payload:** style and restructure header and footer based on other projects ([74ad856](https://github.com/focusreactive/cms-kit/commit/74ad856306e1aefd4ca43c8b925e31ed47665b43))
+* **payload:** style SectionContainer based on other projects ([2b6385c](https://github.com/focusreactive/cms-kit/commit/2b6385ce8c93b9156c5d39574b8d8650006c279c))
+* **payload:** use getServerSideURL utility to determine server url in ab adapter ([669793c](https://github.com/focusreactive/cms-kit/commit/669793cc473bc650fa2045d79bb502dca7165e60))
+* **payload:** use relative url for post images ([fc2fa4c](https://github.com/focusreactive/cms-kit/commit/fc2fa4c09572a2a4ad9b8862c08f592ded11301c))
+
+
+### Features
+
+* **payload:** add comments and scheduling plugins ([923de42](https://github.com/focusreactive/cms-kit/commit/923de42fe934e1ed5ac2e260b0a2aec21825c912))
+* **payload:** add image group fields ([#110](https://github.com/focusreactive/cms-kit/issues/110)) ([5b6a753](https://github.com/focusreactive/cms-kit/commit/5b6a7535be2567d762223869f7bdef6e868ac206))
+* **payload:** add inline blocks with links, grid cards and logos sections ([59fef5a](https://github.com/focusreactive/cms-kit/commit/59fef5abb21eb7c055832c6ea11e383db0b8c5ba))
+* **payload:** bypass variant preview in preview and live preview modes ([92c7c78](https://github.com/focusreactive/cms-kit/commit/92c7c782da46806bbeedd6849a868bbf9705ec23))
+* **payload:** embed section tab in section blocks ([cd9507e](https://github.com/focusreactive/cms-kit/commit/cd9507e89216c639ca09f90b03b54b5612b0c9e3))
+* **payload:** hide default locale prefix ([15537fd](https://github.com/focusreactive/cms-kit/commit/15537fd2702ce0ac07070583ff0ee609b610b5a7))
+* **payload:** provide post content to show on the card ([77f8b94](https://github.com/focusreactive/cms-kit/commit/77f8b946399094eb1f06d3e1ca0abc3c585fa55d))
+* **payload:** reorganize path utils and fix preview locale handling ([1d2f723](https://github.com/focusreactive/cms-kit/commit/1d2f72372ff58c59fad513bf8f5ae16e01b9dbae))
+* **payload:** set required to category slug ([22564e0](https://github.com/focusreactive/cms-kit/commit/22564e02a987c7969216d3a09c8f86f174a7aca9))
+* **payload:** stop using locale cookie ([4322452](https://github.com/focusreactive/cms-kit/commit/432245254adb15bc3139275b7c004cc14508ebee))
+* **payload:** style sections ([ea887b9](https://github.com/focusreactive/cms-kit/commit/ea887b944a5f8f6559142ee9ff50480a1818c6ee))
+* **payload:** update header styles ([84bdb14](https://github.com/focusreactive/cms-kit/commit/84bdb14311d4de6ef0c95dc3e3f594523ab27551))
+* **payload:** update project according to the latest A/B testing plugin version ([2631645](https://github.com/focusreactive/cms-kit/commit/2631645546ba690a35dcaa0a0a30e77369132cb9))
+* **payload:** update SectionContainer ([f6c32f2](https://github.com/focusreactive/cms-kit/commit/f6c32f2c829fdf7d444645457a4f43de282f9bb2))
+
+## [1.0.15](https://github.com/focusreactive/cms-kit/compare/v1.0.14...v1.0.15) (2026-03-23)
+
+
+### Bug Fixes
+
+* **payload:** add aspect ratio to logos ([587e985](https://github.com/focusreactive/cms-kit/commit/587e98587e3581226b9fd5efa87f5fe45e57a20c))
+* **payload:** check draft mode using draftMode utility ([c29b528](https://github.com/focusreactive/cms-kit/commit/c29b528697d853f8d821cc1c7dfeb71f666a6b3c))
+* **payload:** coerce the breadcrumb id to the number type ([0626ad3](https://github.com/focusreactive/cms-kit/commit/0626ad35cfdc004631389421ac6a9475b560d288))
 * **payload:** fix the error with the inability to open the preview page at empty path ([5d3519e](https://github.com/focusreactive/cms-kit/commit/5d3519e2db99b53ed734a815bccac0b9bd39c641))
 * **payload:** get actual page data ([93ae3a4](https://github.com/focusreactive/cms-kit/commit/93ae3a4f519227876c2cf2085dec357efa2bda88))
 * **payload:** hide label for section group field ([9a40bec](https://github.com/focusreactive/cms-kit/commit/9a40bece8f239d6200a9bc50f90f08c855ec59de))
