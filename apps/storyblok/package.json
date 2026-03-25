@@ -17,8 +17,8 @@
     "@shared/ui": "workspace:*",
     "@storyblok/react": "4.3.2",
     "next": "15.5.9",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "storyblok-rich-text-react-renderer": "2.9.1"
   },
   "devDependencies": {

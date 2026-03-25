@@ -36,7 +36,7 @@ export async function BlogJsonLdWrapper({ searchParams, locale }: BlogJsonLdWrap
       <BreadcrumbsJsonLd
         locale={locale}
         blog={{
-          title: blogSettings.blogTitle || 'Blog',
+          title: 'Blog',
           ...(pageNumber > 1 && { page: pageNumber }),
         }}
       />
