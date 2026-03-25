@@ -86,9 +86,7 @@ export const Card: React.FC<{
             </div>
           )}
           {titleToUse && (
-            <div className="prose">
-              <h3>{titleToUse}</h3>
-            </div>
+            <h3 className="font-bold text-lg">{titleToUse}</h3>
           )}
           {excerpt && (
             <div className="mt-2"><p className="text-muted-foreground text-sm line-clamp-3">{excerpt}</p></div>
