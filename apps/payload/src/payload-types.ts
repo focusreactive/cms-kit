@@ -2222,6 +2222,8 @@ export interface SiteSetting {
    */
   notFoundDescription?: string | null;
   blog: {
+    blogTitle?: string | null;
+    blogDescription?: string | null;
     labels: {
       readMoreLabel: string;
       relatedPostsLabel: string;
@@ -2289,6 +2291,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   blog?:
     | T
     | {
+        blogTitle?: T;
+        blogDescription?: T;
         labels?:
           | T
           | {

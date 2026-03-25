@@ -27,6 +27,8 @@ export const DEFAULT_VALUES = {
         es: 'Lo sentimos, la página solicitada no existe o ha sido eliminada.',
       },
       blog: {
+        blogTitle: { en: 'Blog', es: 'Blog' },
+        blogDescription: { en: 'Blog page description', es: 'Descripción de la página de blog' },
         readMoreLabel: { en: 'Read More', es: 'Leer más' },
         relatedPostsLabel: { en: 'Related Articles', es: 'Artículos relacionados' },
       },

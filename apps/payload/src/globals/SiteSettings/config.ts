@@ -337,6 +337,20 @@ export const SiteSettings: GlobalConfig = {
           },
           fields: [
             {
+              name: 'blogTitle',
+              type: 'text',
+              defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.blogTitle),
+              localized: true,
+              label: { en: 'Blog Page Title', es: 'Título de la página de blog' },
+            },
+            {
+              name: 'blogDescription',
+              type: 'textarea',
+              localized: true,
+              label: { en: 'Blog Page Description', es: 'Descripción de la página de blog' },
+              defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.blogDescription),
+            },
+            {
               name: 'labels',
               type: 'group',
               label: { en: 'Labels', es: 'Etiquetas' },

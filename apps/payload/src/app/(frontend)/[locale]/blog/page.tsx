@@ -52,11 +52,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return generateMeta({
     doc: {
-      title: 'Blog',
+      title: blogSettings.blogTitle || 'Blog',
       slug: BLOG_CONFIG.slug,
       meta: {
         title: blogSettings.blogMeta?.title,
-        description: blogSettings.blogMeta?.description,
+        description: blogSettings.blogMeta?.description || blogSettings.blogDescription,
         image: blogSettings.blogMeta?.image,
         robots: blogSettings.blogMeta?.robots,
       },

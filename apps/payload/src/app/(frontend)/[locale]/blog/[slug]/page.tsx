@@ -45,7 +45,7 @@ export default async function Page({ params }: Args) {
         <BreadcrumbsJsonLd
           locale={locale}
           blog={{
-            title: 'Blog',
+            title: blogSettings.blogTitle || 'Blog',
             post: {
               title: post.title,
               slug: post.slug ?? decodedSlug,

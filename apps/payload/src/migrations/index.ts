@@ -10,6 +10,7 @@ import * as migration_20260319_100637_add_image_fields from './20260319_100637_a
 import * as migration_20260319_103151_remove_section_fields_from_blog_section from './20260319_103151_remove_section_fields_from_blog_section';
 import * as migration_20260319_164752_update_header_and_footer_according_to_other_projects from './20260319_164752_update_header_and_footer_according_to_other_projects';
 import * as migration_20260325_115801_enhance_blog from './20260325_115801_enhance_blog';
+import * as migration_20260325_124045_return_blog_field from './20260325_124045_return_blog_field';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20260325_115801_enhance_blog.up,
     down: migration_20260325_115801_enhance_blog.down,
-    name: '20260325_115801_enhance_blog'
+    name: '20260325_115801_enhance_blog',
+  },
+  {
+    up: migration_20260325_124045_return_blog_field.up,
+    down: migration_20260325_124045_return_blog_field.down,
+    name: '20260325_124045_return_blog_field'
   },
 ];
