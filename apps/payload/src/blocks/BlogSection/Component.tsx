@@ -8,9 +8,12 @@ import type { IBlogPostCardProps } from '@shared/ui/components/sections/blog/typ
 import { BlogStyle } from '@shared/ui/components/sections/blog/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
+import type { IRichTextProps } from '@shared/ui/components/ui/richText/types'
+import { AlignVariant } from '@shared/ui/components/ui/richText/types'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import { resolveLocale } from '@/core/lib/resolveLocale'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
+import { getBlogPageSettings } from '@/core/lib/getBlogPageSettings'
 
 export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
   text,
@@ -20,6 +23,7 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
 }) => {
   const payload = await getPayload({ config: configPromise })
   const locale = await resolveLocale()
+  const blogSettings = await getBlogPageSettings({ locale })
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
@@ -36,11 +40,18 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
     const heroImage = typeof post.heroImage === 'object' ? (post.heroImage as Media) : null
     const postUrl = `${shouldIncludeLocalePrefix(locale) ? `/${locale}` : ''}${BLOG_CONFIG.basePath}/${post.slug}`
 
+    const excerptRichText: IRichTextProps = {
+      richText: post.excerpt ? <p>{post.excerpt}</p> : null,
+      alignVariant: AlignVariant.Left,
+      removeInnerMargins: false,
+    }
+
     return {
       style: blogStyle,
-      text: prepareRichTextProps(post.content),
+      text: excerptRichText,
       image: prepareImageProps({ image: heroImage, aspectRatio: aspectRatio ?? null }),
       link: { text: post.title, href: postUrl },
+      readMoreLabel: blogSettings.readMoreLabel ?? undefined,
     }
   })
 

@@ -10,6 +10,8 @@ import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
 function revalidatePostTags(slug: string, locale: Locale, payload: Payload) {
   payload.logger?.info?.(`Revalidating post with slug: ${slug}`)
 
+  // Revalidates this post AND all other posts (via postsList tag),
+  // ensuring related articles sections on other posts stay up to date.
   revalidateTag(cacheTag({ type: 'post', slug, locale }))
   revalidateTag(cacheTag({ type: 'postsList', locale }))
 }

@@ -39,6 +39,7 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
       slug: true,
       categories: true,
       meta: true,
+      excerpt: true,
       heroImage: true,
       publishedAt: true,
       updatedAt: true,

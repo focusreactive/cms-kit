@@ -13,6 +13,7 @@ export interface IBlogPostCardProps {
   image: IImageProps;
   link: LinkProps;
   style: BlogStyle;
+  readMoreLabel?: string;
 }
 
 export interface IBlogSectionProps {

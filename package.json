@@ -53,7 +53,9 @@
   "pnpm": {
     "overrides": {
       "@types/react": "^19",
-      "@types/react-dom": "^19"
+      "@types/react-dom": "^19",
+      "react": "19.2.1",
+      "react-dom": "19.2.1"
     }
   },
   "devDependencies": {

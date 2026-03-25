@@ -8,8 +8,8 @@ export default function BlogPostCard({
   image,
   link,
   text,
+  readMoreLabel,
 }: IBlogPostCardProps) {
-  console.log("link", link);
   return (
     <Link {...link}>
       <article className="bg-bgColor group flex max-w-xl flex-col items-start gap-y-4">
@@ -18,35 +18,15 @@ export default function BlogPostCard({
             <Image {...image} />
           </div>
         ) : null}
-        {/* <div className="flex items-center gap-x-4 text-xs">
-        {post.tags.map((tag) => {
-          return (
-            <SmartLink
-              key={getCmsKey(tag)}
-              className={
-                "relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-              }
-            />
-          );
-        })}
-      </div> */}
         <div className="group relative group-hover:underline">
           <RichText {...text} />
         </div>
-
-        {/* <div className="relative flex items-center gap-x-4 self-baseline">
-        <div className="bg-primary2LightColor size-10 overflow-hidden rounded-full">
-          <Image {...image} />
-        </div>
-        <div className="text-sm leading-6">
-          <p className="text-textColor font-semibold">
-            <a href="#">
-              <span className="absolute inset-0"></span>
-              {"focusreacive"}
-            </a>
-          </p>
-        </div>
-      </div> */}
+        {readMoreLabel && (
+          <span className="text-sm font-medium text-primary inline-flex items-center gap-1">
+            {readMoreLabel}
+            <span aria-hidden="true">&rsaquo;</span>
+          </span>
+        )}
       </article>
     </Link>
   );
