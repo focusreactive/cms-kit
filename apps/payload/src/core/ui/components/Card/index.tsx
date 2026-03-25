@@ -15,6 +15,7 @@ export const Card: React.FC<{
   basePath?: string
   showCategories?: boolean
   title?: string
+  readMoreLabel?: string
 }> = (props) => {
   const {
     className,
@@ -22,14 +23,13 @@ export const Card: React.FC<{
     basePath = BLOG_CONFIG.basePath,
     showCategories,
     title: titleFromProps,
+    readMoreLabel,
   } = props
 
-  const { slug, categories, meta, title, heroImage } = doc || {}
-  const { description } = meta || {}
+  const { slug, categories, excerpt, title, heroImage } = doc || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `${basePath}/${slug}`
 
   return (
@@ -90,8 +90,16 @@ export const Card: React.FC<{
               <h3>{titleToUse}</h3>
             </div>
           )}
-          {description && (
-            <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>
+          {excerpt && (
+            <div className="mt-2"><p className="text-muted-foreground text-sm line-clamp-3">{excerpt}</p></div>
+          )}
+          {readMoreLabel && (
+            <div className="mt-4">
+              <span className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                {readMoreLabel}
+                <span aria-hidden="true">&rsaquo;</span>
+              </span>
+            </div>
           )}
         </div>
       </article>
