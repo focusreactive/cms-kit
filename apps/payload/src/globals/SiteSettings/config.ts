@@ -344,6 +344,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'readMoreLabel',
                   type: 'text',
+                  required: true,
                   label: { en: 'Read More Button Label', es: 'Etiqueta del botón Leer más' },
                   localized: true,
                   defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.readMoreLabel),
@@ -351,6 +352,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'relatedPostsLabel',
                   type: 'text',
+                  required: true,
                   label: { en: 'Related Posts Label', es: 'Etiqueta de publicaciones relacionadas' },
                   localized: true,
                   defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.relatedPostsLabel),
