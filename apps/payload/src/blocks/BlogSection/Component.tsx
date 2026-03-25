@@ -23,7 +23,7 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
 }) => {
   const payload = await getPayload({ config: configPromise })
   const locale = await resolveLocale()
-  const _blogSettings = await getBlogPageSettings({ locale })
+  const blogSettings = await getBlogPageSettings({ locale })
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
@@ -51,10 +51,10 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
       text: excerptRichText,
       image: prepareImageProps({ image: heroImage, aspectRatio: aspectRatio ?? null }),
       link: { text: post.title, href: postUrl },
+      readMoreLabel: blogSettings.readMoreLabel ?? undefined,
     }
   })
 
-  // TODO: pass _blogSettings.readMoreLabel to BlogSection once the shared UI component supports it
   return (
     <BlogSection
       text={text ? prepareRichTextProps(text) : prepareRichTextProps(null)}
