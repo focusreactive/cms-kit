@@ -1,5 +1,6 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { draftMode } from 'next/headers'
 import type { Post } from '@/payload-types'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import type { Locale } from '@/core/types'
@@ -20,6 +21,8 @@ export async function getRelatedPosts({
   post: Post
   locale: Locale
 }): Promise<Post[]> {
+  const { isEnabled: draft } = await draftMode()
+
   const manualPosts = (post.relatedPosts ?? []).filter(
     (p): p is Post => typeof p === 'object' && p !== null,
   )
@@ -43,11 +46,12 @@ export async function getRelatedPosts({
 
   const { docs: backfillPosts } = await payload.find({
     collection: BLOG_CONFIG.collection,
+    draft,
     where: {
       and: [
         { id: { not_in: excludeIds } },
         { categories: { in: categoryIds } },
-        { _status: { equals: 'published' } },
+        ...(!draft ? [{ _status: { equals: 'published' } }] : []),
       ],
     },
     sort: '-publishedAt',

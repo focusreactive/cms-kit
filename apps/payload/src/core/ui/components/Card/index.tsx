@@ -64,20 +64,18 @@ export const Card: React.FC<{
         </div>
         <div className="p-4">
           {showCategories && hasCategories && (
-            <div className="uppercase text-sm mb-4">
+            <div className="flex gap-2 flex-wrap mb-3">
               {categories?.map((category, index) => {
                 if (typeof category === 'object') {
-                  const { title: titleFromCategory } = category
-
-                  const categoryTitle = titleFromCategory || 'Untitled category'
-
-                  const isLast = index === categories.length - 1
+                  const categoryTitle = category.title || 'Untitled category'
 
                   return (
-                    <Fragment key={index}>
+                    <span
+                      key={index}
+                      className="text-xs font-medium uppercase tracking-wide px-2 py-1 rounded-full bg-muted text-muted-foreground"
+                    >
                       {categoryTitle}
-                      {!isLast && <Fragment>, &nbsp;</Fragment>}
-                    </Fragment>
+                    </span>
                   )
                 }
 
