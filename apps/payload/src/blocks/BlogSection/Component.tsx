@@ -8,6 +8,8 @@ import type { IBlogPostCardProps } from '@shared/ui/components/sections/blog/typ
 import { BlogStyle } from '@shared/ui/components/sections/blog/types'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
+import type { IRichTextProps } from '@shared/ui/components/ui/richText/types'
+import { AlignVariant } from '@shared/ui/components/ui/richText/types'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import { resolveLocale } from '@/core/lib/resolveLocale'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
@@ -38,9 +40,15 @@ export const BlogSectionBlockComponent: React.FC<BlogSectionBlock> = async ({
     const heroImage = typeof post.heroImage === 'object' ? (post.heroImage as Media) : null
     const postUrl = `${shouldIncludeLocalePrefix(locale) ? `/${locale}` : ''}${BLOG_CONFIG.basePath}/${post.slug}`
 
+    const excerptRichText: IRichTextProps = {
+      richText: post.excerpt ? <p>{post.excerpt}</p> : null,
+      alignVariant: AlignVariant.Left,
+      removeInnerMargins: false,
+    }
+
     return {
       style: blogStyle,
-      text: prepareRichTextProps(post.content),
+      text: excerptRichText,
       image: prepareImageProps({ image: heroImage, aspectRatio: aspectRatio ?? null }),
       link: { text: post.title, href: postUrl },
     }

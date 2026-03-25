@@ -7,10 +7,11 @@ import type { Locale } from '@/core/types'
 const RELATED_POSTS_COUNT = 3
 
 /**
- * Returns exactly 3 related posts for a given post.
+ * Returns up to 3 related posts for a given post.
  * Prioritizes manually selected related posts, then backfills
  * from the same categories sorted by publish date (newest first).
  * Excludes the current post from results.
+ * If not enough posts match the filters, returns only those available.
  */
 export async function getRelatedPosts({
   post,
