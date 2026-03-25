@@ -2222,12 +2222,10 @@ export interface SiteSetting {
    */
   notFoundDescription?: string | null;
   blog: {
-    blogTitle?: string | null;
-    blogDescription?: string | null;
-    labels: {
-      readMoreLabel: string;
-      relatedPostsLabel: string;
-    };
+    blogTitle: string;
+    blogDescription: string;
+    readMoreLabel: string;
+    relatedPostsLabel: string;
     blogMeta?: {
       title?: string | null;
       /**
@@ -2293,12 +2291,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         blogTitle?: T;
         blogDescription?: T;
-        labels?:
-          | T
-          | {
-              readMoreLabel?: T;
-              relatedPostsLabel?: T;
-            };
+        readMoreLabel?: T;
+        relatedPostsLabel?: T;
         blogMeta?:
           | T
           | {

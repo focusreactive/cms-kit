@@ -30,8 +30,8 @@ export const getBlogPageSettings = async ({
   return {
     blogTitle: settings?.blog?.blogTitle,
     blogDescription: settings?.blog?.blogDescription,
-    readMoreLabel: settings?.blog?.labels?.readMoreLabel,
-    relatedPostsLabel: settings?.blog?.labels?.relatedPostsLabel,
+    readMoreLabel: settings?.blog?.readMoreLabel,
+    relatedPostsLabel: settings?.blog?.relatedPostsLabel,
     blogMeta: settings?.blog?.blogMeta,
   }
 }
