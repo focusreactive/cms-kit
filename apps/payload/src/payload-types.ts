@@ -471,17 +471,17 @@ export interface Post {
     robots?: ('index' | 'noindex') | null;
   };
   /**
-   * Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.
-   */
-  relatedPosts?: (number | Post)[] | null;
-  categories: (number | Category)[];
-  publishedAt?: string | null;
-  authors: (number | Author)[];
-  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
   slug: string;
+  publishedAt?: string | null;
+  categories: (number | Category)[];
+  authors: (number | Author)[];
+  /**
+   * Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.
+   */
+  relatedPosts?: (number | Post)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1894,12 +1894,12 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
         robots?: T;
       };
-  relatedPosts?: T;
-  categories?: T;
-  publishedAt?: T;
-  authors?: T;
   generateSlug?: T;
   slug?: T;
+  publishedAt?: T;
+  categories?: T;
+  authors?: T;
+  relatedPosts?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2221,10 +2221,10 @@ export interface SiteSetting {
    * Text displayed on 404 page
    */
   notFoundDescription?: string | null;
-  blog?: {
-    labels?: {
-      readMoreLabel?: string | null;
-      relatedPostsLabel?: string | null;
+  blog: {
+    labels: {
+      readMoreLabel: string;
+      relatedPostsLabel: string;
     };
     blogMeta?: {
       title?: string | null;
