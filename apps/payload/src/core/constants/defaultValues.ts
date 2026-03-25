@@ -5,7 +5,7 @@ export const DEFAULT_VALUES = {
     },
     posts: {
       title: { en: 'Title', es: 'Título' },
-      relatedPostsIntro: { en: 'Related Posts', es: 'Publicaciones relacionadas' },
+      excerpt: { en: 'Short description of the post', es: 'Breve descripción de la publicación' },
     },
     siteSettings: {
       siteName: { en: 'Site Name', es: 'Nombre del sitio' },
@@ -25,6 +25,10 @@ export const DEFAULT_VALUES = {
       notFoundDescription: {
         en: 'Unfortunately, the requested page does not exist or has been deleted.',
         es: 'Lo sentimos, la página solicitada no existe o ha sido eliminada.',
+      },
+      blog: {
+        readMoreLabel: { en: 'Read More', es: 'Leer más' },
+        relatedPostsLabel: { en: 'Related Articles', es: 'Artículos relacionados' },
       },
     },
     categories: {
