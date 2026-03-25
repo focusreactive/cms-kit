@@ -145,44 +145,7 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    {
-      name: 'relatedPosts',
-      type: 'relationship',
-      admin: {
-        position: 'sidebar',
-        description: {
-          en: 'Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.',
-          es: 'Selecciona hasta 3 publicaciones relacionadas. Si se seleccionan menos de 3, se mostrarán automáticamente publicaciones adicionales de las mismas categorías según la fecha de publicación.',
-        },
-      },
-      filterOptions: ({ id }) => {
-        return {
-          id: {
-            not_in: [id],
-          },
-        }
-      },
-      hasMany: true,
-      relationTo: BLOG_CONFIG.collection,
-      label: {
-        en: 'Related Posts',
-        es: 'Publicaciones relacionadas',
-      },
-    },
-    {
-      name: 'categories',
-      type: 'relationship',
-      required: true,
-      admin: {
-        position: 'sidebar',
-      },
-      hasMany: true,
-      relationTo: 'categories',
-      label: {
-        en: 'Categories',
-        es: 'Categorías',
-      },
-    },
+    createSharedSlugField('posts'),
     {
       name: 'publishedAt',
       index: true,
@@ -209,6 +172,20 @@ export const Posts: CollectionConfig<'posts'> = {
       },
     },
     {
+      name: 'categories',
+      type: 'relationship',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+      hasMany: true,
+      relationTo: 'categories',
+      label: {
+        en: 'Categories',
+        es: 'Categorías',
+      },
+    },
+    {
       name: 'authors',
       type: 'relationship',
       required: true,
@@ -222,7 +199,30 @@ export const Posts: CollectionConfig<'posts'> = {
         es: 'Autores',
       },
     },
-    createSharedSlugField('posts'),
+    {
+      name: 'relatedPosts',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+        description: {
+          en: 'Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.',
+          es: 'Selecciona hasta 3 publicaciones relacionadas. Si se seleccionan menos de 3, se mostrarán automáticamente publicaciones adicionales de las mismas categorías según la fecha de publicación.',
+        },
+      },
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_in: [id],
+          },
+        }
+      },
+      hasMany: true,
+      relationTo: BLOG_CONFIG.collection,
+      label: {
+        en: 'Related Posts',
+        es: 'Publicaciones relacionadas',
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidatePost],
