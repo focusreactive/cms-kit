@@ -382,6 +382,7 @@ export const SiteSettings: GlobalConfig = {
                     {
                       name: 'blogMeta',
                       type: 'group',
+                      label: false,
                       fields: generateSeoFields(),
                       localized: true,
                     },
