@@ -8,7 +8,6 @@ import { CardsGridBlock } from '@/blocks/CardsGrid/config'
 import { CarouselBlock } from '@/blocks/Carousel/config'
 import { LogosBlock } from '@/blocks/Logos/config'
 import { LinksListBlock } from '@/blocks/LinksList/config'
-import { BlogSectionBlock } from '@/blocks/BlogSection/config'
 import { generateSeoFields } from '@/core/lib/seoFields'
 import { getBlocksFieldWithPresetsPath } from '@focus-reactive/payload-plugin-presets'
 
@@ -45,7 +44,7 @@ export function createBasePageFields({ withBlocksDefaultValue = false } = {}): F
             {
               name: 'blocks',
               type: 'blocks',
-              blocks: [HeroBlock, TextSectionBlock, ContentBlock, FaqBlock, TestimonialsListBlock, CardsGridBlock, CarouselBlock, LogosBlock, LinksListBlock, BlogSectionBlock],
+              blocks: [HeroBlock, TextSectionBlock, ContentBlock, FaqBlock, TestimonialsListBlock, CardsGridBlock, CarouselBlock, LogosBlock, LinksListBlock],
               required: true,
               admin: {
                 initCollapsed: false,

@@ -344,7 +344,6 @@ export interface Page {
     | CarouselBlock
     | LogosBlock
     | LinksListBlock
-    | BlogSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -990,36 +989,6 @@ export interface LinksListBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BlogSectionBlock".
- */
-export interface BlogSectionBlock {
-  text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  style?: ('three-column' | 'three-column-with-images' | 'three-column-with-background-images') | null;
-  /**
-   * Aspect ratio applied to all post images in this section
-   */
-  aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-  postsLimit?: number | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'blogSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1522,7 +1491,6 @@ export interface PageSelect<T extends boolean = true> {
         carousel?: T | CarouselBlockSelect<T>;
         logos?: T | LogosBlockSelect<T>;
         linksList?: T | LinksListBlockSelect<T>;
-        blogSection?: T | BlogSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1842,18 +1810,6 @@ export interface LinksListBlockSelect<T extends boolean = true> {
         maxWidth?: T;
         backgroundImage?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BlogSectionBlock_select".
- */
-export interface BlogSectionBlockSelect<T extends boolean = true> {
-  text?: T;
-  style?: T;
-  aspectRatio?: T;
-  postsLimit?: T;
   id?: T;
   blockName?: T;
 }
