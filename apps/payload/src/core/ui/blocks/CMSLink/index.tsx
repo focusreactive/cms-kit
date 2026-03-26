@@ -40,7 +40,7 @@ type Props = {
     value: Page | Post | string | number
   } | null
   size?: ButtonProps['size'] | null
-  type?: 'custom' | 'reference' | null
+  type?: 'custom' | 'reference' | 'customPage' | null
   url?: string | null
 }
 
