@@ -145,6 +145,7 @@ export const plugins: Plugin[] = [
   }),
 
   presetsPlugin({
+    debug: isDev(),
     packageName: '@focus-reactive/payload-plugin-presets',
     labels: {
       singular: { en: 'Preset', es: 'Preset' },

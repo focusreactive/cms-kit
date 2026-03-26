@@ -1,7 +1,7 @@
-import { createPresetActionsField } from '@focus-reactive/payload-plugin-presets'
+import { injectSaveAsPresetButton } from '@focus-reactive/payload-plugin-presets'
 
 export function createPresetFields() {
-  const presetFields = createPresetActionsField()
+  const presetFields = injectSaveAsPresetButton()
 
   return {
     presetFields,
