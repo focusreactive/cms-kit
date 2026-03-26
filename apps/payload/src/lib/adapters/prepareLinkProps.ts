@@ -1,14 +1,16 @@
 import type { LinkProps } from '@shared/ui/components/ui/link/types'
 import { ButtonVariant } from '@shared/ui/components/ui/button/types'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
+import { CUSTOM_PAGES_CONFIG, type CustomPageKey } from '@/core/config/customPages'
 
 type PayloadLink = {
-  type?: 'reference' | 'custom' | null
+  type?: 'reference' | 'custom' | 'customPage' | null
   url?: string | null
   reference?: {
     relationTo: string
     value: unknown
   } | null
+  customPage?: string | null
   label?: string | null
   appearance?: string | null
   newTab?: boolean | null
@@ -28,6 +30,10 @@ export function prepareLinkProps(link: PayloadLink | null | undefined, locale: s
       const path = breadcrumbs[breadcrumbs.length - 1]?.url ?? (value.slug as string) ?? ''
       href = shouldIncludeLocalePrefix(locale) ? `/${locale}${path}` : path
     }
+  } else if (link.type === 'customPage' && link.customPage) {
+    const entry = CUSTOM_PAGES_CONFIG[link.customPage as CustomPageKey]
+
+    if (entry) href = entry.resolver(locale)
   }
 
   const variantMap: Record<string, ButtonVariant> = {

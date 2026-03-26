@@ -10,13 +10,15 @@ import { redirect } from '@/i18n/navigation'
 type BlogPageDynamicProps = {
   searchParams: Promise<{
     page?: string
+    categories?: string
   }>
   locale: Locale
 }
 
 export async function BlogPageDynamic({ searchParams, locale }: BlogPageDynamicProps) {
-  const { page } = await searchParams
+  const { page, categories: categoriesParam } = await searchParams
   const pageNumber = page ? parseInt(page, 10) : 1
+  const activeCategories = categoriesParam?.split(',').filter(Boolean) ?? []
 
   if (pageNumber < 1 || !Number.isInteger(pageNumber)) {
     redirect({ href: BLOG_CONFIG.basePath, locale })
@@ -24,9 +26,18 @@ export async function BlogPageDynamic({ searchParams, locale }: BlogPageDynamicP
 
   const payload = await getPayload({ config: configPromise })
 
-  const [posts, blogSettings] = await Promise.all([
-    getPosts(payload, { page: pageNumber, locale }),
+  const [posts, blogSettings, allCategories] = await Promise.all([
+    getPosts(payload, { page: pageNumber, locale, categories: activeCategories }),
     getBlogPageSettings({ locale }),
+    payload.find({
+      collection: 'categories',
+      depth: 0,
+      limit: 100,
+      locale,
+      sort: 'title',
+      overrideAccess: false,
+      select: { title: true, slug: true },
+    }),
   ])
 
   if (pageNumber > posts.totalPages && posts.totalPages > 0) {
@@ -40,6 +51,8 @@ export async function BlogPageDynamic({ searchParams, locale }: BlogPageDynamicP
       totalPages={posts.totalPages}
       totalDocs={posts.totalDocs}
       readMoreLabel={blogSettings.readMoreLabel}
+      categories={allCategories.docs}
+      activeCategories={activeCategories}
     />
   )
 }

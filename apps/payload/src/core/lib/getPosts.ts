@@ -11,6 +11,7 @@ export interface GetPostsOptions {
   limit?: number
   overrideAccess?: boolean
   locale?: Locale
+  categories?: string[]
 }
 
 const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) => {
@@ -19,6 +20,7 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
     limit = BLOG_CONFIG.postsPerPage,
     overrideAccess = false,
     locale,
+    categories,
   } = options
 
   return await payload.find({
@@ -33,6 +35,9 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
       _status: {
         equals: 'published',
       },
+      ...(categories?.length && {
+        'categories.slug': { in: categories },
+      }),
     },
     select: {
       title: true,
@@ -49,13 +54,13 @@ const getPostsQuery = cache(async (payload: Payload, options: GetPostsOptions) =
 })
 
 export const getPosts = async (payload: Payload, options: GetPostsOptions) => {
-  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale } = options
+  const { page = 1, limit = BLOG_CONFIG.postsPerPage, locale, categories } = options
 
   const resolvedLocale = await resolveLocale(locale)
 
   return unstable_cache(
-    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale }),
-    [page.toString(), limit.toString(), resolvedLocale],
+    async () => getPostsQuery(payload, { page, limit, locale: resolvedLocale, categories }),
+    [page.toString(), limit.toString(), resolvedLocale, ...(categories ?? [])],
     {
       tags: [cacheTag({ type: 'postsList', locale: resolvedLocale })],
     },
