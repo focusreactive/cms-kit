@@ -412,7 +412,7 @@ export interface Header {
          * Link settings
          */
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'customPage') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -424,6 +424,7 @@ export interface Header {
                 value: number | Post;
               } | null);
           url?: string | null;
+          customPage?: 'blog' | null;
           label: string;
         };
         id?: string | null;
@@ -536,7 +537,7 @@ export interface Footer {
          * Link settings
          */
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'customPage') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -548,6 +549,7 @@ export interface Footer {
                 value: number | Post;
               } | null);
           url?: string | null;
+          customPage?: 'blog' | null;
           label: string;
         };
         id?: string | null;
@@ -602,7 +604,7 @@ export interface HeroBlock {
   } | null;
   actions?:
     | {
-        type?: ('reference' | 'custom') | null;
+        type?: ('reference' | 'custom' | 'customPage') | null;
         newTab?: boolean | null;
         reference?:
           | ({
@@ -614,6 +616,7 @@ export interface HeroBlock {
               value: number | Post;
             } | null);
         url?: string | null;
+        customPage?: 'blog' | null;
         label: string;
         /**
          * Choose how the link should be rendered.
@@ -813,7 +816,7 @@ export interface CardsGridBlock {
       aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
     };
     link?: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -825,6 +828,7 @@ export interface CardsGridBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -917,7 +921,7 @@ export interface LogosBlock {
       aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
     };
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -929,6 +933,7 @@ export interface LogosBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label: string;
     };
     id?: string | null;
@@ -954,7 +959,7 @@ export interface LinksListBlock {
   alignVariant?: ('left' | 'center' | 'right') | null;
   links: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -966,6 +971,7 @@ export interface LinksListBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label: string;
       /**
        * Choose how the link should be rendered.
@@ -1057,7 +1063,7 @@ export interface Preset {
     } | null;
     actions?:
       | {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'customPage') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1069,6 +1075,7 @@ export interface Preset {
                 value: number | Post;
               } | null);
           url?: string | null;
+          customPage?: 'blog' | null;
           label: string;
           /**
            * Choose how the link should be rendered.
@@ -1532,6 +1539,7 @@ export interface HeroBlockSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        customPage?: T;
         label?: T;
         appearance?: T;
         id?: T;
@@ -1683,6 +1691,7 @@ export interface CardsGridBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
               appearance?: T;
             };
@@ -1760,6 +1769,7 @@ export interface LogosBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
             };
         id?: T;
@@ -1794,6 +1804,7 @@ export interface LinksListBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
               appearance?: T;
             };
@@ -1891,6 +1902,7 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
             };
         id?: T;
@@ -1916,6 +1928,7 @@ export interface FooterSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
             };
         id?: T;
@@ -1964,6 +1977,7 @@ export interface PresetsSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              customPage?: T;
               label?: T;
               appearance?: T;
               id?: T;
@@ -2309,7 +2323,7 @@ export interface CardsGridInlineBlock {
       aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
     };
     link?: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -2321,6 +2335,7 @@ export interface CardsGridInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -2348,7 +2363,7 @@ export interface LogosInlineBlock {
       aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
     };
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -2360,6 +2375,7 @@ export interface LogosInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label: string;
     };
     id?: string | null;
@@ -2376,7 +2392,7 @@ export interface LinksListInlineBlock {
   alignVariant?: ('left' | 'center' | 'right') | null;
   links: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'customPage') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -2388,6 +2404,7 @@ export interface LinksListInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
+      customPage?: 'blog' | null;
       label: string;
       /**
        * Choose how the link should be rendered.
