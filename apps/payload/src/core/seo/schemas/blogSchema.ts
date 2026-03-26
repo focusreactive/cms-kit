@@ -61,7 +61,7 @@ export function createBlogSchema({ settings, posts, siteName, locale }: BlogSche
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: settings.blogTitle,
+    name: settings.blogTitle || 'Blog',
     url: blogUrl,
     inLanguage: locale,
     mainEntityOfPage: {

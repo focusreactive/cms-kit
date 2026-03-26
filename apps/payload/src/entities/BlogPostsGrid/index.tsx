@@ -5,10 +5,11 @@ import type { CardPostData } from '@/core/types'
 
 export type Props = {
   posts: CardPostData[]
+  readMoreLabel?: string | null
 }
 
 export const BlogPostsGrid: React.FC<Props> = (props) => {
-  const { posts } = props
+  const { posts, readMoreLabel } = props
 
   if (!posts || posts.length === 0) {
     return <EmptyState title="No posts" description="" />
@@ -25,6 +26,7 @@ export const BlogPostsGrid: React.FC<Props> = (props) => {
                 doc={result}
                 basePath={BLOG_CONFIG.basePath}
                 showCategories
+                readMoreLabel={readMoreLabel ?? undefined}
               />
             </div>
           )

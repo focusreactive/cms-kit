@@ -441,6 +441,7 @@ export interface Header {
 export interface Post {
   id: number;
   title: string;
+  excerpt: string;
   heroImage: number | Media;
   content: {
     root: {
@@ -457,12 +458,6 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  /**
-   * Provide a short introduction for the related posts section
-   */
-  relatedPostsIntro: string;
-  relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -475,13 +470,18 @@ export interface Post {
      */
     robots?: ('index' | 'noindex') | null;
   };
-  publishedAt?: string | null;
-  authors?: (number | Author)[] | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
   slug: string;
+  publishedAt?: string | null;
+  categories: (number | Category)[];
+  authors: (number | Author)[];
+  /**
+   * Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.
+   */
+  relatedPosts?: (number | Post)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1883,11 +1883,9 @@ export interface AuthorsSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   heroImage?: T;
   content?: T;
-  relatedPostsIntro?: T;
-  relatedPosts?: T;
-  categories?: T;
   meta?:
     | T
     | {
@@ -1896,10 +1894,12 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
         robots?: T;
       };
-  publishedAt?: T;
-  authors?: T;
   generateSlug?: T;
   slug?: T;
+  publishedAt?: T;
+  categories?: T;
+  authors?: T;
+  relatedPosts?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -2221,15 +2221,11 @@ export interface SiteSetting {
    * Text displayed on 404 page
    */
   notFoundDescription?: string | null;
-  blog?: {
-    /**
-     * The main title for the blog page
-     */
-    blogTitle?: string | null;
-    /**
-     * Used for meta description if not overridden
-     */
-    blogDescription?: string | null;
+  blog: {
+    blogTitle: string;
+    blogDescription: string;
+    readMoreLabel: string;
+    relatedPostsLabel: string;
     blogMeta?: {
       title?: string | null;
       /**
@@ -2295,6 +2291,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         blogTitle?: T;
         blogDescription?: T;
+        readMoreLabel?: T;
+        relatedPostsLabel?: T;
         blogMeta?:
           | T
           | {

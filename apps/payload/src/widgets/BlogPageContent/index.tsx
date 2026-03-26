@@ -8,7 +8,7 @@ type BlogPageContentProps = {
   currentPage?: number
   totalPages?: number
   totalDocs?: number
-  title?: string | null
+  readMoreLabel?: string | null
 }
 
 export const BlogPageContent: React.FC<BlogPageContentProps> = ({
@@ -16,17 +16,11 @@ export const BlogPageContent: React.FC<BlogPageContentProps> = ({
   currentPage,
   totalPages,
   totalDocs,
-  title,
+  readMoreLabel,
 }) => {
   return (
     <section className="py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16">
-          <div className="prose dark:prose-invert max-w-none">
-            <h1>{title}</h1>
-          </div>
-        </div>
-
         {currentPage && totalDocs !== undefined && (
           <div className="mb-8">
             <PageRange
@@ -38,7 +32,7 @@ export const BlogPageContent: React.FC<BlogPageContentProps> = ({
           </div>
         )}
 
-        <BlogPostsGrid posts={posts} />
+        <BlogPostsGrid posts={posts} readMoreLabel={readMoreLabel} />
 
         {currentPage && totalPages && totalPages > 1 && (
           <Pagination basePath={BLOG_CONFIG.basePath} page={currentPage} totalPages={totalPages} />

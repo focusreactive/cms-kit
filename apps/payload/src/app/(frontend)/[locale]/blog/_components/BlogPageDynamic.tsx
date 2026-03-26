@@ -39,7 +39,7 @@ export async function BlogPageDynamic({ searchParams, locale }: BlogPageDynamicP
       currentPage={posts.page}
       totalPages={posts.totalPages}
       totalDocs={posts.totalDocs}
-      title={blogSettings.blogTitle}
+      readMoreLabel={blogSettings.readMoreLabel}
     />
   )
 }
