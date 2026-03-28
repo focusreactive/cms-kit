@@ -1,10 +1,8 @@
 import type { Block } from 'payload'
-import { createPresetFields } from '@/fields/presetFields'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
 import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { embedSectionTab } from '@/fields/section/embedSectionTab'
-
-const { presetFields } = createPresetFields()
+import { getBlockAdminComponents } from '@focus-reactive/payload-plugin-presets'
 
 export const HeroBlock: Block = {
   slug: 'hero',
@@ -14,5 +12,8 @@ export const HeroBlock: Block = {
     singular: { en: 'Hero', es: 'Hero' },
     plural: { en: 'Heroes', es: 'Héroes' },
   },
-  fields: embedSectionTab([...PRESET_TYPES_CONFIG.hero.fields, presetFields]),
+  admin: {
+    components: getBlockAdminComponents(),
+  },
+  fields: embedSectionTab([...PRESET_TYPES_CONFIG.hero.fields]),
 }
