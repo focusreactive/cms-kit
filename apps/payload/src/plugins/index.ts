@@ -8,11 +8,6 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { superAdmin, or, authenticated, user } from '@/core/lib/access'
 import seoPlugin from './seoPlugin'
-import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
-import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
-import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
-import { stripUnusedPresetGroups } from '@/hooks/presets/stripUnusedPresetGroups'
-import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
@@ -150,7 +145,6 @@ export const plugins: Plugin[] = [
       singular: { en: 'Preset', es: 'Preset' },
       plural: { en: 'Presets', es: 'Presets' },
     },
-    presetTypes: [PRESET_TYPES_CONFIG.hero, PRESET_TYPES_CONFIG.testimonialsList],
     overrides: {
       admin: {
         group: 'Settings',
@@ -162,13 +156,7 @@ export const plugins: Plugin[] = [
         read: authenticated,
         update: or(superAdmin, user),
       },
-      fields: (defaultFields) => defaultFields,
-      hooks: {
-        beforeChange: [stripUnusedPresetGroups],
-        afterChange: [revalidatePagesAfterPresetChange],
-        beforeDelete: [preventDeleteIfPresetInUse],
-        afterDelete: [revalidatePagesAfterPresetDelete],
-      },
+      fields: (defaultFields: Field[]) => defaultFields,
     },
   }),
 

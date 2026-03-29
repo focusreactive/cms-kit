@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useLocale } from 'next-intl'
 import { usePathname } from '@/i18n/navigation'
-import { Button, Link } from '@shared/ui'
+import { Button } from '@shared/ui'
 import { Link as LocaleLink } from '@/i18n/navigation'
 import { I18N_CONFIG } from '@/core/config/i18n'
 

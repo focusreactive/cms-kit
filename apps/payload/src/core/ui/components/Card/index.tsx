@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from '@/core/ui'
 import { cn } from '@/core/lib/utils'
 import NextImage from 'next/image'
@@ -83,11 +83,11 @@ export const Card: React.FC<{
               })}
             </div>
           )}
-          {titleToUse && (
-            <h3 className="font-bold text-lg">{titleToUse}</h3>
-          )}
+          {titleToUse && <h3 className="font-bold text-lg">{titleToUse}</h3>}
           {excerpt && (
-            <div className="mt-2"><p className="text-muted-foreground text-sm line-clamp-3">{excerpt}</p></div>
+            <div className="mt-2">
+              <p className="text-muted-foreground text-sm line-clamp-3">{excerpt}</p>
+            </div>
           )}
           {readMoreLabel && (
             <div className="mt-4">

@@ -1,4 +1,4 @@
-import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, Payload } from 'payload'
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import type { Page } from '@/payload-types'
 import { getLocaleFromRequest } from '@/core/lib/getLocaleFromRequest'
 import { revalidatePageCache } from '@/core/lib/revalidatePageCache'

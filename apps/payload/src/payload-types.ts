@@ -1043,7 +1043,16 @@ export interface Preset {
   /**
    * Choose type — only the matching section below will be shown.
    */
-  type: 'hero' | 'testimonialsList';
+  type:
+    | 'hero'
+    | 'textSection'
+    | 'content'
+    | 'faq'
+    | 'testimonialsList'
+    | 'cardsGrid'
+    | 'carousel'
+    | 'logos'
+    | 'linksList';
   hero?: {
     title?: string | null;
     richText?: {
@@ -1094,6 +1103,101 @@ export interface Preset {
      * Overlay opacity (0-100)
      */
     opacity?: number | null;
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  textSection?: {
+    text: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  content?: {
+    heading?: string | null;
+    layout: 'image-text' | 'text-image';
+    image: number | Media;
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  faq?: {
+    heading: string;
+    items: {
+      question: string;
+      answer: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      id?: string | null;
+    }[];
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
   };
   testimonialsList?: {
     heading?: string | null;
@@ -1110,6 +1214,178 @@ export interface Preset {
     duration?: number | null;
     showRating?: boolean | null;
     showAvatar?: boolean | null;
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  cardsGrid?: {
+    columns?: number | null;
+    items: {
+      title: string;
+      description?: string | null;
+      image?: {
+        image?: (number | null) | Media;
+        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+      };
+      link?: {
+        type?: ('reference' | 'custom' | 'customPage') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: number | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: number | Post;
+            } | null);
+        url?: string | null;
+        customPage?: 'blog' | null;
+        label?: string | null;
+        /**
+         * Choose how the link should be rendered.
+         */
+        appearance?: ('default' | 'outline') | null;
+      };
+      alignVariant?: ('left' | 'center' | 'right') | null;
+      rounded?: ('none' | 'large') | null;
+      backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
+      id?: string | null;
+    }[];
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  carousel?: {
+    text?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
+    slides: {
+      image: {
+        image: number | Media;
+        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+      };
+      text?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      id?: string | null;
+    }[];
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  logos?: {
+    alignVariant?: ('left' | 'center' | 'right') | null;
+    items: {
+      image: {
+        image: number | Media;
+        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+      };
+      link: {
+        type?: ('reference' | 'custom' | 'customPage') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: number | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: number | Post;
+            } | null);
+        url?: string | null;
+        customPage?: 'blog' | null;
+        label: string;
+      };
+      id?: string | null;
+    }[];
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
+  };
+  linksList?: {
+    alignVariant?: ('left' | 'center' | 'right') | null;
+    links: {
+      link: {
+        type?: ('reference' | 'custom' | 'customPage') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'page';
+              value: number | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: number | Post;
+            } | null);
+        url?: string | null;
+        customPage?: 'blog' | null;
+        label: string;
+        /**
+         * Choose how the link should be rendered.
+         */
+        appearance?: ('default' | 'outline') | null;
+      };
+      id?: string | null;
+    }[];
+    section?: {
+      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+      marginTop?: ('none' | 'base' | 'large') | null;
+      marginBottom?: ('none' | 'base' | 'large') | null;
+      paddingX?: ('none' | 'base' | 'large') | null;
+      paddingY?: ('none' | 'base' | 'large') | null;
+      maxWidth?: ('none' | 'base' | 'small') | null;
+      backgroundImage?: (number | null) | Media;
+    };
   };
   updatedAt: string;
   createdAt: string;
@@ -1991,6 +2267,75 @@ export interface PresetsSelect<T extends boolean = true> {
         enabled?: T;
         color?: T;
         opacity?: T;
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  textSection?:
+    | T
+    | {
+        text?: T;
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  content?:
+    | T
+    | {
+        heading?: T;
+        layout?: T;
+        image?: T;
+        content?: T;
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
       };
   testimonialsList?:
     | T
@@ -2006,6 +2351,158 @@ export interface PresetsSelect<T extends boolean = true> {
         duration?: T;
         showRating?: T;
         showAvatar?: T;
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  cardsGrid?:
+    | T
+    | {
+        columns?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?:
+                | T
+                | {
+                    image?: T;
+                    aspectRatio?: T;
+                  };
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    customPage?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              alignVariant?: T;
+              rounded?: T;
+              backgroundColor?: T;
+              id?: T;
+            };
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  carousel?:
+    | T
+    | {
+        text?: T;
+        effect?: T;
+        slides?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    image?: T;
+                    aspectRatio?: T;
+                  };
+              text?: T;
+              id?: T;
+            };
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  logos?:
+    | T
+    | {
+        alignVariant?: T;
+        items?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    image?: T;
+                    aspectRatio?: T;
+                  };
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    customPage?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
+      };
+  linksList?:
+    | T
+    | {
+        alignVariant?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    customPage?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        section?:
+          | T
+          | {
+              theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
+              paddingX?: T;
+              paddingY?: T;
+              maxWidth?: T;
+              backgroundImage?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
