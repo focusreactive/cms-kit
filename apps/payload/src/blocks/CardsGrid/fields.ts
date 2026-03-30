@@ -24,11 +24,13 @@ export const cardsGridFields: Field[] = [
         type: 'text',
         required: true,
         label: { en: 'Title', es: 'Título' },
+        localized: true,
       },
       {
         name: 'description',
         type: 'text',
         label: { en: 'Description', es: 'Descripción' },
+        localized: true,
       },
       imageField('image', { required: false }),
       link({ required: false }),

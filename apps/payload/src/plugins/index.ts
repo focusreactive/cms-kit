@@ -12,12 +12,24 @@ import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
 import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
+import {
+  translatorPlugin,
+  createOpenAIProvider,
+  createSyncRunner,
+} from '@focus-reactive/payload-plugin-translator'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
 import { buildVariantData } from '@/core/lib/abTesting/buildVariantData'
 import { I18N_CONFIG } from '@/core/config/i18n'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 import { isDev } from '@/core/utils/isDev'
+import { Page as PageCollection } from '@/collections/Page/Page'
+import { Posts } from '@/collections/Posts'
+import { Categories } from '@/collections/Categories'
+import { Authors } from '@/collections/Authors'
+import { Testimonials } from '@/collections/Testimonials'
+import { Header } from '@/collections/Header/config'
+import { Footer } from '@/collections/Footer/config'
 
 export const plugins: Plugin[] = [
   vercelBlobStorage({
@@ -206,6 +218,21 @@ export const plugins: Plugin[] = [
     globals: ['site-settings'],
     secret: process.env.CRON_SECRET!,
   }) as unknown as Plugin,
+
+  translatorPlugin({
+    collections: [PageCollection, Posts, Categories, Authors, Testimonials, Header, Footer].map(
+      (col) =>
+        JSON.parse(JSON.stringify(col, (_, v) => (typeof v === 'function' ? undefined : v))),
+    ),
+    translationProvider: createOpenAIProvider({
+      apiKey: process.env.OPENAI_API_KEY!,
+      model: 'gpt-4o-mini',
+      systemPrompt: ({ defaultPrompt }) =>
+        `${defaultPrompt}\nUse formal language. Keep brand names unchanged.`,
+      dryRun: false,
+    }),
+    runner: createSyncRunner(),
+  }),
 
   abTestingPlugin<ABVariantData>({
     debug: isDev(),

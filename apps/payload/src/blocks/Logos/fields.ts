@@ -20,6 +20,7 @@ export const logosFields: Field[] = [
     label: { en: 'Logo Items', es: 'Logos' },
     minRows: 1,
     required: true,
+    localized: true,
     fields: [imageField(), link({ appearances: false })],
   },
 ]

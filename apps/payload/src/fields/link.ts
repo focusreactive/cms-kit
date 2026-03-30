@@ -161,6 +161,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, required = t
             es: 'Etiqueta',
           },
           required,
+          localized: true,
         },
       ],
     })
