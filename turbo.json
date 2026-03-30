@@ -33,7 +33,8 @@
     "AUTH0_CLIENT_ID",
     "AUTH0_CLIENT_SECRET",
     "BLOB_READ_WRITE_TOKEN",
-    "EDGE_CONFIG"
+    "EDGE_CONFIG",
+    "OPENAI_API_KEY"
   ],
   "tasks": {
     "build": {
