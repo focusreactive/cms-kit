@@ -48,7 +48,9 @@ export const Users: CollectionConfig<'users'> = {
       return false
     },
   },
-  auth: true,
+  auth: {
+    useAPIKey: true,
+  },
   fields: [
     {
       name: 'name',

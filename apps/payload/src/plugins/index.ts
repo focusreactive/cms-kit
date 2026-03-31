@@ -10,6 +10,7 @@ import { superAdmin, or, authenticated, user } from '@/core/lib/access'
 import seoPlugin from './seoPlugin'
 import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
+import { mcpPluginConfig } from './mcp'
 import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
 import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
 import {
@@ -221,8 +222,7 @@ export const plugins: Plugin[] = [
 
   translatorPlugin({
     collections: [PageCollection, Posts, Categories, Authors, Testimonials, Header, Footer].map(
-      (col) =>
-        JSON.parse(JSON.stringify(col, (_, v) => (typeof v === 'function' ? undefined : v))),
+      (col) => JSON.parse(JSON.stringify(col, (_, v) => (typeof v === 'function' ? undefined : v))),
     ),
     translationProvider: createOpenAIProvider({
       apiKey: process.env.OPENAI_API_KEY!,
@@ -260,4 +260,6 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+
+  mcpPluginConfig,
 ]
