@@ -1,8 +1,32 @@
+import type { Page } from '@/payload-types'
+import { buildUrl } from '@/core/utils/path/buildUrl'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { trimPageResponse, trimPostResponse } from './overrides/trimResponse'
-import { getPageContent, getPostContent } from './tools/getContent'
+import { getDocumentFabric } from './tools/getDocumentFabric'
 import { uploadImage } from './tools/uploadImage'
-import { getPageBlock } from './tools/getPageBlock'
+
+const [getPageContent, getPageField] = getDocumentFabric({
+  collection: 'page',
+  buildUrl: (doc) =>
+    buildUrl({
+      collection: 'page',
+      breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
+      locale: 'en',
+    }),
+  skipKeys: [
+    'generateSlug',
+    'parent',
+    'folder',
+    '_abPassPercentage',
+    '_abVariantOf',
+    '_abVariantPercentages',
+  ],
+  richTextPreviewLength: 300,
+})
+
+const [getPostsContent, getPostsField] = getDocumentFabric({
+  collection: 'posts',
+})
 
 export const mcpPluginConfig = mcpPlugin({
   collections: {
@@ -21,6 +45,6 @@ export const mcpPluginConfig = mcpPlugin({
   },
   mcp: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tools: [getPageContent, getPostContent, uploadImage, getPageBlock] as any,
+    tools: [getPageContent, getPageField, getPostsContent, getPostsField, uploadImage] as any,
   },
 })

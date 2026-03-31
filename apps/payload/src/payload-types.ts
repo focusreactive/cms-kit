@@ -1510,21 +1510,25 @@ export interface PayloadMcpApiKey {
   };
   'payload-mcp-tool'?: {
     /**
-     * Fetch a page outline by ID: metadata (title, slug, status, dates, URLs) and a layout block index with type and preview text for each block. Use getPageBlock to retrieve the full content of a specific block.
+     * Fetch a page document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getPageField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
      */
     getPageContent?: boolean | null;
     /**
-     * Fetch a complete post document by ID, including all layout blocks, rich text, and SEO fields.
+     * Fetch the full content of a specific field from a page document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
-    getPostContent?: boolean | null;
+    getPageField?: boolean | null;
+    /**
+     * Fetch a posts document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getPostsField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getPostsContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a posts document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     */
+    getPostsField?: boolean | null;
     /**
      * Upload a base64-encoded image file and create a media record. Returns the new media document id, url, and filename.
      */
     uploadImage?: boolean | null;
-    /**
-     * Fetch the full content of a single layout block from a page, with rich text serialized to Markdown.
-     */
-    getPageBlock?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -2684,9 +2688,10 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
     | T
     | {
         getPageContent?: T;
-        getPostContent?: T;
+        getPageField?: T;
+        getPostsContent?: T;
+        getPostsField?: T;
         uploadImage?: T;
-        getPageBlock?: T;
       };
   updatedAt?: T;
   createdAt?: T;

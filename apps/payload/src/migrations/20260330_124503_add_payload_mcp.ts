@@ -52,24 +52,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    ALTER TABLE "payload_mcp_api_keys" DISABLE ROW LEVEL SECURITY;
-  DROP TABLE "payload_mcp_api_keys" CASCADE;
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_payload_mcp_api_keys_fk";
+  DROP TABLE IF EXISTS "payload_mcp_api_keys" CASCADE;
+  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT IF EXISTS "payload_locked_documents_rels_payload_mcp_api_keys_fk";
   
-  ALTER TABLE "payload_preferences_rels" DROP CONSTRAINT "payload_preferences_rels_payload_mcp_api_keys_fk";
+  ALTER TABLE "payload_preferences_rels" DROP CONSTRAINT IF EXISTS "payload_preferences_rels_payload_mcp_api_keys_fk";
   
-  DROP INDEX "presets_hero_actions_locale_idx";
-  DROP INDEX "presets_logos_items_locale_idx";
-  DROP INDEX "payload_locked_documents_rels_payload_mcp_api_keys_id_idx";
-  DROP INDEX "payload_preferences_rels_payload_mcp_api_keys_id_idx";
+  DROP INDEX IF EXISTS "presets_hero_actions_locale_idx";
+  DROP INDEX IF EXISTS "presets_logos_items_locale_idx";
+  DROP INDEX IF EXISTS "payload_locked_documents_rels_payload_mcp_api_keys_id_idx";
+  DROP INDEX IF EXISTS "payload_preferences_rels_payload_mcp_api_keys_id_idx";
   ALTER TABLE "testimonials" ADD COLUMN "content" varchar NOT NULL;
   ALTER TABLE "presets" ADD COLUMN "hero_rich_text" jsonb;
-  ALTER TABLE "users" DROP COLUMN "enable_a_p_i_key";
-  ALTER TABLE "users" DROP COLUMN "api_key";
-  ALTER TABLE "users" DROP COLUMN "api_key_index";
-  ALTER TABLE "testimonials_locales" DROP COLUMN "content";
-  ALTER TABLE "presets_hero_actions" DROP COLUMN "_locale";
-  ALTER TABLE "presets_logos_items" DROP COLUMN "_locale";
-  ALTER TABLE "presets_locales" DROP COLUMN "hero_rich_text";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "payload_mcp_api_keys_id";
-  ALTER TABLE "payload_preferences_rels" DROP COLUMN "payload_mcp_api_keys_id";`)
+  ALTER TABLE "users" DROP COLUMN IF EXISTS "enable_a_p_i_key";
+  ALTER TABLE "users" DROP COLUMN IF EXISTS "api_key";
+  ALTER TABLE "users" DROP COLUMN IF EXISTS "api_key_index";
+  ALTER TABLE "testimonials_locales" DROP COLUMN IF EXISTS "content";
+  ALTER TABLE "presets_hero_actions" DROP COLUMN IF EXISTS "_locale";
+  ALTER TABLE "presets_logos_items" DROP COLUMN IF EXISTS "_locale";
+  ALTER TABLE "presets_locales" DROP COLUMN IF EXISTS "hero_rich_text";
+  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "payload_mcp_api_keys_id";
+  ALTER TABLE "payload_preferences_rels" DROP COLUMN IF EXISTS "payload_mcp_api_keys_id";`)
 }

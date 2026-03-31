@@ -88,6 +88,10 @@ Helpers in `src/shared/lib/access/`: `superAdmin`, `tenantAdmin`, `author`, `use
 
 Register via file paths (not imports): `'/components/MyComponent'`. Named exports: `'/components/MyComponent#Named'`. Run `pnpm generate:importmap` after changes. Default is Server Components; add `'use client'` for client components.
 
+## MCP Tools
+
+When Payload MCP tools (e.g. `getPageContent`, `getPostsContent`) return content, output it **verbatim** — do not reformat, paraphrase, or summarize. The response is already pre-formatted Markdown.
+
 ## Critical Rules
 
 1. **Local API access control:** Always set `overrideAccess: false` when passing a `user` to Payload's Local API, otherwise access control is bypassed.

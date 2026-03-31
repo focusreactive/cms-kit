@@ -18,6 +18,7 @@ import * as migration_20260329_153412_add_presets_to_all_blocks from './20260329
 import * as migration_20260330_124503_add_payload_mcp from './20260330_124503_add_payload_mcp';
 import * as migration_20260331_054242_add_get_content_and_upload_image from './20260331_054242_add_get_content_and_upload_image';
 import * as migration_20260331_084316_add_get_page_content_and_get_page_block from './20260331_084316_add_get_page_content_and_get_page_block';
+import * as migration_20260331_131819_update_posts_for_mcp from './20260331_131819_update_posts_for_mcp';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20260331_084316_add_get_page_content_and_get_page_block.up,
     down: migration_20260331_084316_add_get_page_content_and_get_page_block.down,
-    name: '20260331_084316_add_get_page_content_and_get_page_block'
+    name: '20260331_084316_add_get_page_content_and_get_page_block',
+  },
+  {
+    up: migration_20260331_131819_update_posts_for_mcp.up,
+    down: migration_20260331_131819_update_posts_for_mcp.down,
+    name: '20260331_131819_update_posts_for_mcp'
   },
 ];
