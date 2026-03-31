@@ -1518,6 +1518,10 @@ export interface PayloadMcpApiKey {
      */
     getPageField?: boolean | null;
     /**
+     * List page documents as a summary table. The "title" field is the document title. Returns id, title, slug, _status, plus admin URL and public URL. To get full details for a document, call `getPageContent` with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getAllPage?: boolean | null;
+    /**
      * Fetch a posts document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getPostsField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
      */
     getPostsContent?: boolean | null;
@@ -1525,6 +1529,10 @@ export interface PayloadMcpApiKey {
      * Fetch the full content of a specific field from a posts document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getPostsField?: boolean | null;
+    /**
+     * List posts documents as a summary table. The "title" field is the document title. Returns id, title, slug, _status, publishedAt, excerpt, plus admin URL. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getAllPosts?: boolean | null;
     /**
      * Upload a base64-encoded image file and create a media record. Returns the new media document id, url, and filename.
      */
@@ -2689,8 +2697,10 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
     | {
         getPageContent?: T;
         getPageField?: T;
+        getAllPage?: T;
         getPostsContent?: T;
         getPostsField?: T;
+        getAllPosts?: T;
         uploadImage?: T;
       };
   updatedAt?: T;

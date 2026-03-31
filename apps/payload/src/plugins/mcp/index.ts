@@ -4,6 +4,7 @@ import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { trimPageResponse, trimPostResponse } from './overrides/trimResponse'
 import { getDocumentFabric } from './tools/getDocumentFabric'
 import { uploadImage } from './tools/uploadImage'
+import { getAllDocumentsFabric } from './tools/getAllDocumentsFabric'
 
 const [getPageContent, getPageField] = getDocumentFabric({
   collection: 'page',
@@ -44,7 +45,29 @@ export const mcpPluginConfig = mcpPlugin({
     },
   },
   mcp: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tools: [getPageContent, getPageField, getPostsContent, getPostsField, uploadImage] as any,
+    tools: [
+      getPageContent,
+      getPageField,
+      getAllDocumentsFabric({
+        collection: 'page',
+        tableFields: ['id', 'title', 'slug', '_status'],
+        titleField: 'title',
+        buildUrl: (doc) =>
+          buildUrl({
+            collection: 'page',
+            breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
+            locale: 'en',
+          }),
+      }),
+      getPostsContent,
+      getPostsField,
+      getAllDocumentsFabric({
+        collection: 'posts',
+        tableFields: ['id', 'title', 'slug', '_status', 'publishedAt', 'excerpt'],
+        titleField: 'title',
+      }),
+      uploadImage,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ] as any,
   },
 })
