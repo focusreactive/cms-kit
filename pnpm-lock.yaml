@@ -88,8 +88,8 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@payloadcms/plugin-multi-tenant@3.73.0(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3)))(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@focus-reactive/payload-plugin-presets':
-        specifier: 0.10.2
-        version: 0.10.2(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        specifier: 0.10.3
+        version: 0.10.3(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@focus-reactive/payload-plugin-scheduling':
         specifier: 1.1.0
         version: 1.1.0(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))
@@ -2642,8 +2642,8 @@ packages:
       react-dom:
         optional: true
 
-  '@focus-reactive/payload-plugin-presets@0.10.2':
-    resolution: {integrity: sha512-/nBjN0i6yqqOAWbdgbU1AavaO4xzNH2xF+mLmuGL/tHM9Kb8fOsRjiCkfywSl2Mps2FPH8adInXGt47W+SyYVQ==}
+  '@focus-reactive/payload-plugin-presets@0.10.3':
+    resolution: {integrity: sha512-FW34F6Eivijy711XPVQp5g8xRViD9OfjqHx7BRxRNgY6Kacz4fE7+oGGnSnW4sMcBIS9aWhNDDfkO6KSDP7RBw==}
     peerDependencies:
       '@payloadcms/ui': ^3.0.0
       next: ^14.0.0 || ^15.0.0
@@ -16092,7 +16092,7 @@ snapshots:
       - '@types/react-dom'
       - react-native
 
-  '@focus-reactive/payload-plugin-presets@0.10.2(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
+  '@focus-reactive/payload-plugin-presets@0.10.3(@payloadcms/ui@3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3))(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
     dependencies:
       '@payloadcms/ui': 3.73.0(@types/react@19.2.1)(monaco-editor@0.55.1)(next@15.5.9(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4))(payload@3.73.0(graphql@16.13.0)(typescript@5.7.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.7.3)
       '@radix-ui/react-popover': 1.1.15(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
