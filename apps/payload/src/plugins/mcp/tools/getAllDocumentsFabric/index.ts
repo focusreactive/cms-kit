@@ -1,6 +1,10 @@
 import { z } from 'zod'
-import type { PayloadRequest, Where } from 'payload'
+import type { CollectionSlug, Field, Payload, PayloadRequest, Where } from 'payload'
 import { getServerSideURL } from '@/core/lib/getURL'
+import { buildLabelMaps } from '../../utils/field/buildLabelMaps'
+import { isScalar } from '../../utils/field/is'
+import { formatDocument } from '../../utils/markdown/formatDocument'
+import { resolveTitleField } from '../../utils/resolveTitleField'
 
 type McpTool = {
   name: string
@@ -26,40 +30,60 @@ function toPascalCase(collection: string) {
     .join('')
 }
 
-function buildTableRow(
+function findCollectionField(payload: Payload, collection: string, fieldName: string) {
+  const fields: Field[] = payload.collections[collection as CollectionSlug]?.config.fields ?? []
+
+  return fields.find((field) => 'name' in field && field.name === fieldName)
+}
+
+function shouldIncludeSummaryField(
+  payload: Payload,
+  collection: string,
+  fieldName: string,
+  value: unknown,
+) {
+  if (!isScalar(value)) return false
+
+  const field = findCollectionField(payload, collection, fieldName)
+  if (!field || !('type' in field)) return true
+
+  return true
+}
+
+function buildSummaryFields(
+  payload: Payload,
+  collection: string,
   doc: Record<string, unknown>,
-  columns: string[],
-): string {
-  return (
-    '| ' +
-    columns
-      .map((col) => {
-        const val = doc[col]
-        return val === null || val === undefined ? '' : String(val)
-      })
-      .join(' | ') +
-    ' |'
-  )
+  tableFields: string[],
+  titleField?: string,
+) {
+  const summary: Record<string, unknown> = {}
+
+  for (const fieldName of tableFields) {
+    if (fieldName === 'id' || fieldName === titleField) continue
+
+    const value = doc[fieldName]
+    if (!shouldIncludeSummaryField(payload, collection, fieldName, value)) continue
+
+    summary[fieldName] = value
+  }
+
+  return summary
 }
 
 export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): McpTool {
   const { collection, tableFields, titleField, buildUrl } = options
   const collectionPascal = toPascalCase(collection)
 
-  const urlColumns = buildUrl ? ['adminUrl', 'url'] : ['adminUrl']
-  const columns = [...tableFields, ...urlColumns]
-
-  const headerRow = '| ' + columns.join(' | ') + ' |'
-  const separatorRow = '| ' + columns.map(() => '---').join(' | ') + ' |'
-
   return {
     name: `getAll${collectionPascal}`,
     description: [
-      `List ${collection} documents as a summary table.`,
+      `List ${collection} documents as a formatted summary list.`,
       titleField ? `The "${titleField}" field is the document title.` : '',
-      `Returns ${tableFields.join(', ')}, plus admin URL${buildUrl ? ' and public URL' : ''}.`,
+      `Returns only the necessary scalar summary fields from ${tableFields.join(', ')}, plus admin URL${buildUrl ? ' and public URL' : ''}.`,
+      'Objects, relations, arrays and rich text are omitted from the list output.',
       `To get full details for a document, call \`get${collectionPascal}Content\` with its ID.`,
-      'The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.',
+      'The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.',
     ]
       .filter(Boolean)
       .join(' '),
@@ -69,7 +93,9 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
       where: z
         .string()
         .optional()
-        .describe('Payload where clause as a JSON string, e.g. \'{"_status":{"equals":"published"}}\''),
+        .describe(
+          'Payload where clause as a JSON string, e.g. \'{"_status":{"equals":"published"}}\'',
+        ),
     },
     handler: async (args, req) => {
       const { limit, page, where } = args as {
@@ -85,7 +111,7 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
         } catch (err) {
           const msg = err instanceof Error ? err.message : String(err)
           return {
-            content: [{ type: 'text' as const, text: `Error: invalid where JSON — ${msg}` }],
+            content: [{ type: 'text', text: `Error: invalid where JSON - ${msg}` }],
           }
         }
       }
@@ -102,33 +128,44 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
       })
 
       const { docs, totalDocs, page: currentPage, limit: effectiveLimit } = result
+      const { fieldLabels, blockLabels } = buildLabelMaps(collection, req.payload)
+      const titleIsId = titleField === 'id' || !titleField
 
-      const enriched = docs.map((doc) => {
+      const formattedDocs = docs.map((doc) => {
         const raw = doc as Record<string, unknown>
-        const adminUrl =
-          raw.id ? `${getServerSideURL()}/admin/collections/${collection}/${raw.id}` : ''
+
+        const adminUrl = raw.id
+          ? `${getServerSideURL()}/admin/collections/${collection}/${raw.id}`
+          : ''
         const url = buildUrl ? (buildUrl(raw) ?? '') : undefined
-        return { ...raw, adminUrl, ...(url !== undefined ? { url } : {}) }
+
+        return formatDocument({
+          id: raw.id as string,
+          title: resolveTitleField(raw, titleField),
+          titleIsId,
+          url,
+          adminUrl,
+          extractedDoc: buildSummaryFields(req.payload, collection, raw, tableFields, titleField),
+          collectionPascal,
+          fieldLabels,
+          blockLabels,
+        })
       })
 
-      const start = ((currentPage ?? 1) - 1) * effectiveLimit + 1
-      const end = start + enriched.length - 1
+      const start = totalDocs === 0 ? 0 : ((currentPage ?? 1) - 1) * effectiveLimit + 1
+      const end = totalDocs === 0 ? 0 : start + formattedDocs.length - 1
 
-      const tableRows =
-        enriched.length === 0
-          ? ['| ' + columns.map(() => '').join(' | ') + ' |', 'No documents found.']
-          : enriched.map((doc) => buildTableRow(doc, columns))
-
-      const table = [headerRow, separatorRow, ...tableRows].join('\n')
-
-      const pagination = `Showing ${start}–${end} of ${totalDocs} total. Use \`page\` and \`limit\` to paginate.`
+      const documents =
+        formattedDocs.length === 0 ? 'No documents found.' : formattedDocs.join('\n\n')
+      const pagination = `Showing ${start}-${end} of ${totalDocs} total. Use \`page\` and \`limit\` to paginate.`
       const followUp = `To get full details for a document, call \`get${collectionPascal}Content\` with its ID.`
 
-      const body = [table, pagination, followUp].join('\n\n')
-      const instruction =
-        '[SYSTEM: The following is pre-formatted content. Present it to the user EXACTLY as written — do not reformat, paraphrase, or summarize.]\n\n'
+      const body = [documents, pagination, followUp].join('\n\n')
 
-      return { content: [{ type: 'text' as const, text: instruction + body }] }
+      const instruction =
+        '[SYSTEM: The following is pre-formatted content. Present it to the user EXACTLY as written - do not reformat, paraphrase, or summarize.]\n\n'
+
+      return { content: [{ type: 'text', text: instruction + body }] }
     },
   }
 }
