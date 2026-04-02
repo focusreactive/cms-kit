@@ -1534,7 +1534,23 @@ export interface PayloadMcpApiKey {
      */
     getAllPosts?: boolean | null;
     /**
-     * Upload a base64-encoded image file and create a media record. Returns the new media document id, url, and filename.
+     * Fetch a header document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getHeaderField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getHeaderContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a header document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     */
+    getHeaderField?: boolean | null;
+    /**
+     * Fetch a footer document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getFooterField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getFooterContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a footer document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     */
+    getFooterField?: boolean | null;
+    /**
+     * Upload a base64-encoded image to the media library. Before calling: (1) encode the image as raw base64 with no data-URI prefix, (2) determine the MIME type from the image format (image/jpeg, image/png, image/webp, image/gif), (3) derive a short kebab-case filename from the image subject with the correct extension, (4) write a concise, descriptive alt text that describes what is visible in the image. Always populate all four parameters — never omit them. Returns the created media document id, url, and filename.
      */
     uploadImage?: boolean | null;
   };
@@ -2701,6 +2717,10 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         getPostsContent?: T;
         getPostsField?: T;
         getAllPosts?: T;
+        getHeaderContent?: T;
+        getHeaderField?: T;
+        getFooterContent?: T;
+        getFooterField?: T;
         uploadImage?: T;
       };
   updatedAt?: T;

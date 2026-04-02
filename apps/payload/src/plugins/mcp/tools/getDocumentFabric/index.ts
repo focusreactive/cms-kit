@@ -13,15 +13,7 @@ export interface DocumentFabricOptions {
   buildUrl?: (doc: Record<string, unknown>) => string | null
 }
 
-const SKIP_KEYS = new Set([
-  'id',
-  'blockType',
-  'blockName',
-  'url',
-  'locale',
-  'createdAt',
-  'updatedAt',
-])
+const SKIP_KEYS = new Set(['blockType', 'blockName', 'url', 'locale', 'createdAt', 'updatedAt'])
 
 function toPascalCase(collection: string) {
   return collection
@@ -92,6 +84,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         collectionPascal,
         collection,
         titleField,
+        req.payload,
         buildUrl,
       )
 
@@ -146,8 +139,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
       } else if (typeof value === 'object' && value !== null) {
         const walked = walkBlock(value) as Record<string, unknown>
         const rows = Object.entries(walked).map(
-          ([k, v]) =>
-            `| ${k} | ${typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')} |`,
+          ([k, v]) => `| ${k} | ${typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')} |`,
         )
         text = ['| Field | Value |', '|-------|-------|', ...rows].join('\n')
       } else {

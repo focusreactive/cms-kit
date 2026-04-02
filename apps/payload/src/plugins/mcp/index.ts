@@ -8,6 +8,7 @@ import { getAllDocumentsFabric } from './tools/getAllDocumentsFabric'
 
 const [getPageContent, getPageField] = getDocumentFabric({
   collection: 'page',
+  titleField: 'title',
   buildUrl: (doc) =>
     buildUrl({
       collection: 'page',
@@ -27,6 +28,14 @@ const [getPageContent, getPageField] = getDocumentFabric({
 
 const [getPostsContent, getPostsField] = getDocumentFabric({
   collection: 'posts',
+})
+
+const [getHeaderContent, getHeaderField] = getDocumentFabric({
+  collection: 'header',
+})
+
+const [getFooterContent, getFooterField] = getDocumentFabric({
+  collection: 'footer',
 })
 
 export const mcpPluginConfig = mcpPlugin({
@@ -66,6 +75,10 @@ export const mcpPluginConfig = mcpPlugin({
         tableFields: ['id', 'title', 'slug', '_status', 'publishedAt', 'excerpt'],
         titleField: 'title',
       }),
+      getHeaderContent,
+      getHeaderField,
+      getFooterContent,
+      getFooterField,
       uploadImage,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any,
