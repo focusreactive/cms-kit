@@ -1,9 +1,8 @@
 import { z } from 'zod'
 import type { PayloadRequest } from 'payload'
-import { isLexicalField } from '../../utils/lexical/isLexicalField'
-import { walkBlock, resolvePath } from '../../utils/resolvePath'
-import { lexicalToMarkdown } from '../../utils/lexical/lexicalToMarkdown'
+import { resolvePath } from '../../utils/resolvePath'
 import { buildContent } from './buildContent'
+import { buildFieldContent } from './buildFieldContent'
 
 export interface DocumentFabricOptions {
   collection: string
@@ -51,13 +50,7 @@ type McpTool = {
 }
 
 export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, McpTool] {
-  const {
-    collection,
-    buildUrl,
-    skipKeys: extraSkipKeys,
-    richTextPreviewLength = 300,
-    titleField,
-  } = options
+  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField } = options
   const collectionPascal = toPascalCase(collection)
   const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(extraSkipKeys ?? [])])
 
@@ -71,7 +64,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
 
   const mainTool: McpTool = {
     name: `get${collectionPascal}Content`,
-    description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call get${collectionPascal}Field for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.`,
+    description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.`,
     parameters,
     handler: async (args, req) => {
       const { id, locale } = args as { id: string; locale?: string }
@@ -80,7 +73,6 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
       const content = buildContent(
         doc,
         effectiveSkipKeys,
-        richTextPreviewLength,
         collectionPascal,
         collection,
         titleField,
@@ -117,38 +109,15 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         }
       }
 
-      const { value } = resolved
-      let text: string
+      const content = buildFieldContent(
+        fieldPath,
+        resolved.value,
+        collection,
+        collectionPascal,
+        req.payload,
+      )
 
-      if (isLexicalField(value)) {
-        text = lexicalToMarkdown(value.root)
-      } else if (Array.isArray(value)) {
-        const walked = walkBlock(value) as unknown[]
-        text = walked
-          .map((item, i) => {
-            if (typeof item === 'object' && item !== null) {
-              const rows = Object.entries(item as Record<string, unknown>).map(
-                ([k, v]) =>
-                  `| ${k} | ${typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')} |`,
-              )
-              return [`### [${i}]`, '| Field | Value |', '|-------|-------|', ...rows].join('\n')
-            }
-            return `### [${i}]\n${String(item ?? '')}`
-          })
-          .join('\n\n')
-      } else if (typeof value === 'object' && value !== null) {
-        const walked = walkBlock(value) as Record<string, unknown>
-        const rows = Object.entries(walked).map(
-          ([k, v]) => `| ${k} | ${typeof v === 'object' ? JSON.stringify(v) : String(v ?? '')} |`,
-        )
-        text = ['| Field | Value |', '|-------|-------|', ...rows].join('\n')
-      } else {
-        text = String(value ?? '')
-      }
-
-      return {
-        content: [{ type: 'text' as const, text }],
-      }
+      return { content }
     },
   }
 

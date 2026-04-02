@@ -1,4 +1,4 @@
-import { formatFieldCell } from './formatFieldCell'
+import { formatFieldLine } from './formatFieldLine'
 
 interface Props {
   id?: number | string
@@ -7,7 +7,6 @@ interface Props {
   url?: string | null
   adminUrl?: string | null
   extractedDoc: Record<string, unknown>
-  richTextPreviewLength: number
   collectionPascal: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
@@ -20,7 +19,6 @@ export function formatDocument({
   url,
   adminUrl,
   extractedDoc,
-  richTextPreviewLength,
   collectionPascal,
   fieldLabels,
   blockLabels,
@@ -29,21 +27,15 @@ export function formatDocument({
   const urlLine = [adminUrl, url].filter(Boolean).join(' | ')
   const fieldsTitleLine = `## Fields:`
 
-  const fieldCellLines: string[] = []
+  const fieldLines = Object.entries(extractedDoc).map(([name, value]) =>
+    formatFieldLine(name, value, 0, {
+      collectionPascal,
+      fieldLabels,
+      blockLabels,
+      summarizeComplexValues: true,
+      fieldPath: name,
+    }),
+  )
 
-  Object.entries(extractedDoc).forEach(([name, value], i) => {
-    fieldCellLines.push(
-      formatFieldCell({
-        name,
-        value,
-        collectionPascal,
-        richTextPreviewLength,
-        index: i + 1,
-        fieldLabels,
-        blockLabels,
-      }),
-    )
-  })
-
-  return [titleLine, urlLine, fieldsTitleLine, ...fieldCellLines].filter(Boolean).join('\n\n')
+  return [titleLine, urlLine, fieldsTitleLine, ...fieldLines].filter(Boolean).join('\n\n')
 }
