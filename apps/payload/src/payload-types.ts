@@ -1510,7 +1510,7 @@ export interface PayloadMcpApiKey {
   };
   'payload-mcp-tool'?: {
     /**
-     * Fetch a page document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * Fetch a page document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
      */
     getPageContent?: boolean | null;
     /**
@@ -1522,7 +1522,7 @@ export interface PayloadMcpApiKey {
      */
     getAllPage?: boolean | null;
     /**
-     * Fetch a posts document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * Fetch a posts document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
      */
     getPostsContent?: boolean | null;
     /**
@@ -1534,7 +1534,7 @@ export interface PayloadMcpApiKey {
      */
     getAllPosts?: boolean | null;
     /**
-     * Fetch a header document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * Fetch a header document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
      */
     getHeaderContent?: boolean | null;
     /**
@@ -1542,7 +1542,7 @@ export interface PayloadMcpApiKey {
      */
     getHeaderField?: boolean | null;
     /**
-     * Fetch a footer document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * Fetch a footer document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
      */
     getFooterContent?: boolean | null;
     /**

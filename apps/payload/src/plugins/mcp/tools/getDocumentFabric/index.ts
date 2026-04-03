@@ -27,6 +27,7 @@ async function getDocument(
   id: string,
   req: PayloadRequest,
   locale?: string,
+  full?: boolean,
 ): Promise<Record<string, unknown>> {
   return req.payload.findByID({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +35,7 @@ async function getDocument(
     id,
     overrideAccess: false,
     req,
-    depth: 1,
+    depth: full ? 2 : 1,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(locale ? { locale: locale as any } : {}),
   }) as unknown as Promise<Record<string, unknown>>
@@ -51,7 +52,13 @@ type McpTool = {
 }
 
 export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, McpTool] {
-  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField, knownCollectionPascals } = options
+  const {
+    collection,
+    buildUrl,
+    skipKeys: extraSkipKeys,
+    titleField,
+    knownCollectionPascals,
+  } = options
   const collectionPascal = toPascalCase(collection)
   const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(extraSkipKeys ?? [])])
 
@@ -61,15 +68,25 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
       .string()
       .optional()
       .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
+    full: z
+      .boolean()
+      .optional()
+      .describe(
+        'Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.',
+      ),
   }
 
   const mainTool: McpTool = {
     name: `get${collectionPascal}Content`,
-    description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.`,
+    description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.`,
     parameters,
     handler: async (args, req) => {
-      const { id, locale } = args as { id: string; locale?: string }
-      const doc = await getDocument(collection, id, req, locale)
+      const { id, locale, full } = args as {
+        id: string
+        locale?: string
+        full?: boolean
+      }
+      const doc = await getDocument(collection, id, req, locale, full)
 
       const content = buildContent(
         doc,
@@ -80,6 +97,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         req.payload,
         buildUrl,
         knownCollectionPascals,
+        full,
       )
 
       return { content }

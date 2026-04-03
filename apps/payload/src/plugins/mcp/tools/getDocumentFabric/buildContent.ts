@@ -22,6 +22,7 @@ export function buildContent(
   payload: Payload,
   buildUrl?: (doc: Record<string, unknown>) => string | null,
   knownCollectionPascals?: Set<string>,
+  full?: boolean,
 ): ContentBlock[] {
   const title = resolveTitleField(doc, titleField)
   const titleIsId = titleField === 'id' || !titleField
@@ -45,6 +46,7 @@ export function buildContent(
     fieldLabels,
     blockLabels,
     knownCollectionPascals,
+    summarizeComplexValues: !full,
   })
 
   return [{ type: 'text', text: PRE_FORMATTED_CONTENT_INSTRUCTION + body }]

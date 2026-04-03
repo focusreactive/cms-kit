@@ -3,6 +3,10 @@ import { isLexicalField } from '../lexical/isLexicalField'
 import { lexicalToMarkdown } from '../lexical/lexicalToMarkdown'
 import { formatFieldValueClue, formatRelationValueClue } from './formatValueClue'
 
+function isResolvedRelation(value: Record<string, unknown>): boolean {
+  return Object.keys(value).some((k) => k !== 'id' && k !== 'relationTo')
+}
+
 interface FormatFieldLineOpts {
   collectionPascal: string
   fieldLabels: Record<string, string>
@@ -50,6 +54,14 @@ export function formatFieldLine(
   }
 
   if (isRelation(value)) {
+    if (!summarizeComplexValues && isResolvedRelation(value)) {
+      const fields = Object.entries(value)
+        .filter(([k]) => k !== 'id' && k !== 'relationTo')
+        .map(([k, v]) => formatFieldLine(k, v, depth + 2, options))
+        .join('\n')
+      const idLine = `${indent}  - **id**: ${String(value.id)}`
+      return `${indent}- **${label}**:\n${idLine}\n${fields}`
+    }
     return `${indent}- **${label}**: ${formatRelationValueClue(value, knownCollectionPascals)}`
   }
 

@@ -58,6 +58,7 @@ const [getPageContent, getPageField] = getDocumentFabric({
       locale: 'en',
     }),
   skipKeys: [
+    'id',
     'generateSlug',
     'parent',
     'folder',
