@@ -9,6 +9,7 @@ export function buildFieldContent(
   collection: string,
   collectionPascal: string,
   payload: Payload,
+  knownCollectionPascals?: Set<string>,
 ): ContentBlock[] {
   const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
 
@@ -16,6 +17,7 @@ export function buildFieldContent(
     collectionPascal,
     fieldLabels,
     blockLabels,
+    knownCollectionPascals,
   })
 
   const instruction =

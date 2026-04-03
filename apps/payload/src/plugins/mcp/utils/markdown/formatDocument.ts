@@ -10,6 +10,7 @@ interface Props {
   collectionPascal: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
+  knownCollectionPascals?: Set<string>
 }
 
 export function formatDocument({
@@ -22,6 +23,7 @@ export function formatDocument({
   collectionPascal,
   fieldLabels,
   blockLabels,
+  knownCollectionPascals,
 }: Props) {
   const titleLine = titleIsId ? `# ${title}` : id ? `# ${title} | ${id}` : `# ${title}`
   const urlLine = [adminUrl, url].filter(Boolean).join(' | ')
@@ -34,6 +36,7 @@ export function formatDocument({
       blockLabels,
       summarizeComplexValues: true,
       fieldPath: name,
+      knownCollectionPascals,
     }),
   )
 

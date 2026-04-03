@@ -4,6 +4,7 @@ interface FormatDocumentFieldOpts {
   collectionPascal: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
+  knownCollectionPascals?: Set<string>
 }
 
 export function formatDocumentField(

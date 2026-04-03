@@ -9,6 +9,7 @@ interface FormatFieldLineOpts {
   blockLabels: Record<string, string>
   summarizeComplexValues?: boolean
   fieldPath?: string
+  knownCollectionPascals?: Set<string>
 }
 
 export function formatFieldLine(
@@ -23,6 +24,7 @@ export function formatFieldLine(
     fieldPath = key,
     summarizeComplexValues,
     collectionPascal,
+    knownCollectionPascals,
   } = options
 
   const indent = '  '.repeat(depth)
@@ -35,7 +37,7 @@ export function formatFieldLine(
 
   if (isLexicalField(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
     }
 
     const content = lexicalToMarkdown(value.root)
@@ -48,12 +50,12 @@ export function formatFieldLine(
   }
 
   if (isRelation(value)) {
-    return `${indent}- **${label}**: ${formatRelationValueClue(value)}`
+    return `${indent}- **${label}**: ${formatRelationValueClue(value, knownCollectionPascals)}`
   }
 
   if (isBlocksArray(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
     }
 
     const items = value
@@ -75,7 +77,7 @@ export function formatFieldLine(
 
   if (isObjectsArray(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
     }
 
     const items = value
@@ -94,7 +96,7 @@ export function formatFieldLine(
 
   if (typeof value === 'object' && value !== null) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
     }
 
     const fields = Object.entries(value as Record<string, unknown>)

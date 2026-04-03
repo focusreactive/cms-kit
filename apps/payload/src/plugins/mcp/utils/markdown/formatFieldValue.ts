@@ -8,10 +8,11 @@ interface FormatDocumentFieldOpts {
   collectionPascal: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
+  knownCollectionPascals?: Set<string>
 }
 
 export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpts) {
-  const { blockLabels } = options
+  const { blockLabels, knownCollectionPascals } = options
 
   if (isLexicalField(value)) {
     return lexicalToMarkdown(value.root)
@@ -22,7 +23,7 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
   }
 
   if (isRelation(value)) {
-    return formatRelationValueClue(value)
+    return formatRelationValueClue(value, knownCollectionPascals)
   }
 
   if (Array.isArray(value)) {

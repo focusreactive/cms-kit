@@ -10,6 +10,7 @@ export interface DocumentFabricOptions {
   skipKeys?: string[]
   richTextPreviewLength?: number
   buildUrl?: (doc: Record<string, unknown>) => string | null
+  knownCollectionPascals?: Set<string>
 }
 
 const SKIP_KEYS = new Set(['blockType', 'blockName', 'url', 'locale', 'createdAt', 'updatedAt'])
@@ -50,7 +51,7 @@ type McpTool = {
 }
 
 export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, McpTool] {
-  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField } = options
+  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField, knownCollectionPascals } = options
   const collectionPascal = toPascalCase(collection)
   const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(extraSkipKeys ?? [])])
 
@@ -78,6 +79,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         titleField,
         req.payload,
         buildUrl,
+        knownCollectionPascals,
       )
 
       return { content }
@@ -115,6 +117,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         collection,
         collectionPascal,
         req.payload,
+        knownCollectionPascals,
       )
 
       return { content }

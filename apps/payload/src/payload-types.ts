@@ -1510,7 +1510,7 @@ export interface PayloadMcpApiKey {
   };
   'payload-mcp-tool'?: {
     /**
-     * Fetch a page document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getPageField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * Fetch a page document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getPageContent?: boolean | null;
     /**
@@ -1518,11 +1518,11 @@ export interface PayloadMcpApiKey {
      */
     getPageField?: boolean | null;
     /**
-     * List page documents as a summary table. The "title" field is the document title. Returns id, title, slug, _status, plus admin URL and public URL. To get full details for a document, call `getPageContent` with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * List page documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPageContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getAllPage?: boolean | null;
     /**
-     * Fetch a posts document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getPostsField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * Fetch a posts document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getPostsContent?: boolean | null;
     /**
@@ -1530,11 +1530,11 @@ export interface PayloadMcpApiKey {
      */
     getPostsField?: boolean | null;
     /**
-     * List posts documents as a summary table. The "title" field is the document title. Returns id, title, slug, _status, publishedAt, excerpt, plus admin URL. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * List posts documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, publishedAt, excerpt, plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getAllPosts?: boolean | null;
     /**
-     * Fetch a header document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getHeaderField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * Fetch a header document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getHeaderContent?: boolean | null;
     /**
@@ -1542,7 +1542,7 @@ export interface PayloadMcpApiKey {
      */
     getHeaderField?: boolean | null;
     /**
-     * Fetch a footer document by ID. Returns all top-level fields as structured sections. Rich text and array fields include a hint to call getFooterField for full content. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     * Fetch a footer document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getFooterContent?: boolean | null;
     /**
@@ -1550,7 +1550,7 @@ export interface PayloadMcpApiKey {
      */
     getFooterField?: boolean | null;
     /**
-     * Upload a base64-encoded image to the media library. Before calling: (1) encode the image as raw base64 with no data-URI prefix, (2) determine the MIME type from the image format (image/jpeg, image/png, image/webp, image/gif), (3) derive a short kebab-case filename from the image subject with the correct extension, (4) write a concise, descriptive alt text that describes what is visible in the image. Always populate all four parameters — never omit them. Returns the created media document id, url, and filename.
+     * Upload an image to the media library from a local file path (dev only) or a remote URL. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` as the value of that field in the subsequent create/update call. Always derive `alt` from the visible or described image content — never copy the filename.
      */
     uploadImage?: boolean | null;
   };

@@ -10,6 +10,9 @@ export type ContentBlock = {
   text: string
 }
 
+export const PRE_FORMATTED_CONTENT_INSTRUCTION =
+  '[SYSTEM: The following is pre-formatted content. Present it to the user EXACTLY as written - do not reformat, paraphrase, or summarize.]\n\n'
+
 export function buildContent(
   doc: Record<string, unknown>,
   skipKeys: Set<string>,
@@ -18,6 +21,7 @@ export function buildContent(
   titleField: string | undefined,
   payload: Payload,
   buildUrl?: (doc: Record<string, unknown>) => string | null,
+  knownCollectionPascals?: Set<string>,
 ): ContentBlock[] {
   const title = resolveTitleField(doc, titleField)
   const titleIsId = titleField === 'id' || !titleField
@@ -40,10 +44,8 @@ export function buildContent(
     collectionPascal,
     fieldLabels,
     blockLabels,
+    knownCollectionPascals,
   })
 
-  const instruction =
-    '[SYSTEM: The following is pre-formatted content. Present it to the user EXACTLY as written - do not reformat, paraphrase, or summarize.]\n\n'
-
-  return [{ type: 'text', text: instruction + body }]
+  return [{ type: 'text', text: PRE_FORMATTED_CONTENT_INSTRUCTION + body }]
 }

@@ -45,6 +45,8 @@ function isLocalDevMcpRequest(req: PayloadRequest) {
   }
 }
 
+const KNOWN_COLLECTION_PASCALS = new Set(['Page', 'Posts', 'Header', 'Footer'])
+
 // Get tools
 const [getPageContent, getPageField] = getDocumentFabric({
   collection: 'page',
@@ -64,15 +66,19 @@ const [getPageContent, getPageField] = getDocumentFabric({
     '_abVariantPercentages',
   ],
   richTextPreviewLength: 300,
+  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
 })
 const [getPostsContent, getPostsField] = getDocumentFabric({
   collection: 'posts',
+  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
 })
 const [getHeaderContent, getHeaderField] = getDocumentFabric({
   collection: 'header',
+  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
 })
 const [getFooterContent, getFooterField] = getDocumentFabric({
   collection: 'footer',
+  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
 })
 
 export const mcpPluginConfig = mcpPlugin({
