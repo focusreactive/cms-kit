@@ -1,11 +1,51 @@
 import type { Page } from '@/payload-types'
+import type { MCPAccessSettings } from '@payloadcms/plugin-mcp'
+import type { PayloadRequest } from 'payload'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
-import { trimPageResponse, trimPostResponse } from './overrides/trimResponse'
 import { getDocumentFabric } from './tools/getDocumentFabric'
 import { uploadImage } from './tools/uploadImage'
 import { getAllDocumentsFabric } from './tools/getAllDocumentsFabric'
 
+const LOCAL_DEV_MCP_USER: MCPAccessSettings['user'] = {
+  id: 0,
+  collection: 'users',
+  email: 'local-mcp@localhost',
+  name: 'Local MCP',
+  role: 'admin',
+  updatedAt: new Date(0).toISOString(),
+  createdAt: new Date(0).toISOString(),
+}
+
+const LOCAL_HOSTS = ['127.0.0.1', '::1', 'localhost']
+
+function isLocalDevMcpRequest(req: PayloadRequest) {
+  if (process.env.NODE_ENV !== 'development') {
+    return false
+  }
+
+  if (process.env.PAYLOAD_MCP_LOCAL_AUTH_BYPASS === 'false') {
+    return false
+  }
+
+  try {
+    if (!req.url) {
+      return false
+    }
+
+    const url = new URL(req.url)
+
+    return LOCAL_HOSTS.includes(url.hostname)
+  } catch {
+    const host = req.headers.get('host')?.split(':')[0]
+
+    if (!host) return false
+
+    return LOCAL_HOSTS.includes(host)
+  }
+}
+
+// Get tools
 const [getPageContent, getPageField] = getDocumentFabric({
   collection: 'page',
   titleField: 'title',
@@ -25,15 +65,12 @@ const [getPageContent, getPageField] = getDocumentFabric({
   ],
   richTextPreviewLength: 300,
 })
-
 const [getPostsContent, getPostsField] = getDocumentFabric({
   collection: 'posts',
 })
-
 const [getHeaderContent, getHeaderField] = getDocumentFabric({
   collection: 'header',
 })
-
 const [getFooterContent, getFooterField] = getDocumentFabric({
   collection: 'footer',
 })
@@ -44,14 +81,47 @@ export const mcpPluginConfig = mcpPlugin({
       description:
         'Website pages built with a block-based layout system. Each page has a title, URL slug, nested hierarchy (parent/breadcrumbs), and a flexible block editor for composing content sections such as Hero, Content, FAQ, and more. Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete site pages.',
       enabled: true,
-      overrideResponse: trimPageResponse,
     },
     posts: {
       description:
         'Blog posts. Each post has a title, excerpt, hero image, rich-text body, SEO metadata, categories, authors, and related posts. Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete blog articles.',
       enabled: true,
-      overrideResponse: trimPostResponse,
     },
+  },
+  overrideAuth: async (req, getDefaultMcpAccessSettings) => {
+    if (!isLocalDevMcpRequest(req)) {
+      return getDefaultMcpAccessSettings()
+    }
+
+    return {
+      user: LOCAL_DEV_MCP_USER,
+      page: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
+      posts: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
+
+      'payload-mcp-tool': {
+        getPageContent: true,
+        getPageField: true,
+        getAllPage: true,
+        getPostsContent: true,
+        getPostsField: true,
+        getAllPosts: true,
+        getHeaderContent: true,
+        getHeaderField: true,
+        getFooterContent: true,
+        getFooterField: true,
+        uploadImage: true,
+      },
+    }
   },
   mcp: {
     tools: [
