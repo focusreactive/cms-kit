@@ -1474,10 +1474,6 @@ export interface PayloadMcpApiKey {
   description?: string | null;
   page?: {
     /**
-     * Allow clients to find page.
-     */
-    find?: boolean | null;
-    /**
      * Allow clients to create page.
      */
     create?: boolean | null;
@@ -1492,10 +1488,6 @@ export interface PayloadMcpApiKey {
   };
   posts?: {
     /**
-     * Allow clients to find posts.
-     */
-    find?: boolean | null;
-    /**
      * Allow clients to create posts.
      */
     create?: boolean | null;
@@ -1505,6 +1497,34 @@ export interface PayloadMcpApiKey {
     update?: boolean | null;
     /**
      * Allow clients to delete posts.
+     */
+    delete?: boolean | null;
+  };
+  header?: {
+    /**
+     * Allow clients to create header.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update header.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete header.
+     */
+    delete?: boolean | null;
+  };
+  footer?: {
+    /**
+     * Allow clients to create footer.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update footer.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete footer.
      */
     delete?: boolean | null;
   };
@@ -1530,7 +1550,7 @@ export interface PayloadMcpApiKey {
      */
     getPostsField?: boolean | null;
     /**
-     * List posts documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, publishedAt, excerpt, plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * List posts documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, publishedAt, excerpt, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
      */
     getAllPosts?: boolean | null;
     /**
@@ -1542,6 +1562,10 @@ export interface PayloadMcpApiKey {
      */
     getHeaderField?: boolean | null;
     /**
+     * List header documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getHeaderContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllHeader?: boolean | null;
+    /**
      * Fetch a footer document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
      */
     getFooterContent?: boolean | null;
@@ -1549,6 +1573,10 @@ export interface PayloadMcpApiKey {
      * Fetch the full content of a specific field from a footer document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getFooterField?: boolean | null;
+    /**
+     * List footer documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getFooterContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllFooter?: boolean | null;
     /**
      * Upload an image to the media library from a local file path (dev only) or a remote URL. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` as the value of that field in the subsequent create/update call. Always derive `alt` from the visible or described image content — never copy the filename.
      */
@@ -2695,7 +2723,6 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
   page?:
     | T
     | {
-        find?: T;
         create?: T;
         update?: T;
         delete?: T;
@@ -2703,7 +2730,20 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
   posts?:
     | T
     | {
-        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  header?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  footer?:
+    | T
+    | {
         create?: T;
         update?: T;
         delete?: T;
@@ -2719,8 +2759,10 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         getAllPosts?: T;
         getHeaderContent?: T;
         getHeaderField?: T;
+        getAllHeader?: T;
         getFooterContent?: T;
         getFooterField?: T;
+        getAllFooter?: T;
         uploadImage?: T;
       };
   updatedAt?: T;

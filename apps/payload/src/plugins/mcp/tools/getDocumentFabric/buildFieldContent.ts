@@ -1,16 +1,26 @@
-import type { Payload } from 'payload'
+import type { CollectionSlug, Payload } from 'payload'
 import { buildLabelMaps } from '../../utils/field/buildLabelMaps'
 import { formatDocumentField } from '../../utils/markdown/formatDocumentField'
-import type { ContentBlock } from './buildContent'
+import { PRE_FORMATTED_CONTENT_INSTRUCTION } from '../../constants/instructions'
+import { ContentBlock } from '../../types'
 
-export function buildFieldContent(
-  fieldPath: string,
-  value: unknown,
-  collection: string,
-  collectionPascal: string,
-  payload: Payload,
-  knownCollectionPascals?: Set<string>,
-): ContentBlock[] {
+interface Props {
+  fieldPath: string
+  value: unknown
+  collection: CollectionSlug
+  collectionPascal: string
+  payload: Payload
+  knownCollectionPascals?: Set<string>
+}
+
+export function buildFieldContent({
+  fieldPath,
+  value,
+  collection,
+  collectionPascal,
+  payload,
+  knownCollectionPascals,
+}: Props): ContentBlock[] {
   const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
 
   const body = formatDocumentField(fieldPath, value, {
@@ -20,8 +30,5 @@ export function buildFieldContent(
     knownCollectionPascals,
   })
 
-  const instruction =
-    '[SYSTEM: The following is pre-formatted content. Present it to the user EXACTLY as written - do not reformat, paraphrase, or summarize.]\n\n'
-
-  return [{ type: 'text', text: instruction + body }]
+  return [{ type: 'text', text: PRE_FORMATTED_CONTENT_INSTRUCTION + body }]
 }

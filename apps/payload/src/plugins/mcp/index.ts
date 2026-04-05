@@ -1,23 +1,10 @@
 import type { Page } from '@/payload-types'
-import type { MCPAccessSettings } from '@payloadcms/plugin-mcp'
-import type { PayloadRequest } from 'payload'
+import type { CollectionSlug, PayloadRequest } from 'payload'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { getDocumentFabric } from './tools/getDocumentFabric'
 import { uploadImage } from './tools/uploadImage'
-import { getAllDocumentsFabric } from './tools/getAllDocumentsFabric'
-
-const LOCAL_DEV_MCP_USER: MCPAccessSettings['user'] = {
-  id: 0,
-  collection: 'users',
-  email: 'local-mcp@localhost',
-  name: 'Local MCP',
-  role: 'admin',
-  updatedAt: new Date(0).toISOString(),
-  createdAt: new Date(0).toISOString(),
-}
-
-const LOCAL_HOSTS = ['127.0.0.1', '::1', 'localhost']
+import { LOCAL_DEV_MCP_USER, LOCAL_HOSTS } from './constants/local'
 
 function isLocalDevMcpRequest(req: PayloadRequest) {
   if (process.env.NODE_ENV !== 'development') {
@@ -45,11 +32,12 @@ function isLocalDevMcpRequest(req: PayloadRequest) {
   }
 }
 
-const KNOWN_COLLECTIONS = new Set(['page', 'posts', 'header', 'footer'])
+const KNOWN_COLLECTIONS: Set<CollectionSlug> = new Set(['page', 'posts', 'header', 'footer'])
 
 // Get tools
-const [getPageContent, getPageField] = getDocumentFabric({
+const [getPageContent, getPageField, getAllPage] = getDocumentFabric({
   collection: 'page',
+  tableFields: ['id', 'title', 'slug', '_status'],
   titleField: 'title',
   buildUrl: (doc, locale) =>
     buildUrl({
@@ -68,8 +56,9 @@ const [getPageContent, getPageField] = getDocumentFabric({
   ],
   knownCollections: KNOWN_COLLECTIONS,
 })
-const [getPostsContent, getPostsField] = getDocumentFabric({
+const [getPostsContent, getPostsField, getAllPosts] = getDocumentFabric({
   collection: 'posts',
+  tableFields: ['id', 'title', 'slug', '_status', 'publishedAt', 'excerpt'],
   titleField: 'title',
   buildUrl: (doc, locale) =>
     buildUrl({
@@ -81,14 +70,16 @@ const [getPostsContent, getPostsField] = getDocumentFabric({
   skipKeys: ['id'],
   knownCollections: KNOWN_COLLECTIONS,
 })
-const [getHeaderContent, getHeaderField] = getDocumentFabric({
+const [getHeaderContent, getHeaderField, getAllHeaders] = getDocumentFabric({
   collection: 'header',
+  tableFields: [],
   titleField: 'name',
   skipKeys: ['id'],
   knownCollections: KNOWN_COLLECTIONS,
 })
-const [getFooterContent, getFooterField] = getDocumentFabric({
+const [getFooterContent, getFooterField, getAllFooters] = getDocumentFabric({
   collection: 'footer',
+  tableFields: [],
   titleField: 'name',
   skipKeys: ['id'],
   knownCollections: KNOWN_COLLECTIONS,
@@ -99,12 +90,42 @@ export const mcpPluginConfig = mcpPlugin({
     page: {
       description:
         'Website pages built with a block-based layout system. Each page has a title, URL slug, nested hierarchy (parent/breadcrumbs), and a flexible block editor for composing content sections such as Hero, Content, FAQ, and more. Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete site pages.',
-      enabled: true,
+      enabled: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
     },
     posts: {
       description:
         'Blog posts. Each post has a title, excerpt, hero image, rich-text body, SEO metadata, categories, authors, and related posts. Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete blog articles.',
-      enabled: true,
+      enabled: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
+    },
+    header: {
+      description:
+        'Site header configurations. Each header has a name, logo, and navigation items (up to 6 links). Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete site headers.',
+      enabled: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
+    },
+    footer: {
+      description:
+        'Site footer configurations. Each footer has a name, logo, navigation links (up to 10), body text, and copyright text. Supports draft/publish versioning and localization (en/es). Use this collection to read, create, update or delete site footers.',
+      enabled: {
+        create: true,
+        delete: true,
+        find: false,
+        update: true,
+      },
     },
   },
   overrideAuth: async (req, getDefaultMcpAccessSettings) => {
@@ -114,19 +135,6 @@ export const mcpPluginConfig = mcpPlugin({
 
     return {
       user: LOCAL_DEV_MCP_USER,
-      page: {
-        create: true,
-        delete: true,
-        find: false,
-        update: true,
-      },
-      posts: {
-        create: true,
-        delete: true,
-        find: false,
-        update: true,
-      },
-
       'payload-mcp-tool': {
         getPageContent: true,
         getPageField: true,
@@ -136,8 +144,10 @@ export const mcpPluginConfig = mcpPlugin({
         getAllPosts: true,
         getHeaderContent: true,
         getHeaderField: true,
+        getAllHeaders: true,
         getFooterContent: true,
         getFooterField: true,
+        getAllFooters: true,
         uploadImage: true,
       },
     }
@@ -146,28 +156,16 @@ export const mcpPluginConfig = mcpPlugin({
     tools: [
       getPageContent,
       getPageField,
-      getAllDocumentsFabric({
-        collection: 'page',
-        tableFields: ['id', 'title', 'slug', '_status'],
-        titleField: 'title',
-        buildUrl: (doc, locale) =>
-          buildUrl({
-            collection: 'page',
-            breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
-            locale: locale ?? 'en',
-          }),
-      }),
+      getAllPage,
       getPostsContent,
       getPostsField,
-      getAllDocumentsFabric({
-        collection: 'posts',
-        tableFields: ['id', 'title', 'slug', '_status', 'publishedAt', 'excerpt'],
-        titleField: 'title',
-      }),
+      getAllPosts,
       getHeaderContent,
       getHeaderField,
+      getAllHeaders,
       getFooterContent,
       getFooterField,
+      getAllFooters,
       uploadImage,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any,

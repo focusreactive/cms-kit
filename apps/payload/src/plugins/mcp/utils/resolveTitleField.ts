@@ -1,6 +1,7 @@
 import { resolvePath } from './resolvePath'
+import { BaseDocument } from '../types'
 
-export function resolveTitleField(doc: Record<string, unknown>, titleField?: string) {
+export function resolveTitleField(doc: BaseDocument, titleField?: string) {
   const fallback = doc.id !== undefined ? String(doc.id) : 'Document'
 
   if (!titleField) return fallback

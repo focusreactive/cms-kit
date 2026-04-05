@@ -21,6 +21,8 @@ import * as migration_20260331_084316_add_get_page_content_and_get_page_block fr
 import * as migration_20260331_131819_update_posts_for_mcp from './20260331_131819_update_posts_for_mcp';
 import * as migration_20260331_222621_get_all_pages_and_posts_mcp from './20260331_222621_get_all_pages_and_posts_mcp';
 import * as migration_20260402_081910_get_footer_and_header_via_mcp from './20260402_081910_get_footer_and_header_via_mcp';
+import * as migration_20260405_104039_get_all_footers_and_headers_via_mcp from './20260405_104039_get_all_footers_and_headers_via_mcp';
+import * as migration_20260405_104555_forbid_default_get_tool_for_all_collections from './20260405_104555_forbid_default_get_tool_for_all_collections';
 
 export const migrations = [
   {
@@ -136,6 +138,16 @@ export const migrations = [
   {
     up: migration_20260402_081910_get_footer_and_header_via_mcp.up,
     down: migration_20260402_081910_get_footer_and_header_via_mcp.down,
-    name: '20260402_081910_get_footer_and_header_via_mcp'
+    name: '20260402_081910_get_footer_and_header_via_mcp',
+  },
+  {
+    up: migration_20260405_104039_get_all_footers_and_headers_via_mcp.up,
+    down: migration_20260405_104039_get_all_footers_and_headers_via_mcp.down,
+    name: '20260405_104039_get_all_footers_and_headers_via_mcp',
+  },
+  {
+    up: migration_20260405_104555_forbid_default_get_tool_for_all_collections.up,
+    down: migration_20260405_104555_forbid_default_get_tool_for_all_collections.down,
+    name: '20260405_104555_forbid_default_get_tool_for_all_collections'
   },
 ];

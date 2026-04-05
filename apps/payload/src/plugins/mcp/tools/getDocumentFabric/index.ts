@@ -1,101 +1,93 @@
 import { z } from 'zod'
-import type { PayloadRequest } from 'payload'
+import type { CollectionSlug, PayloadRequest, Where } from 'payload'
+import { Locale } from '@/core/types'
 import { resolvePath } from '../../utils/resolvePath'
 import { buildContent } from './buildContent'
 import { buildFieldContent } from './buildFieldContent'
-import { Locale } from '@/core/types'
-
-export interface DocumentFabricOptions {
-  collection: string
-  titleField?: string
-  skipKeys?: string[]
-  buildUrl?: (doc: Record<string, unknown>, locale?: Locale) => string | null
-  knownCollections?: Set<string>
-}
+import { toPascalCase } from '../../utils/toPascalCase'
+import { BaseDocument, McpTool } from '../../types'
+import { buildDocumentsContent } from './buildDocumentsContent'
 
 const SKIP_KEYS = new Set(['blockType', 'blockName', 'url', 'locale', 'createdAt', 'updatedAt'])
 
-function toPascalCase(collection: string) {
-  return collection
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('')
+export interface DocumentFabricOptions {
+  collection: CollectionSlug
+  tableFields: string[]
+  titleField?: string
+  skipKeys?: string[]
+  knownCollections?: Set<CollectionSlug>
+  buildUrl?: (doc: BaseDocument, locale?: Locale) => string | null
 }
 
 async function getDocument(
-  collection: string,
+  collection: CollectionSlug,
   id: string,
   req: PayloadRequest,
   locale?: Locale,
   full?: boolean,
-): Promise<Record<string, unknown>> {
+) {
   return req.payload.findByID({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    collection: collection as any,
+    collection,
     id,
     overrideAccess: false,
     req,
     depth: full ? 2 : 1,
     locale,
-  }) as unknown as Promise<Record<string, unknown>>
+  }) as unknown as Promise<BaseDocument>
 }
 
-type McpTool = {
-  name: string
-  description: string
-  parameters: Record<string, unknown>
-  handler: (
-    args: Record<string, unknown>,
-    req: PayloadRequest,
-  ) => Promise<{ content: { type: 'text'; text: string }[] }>
-}
-
-export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, McpTool] {
-  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField, knownCollections } = options
+export function getDocumentFabric({
+  collection,
+  tableFields,
+  skipKeys,
+  titleField,
+  knownCollections,
+  buildUrl,
+}: DocumentFabricOptions): [McpTool, McpTool, McpTool] {
   const collectionPascal = toPascalCase(collection)
   const knownCollectionPascals = knownCollections
     ? new Set([...knownCollections].map(toPascalCase))
     : undefined
-  const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(extraSkipKeys ?? [])])
 
-  const parameters = {
-    id: z.string().describe('Document ID'),
-    locale: z
-      .string()
-      .optional()
-      .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
-    full: z
-      .boolean()
-      .optional()
-      .describe(
-        'Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.',
-      ),
-  }
+  const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(skipKeys ?? [])])
 
   const mainTool: McpTool = {
     name: `get${collectionPascal}Content`,
     description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.`,
-    parameters,
+    parameters: {
+      id: z.string().describe('Document ID'),
+      locale: z
+        .string()
+        .optional()
+        .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
+      full: z
+        .boolean()
+        .optional()
+        .describe(
+          'Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.',
+        ),
+    },
     handler: async (args, req) => {
       const { id, locale, full } = args as {
         id: string
         locale?: Locale
         full?: boolean
       }
+
       const doc = await getDocument(collection, id, req, locale, full)
 
-      const content = buildContent(
+      const content = buildContent({
         doc,
-        effectiveSkipKeys,
+        skipKeys: effectiveSkipKeys,
         collectionPascal,
         collection,
         titleField,
-        req.payload,
-        buildUrl,
+        payload: req.payload,
         knownCollectionPascals,
         full,
         locale,
-      )
+        buildUrl,
+      })
 
       return { content }
     },
@@ -126,18 +118,101 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         }
       }
 
-      const content = buildFieldContent(
+      const content = buildFieldContent({
         fieldPath,
-        resolved.value,
+        value: resolved.value,
         collection,
         collectionPascal,
-        req.payload,
+        payload: req.payload,
         knownCollectionPascals,
-      )
+      })
 
       return { content }
     },
   }
 
-  return [mainTool, fieldTool]
+  const getAllTool: McpTool = {
+    name: `getAll${collectionPascal}`,
+    description: [
+      `List ${collection} documents as a formatted summary list.`,
+      titleField ? `The "${titleField}" field is the document title.` : '',
+      `Returns only the necessary scalar summary fields from ${tableFields.join(', ')}, plus admin URL${buildUrl ? ' and public URL' : ''}.`,
+      'Objects, relations, arrays and rich text are omitted from the list output.',
+      `To get full details for a document, call \`get${collectionPascal}Content\` with its ID.`,
+      'The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.',
+    ]
+      .filter(Boolean)
+      .join(' '),
+    parameters: {
+      limit: z.number().optional().describe('Max documents to return (default 10)'),
+      page: z.number().optional().describe('Page number for pagination'),
+      locale: z
+        .string()
+        .optional()
+        .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
+      where: z
+        .string()
+        .optional()
+        .describe(
+          'Payload where clause as a JSON string, e.g. \'{"_status":{"equals":"published"}}\'',
+        ),
+    },
+    handler: async (args, req) => {
+      const {
+        limit = 10,
+        page,
+        locale,
+        where,
+      } = args as {
+        limit?: number
+        page?: number
+        locale?: Locale
+        where?: string
+      }
+
+      let parsedWhere: Where | undefined
+      if (where) {
+        try {
+          parsedWhere = JSON.parse(where) as Where
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err)
+
+          return {
+            content: [{ type: 'text', text: `Error: invalid where JSON - ${msg}` }],
+          }
+        }
+      }
+
+      const result = await req.payload.find({
+        collection,
+        limit,
+        page,
+        where: parsedWhere,
+        overrideAccess: false,
+        req,
+        depth: 0,
+        locale,
+      })
+
+      const { docs, totalDocs, page: currentPage, limit: effectiveLimit } = result
+
+      const content = buildDocumentsContent({
+        docs: docs as BaseDocument[],
+        totalDocs,
+        limit: effectiveLimit,
+        page: currentPage,
+        collection,
+        collectionPascal,
+        titleField,
+        tableFields,
+        locale,
+        payload: req.payload,
+        buildUrl,
+      })
+
+      return { content }
+    },
+  }
+
+  return [mainTool, fieldTool, getAllTool]
 }

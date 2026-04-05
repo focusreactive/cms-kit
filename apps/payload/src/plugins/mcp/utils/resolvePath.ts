@@ -1,5 +1,6 @@
 import { isLexicalField } from './lexical/isLexicalField'
 import { lexicalToMarkdown } from './lexical/lexicalToMarkdown'
+import { BaseDocument } from '../types'
 
 export function walkBlock(val: unknown): unknown {
   if (isLexicalField(val)) return lexicalToMarkdown(val.root)
@@ -16,7 +17,7 @@ export function walkBlock(val: unknown): unknown {
 }
 
 export function resolvePath(
-  doc: Record<string, unknown>,
+  doc: BaseDocument,
   fieldPath: string,
 ): { value: unknown } | { error: string } {
   const segments = fieldPath.split('.')

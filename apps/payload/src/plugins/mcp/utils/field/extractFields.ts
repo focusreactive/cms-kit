@@ -1,4 +1,6 @@
-export const extractFields = (obj: Record<string, unknown>, skipKeys: Set<string>) => {
+import { BaseDocument } from '../../types'
+
+export const extractFields = (obj: BaseDocument, skipKeys: Set<string>) => {
   const extracted: Record<string, unknown> = {}
 
   for (const [key, val] of Object.entries(obj)) {
