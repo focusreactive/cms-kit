@@ -637,12 +637,20 @@ export interface HeroBlock {
   opacity?: number | null;
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -670,12 +678,20 @@ export interface TextSectionBlock {
   };
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -706,12 +722,20 @@ export interface ContentBlock {
   };
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -744,12 +768,20 @@ export interface FaqBlock {
   }[];
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -776,12 +808,20 @@ export interface TestimonialsListBlock {
   showAvatar?: boolean | null;
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -842,12 +882,20 @@ export interface CardsGridBlock {
   }[];
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -898,12 +946,20 @@ export interface CarouselBlock {
   }[];
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -940,12 +996,20 @@ export interface LogosBlock {
   }[];
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -982,12 +1046,20 @@ export interface LinksListBlock {
   }[];
   section?: {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-    marginTop?: ('none' | 'base' | 'large') | null;
-    marginBottom?: ('none' | 'base' | 'large') | null;
-    paddingX?: ('none' | 'base' | 'large') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
-    maxWidth?: ('none' | 'base' | 'small') | null;
-    backgroundImage?: (number | null) | Media;
+    paddingX?: ('none' | 'base') | null;
+    maxWidth?: ('none' | 'base' | 'full') | null;
+    background?: {
+      /**
+       * Upload an image or video. Use the "Background" folder.
+       */
+      media?: (number | null) | Media;
+      overlay?: ('black' | 'white') | null;
+      /**
+       * 0 = transparent, 100 = fully opaque
+       */
+      opacity?: number | null;
+    };
   };
   id?: string | null;
   blockName?: string | null;
@@ -1105,12 +1177,20 @@ export interface Preset {
     opacity?: number | null;
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   textSection?: {
@@ -1131,12 +1211,20 @@ export interface Preset {
     };
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   content?: {
@@ -1160,12 +1248,20 @@ export interface Preset {
     };
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   faq?: {
@@ -1191,12 +1287,20 @@ export interface Preset {
     }[];
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   testimonialsList?: {
@@ -1216,12 +1320,20 @@ export interface Preset {
     showAvatar?: boolean | null;
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   cardsGrid?: {
@@ -1260,12 +1372,20 @@ export interface Preset {
     }[];
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   carousel?: {
@@ -1309,12 +1429,20 @@ export interface Preset {
     }[];
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   logos?: {
@@ -1344,12 +1472,20 @@ export interface Preset {
     }[];
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   linksList?: {
@@ -1379,12 +1515,20 @@ export interface Preset {
     }[];
     section?: {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
+      paddingX?: ('none' | 'base') | null;
+      maxWidth?: ('none' | 'base' | 'full') | null;
+      background?: {
+        /**
+         * Upload an image or video. Use the "Background" folder.
+         */
+        media?: (number | null) | Media;
+        overlay?: ('black' | 'white') | null;
+        /**
+         * 0 = transparent, 100 = fully opaque
+         */
+        opacity?: number | null;
+      };
     };
   };
   updatedAt: string;
@@ -1833,12 +1977,16 @@ export interface HeroBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1853,12 +2001,16 @@ export interface TextSectionBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1876,12 +2028,16 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1903,12 +2059,16 @@ export interface FaqBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1933,12 +2093,16 @@ export interface TestimonialsListBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1980,12 +2144,16 @@ export interface CardsGridBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -2013,12 +2181,16 @@ export interface CarouselBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -2054,12 +2226,16 @@ export interface LogosBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -2090,12 +2266,16 @@ export interface LinksListBlockSelect<T extends boolean = true> {
     | T
     | {
         theme?: T;
-        marginTop?: T;
-        marginBottom?: T;
-        paddingX?: T;
         paddingY?: T;
+        paddingX?: T;
         maxWidth?: T;
-        backgroundImage?: T;
+        background?:
+          | T
+          | {
+              media?: T;
+              overlay?: T;
+              opacity?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -2271,12 +2451,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   textSection?:
@@ -2287,12 +2471,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   content?:
@@ -2306,12 +2494,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   faq?:
@@ -2329,12 +2521,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   testimonialsList?:
@@ -2355,12 +2551,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   cardsGrid?:
@@ -2398,12 +2598,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   carousel?:
@@ -2427,12 +2631,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   logos?:
@@ -2464,12 +2672,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   linksList?:
@@ -2496,12 +2708,16 @@ export interface PresetsSelect<T extends boolean = true> {
           | T
           | {
               theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
               paddingY?: T;
+              paddingX?: T;
               maxWidth?: T;
-              backgroundImage?: T;
+              background?:
+                | T
+                | {
+                    media?: T;
+                    overlay?: T;
+                    opacity?: T;
+                  };
             };
       };
   updatedAt?: T;
