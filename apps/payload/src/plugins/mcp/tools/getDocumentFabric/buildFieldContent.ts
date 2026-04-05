@@ -11,6 +11,7 @@ interface Props {
   collectionPascal: string
   payload: Payload
   knownCollectionPascals?: Set<string>
+  raw?: boolean
 }
 
 export function buildFieldContent({
@@ -20,7 +21,12 @@ export function buildFieldContent({
   collectionPascal,
   payload,
   knownCollectionPascals,
+  raw,
 }: Props): ContentBlock[] {
+  if (raw) {
+    return [{ type: 'text', text: JSON.stringify(value, null, 2) }]
+  }
+
   const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
 
   const body = formatDocumentField(fieldPath, value, {

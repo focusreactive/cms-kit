@@ -17,6 +17,7 @@ interface Props {
   payload: Payload
   knownCollectionPascals?: Set<string>
   full?: boolean
+  raw?: boolean
   locale?: Locale
 }
 
@@ -46,8 +47,12 @@ export function buildContent({
   payload,
   knownCollectionPascals,
   full,
+  raw,
   locale,
 }: Props): ContentBlock[] {
+  if (raw) {
+    return [{ type: 'text', text: JSON.stringify(doc, null, 2) }]
+  }
   const title = resolveGlobalTitle(doc, titleField, slug)
   const adminUrl = `${getServerSideURL()}/admin/globals/${slug}${locale ? `?locale=${locale}` : ''}`
   const extractedDoc = extractFields(doc, skipKeys)

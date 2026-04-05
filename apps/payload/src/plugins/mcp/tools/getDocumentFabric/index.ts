@@ -53,7 +53,7 @@ export function getDocumentFabric({
 
   const mainTool: McpTool = {
     name: `get${collectionPascal}Content`,
-    description: `Fetch a ${collection} document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call \`get${collectionPascal}Field\` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.`,
+    description: `Fetch a ${collection} document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call \`get${collectionPascal}Field\` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.`,
     parameters: {
       id: z.string().describe('Document ID'),
       locale: z
@@ -64,14 +64,21 @@ export function getDocumentFabric({
         .boolean()
         .optional()
         .describe(
-          `Only pass full: true when the user explicitly asks to extract the entire document content. Expands all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a much larger response - omit by default.`,
+          `Only pass full: true when the user explicitly asks to extract the entire document content. Expands all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a much larger response — omit by default.`,
+        ),
+      raw: z
+        .boolean()
+        .optional()
+        .describe(
+          'Return the raw JSON document instead of formatted Markdown. Use this when you need all field values, IDs, and Lexical node structure — for example, to extract structured data for analysis, reporting, or passing back in an update call.',
         ),
     },
     handler: async (args, req) => {
-      const { id, locale, full } = args as {
+      const { id, locale, full, raw } = args as {
         id: string
         locale?: Locale
         full?: boolean
+        raw?: boolean
       }
 
       const doc = await getDocument(collection, id, req, locale, full)
@@ -85,6 +92,7 @@ export function getDocumentFabric({
         payload: req.payload,
         knownCollectionPascals,
         full,
+        raw,
         locale,
         buildUrl,
       })
@@ -95,7 +103,7 @@ export function getDocumentFabric({
 
   const fieldTool: McpTool = {
     name: `get${collectionPascal}Field`,
-    description: `Fetch the full content of a specific field from a ${collection} document. Use this after \`get${collectionPascal}Content\` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.`,
+    description: `Fetch the full content of a specific field from a ${collection} document. Use this after \`get${collectionPascal}Content\` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.`,
     parameters: {
       id: z.string().describe('Document ID'),
       fieldPath: z
@@ -105,9 +113,20 @@ export function getDocumentFabric({
         .string()
         .optional()
         .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
+      raw: z
+        .boolean()
+        .optional()
+        .describe(
+          'REQUIRED before any update/create: returns raw JSON instead of Markdown, including block IDs, Lexical nodes, and full array structure needed to construct a valid update payload.',
+        ),
     },
     handler: async (args, req) => {
-      const { id, fieldPath, locale } = args as { id: string; fieldPath: string; locale?: Locale }
+      const { id, fieldPath, locale, raw } = args as {
+        id: string
+        fieldPath: string
+        locale?: Locale
+        raw?: boolean
+      }
       const doc = await getDocument(collection, id, req, locale)
 
       const resolved = resolvePath(doc, fieldPath)
@@ -125,6 +144,7 @@ export function getDocumentFabric({
         collectionPascal,
         payload: req.payload,
         knownCollectionPascals,
+        raw,
       })
 
       return { content }

@@ -17,6 +17,7 @@ interface Props {
   payload: Payload
   knownCollectionPascals?: Set<string>
   full?: boolean
+  raw?: boolean
   locale?: Locale
   buildUrl?: (doc: BaseDocument, locale?: Locale) => string | null
 }
@@ -30,9 +31,14 @@ export function buildContent({
   payload,
   knownCollectionPascals,
   full,
+  raw,
   locale,
   buildUrl,
 }: Props): ContentBlock[] {
+  if (raw) {
+    return [{ type: 'text', text: JSON.stringify(doc, null, 2) }]
+  }
+
   const title = resolveTitleField(doc, titleField)
   const titleIsId = titleField === 'id' || !titleField
 
