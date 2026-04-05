@@ -3,8 +3,24 @@ import { isLexicalField } from '../lexical/isLexicalField'
 import { lexicalToMarkdown } from '../lexical/lexicalToMarkdown'
 import { formatFieldValueClue, formatRelationValueClue } from './formatValueClue'
 
+const LIST_INDENT = '    '
+
 function isResolvedRelation(value: Record<string, unknown>): boolean {
   return Object.keys(value).some((k) => k !== 'id' && k !== 'relationTo')
+}
+
+function formatEmptyValue(value: unknown): string {
+  if (value === null || value === undefined || value === '') {
+    return 'null'
+  }
+
+  return String(value)
+}
+
+function formatLexicalContent(value: unknown): string {
+  const content = lexicalToMarkdown((value as { root: unknown }).root).trim()
+
+  return content || 'null'
 }
 
 interface FormatFieldLineOpts {
@@ -31,12 +47,12 @@ export function formatFieldLine(
     knownCollectionPascals,
   } = options
 
-  const indent = '  '.repeat(depth)
-  const childIndent = '  '.repeat(depth + 2)
+  const indent = LIST_INDENT.repeat(depth)
+  const childIndent = LIST_INDENT.repeat(depth + 1)
   const label = fieldLabels[key] ?? key
 
   if (isScalar(value)) {
-    return `${indent}- **${label}**: ${String(value ?? '')}`
+    return `${indent}- **${label}**: ${formatEmptyValue(value)}`
   }
 
   if (isLexicalField(value)) {
@@ -44,23 +60,23 @@ export function formatFieldLine(
       return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
     }
 
-    const content = lexicalToMarkdown(value.root)
-    const indentedContent = content
+    const indentedContent = formatLexicalContent(value)
       .split('\n')
-      .map((line) => `${indent}  ${line}`)
+      .map((line) => `${childIndent}${line}`)
       .join('\n')
 
-    return `${indent}- **${label}**:\n\n${indentedContent}\n`
+    return `${indent}- **${label}**:\n${indentedContent}`
   }
 
   if (isRelation(value)) {
     if (!summarizeComplexValues && isResolvedRelation(value)) {
       const fields = Object.entries(value)
         .filter(([k]) => k !== 'id' && k !== 'relationTo')
-        .map(([k, v]) => formatFieldLine(k, v, depth + 2, options))
+        .map(([k, v]) => formatFieldLine(k, v, depth + 1, options))
         .join('\n')
-      const idLine = `${indent}  - **id**: ${String(value.id)}`
-      return `${indent}- **${label}**:\n${idLine}\n${fields}`
+      const idLine = `${childIndent}- **id**: ${formatEmptyValue(value.id)}`
+
+      return fields ? `${indent}- **${label}**:\n${idLine}\n${fields}` : `${indent}- **${label}**:\n${idLine}`
     }
     return `${indent}- **${label}**: ${formatRelationValueClue(value, knownCollectionPascals)}`
   }
@@ -77,14 +93,14 @@ export function formatFieldLine(
 
         const fields = Object.entries(block)
           .filter(([key]) => key !== 'blockType' && key !== 'blockName' && key !== 'id')
-          .map(([key, value]) => formatFieldLine(key, value, depth + 3, options))
+          .map(([key, value]) => formatFieldLine(key, value, depth + 2, options))
           .join('\n')
 
         return fields ? `${header}\n${fields}` : header
       })
       .join('\n')
 
-    return `${indent}- **${label}**:\n${items}`
+    return `${indent}- **${label}**:${items ? `\n${items}` : ' null'}`
   }
 
   if (isObjectsArray(value)) {
@@ -96,14 +112,14 @@ export function formatFieldLine(
       .map((item, i) => {
         const header = `${childIndent}- [${i}]:`
         const fields = Object.entries(item)
-          .map(([key, value]) => formatFieldLine(key, value, depth + 3, options))
+          .map(([key, value]) => formatFieldLine(key, value, depth + 2, options))
           .join('\n')
 
         return fields ? `${header}\n${fields}` : header
       })
       .join('\n')
 
-    return `${indent}- **${label}**:\n${items}`
+    return `${indent}- **${label}**:${items ? `\n${items}` : ' null'}`
   }
 
   if (typeof value === 'object' && value !== null) {
@@ -112,11 +128,11 @@ export function formatFieldLine(
     }
 
     const fields = Object.entries(value as Record<string, unknown>)
-      .map(([key, value]) => formatFieldLine(key, value, depth + 2, options))
+      .map(([key, value]) => formatFieldLine(key, value, depth + 1, options))
       .join('\n')
 
-    return `${indent}- **${label}**:\n${fields}`
+    return `${indent}- **${label}**:${fields ? `\n${fields}` : ' null'}`
   }
 
-  return `${indent}- **${label}**: ${String(value ?? '')}`
+  return `${indent}- **${label}**: ${formatEmptyValue(value)}`
 }

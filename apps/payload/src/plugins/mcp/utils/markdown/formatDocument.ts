@@ -42,5 +42,5 @@ export function formatDocument({
     }),
   )
 
-  return [titleLine, urlLine, fieldsTitleLine, ...fieldLines].filter(Boolean).join('\n\n')
+  return [titleLine, urlLine, fieldsTitleLine, ...fieldLines].filter(Boolean).join('\n')
 }

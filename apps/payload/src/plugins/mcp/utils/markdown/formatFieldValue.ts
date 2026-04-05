@@ -4,6 +4,14 @@ import { lexicalToMarkdown } from '../lexical/lexicalToMarkdown'
 import { formatFieldLine } from './formatFieldLine'
 import { formatRelationValueClue } from './formatValueClue'
 
+function formatEmptyValue(value: unknown): string {
+  if (value === null || value === undefined || value === '') {
+    return 'null'
+  }
+
+  return String(value)
+}
+
 interface FormatDocumentFieldOpts {
   collectionPascal: string
   fieldLabels: Record<string, string>
@@ -15,11 +23,11 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
   const { blockLabels, knownCollectionPascals } = options
 
   if (isLexicalField(value)) {
-    return lexicalToMarkdown(value.root)
+    return lexicalToMarkdown(value.root).trim() || 'null'
   }
 
   if (isScalar(value)) {
-    return String(value ?? '')
+    return formatEmptyValue(value)
   }
 
   if (isRelation(value)) {
@@ -53,11 +61,11 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
           return fields ? `${header}\n${fields}` : header
         }
 
-        return `- [${i}]: ${String(item ?? '')}`
+        return `- [${i}]: ${formatEmptyValue(item)}`
       })
       .join('\n\n')
 
-    return [`## Items:`, '', items].join('\n')
+    return items ? `## Items:\n${items}` : '## Items:\nnull'
   }
 
   const obj = value as Record<string, unknown>
@@ -67,5 +75,5 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
     .map(([key, value]) => formatFieldLine(key, value, 0, options))
     .join('\n')
 
-  return [`## Fields:`, '', fields].join('\n')
+  return fields ? `## Fields:\n${fields}` : '## Fields:\nnull'
 }
