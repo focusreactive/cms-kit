@@ -23,6 +23,7 @@ import * as migration_20260331_222621_get_all_pages_and_posts_mcp from './202603
 import * as migration_20260402_081910_get_footer_and_header_via_mcp from './20260402_081910_get_footer_and_header_via_mcp';
 import * as migration_20260405_104039_get_all_footers_and_headers_via_mcp from './20260405_104039_get_all_footers_and_headers_via_mcp';
 import * as migration_20260405_104555_forbid_default_get_tool_for_all_collections from './20260405_104555_forbid_default_get_tool_for_all_collections';
+import * as migration_20260405_132850_get_site_settings_via_mcp from './20260405_132850_get_site_settings_via_mcp';
 
 export const migrations = [
   {
@@ -148,6 +149,11 @@ export const migrations = [
   {
     up: migration_20260405_104555_forbid_default_get_tool_for_all_collections.up,
     down: migration_20260405_104555_forbid_default_get_tool_for_all_collections.down,
-    name: '20260405_104555_forbid_default_get_tool_for_all_collections'
+    name: '20260405_104555_forbid_default_get_tool_for_all_collections',
+  },
+  {
+    up: migration_20260405_132850_get_site_settings_via_mcp.up,
+    down: migration_20260405_132850_get_site_settings_via_mcp.down,
+    name: '20260405_132850_get_site_settings_via_mcp'
   },
 ];

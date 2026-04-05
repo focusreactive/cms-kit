@@ -1581,6 +1581,14 @@ export interface PayloadMcpApiKey {
      * Upload one or more images to the media library from local file paths (dev only) or remote URLs. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` values as the value of those fields in subsequent create/update calls. Always derive `alt` from the visible or described image content — never copy the filename. Uploads are processed concurrently (up to 3 at a time). Partial failures are tolerated — check the `failed` array in the response.
      */
     uploadImage?: boolean | null;
+    /**
+     * Fetch the site-settings global. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     */
+    getSiteSettingsContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from the site-settings global. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown.
+     */
+    getSiteSettingsField?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -2764,6 +2772,8 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         getFooterField?: T;
         getAllFooter?: T;
         uploadImage?: T;
+        getSiteSettingsContent?: T;
+        getSiteSettingsField?: T;
       };
   updatedAt?: T;
   createdAt?: T;

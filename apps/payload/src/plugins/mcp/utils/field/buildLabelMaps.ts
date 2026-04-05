@@ -14,10 +14,14 @@ function resolveLabel(
 }
 
 export function buildLabelMaps(
-  collection: string,
+  slug: string,
   payload: Payload,
+  type: 'collection' | 'global' = 'collection',
 ): { fieldLabels: Record<string, string>; blockLabels: Record<string, string> } {
-  const fields: Field[] = payload.collections[collection as CollectionSlug]?.config.fields ?? []
+  const fields: Field[] =
+    type === 'global'
+      ? (payload.globals.config.find((g) => g.slug === slug)?.fields ?? [])
+      : (payload.collections[slug as CollectionSlug]?.config.fields ?? [])
 
   const fieldLabels: Record<string, string> = {}
   const blockLabels: Record<string, string> = {}

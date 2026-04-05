@@ -1,3 +1,4 @@
+import { LexicalNode } from '../../types/lexical'
 import { isBlocksArray, isObjectsArray, isRelation, isScalar } from '../field/is'
 import { isLexicalField } from '../lexical/isLexicalField'
 import { lexicalToMarkdown } from '../lexical/lexicalToMarkdown'
@@ -18,7 +19,7 @@ function formatEmptyValue(value: unknown): string {
 }
 
 function formatLexicalContent(value: unknown): string {
-  const content = lexicalToMarkdown((value as { root: unknown }).root).trim()
+  const content = lexicalToMarkdown((value as { root: unknown }).root as LexicalNode).trim()
 
   return content || 'null'
 }
@@ -76,7 +77,9 @@ export function formatFieldLine(
         .join('\n')
       const idLine = `${childIndent}- **id**: ${formatEmptyValue(value.id)}`
 
-      return fields ? `${indent}- **${label}**:\n${idLine}\n${fields}` : `${indent}- **${label}**:\n${idLine}`
+      return fields
+        ? `${indent}- **${label}**:\n${idLine}\n${fields}`
+        : `${indent}- **${label}**:\n${idLine}`
     }
     return `${indent}- **${label}**: ${formatRelationValueClue(value, knownCollectionPascals)}`
   }

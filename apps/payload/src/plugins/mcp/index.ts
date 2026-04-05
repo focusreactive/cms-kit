@@ -3,6 +3,7 @@ import type { CollectionSlug, PayloadRequest } from 'payload'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { getDocumentFabric } from './tools/getDocumentFabric'
+import { getGlobalDocumentFabric } from './tools/getGlobalDocumentFabric'
 import { uploadImage } from './tools/uploadImage'
 import { LOCAL_DEV_MCP_USER, LOCAL_HOSTS } from './constants/local'
 
@@ -84,6 +85,11 @@ const [getFooterContent, getFooterField, getAllFooters] = getDocumentFabric({
   skipKeys: ['id'],
   knownCollections: KNOWN_COLLECTIONS,
 })
+const [getSiteSettingsContent, getSiteSettingsField] = getGlobalDocumentFabric({
+  slug: 'site-settings',
+  titleField: 'siteName',
+  knownCollections: KNOWN_COLLECTIONS,
+})
 
 export const mcpPluginConfig = mcpPlugin({
   collections: {
@@ -149,6 +155,8 @@ export const mcpPluginConfig = mcpPlugin({
         getFooterField: true,
         getAllFooters: true,
         uploadImage: true,
+        getSiteSettingsContent: true,
+        getSiteSettingsField: true,
       },
     }
   },
@@ -167,6 +175,8 @@ export const mcpPluginConfig = mcpPlugin({
       getFooterField,
       getAllFooters,
       uploadImage,
+      getSiteSettingsContent,
+      getSiteSettingsField,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any,
   },

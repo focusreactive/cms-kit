@@ -64,7 +64,7 @@ export function getDocumentFabric({
         .boolean()
         .optional()
         .describe(
-          'Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.',
+          `Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response. Skip it if the user doesn't explicitly ask to extract the entire content.`,
         ),
     },
     handler: async (args, req) => {
