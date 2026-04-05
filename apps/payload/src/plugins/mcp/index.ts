@@ -141,6 +141,10 @@ export const mcpPluginConfig = mcpPlugin({
 
     return {
       user: LOCAL_DEV_MCP_USER,
+      page: { create: true, delete: true, find: false, update: true },
+      posts: { create: true, delete: true, find: false, update: true },
+      header: { create: true, delete: true, find: false, update: true },
+      footer: { create: true, delete: true, find: false, update: true },
       'payload-mcp-tool': {
         getPageContent: true,
         getPageField: true,

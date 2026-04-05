@@ -1530,11 +1530,11 @@ export interface PayloadMcpApiKey {
   };
   'payload-mcp-tool'?: {
     /**
-     * Fetch a page document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     * Fetch a page document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call `getPageField` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
      */
     getPageContent?: boolean | null;
     /**
-     * Fetch the full content of a specific field from a page document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     * Fetch the full content of a specific field from a page document. Use this after `getPageContent` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getPageField?: boolean | null;
     /**
@@ -1542,11 +1542,11 @@ export interface PayloadMcpApiKey {
      */
     getAllPage?: boolean | null;
     /**
-     * Fetch a posts document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     * Fetch a posts document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call `getPostsField` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
      */
     getPostsContent?: boolean | null;
     /**
-     * Fetch the full content of a specific field from a posts document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     * Fetch the full content of a specific field from a posts document. Use this after `getPostsContent` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getPostsField?: boolean | null;
     /**
@@ -1554,11 +1554,11 @@ export interface PayloadMcpApiKey {
      */
     getAllPosts?: boolean | null;
     /**
-     * Fetch a header document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     * Fetch a header document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call `getHeaderField` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
      */
     getHeaderContent?: boolean | null;
     /**
-     * Fetch the full content of a specific field from a header document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     * Fetch the full content of a specific field from a header document. Use this after `getHeaderContent` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getHeaderField?: boolean | null;
     /**
@@ -1566,11 +1566,11 @@ export interface PayloadMcpApiKey {
      */
     getAllHeader?: boolean | null;
     /**
-     * Fetch a footer document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     * Fetch a footer document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call `getFooterField` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
      */
     getFooterContent?: boolean | null;
     /**
-     * Fetch the full content of a specific field from a footer document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
+     * Fetch the full content of a specific field from a footer document. Use this after `getFooterContent` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.
      */
     getFooterField?: boolean | null;
     /**
@@ -1582,11 +1582,11 @@ export interface PayloadMcpApiKey {
      */
     uploadImage?: boolean | null;
     /**
-     * Fetch the site-settings global. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.
+     * Fetch the site-settings global. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the global structure before deciding which fields to read. To read specific field values, call `getSiteSettingsField` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
      */
     getSiteSettingsContent?: boolean | null;
     /**
-     * Fetch the full content of a specific field from the site-settings global. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown.
+     * Fetch the full content of a specific field from the site-settings global. Use this after `getSiteSettingsContent` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown.
      */
     getSiteSettingsField?: boolean | null;
   };

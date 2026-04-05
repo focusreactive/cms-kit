@@ -53,7 +53,7 @@ export function getDocumentFabric({
 
   const mainTool: McpTool = {
     name: `get${collectionPascal}Content`,
-    description: `Fetch a ${collection} document by ID. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.`,
+    description: `Fetch a ${collection} document by ID. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure before deciding which fields to read. To read specific field values, call \`get${collectionPascal}Field\` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.`,
     parameters: {
       id: z.string().describe('Document ID'),
       locale: z
@@ -64,7 +64,7 @@ export function getDocumentFabric({
         .boolean()
         .optional()
         .describe(
-          `Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response. Skip it if the user doesn't explicitly ask to extract the entire content.`,
+          `Only pass full: true when the user explicitly asks to extract the entire document content. Expands all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a much larger response - omit by default.`,
         ),
     },
     handler: async (args, req) => {
@@ -95,7 +95,7 @@ export function getDocumentFabric({
 
   const fieldTool: McpTool = {
     name: `get${collectionPascal}Field`,
-    description: `Fetch the full content of a specific field from a ${collection} document. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.`,
+    description: `Fetch the full content of a specific field from a ${collection} document. Use this after \`get${collectionPascal}Content\` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown.`,
     parameters: {
       id: z.string().describe('Document ID'),
       fieldPath: z

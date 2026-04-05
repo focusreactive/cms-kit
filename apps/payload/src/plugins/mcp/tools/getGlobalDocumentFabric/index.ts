@@ -46,7 +46,7 @@ export function getGlobalDocumentFabric({
 
   const contentTool: McpTool = {
     name: `get${globalPascal}Content`,
-    description: `Fetch the ${slug} global. Returns all top-level fields as structured sections with nested values rendered inline. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response.`,
+    description: `Fetch the ${slug} global. Returns all top-level fields as a structured overview - complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the global structure before deciding which fields to read. To read specific field values, call \`get${globalPascal}Field\` with the relevant dot-notation path. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.`,
     parameters: {
       locale: z
         .string()
@@ -56,7 +56,7 @@ export function getGlobalDocumentFabric({
         .boolean()
         .optional()
         .describe(
-          `Pass full: true to expand all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a larger response. Skip it if the user doesn't explicitly ask to extract the entire content.`,
+          `Only pass full: true when the user explicitly asks to extract the entire global content. Expands all nested fields, arrays, rich text, and relations inline (uses depth 2). Produces a much larger response - omit by default.`,
         ),
     },
     handler: async (args, req) => {
@@ -85,7 +85,7 @@ export function getGlobalDocumentFabric({
 
   const fieldTool: McpTool = {
     name: `get${globalPascal}Field`,
-    description: `Fetch the full content of a specific field from the ${slug} global. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown.`,
+    description: `Fetch the full content of a specific field from the ${slug} global. Use this after \`get${globalPascal}Content\` to drill into a particular field - especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown.`,
     parameters: {
       fieldPath: z
         .string()
