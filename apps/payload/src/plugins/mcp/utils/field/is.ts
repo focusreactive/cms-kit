@@ -18,6 +18,7 @@ export function isRelation(val: unknown): val is Record<string, unknown> {
   const obj = val as Record<string, unknown>
 
   if (!('id' in obj)) return false
+  if ('blockType' in obj) return false
 
   return Object.entries(obj).some(([k, v]) => k !== 'id' && isScalar(v))
 }
