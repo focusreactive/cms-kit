@@ -28,6 +28,9 @@
     "goToNextPage": "Go to next page",
     "morePages": "More pages"
   },
+  "blog": {
+    "all": "All"
+  },
   "announcements": {
     "title": "Announcements",
     "noAnnouncements": "No announcements available.",

@@ -40,6 +40,7 @@ const fields: Field[] = [
         type: 'richText',
         editor: generateRichText(),
         label: { en: 'Slide Text', es: 'Texto de la diapositiva' },
+        localized: true,
       },
     ],
   },

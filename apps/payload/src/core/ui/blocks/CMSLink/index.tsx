@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 import type { Page, Post } from '@/payload-types'
 import { cn } from '@/core/lib/utils'
-import { Button, ButtonVariant, ButtonSize, Link } from '@/core/ui'
+import { Button, ButtonVariant, Link } from '@/core/ui'
 import { BLOG_CONFIG } from '@/core/config/blog'
 
 type ButtonProps = React.ComponentProps<typeof Button>
@@ -29,7 +29,11 @@ const collectionPaths: Record<string, string> = {
 type LegacyAppearance = 'default' | 'outline'
 
 type Props = {
-  appearance?: VariantProps<typeof linkVariants>['appearance'] | ButtonProps['variant'] | LegacyAppearance | null
+  appearance?:
+    | VariantProps<typeof linkVariants>['appearance']
+    | ButtonProps['variant']
+    | LegacyAppearance
+    | null
   children?: React.ReactNode
   className?: string
   label?: string | null
@@ -40,7 +44,7 @@ type Props = {
     value: Page | Post | string | number
   } | null
   size?: ButtonProps['size'] | null
-  type?: 'custom' | 'reference' | null
+  type?: 'custom' | 'reference' | 'customPage' | null
   url?: string | null
 }
 
@@ -94,12 +98,7 @@ export const CMSLink: React.FC<Props> = (props) => {
   }
 
   return (
-    <Button
-      asChild
-      className={className}
-      size={size}
-      variant={mapAppearanceToVariant(appearance)}
-    >
+    <Button asChild className={className} size={size} variant={mapAppearanceToVariant(appearance)}>
       <Link href={href || url || ''} onClick={onClick} {...newTabProps}>
         {label && label}
         {children && children}

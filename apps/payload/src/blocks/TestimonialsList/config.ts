@@ -1,10 +1,7 @@
 import type { Block } from 'payload'
-import { createPresetFields } from '@/fields/presetFields'
 import { getBlockPreviewImage } from '@/core/lib/blockPreviewImage'
-import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { embedSectionTab } from '@/fields/section/embedSectionTab'
-
-const { presetFields } = createPresetFields()
+import { testimonialsListFields } from '@/fields/testimonialsListFields'
 
 export const TestimonialsListBlock: Block = {
   slug: 'testimonialsList',
@@ -14,5 +11,5 @@ export const TestimonialsListBlock: Block = {
     singular: { en: 'Testimonials', es: 'Testimonios' },
     plural: { en: 'Testimonials', es: 'Testimonios' },
   },
-  fields: embedSectionTab([...PRESET_TYPES_CONFIG.testimonialsList.fields, presetFields]),
+  fields: embedSectionTab([...testimonialsListFields]),
 }

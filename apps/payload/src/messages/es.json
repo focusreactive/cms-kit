@@ -28,6 +28,9 @@
     "goToNextPage": "Ir a la página siguiente",
     "morePages": "Más páginas"
   },
+  "blog": {
+    "all": "Todas"
+  },
   "announcements": {
     "title": "Anuncios",
     "noAnnouncements": "No hay anuncios disponibles.",

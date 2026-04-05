@@ -8,6 +8,12 @@ export function BlogPageSkeleton() {
           </div>
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-8">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="animate-pulse rounded-full bg-primaryLightColor h-8 w-20" />
+          ))}
+        </div>
+
         <div className="mb-8">
           <div className="animate-pulse rounded-md bg-primaryLightColor h-6 w-32" />
         </div>

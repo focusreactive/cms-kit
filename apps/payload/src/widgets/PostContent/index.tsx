@@ -1,32 +1,45 @@
 import { RichText, PostHero } from '@/core/ui'
 import type { Post } from '@/payload-types'
 import { RelatedPosts } from '@/entities'
+import { getRelatedPosts } from '@/core/lib/getRelatedPosts'
+import type { Locale } from '@/core/types'
 
 type PostContentProps = {
   post: Post
+  locale: Locale
+  relatedPostsLabel?: string | null
+  readMoreLabel?: string | null
 }
 
-export const PostContent: React.FC<PostContentProps> = ({
+export const PostContent: React.FC<PostContentProps> = async ({
   post,
+  locale,
+  relatedPostsLabel,
+  readMoreLabel,
 }) => {
+  const relatedPosts = await getRelatedPosts({ post, locale })
+
   return (
-    <article className="py-16">
+    <article>
       <PostHero post={post} />
 
-      <div className="py-4 px-4 sm:py-4 sm:px-6 md:py-4 md:px-8 lg:py-4">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex flex-col items-center gap-4 pt-8">
-            <RichText className="mx-auto" content={post.content} />
-            {post.relatedPosts && post.relatedPosts.length > 0 && (
-              <RelatedPosts
-                className="mt-12 "
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-                relatedPostsIntro={post.relatedPostsIntro}
-              />
-            )}
-          </div>
+      <div className="py-8 px-4 sm:py-10 sm:px-6 md:py-12 md:px-8">
+        <div className="mx-auto max-w-3xl">
+          <RichText className="mx-auto" content={post.content} />
         </div>
       </div>
+
+      {relatedPosts.length > 0 && (
+        <div className="border-t border-border py-12 px-4 sm:px-6 md:px-8">
+          <div className="mx-auto max-w-4xl">
+            <RelatedPosts
+              docs={relatedPosts}
+              relatedPostsLabel={relatedPostsLabel}
+              readMoreLabel={readMoreLabel}
+            />
+          </div>
+        </div>
+      )}
     </article>
   )
 }

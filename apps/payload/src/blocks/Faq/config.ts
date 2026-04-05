@@ -40,6 +40,7 @@ const fields: Field[] = [
         type: 'text',
         required: true,
         label: { en: 'Question', es: 'Pregunta' },
+        localized: true,
       },
       {
         name: 'answer',
@@ -47,6 +48,7 @@ const fields: Field[] = [
         editor: generateRichText(),
         required: true,
         label: { en: 'Answer', es: 'Respuesta' },
+        localized: true,
         defaultValue: createLocalizedRichText(DEFAULT_VALUES.blocks.faq.answer),
       },
     ],

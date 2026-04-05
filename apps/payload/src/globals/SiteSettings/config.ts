@@ -337,43 +337,58 @@ export const SiteSettings: GlobalConfig = {
           },
           fields: [
             {
-              name: 'blogTitle',
-              type: 'text',
-              defaultValue: createLocalizedDefault({ en: 'Blog', es: 'Blog' }),
-              localized: true,
-              label: { en: 'Blog Page Title', es: 'Título de la página de blog' },
-              admin: {
-                description: {
-                  en: 'The main title for the blog page',
-                  es: 'El título principal para la página de blog',
+              type: 'tabs',
+              tabs: [
+                {
+                  label: { en: 'Content', es: 'Contenido' },
+                  fields: [
+                    {
+                      name: 'blogTitle',
+                      type: 'text',
+                      required: true,
+                      defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.blogTitle),
+                      localized: true,
+                      label: { en: 'Blog Page Title', es: 'Título de la página de blog' },
+                    },
+                    {
+                      name: 'blogDescription',
+                      type: 'textarea',
+                      required: true,
+                      localized: true,
+                      label: { en: 'Blog Page Description', es: 'Descripción de la página de blog' },
+                      defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.blogDescription),
+                    },
+                    {
+                      name: 'readMoreLabel',
+                      type: 'text',
+                      required: true,
+                      label: { en: 'Read More Button Label', es: 'Etiqueta del botón Leer más' },
+                      localized: true,
+                      defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.readMoreLabel),
+                    },
+                    {
+                      name: 'relatedPostsLabel',
+                      type: 'text',
+                      required: true,
+                      label: { en: 'Related Posts Label', es: 'Etiqueta de publicaciones relacionadas' },
+                      localized: true,
+                      defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.siteSettings.blog.relatedPostsLabel),
+                    },
+                  ],
                 },
-              },
-            },
-            {
-              name: 'blogDescription',
-              type: 'textarea',
-              localized: true,
-              label: {
-                en: 'Blog Page Description',
-                es: 'Descripción de la página de blog',
-              },
-              defaultValue: createLocalizedDefault({
-                en: 'Blog page description',
-                es: 'Descripción de la página de blog',
-              }),
-              admin: {
-                description: {
-                  en: 'Used for meta description if not overridden',
-                  es: 'Usada para la descripción meta si no se sobreescribe',
+                {
+                  label: { en: 'SEO', es: 'SEO' },
+                  fields: [
+                    {
+                      name: 'blogMeta',
+                      type: 'group',
+                      label: false,
+                      fields: generateSeoFields(),
+                      localized: true,
+                    },
+                  ],
                 },
-              },
-            },
-            {
-              name: 'blogMeta',
-              type: 'group',
-              label: { en: 'Blog SEO', es: 'SEO del blog' },
-              fields: generateSeoFields(),
-              localized: true,
+              ],
             },
           ],
         },

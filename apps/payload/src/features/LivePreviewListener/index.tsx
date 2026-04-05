@@ -4,7 +4,7 @@ import { getClientSideURL } from '@/core/lib/getURL'
 import { RefreshRouteOnSave as PayloadLivePreview } from '@payloadcms/live-preview-react'
 import { useRouter, usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 export const LivePreviewListener: React.FC = () => {
   const router = useRouter()
@@ -45,8 +45,7 @@ export const LivePreviewListener: React.FC = () => {
     checkIframe()
   }, [])
 
-  const locale = useLocale()
-  const exitPreviewUrl = `/${locale}/next/exit-preview?path=${encodeURIComponent(pathname)}`
+  const exitPreviewUrl = `/next/exit-preview?path=${encodeURIComponent(pathname)}`
 
   return (
     <>

@@ -9,7 +9,6 @@ import { CardsGridBlockComponent } from './CardsGrid/Component'
 import { CarouselBlockComponent } from './Carousel/Component'
 import { LogosBlockComponent } from './Logos/Component'
 import { LinksListBlockComponent } from './LinksList/Component'
-import { BlogSectionBlockComponent } from './BlogSection/Component'
 
 const blockComponents = {
   hero: HeroBlockComponent,
@@ -21,7 +20,6 @@ const blockComponents = {
   carousel: CarouselBlockComponent,
   logos: LogosBlockComponent,
   linksList: LinksListBlockComponent,
-  blogSection: BlogSectionBlockComponent,
 }
 
 export const RenderBlocks: React.FC<{

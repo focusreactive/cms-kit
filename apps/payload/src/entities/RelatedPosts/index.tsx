@@ -8,11 +8,12 @@ import { cn } from '@/core/lib/utils'
 export type RelatedPostsProps = {
   className?: string
   docs?: Post[]
-  relatedPostsIntro?: string
+  relatedPostsLabel?: string | null
+  readMoreLabel?: string | null
 }
 
 export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
-  const { className, docs, relatedPostsIntro } = props
+  const { className, docs, relatedPostsLabel, readMoreLabel } = props
 
   if (!docs || docs.length === 0) {
     return null
@@ -20,11 +21,10 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
 
   return (
     <div className={cn('w-full', className)}>
-      <h2 className="text-2xl font-bold mb-6">
-        {relatedPostsIntro}
-      </h2>
-
-      <BlogPostsGrid posts={docs} />
+      {relatedPostsLabel && (
+        <h2 className="text-2xl font-bold mb-6">{relatedPostsLabel}</h2>
+      )}
+      <BlogPostsGrid posts={docs} readMoreLabel={readMoreLabel} />
     </div>
   )
 }

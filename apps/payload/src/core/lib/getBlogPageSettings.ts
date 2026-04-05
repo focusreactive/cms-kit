@@ -7,6 +7,8 @@ import { draftMode } from 'next/headers'
 export type BlogPageSettingsData = {
   blogTitle?: string | null
   blogDescription?: string | null
+  readMoreLabel?: string | null
+  relatedPostsLabel?: string | null
   blogMeta?: NonNullable<SiteSetting['blog']>['blogMeta']
 }
 
@@ -28,6 +30,8 @@ export const getBlogPageSettings = async ({
   return {
     blogTitle: settings?.blog?.blogTitle,
     blogDescription: settings?.blog?.blogDescription,
+    readMoreLabel: settings?.blog?.readMoreLabel,
+    relatedPostsLabel: settings?.blog?.relatedPostsLabel,
     blogMeta: settings?.blog?.blogMeta,
   }
 }

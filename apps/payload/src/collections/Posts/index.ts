@@ -8,11 +8,8 @@ import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
 import { generateSeoFields } from '@/core/lib/seoFields'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import { generateRichText } from '@/core/lib/generateRichText'
-import { buildUrl } from '@/core/lib/buildUrl'
-import {
-  createLocalizedDefault,
-  createLocalizedRichText,
-} from '@/core/lib/createLocalizedDefault'
+import { buildUrl } from '@/core/utils/path/buildUrl'
+import { createLocalizedDefault, createLocalizedRichText } from '@/core/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
 import { DEFAULT_VALUES } from '@/core/constants/defaultValues'
@@ -40,10 +37,9 @@ export const Posts: CollectionConfig<'posts'> = {
     slug: true,
     categories: true,
     authors: true,
-    meta: {
-      image: true,
-      description: true,
-    },
+    excerpt: true,
+    heroImage: true,
+    publishedAt: true,
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -52,14 +48,16 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     group: 'Blog',
     livePreview: {
-      url: ({ data, locale }) => {
+      url: ({ data, locale: localeProp }) => {
+        const locale = localeProp.code ?? localeProp.fallbackLocale
+
         return generatePreviewPath({
           slug: data?.slug,
           path: buildUrl({
             collection: 'posts',
             slug: data?.slug,
             absolute: false,
-            locale: locale.code ?? locale.fallbackLocale,
+            locale,
           }),
           collection: BLOG_CONFIG.collection,
         })
@@ -81,21 +79,32 @@ export const Posts: CollectionConfig<'posts'> = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-      label: {
-        en: 'Title',
-        es: 'Título',
-      },
-      localized: true,
-      defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.posts.title),
-    },
-    {
       type: 'tabs',
       tabs: [
         {
           fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              label: {
+                en: 'Title',
+                es: 'Título',
+              },
+              localized: true,
+              defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.posts.title),
+            },
+            {
+              name: 'excerpt',
+              type: 'textarea',
+              required: true,
+              label: {
+                en: 'Excerpt',
+                es: 'Extracto',
+              },
+              localized: true,
+              defaultValue: createLocalizedDefault(DEFAULT_VALUES.collections.posts.excerpt),
+            },
             {
               name: 'heroImage',
               type: 'upload',
@@ -126,66 +135,6 @@ export const Posts: CollectionConfig<'posts'> = {
           },
         },
         {
-          fields: [
-            {
-              name: 'relatedPostsIntro',
-              type: 'text',
-              required: true,
-              defaultValue: createLocalizedDefault(
-                DEFAULT_VALUES.collections.posts.relatedPostsIntro,
-              ),
-              admin: {
-                description: {
-                  en: 'Provide a short introduction for the related posts section',
-                  es: 'Proporciona una introducción corta para la sección de publicaciones relacionadas',
-                },
-              },
-              label: {
-                en: 'Related Posts',
-                es: 'Publicaciones relacionadas',
-              },
-              localized: true,
-            },
-            {
-              name: 'relatedPosts',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: BLOG_CONFIG.collection,
-              label: {
-                en: 'Related Posts',
-                es: 'Publicaciones relacionadas',
-              },
-            },
-            {
-              name: 'categories',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
-              relationTo: 'categories',
-              label: {
-                en: 'Categories',
-                es: 'Categorías',
-              },
-            },
-          ],
-          label: {
-            en: 'Meta',
-            es: 'Meta',
-          },
-        },
-        {
           name: 'meta',
           label: {
             en: 'SEO',
@@ -196,6 +145,7 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
+    createSharedSlugField('posts'),
     {
       name: 'publishedAt',
       index: true,
@@ -222,8 +172,23 @@ export const Posts: CollectionConfig<'posts'> = {
       },
     },
     {
+      name: 'categories',
+      type: 'relationship',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+      hasMany: true,
+      relationTo: 'categories',
+      label: {
+        en: 'Categories',
+        es: 'Categorías',
+      },
+    },
+    {
       name: 'authors',
       type: 'relationship',
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -234,7 +199,30 @@ export const Posts: CollectionConfig<'posts'> = {
         es: 'Autores',
       },
     },
-    createSharedSlugField('posts'),
+    {
+      name: 'relatedPosts',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+        description: {
+          en: 'Select up to 3 related posts. If fewer than 3 are selected, additional posts from the same categories will be shown automatically based on publish date.',
+          es: 'Selecciona hasta 3 publicaciones relacionadas. Si se seleccionan menos de 3, se mostrarán automáticamente publicaciones adicionales de las mismas categorías según la fecha de publicación.',
+        },
+      },
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_in: [id],
+          },
+        }
+      },
+      hasMany: true,
+      relationTo: BLOG_CONFIG.collection,
+      label: {
+        en: 'Related Posts',
+        es: 'Publicaciones relacionadas',
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidatePost],

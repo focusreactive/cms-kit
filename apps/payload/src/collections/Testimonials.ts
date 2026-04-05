@@ -68,6 +68,7 @@ export const Testimonials: CollectionConfig<'testimonials'> = {
         en: 'Review',
         es: 'Reseña',
       },
+      localized: true,
     },
     {
       name: 'rating',

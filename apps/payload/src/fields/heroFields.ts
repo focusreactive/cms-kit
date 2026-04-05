@@ -28,6 +28,7 @@ export const heroFields: Field[] = [
     type: 'richText',
     editor: generateRichText('hero'),
     label: { en: 'Rich Text', es: 'Texto enriquecido' },
+    localized: true,
     defaultValue: createLocalizedRichText(DEFAULT_VALUES.richText.text),
   },
   {
@@ -35,6 +36,7 @@ export const heroFields: Field[] = [
     type: 'array',
     label: { en: 'Actions', es: 'Acciones' },
     maxRows: 2,
+    localized: true,
     admin: {
       initCollapsed: true,
       components: {

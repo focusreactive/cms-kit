@@ -4,18 +4,7 @@ import { link } from '@/fields/link'
 import { createLocalizedDefault } from '@/core/lib/createLocalizedDefault'
 import { getDefaultMediaId } from '@/core/lib/getDefaultMediaId'
 import { PLATFORM_DEFAULT_MEDIA_SLOT } from '@/core/constants/mediaDefaults'
-import type { Locale } from '@/core/types'
 import { revalidateResourcesUsingFooter } from './hooks/revalidateResourcesUsingFooter'
-
-const footerNavGroup = (groupName: string, linkLabel: string) => ({
-  groupName,
-  links: [{ link: { type: 'custom' as const, url: '#', label: linkLabel, newTab: false } }],
-})
-
-const DEFAULT_FOOTER_NAV_ITEMS = {
-  en: [footerNavGroup('Group name', 'Link'), footerNavGroup('Group name', 'Link')],
-  es: [footerNavGroup('Nombre del grupo', 'Enlace'), footerNavGroup('Nombre del grupo', 'Enlace')],
-} satisfies Record<Locale, ReturnType<typeof footerNavGroup>[]>
 
 export const Footer: CollectionConfig<'footer'> = {
   slug: 'footer',
@@ -67,55 +56,70 @@ export const Footer: CollectionConfig<'footer'> = {
       defaultValue: async () => getDefaultMediaId(PLATFORM_DEFAULT_MEDIA_SLOT),
     },
     {
-      name: 'navItems',
+      name: 'links',
       type: 'array',
       localized: true,
       fields: [
-        {
-          name: 'groupName',
-          type: 'text',
-          required: true,
-          admin: {
-            description: {
-              en: 'Footer links group name',
-              es: 'Nombre del grupo de enlaces del footer',
+        link({
+          appearances: false,
+          overrides: {
+            admin: {
+              description: {
+                en: 'Link settings',
+                es: 'Configuración del enlace',
+              },
             },
           },
-          defaultValue: createLocalizedDefault({ en: 'Group name', es: 'Nombre del grupo' }),
-        },
-        {
-          name: 'links',
-          type: 'array',
-          required: true,
-          localized: true,
-          fields: [
-            link({
-              appearances: false,
-            }),
-          ],
-          minRows: 1,
-          maxRows: 10,
-          admin: {
-            description: {
-              en: 'Links in this group (up to 10 items)',
-              es: 'Enlaces en este grupo (hasta 10 items)',
-            },
-          },
-        },
+        }),
       ],
-      minRows: 2,
-      maxRows: 4,
+      minRows: 1,
+      maxRows: 10,
       admin: {
         description: {
-          en: 'Footer navigation link groups (2 to 4 groups)',
-          es: 'Grupos de enlaces de navegación del footer (2 a 4 grupos)',
+          en: 'Footer navigation links (up to 10 items)',
+          es: 'Enlaces de navegación del footer (hasta 10 items)',
         },
         initCollapsed: true,
         components: {
           RowLabel: '@/core/ui/components/RowLabel#RowLabelGroupName',
         },
       },
-      defaultValue: createLocalizedDefault(DEFAULT_FOOTER_NAV_ITEMS),
+      defaultValue: createLocalizedDefault({
+        en: [
+          { link: { type: 'custom', url: '#', label: 'Link', newTab: false } },
+          { link: { type: 'custom', url: '#', label: 'Link', newTab: false } },
+        ],
+        es: [
+          { link: { type: 'custom', url: '#', label: 'Enlace', newTab: false } },
+          { link: { type: 'custom', url: '#', label: 'Enlace', newTab: false } },
+        ],
+      }),
+    },
+    {
+      name: 'text',
+      type: 'richText',
+      localized: true,
+      admin: {
+        description: {
+          en: 'Footer body text',
+          es: 'Texto del footer',
+        },
+      },
+    },
+    {
+      name: 'copywriteText',
+      type: 'text',
+      localized: true,
+      admin: {
+        description: {
+          en: 'Copyright text shown at the bottom',
+          es: 'Texto de copyright al pie',
+        },
+      },
+      defaultValue: createLocalizedDefault({
+        en: '© 2025 All rights reserved',
+        es: '© 2025 Todos los derechos reservados',
+      }),
     },
   ],
   hooks: {

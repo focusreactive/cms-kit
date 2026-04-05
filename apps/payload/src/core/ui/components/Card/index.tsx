@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react'
-import { Link, Media } from '@/core/ui'
+import React from 'react'
+import { Link } from '@/core/ui'
 import { cn } from '@/core/lib/utils'
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { BLOG_CONFIG } from '@/core/config/blog'
 import type { CardPostData } from '@/core/types'
+import { Image } from '@shared/ui'
+import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
+import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -12,6 +15,7 @@ export const Card: React.FC<{
   basePath?: string
   showCategories?: boolean
   title?: string
+  readMoreLabel?: string
 }> = (props) => {
   const {
     className,
@@ -19,14 +23,13 @@ export const Card: React.FC<{
     basePath = BLOG_CONFIG.basePath,
     showCategories,
     title: titleFromProps,
+    readMoreLabel,
   } = props
 
-  const { slug, categories, meta, title, heroImage } = doc || {}
-  const { description } = meta || {}
+  const { slug, categories, excerpt, title, heroImage } = doc || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `${basePath}/${slug}`
 
   return (
@@ -40,7 +43,7 @@ export const Card: React.FC<{
         <div className="relative w-full">
           {!heroImage && (
             <div className="relative w-full aspect-[4/3]">
-              <Image
+              <NextImage
                 src="/empty-placeholder.jpg"
                 alt={`${titleToUse} - Placeholder image`}
                 fill
@@ -50,31 +53,29 @@ export const Card: React.FC<{
             </div>
           )}
           {heroImage && typeof heroImage !== 'number' && (
-            <Media
+            // eslint-disable-next-line jsx-a11y/alt-text
+            <Image
               fill
               priority
-              imgClassName="object-cover"
-              resource={heroImage}
-              className="w-full aspect-[4/3]"
+              className="object-cover"
+              {...prepareImageProps({ image: heroImage, aspectRatio: ImageAspectRatio['4/3'] })}
             />
           )}
         </div>
         <div className="p-4">
           {showCategories && hasCategories && (
-            <div className="uppercase text-sm mb-4">
+            <div className="flex gap-2 flex-wrap mb-3">
               {categories?.map((category, index) => {
                 if (typeof category === 'object') {
-                  const { title: titleFromCategory } = category
-
-                  const categoryTitle = titleFromCategory || 'Untitled category'
-
-                  const isLast = index === categories.length - 1
+                  const categoryTitle = category.title || 'Untitled category'
 
                   return (
-                    <Fragment key={index}>
+                    <span
+                      key={index}
+                      className="text-xs font-medium uppercase tracking-wide px-2 py-1 rounded-full bg-muted text-muted-foreground"
+                    >
                       {categoryTitle}
-                      {!isLast && <Fragment>, &nbsp;</Fragment>}
-                    </Fragment>
+                    </span>
                   )
                 }
 
@@ -82,13 +83,19 @@ export const Card: React.FC<{
               })}
             </div>
           )}
-          {titleToUse && (
-            <div className="prose">
-              <h3>{titleToUse}</h3>
+          {titleToUse && <h3 className="font-bold text-lg">{titleToUse}</h3>}
+          {excerpt && (
+            <div className="mt-2">
+              <p className="text-muted-foreground text-sm line-clamp-3">{excerpt}</p>
             </div>
           )}
-          {description && (
-            <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>
+          {readMoreLabel && (
+            <div className="mt-4">
+              <span className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                {readMoreLabel}
+                <span aria-hidden="true">&rsaquo;</span>
+              </span>
+            </div>
           )}
         </div>
       </article>

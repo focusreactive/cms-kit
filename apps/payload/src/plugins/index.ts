@@ -8,20 +8,28 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { superAdmin, or, authenticated, user } from '@/core/lib/access'
 import seoPlugin from './seoPlugin'
-import { preventDeleteIfPresetInUse } from '@/hooks/presets/preventDeleteIfPresetInUse'
-import { revalidatePagesAfterPresetChange } from '@/hooks/presets/revalidatePagesAfterPresetChange'
-import { revalidatePagesAfterPresetDelete } from '@/hooks/presets/revalidatePagesAfterPresetDelete'
-import { stripUnusedPresetGroups } from '@/hooks/presets/stripUnusedPresetGroups'
-import { PRESET_TYPES_CONFIG } from '@/core/constants/presets'
 import { presetsPlugin } from '@focus-reactive/payload-plugin-presets'
 import { abTestingPlugin } from '@focus-reactive/payload-plugin-ab'
 import { commentsPlugin } from '@focus-reactive/payload-plugin-comments'
 import { schedulePublicationPlugin } from '@focus-reactive/payload-plugin-scheduling'
+import {
+  translatorPlugin,
+  createOpenAIProvider,
+  createSyncRunner,
+} from '@focus-reactive/payload-plugin-translator'
 import { abAdapter } from '@/core/lib/abTesting/abAdapter'
 import type { ABVariantData } from '@/core/lib/abTesting/types'
+import { buildVariantData } from '@/core/lib/abTesting/buildVariantData'
 import { I18N_CONFIG } from '@/core/config/i18n'
 import { shouldIncludeLocalePrefix } from '@/core/lib/localePrefix'
 import { isDev } from '@/core/utils/isDev'
+import { Page as PageCollection } from '@/collections/Page/Page'
+import { Posts } from '@/collections/Posts'
+import { Categories } from '@/collections/Categories'
+import { Authors } from '@/collections/Authors'
+import { Testimonials } from '@/collections/Testimonials'
+import { Header } from '@/collections/Header/config'
+import { Footer } from '@/collections/Footer/config'
 
 export const plugins: Plugin[] = [
   vercelBlobStorage({
@@ -149,7 +157,6 @@ export const plugins: Plugin[] = [
       singular: { en: 'Preset', es: 'Preset' },
       plural: { en: 'Presets', es: 'Presets' },
     },
-    presetTypes: [PRESET_TYPES_CONFIG.hero, PRESET_TYPES_CONFIG.testimonialsList],
     overrides: {
       admin: {
         group: 'Settings',
@@ -161,13 +168,7 @@ export const plugins: Plugin[] = [
         read: authenticated,
         update: or(superAdmin, user),
       },
-      fields: (defaultFields) => defaultFields,
-      hooks: {
-        beforeChange: [stripUnusedPresetGroups],
-        afterChange: [revalidatePagesAfterPresetChange],
-        beforeDelete: [preventDeleteIfPresetInUse],
-        afterDelete: [revalidatePagesAfterPresetDelete],
-      },
+      fields: (defaultFields: Field[]) => defaultFields,
     },
   }),
 
@@ -206,13 +207,8 @@ export const plugins: Plugin[] = [
         failedToAdd: 'Error al añadir el comentario',
         unknownAuthor: 'Desconocido',
         deletedUser: 'Usuario eliminado',
-        noOpenComments: 'Sin comentarios abiertos',
-        noResolvedComments: 'Sin comentarios resueltos',
-        noMentionedComments: 'Sin comentarios que te mencionen',
-        filterOpen: 'Abiertos',
-        filterResolved: 'Resueltos',
-        filterMentioned: 'Me mencionan',
         noMentionMatches: 'Sin coincidencias',
+        loadingComments: 'Cargando comentarios...',
       },
     },
   }) as unknown as Plugin,
@@ -222,6 +218,21 @@ export const plugins: Plugin[] = [
     globals: ['site-settings'],
     secret: process.env.CRON_SECRET!,
   }) as unknown as Plugin,
+
+  translatorPlugin({
+    collections: [PageCollection, Posts, Categories, Authors, Testimonials, Header, Footer].map(
+      (col) =>
+        JSON.parse(JSON.stringify(col, (_, v) => (typeof v === 'function' ? undefined : v))),
+    ),
+    translationProvider: createOpenAIProvider({
+      apiKey: process.env.OPENAI_API_KEY!,
+      model: 'gpt-4o-mini',
+      systemPrompt: ({ defaultPrompt }) =>
+        `${defaultPrompt}\nUse formal language. Keep brand names unchanged.`,
+      dryRun: false,
+    }),
+    runner: createSyncRunner(),
+  }),
 
   abTestingPlugin<ABVariantData>({
     debug: isDev(),
@@ -239,6 +250,12 @@ export const plugins: Plugin[] = [
           return shouldIncludeLocalePrefix(resolvedLocale)
             ? `/${resolvedLocale}${restPath}`
             : restPath || '/'
+        },
+        generateVariantData: ({ variantDoc, locale }) => {
+          return buildVariantData(
+            variantDoc as unknown as Page & { _abPassPercentage?: number },
+            locale,
+          )
         },
       },
     },

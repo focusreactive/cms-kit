@@ -2,6 +2,7 @@ import type { Field, GroupField } from 'payload'
 
 import deepMerge from '@/core/lib/deepMerge'
 import { BLOG_CONFIG } from '@/core/config/blog'
+import { CUSTOM_PAGES_CONFIG, type CustomPageKey } from '@/core/config/customPages'
 import { Option } from 'payload'
 
 export type LinkAppearances = 'default' | 'outline'
@@ -64,6 +65,13 @@ export const link: LinkType = ({ appearances, disableLabel = false, required = t
                 },
                 value: 'custom',
               },
+              {
+                label: {
+                  en: 'Custom Page',
+                  es: 'Página personalizada',
+                },
+                value: 'customPage',
+              },
             ],
           },
           {
@@ -111,6 +119,22 @@ export const link: LinkType = ({ appearances, disableLabel = false, required = t
       },
       required,
     },
+    {
+      name: 'customPage',
+      type: 'select',
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'customPage',
+      },
+      label: {
+        en: 'Custom Page',
+        es: 'Página personalizada',
+      },
+      options: Object.entries(CUSTOM_PAGES_CONFIG).map(([key, entry]) => ({
+        value: key as CustomPageKey,
+        label: entry.label,
+      })),
+      required,
+    },
   ]
 
   if (!disableLabel) {
@@ -137,6 +161,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, required = t
             es: 'Etiqueta',
           },
           required,
+          localized: true,
         },
       ],
     })
