@@ -3,14 +3,14 @@ import type { PayloadRequest } from 'payload'
 import { resolvePath } from '../../utils/resolvePath'
 import { buildContent } from './buildContent'
 import { buildFieldContent } from './buildFieldContent'
+import { Locale } from '@/core/types'
 
 export interface DocumentFabricOptions {
   collection: string
   titleField?: string
   skipKeys?: string[]
-  richTextPreviewLength?: number
-  buildUrl?: (doc: Record<string, unknown>) => string | null
-  knownCollectionPascals?: Set<string>
+  buildUrl?: (doc: Record<string, unknown>, locale?: Locale) => string | null
+  knownCollections?: Set<string>
 }
 
 const SKIP_KEYS = new Set(['blockType', 'blockName', 'url', 'locale', 'createdAt', 'updatedAt'])
@@ -26,7 +26,7 @@ async function getDocument(
   collection: string,
   id: string,
   req: PayloadRequest,
-  locale?: string,
+  locale?: Locale,
   full?: boolean,
 ): Promise<Record<string, unknown>> {
   return req.payload.findByID({
@@ -36,8 +36,7 @@ async function getDocument(
     overrideAccess: false,
     req,
     depth: full ? 2 : 1,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...(locale ? { locale: locale as any } : {}),
+    locale,
   }) as unknown as Promise<Record<string, unknown>>
 }
 
@@ -52,14 +51,11 @@ type McpTool = {
 }
 
 export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, McpTool] {
-  const {
-    collection,
-    buildUrl,
-    skipKeys: extraSkipKeys,
-    titleField,
-    knownCollectionPascals,
-  } = options
+  const { collection, buildUrl, skipKeys: extraSkipKeys, titleField, knownCollections } = options
   const collectionPascal = toPascalCase(collection)
+  const knownCollectionPascals = knownCollections
+    ? new Set([...knownCollections].map(toPascalCase))
+    : undefined
   const effectiveSkipKeys = new Set([...SKIP_KEYS, ...(extraSkipKeys ?? [])])
 
   const parameters = {
@@ -83,7 +79,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
     handler: async (args, req) => {
       const { id, locale, full } = args as {
         id: string
-        locale?: string
+        locale?: Locale
         full?: boolean
       }
       const doc = await getDocument(collection, id, req, locale, full)
@@ -98,6 +94,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         buildUrl,
         knownCollectionPascals,
         full,
+        locale,
       )
 
       return { content }
@@ -118,7 +115,7 @@ export function getDocumentFabric(options: DocumentFabricOptions): [McpTool, Mcp
         .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
     },
     handler: async (args, req) => {
-      const { id, fieldPath, locale } = args as { id: string; fieldPath: string; locale?: string }
+      const { id, fieldPath, locale } = args as { id: string; fieldPath: string; locale?: Locale }
       const doc = await getDocument(collection, id, req, locale)
 
       const resolved = resolvePath(doc, fieldPath)

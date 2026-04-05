@@ -4,6 +4,7 @@ import { formatDocument } from '../../utils/markdown/formatDocument'
 import { resolveTitleField } from '../../utils/resolveTitleField'
 import { extractFields } from '../../utils/field/extractFields'
 import { buildLabelMaps } from '../../utils/field/buildLabelMaps'
+import { Locale } from '@/core/types'
 
 export type ContentBlock = {
   type: 'text'
@@ -20,16 +21,19 @@ export function buildContent(
   collection: string,
   titleField: string | undefined,
   payload: Payload,
-  buildUrl?: (doc: Record<string, unknown>) => string | null,
+  buildUrl?: (doc: Record<string, unknown>, locale?: Locale) => string | null,
   knownCollectionPascals?: Set<string>,
   full?: boolean,
+  locale?: Locale,
 ): ContentBlock[] {
   const title = resolveTitleField(doc, titleField)
   const titleIsId = titleField === 'id' || !titleField
 
-  const url = buildUrl ? buildUrl(doc) : null
+  const url = buildUrl ? buildUrl(doc, locale) : null
   const adminUrl =
-    doc.id && collection ? `${getServerSideURL()}/admin/collections/${collection}/${doc.id}` : null
+    doc.id && collection
+      ? `${getServerSideURL()}/admin/collections/${collection}/${doc.id}${locale ? `?locale=${locale}` : ''}`
+      : null
 
   const extractedDoc = extractFields(doc, skipKeys)
 

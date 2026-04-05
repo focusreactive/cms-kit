@@ -45,17 +45,17 @@ function isLocalDevMcpRequest(req: PayloadRequest) {
   }
 }
 
-const KNOWN_COLLECTION_PASCALS = new Set(['Page', 'Posts', 'Header', 'Footer'])
+const KNOWN_COLLECTIONS = new Set(['page', 'posts', 'header', 'footer'])
 
 // Get tools
 const [getPageContent, getPageField] = getDocumentFabric({
   collection: 'page',
   titleField: 'title',
-  buildUrl: (doc) =>
+  buildUrl: (doc, locale) =>
     buildUrl({
       collection: 'page',
       breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
-      locale: 'en',
+      locale: locale ?? 'en',
     }),
   skipKeys: [
     'id',
@@ -66,20 +66,32 @@ const [getPageContent, getPageField] = getDocumentFabric({
     '_abVariantOf',
     '_abVariantPercentages',
   ],
-  richTextPreviewLength: 300,
-  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
+  knownCollections: KNOWN_COLLECTIONS,
 })
 const [getPostsContent, getPostsField] = getDocumentFabric({
   collection: 'posts',
-  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
+  titleField: 'title',
+  buildUrl: (doc, locale) =>
+    buildUrl({
+      collection: 'posts',
+      slug: doc?.slug as string,
+      absolute: false,
+      locale: locale ?? 'en',
+    }),
+  skipKeys: ['id'],
+  knownCollections: KNOWN_COLLECTIONS,
 })
 const [getHeaderContent, getHeaderField] = getDocumentFabric({
   collection: 'header',
-  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
+  titleField: 'name',
+  skipKeys: ['id'],
+  knownCollections: KNOWN_COLLECTIONS,
 })
 const [getFooterContent, getFooterField] = getDocumentFabric({
   collection: 'footer',
-  knownCollectionPascals: KNOWN_COLLECTION_PASCALS,
+  titleField: 'name',
+  skipKeys: ['id'],
+  knownCollections: KNOWN_COLLECTIONS,
 })
 
 export const mcpPluginConfig = mcpPlugin({
@@ -138,11 +150,11 @@ export const mcpPluginConfig = mcpPlugin({
         collection: 'page',
         tableFields: ['id', 'title', 'slug', '_status'],
         titleField: 'title',
-        buildUrl: (doc) =>
+        buildUrl: (doc, locale) =>
           buildUrl({
             collection: 'page',
             breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
-            locale: 'en',
+            locale: locale ?? 'en',
           }),
       }),
       getPostsContent,

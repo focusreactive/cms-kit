@@ -5,6 +5,7 @@ import { buildLabelMaps } from '../../utils/field/buildLabelMaps'
 import { isScalar } from '../../utils/field/is'
 import { formatDocument } from '../../utils/markdown/formatDocument'
 import { resolveTitleField } from '../../utils/resolveTitleField'
+import { Locale } from '@/core/types'
 
 type McpTool = {
   name: string
@@ -20,7 +21,7 @@ export interface GetAllDocumentsFabricOptions {
   collection: string
   tableFields: string[]
   titleField?: string
-  buildUrl?: (doc: Record<string, unknown>) => string | null
+  buildUrl?: (doc: Record<string, unknown>, locale?: Locale) => string | null
 }
 
 function toPascalCase(collection: string) {
@@ -90,6 +91,10 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
     parameters: {
       limit: z.number().optional().describe('Max documents to return (default 10)'),
       page: z.number().optional().describe('Page number for pagination'),
+      locale: z
+        .string()
+        .optional()
+        .describe('Locale code, e.g. "en" or "es". Omit to use the default locale.'),
       where: z
         .string()
         .optional()
@@ -98,9 +103,10 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
         ),
     },
     handler: async (args, req) => {
-      const { limit, page, where } = args as {
+      const { limit, page, locale, where } = args as {
         limit?: number
         page?: number
+        locale?: Locale
         where?: string
       }
 
@@ -125,6 +131,7 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
         overrideAccess: false,
         req,
         depth: 0,
+        locale,
       })
 
       const { docs, totalDocs, page: currentPage, limit: effectiveLimit } = result
@@ -135,9 +142,9 @@ export function getAllDocumentsFabric(options: GetAllDocumentsFabricOptions): Mc
         const raw = doc as Record<string, unknown>
 
         const adminUrl = raw.id
-          ? `${getServerSideURL()}/admin/collections/${collection}/${raw.id}`
+          ? `${getServerSideURL()}/admin/collections/${collection}/${raw.id}${locale ? `?locale=${locale}` : ''}`
           : ''
-        const url = buildUrl ? (buildUrl(raw) ?? '') : undefined
+        const url = buildUrl ? (buildUrl(raw, locale) ?? '') : undefined
 
         return formatDocument({
           id: raw.id as string,
