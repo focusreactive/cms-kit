@@ -29,8 +29,6 @@ export async function Footer({ data }: Props) {
       sectionData={{
         paddingY: 'base',
         paddingX: 'base',
-        marginTop: 'base',
-        marginBottom: 'none',
         theme: undefined,
       }}
     >

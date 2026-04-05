@@ -28,8 +28,6 @@ export async function Header({ data }: Props) {
       sectionData={{
         paddingY: 'none',
         paddingX: 'none',
-        marginTop: 'none',
-        marginBottom: 'none',
         theme: undefined,
       }}
       className="sticky left-0 top-0 z-50 rounded-t-none overflow-x-visible!"

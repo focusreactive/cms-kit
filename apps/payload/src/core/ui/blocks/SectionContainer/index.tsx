@@ -8,8 +8,8 @@ export type SectionData = {
   id?: string | null
   theme?: 'light' | 'dark' | 'light-gray' | 'dark-gray' | null
   paddingY?: 'none' | 'base' | 'large' | null
-  paddingX: 'none' | 'base' | null
-  maxWidth: 'none' | 'base' | 'full' | null
+  paddingX?: 'none' | 'base' | null
+  maxWidth?: 'none' | 'base' | 'full' | null
   background?: {
     media?: MediaType | number | null
     overlay?: 'black' | 'white' | null
