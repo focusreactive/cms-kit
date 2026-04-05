@@ -8,6 +8,7 @@ import * as migration_20260318_022640_create_comments from './20260318_022640_cr
 import * as migration_20260318_140943_add_section_group_to_blocks from './20260318_140943_add_section_group_to_blocks';
 import * as migration_20260319_100637_add_image_fields from './20260319_100637_add_image_fields';
 import * as migration_20260319_103151_remove_section_fields_from_blog_section from './20260319_103151_remove_section_fields_from_blog_section';
+import * as migration_20260405_071430_refactor_section_fields from './20260405_071430_refactor_section_fields';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20260319_103151_remove_section_fields_from_blog_section.up,
     down: migration_20260319_103151_remove_section_fields_from_blog_section.down,
-    name: '20260319_103151_remove_section_fields_from_blog_section'
+    name: '20260319_103151_remove_section_fields_from_blog_section',
+  },
+  {
+    up: migration_20260405_071430_refactor_section_fields.up,
+    down: migration_20260405_071430_refactor_section_fields.down,
+    name: '20260405_071430_refactor_section_fields'
   },
 ];

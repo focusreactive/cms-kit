@@ -12,13 +12,13 @@
   --color-primary2LightColor: var(--primary-2-light);
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
+  --spacing-containerBase: var(--container-padding-base);
 }
 
 :root {
-  --section-margin-base: 24px;
-  --section-margin-large: 72px;
-  --section-padding-base: 16px;
-  --section-padding-large: 72px;
+  --section-margin-base: 96px;
+  --section-margin-large: 120px;
+  --container-padding-base: 40px;
 }
 
 .light {
@@ -42,10 +42,15 @@
 }
 
 .testimonials-carousel-group {
-  animation: testimonials-carousel-scrolling var(--testimonials-carousel-duration, 60s) linear infinite;
+  animation: testimonials-carousel-scrolling var(--testimonials-carousel-duration, 60s) linear
+    infinite;
 }
 
 @keyframes testimonials-carousel-scrolling {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

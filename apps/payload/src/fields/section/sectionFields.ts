@@ -17,20 +17,9 @@ export const sectionFields: GroupField = {
       ],
     },
     {
-      name: 'marginTop',
+      name: 'paddingY',
       type: 'select',
-      label: { en: 'Margin Top', es: 'Margen Superior' },
-      defaultValue: 'base',
-      options: [
-        { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
-        { label: { en: 'Base', es: 'Base' }, value: 'base' },
-        { label: { en: 'Large', es: 'Grande' }, value: 'large' },
-      ],
-    },
-    {
-      name: 'marginBottom',
-      type: 'select',
-      label: { en: 'Margin Bottom', es: 'Margen Inferior' },
+      label: { en: 'Padding Y', es: 'Relleno Vertical' },
       defaultValue: 'base',
       options: [
         { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
@@ -46,18 +35,6 @@ export const sectionFields: GroupField = {
       options: [
         { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
         { label: { en: 'Base', es: 'Base' }, value: 'base' },
-        { label: { en: 'Large', es: 'Grande' }, value: 'large' },
-      ],
-    },
-    {
-      name: 'paddingY',
-      type: 'select',
-      label: { en: 'Padding Y', es: 'Relleno Vertical' },
-      defaultValue: 'base',
-      options: [
-        { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
-        { label: { en: 'Base', es: 'Base' }, value: 'base' },
-        { label: { en: 'Large', es: 'Grande' }, value: 'large' },
       ],
     },
     {
@@ -68,14 +45,67 @@ export const sectionFields: GroupField = {
       options: [
         { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
         { label: { en: 'Base', es: 'Base' }, value: 'base' },
-        { label: { en: 'Small', es: 'Pequeño' }, value: 'small' },
+        { label: { en: 'Full', es: 'Completo' }, value: 'full' },
       ],
     },
     {
-      name: 'backgroundImage',
-      type: 'upload',
-      relationTo: 'media',
-      label: { en: 'Background Image', es: 'Imagen de Fondo' },
+      name: 'background',
+      type: 'group',
+      label: { en: 'Background', es: 'Fondo' },
+      fields: [
+        {
+          name: 'media',
+          type: 'upload',
+          relationTo: 'media',
+          label: { en: 'Background (Image or Video)', es: 'Fondo (Imagen o Video)' },
+          filterOptions: () => ({
+            'folder.name': {
+              equals: 'Background',
+            },
+          }),
+          admin: {
+            description: {
+              en: 'Upload an image or video. Use the "Background" folder.',
+              es: 'Sube una imagen o video. Usa la carpeta "Background".',
+            },
+          },
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'overlay',
+              type: 'select',
+              dbName: 'sec_bg_ovrly',
+              label: { en: 'Overlay Color', es: 'Color de Capa' },
+              options: [
+                { label: { en: 'Black', es: 'Negro' }, value: 'black' },
+                { label: { en: 'White', es: 'Blanco' }, value: 'white' },
+              ],
+              admin: {
+                width: '50%',
+                condition: (_, siblingData) => !!siblingData?.media,
+              },
+            },
+            {
+              name: 'opacity',
+              type: 'number',
+              label: { en: 'Overlay Opacity (%)', es: 'Opacidad de Capa (%)' },
+              min: 0,
+              max: 100,
+              defaultValue: 35,
+              admin: {
+                width: '50%',
+                condition: (_, siblingData) => !!siblingData?.overlay,
+                description: {
+                  en: '0 = transparent, 100 = fully opaque',
+                  es: '0 = transparente, 100 = completamente opaco',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
   ],
 }
