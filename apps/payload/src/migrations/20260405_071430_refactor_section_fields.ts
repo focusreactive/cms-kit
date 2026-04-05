@@ -1,6 +1,47 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  // Migrate existing data before changing enums
+  await db.execute(sql`
+    UPDATE "page_blocks_hero" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_text_section" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_content" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_faq" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_testimonials_list" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_cards_grid" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_carousel" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_logos" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "page_blocks_links_list" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_hero" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_text_section" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_content" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_faq" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_testimonials_list" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_cards_grid" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_carousel" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_logos" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+    UPDATE "_page_v_blocks_links_list" SET "section_padding_x" = 'base' WHERE "section_padding_x" = 'large';
+
+    UPDATE "page_blocks_hero" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_text_section" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_content" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_faq" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_testimonials_list" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_cards_grid" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_carousel" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_logos" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "page_blocks_links_list" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_hero" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_text_section" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_content" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_faq" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_testimonials_list" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_cards_grid" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_carousel" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_logos" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+    UPDATE "_page_v_blocks_links_list" SET "section_max_width" = 'base' WHERE "section_max_width" = 'small';
+  `);
+
   await db.execute(sql`
    CREATE TYPE "public"."sec_bg_ovrly" AS ENUM('black', 'white');
   ALTER TABLE "page_blocks_hero" DROP CONSTRAINT "page_blocks_hero_section_background_image_id_media_id_fk";
