@@ -2,93 +2,138 @@ import type { PayloadRequest } from 'payload'
 import { z } from 'zod'
 import { resolveSource } from './resolveSource'
 
-interface Args {
+interface UploadedEntry {
+  id: string | number
+  url?: string | null
+  filename?: string | null
+  source: string
+}
+interface FailedEntry {
+  source: string
+  error: string
+}
+
+interface ImageInput {
   source: string
   alt: string
   filename?: string
 }
 
+interface Args {
+  images: ImageInput[]
+}
+
 export const uploadImage = {
   name: 'uploadImage',
   description:
-    'Upload an image to the media library from a local file path (dev only) or a remote URL. ' +
+    'Upload one or more images to the media library from local file paths (dev only) or remote URLs. ' +
     'Call this tool BEFORE any create/update operation that requires a media relationship field. ' +
-    'Pass the returned `id` as the value of that field in the subsequent create/update call. ' +
-    'Always derive `alt` from the visible or described image content — never copy the filename.',
+    'Pass the returned `id` values as the value of those fields in subsequent create/update calls. ' +
+    'Always derive `alt` from the visible or described image content — never copy the filename. ' +
+    'Uploads are processed concurrently (up to 3 at a time). ' +
+    'Partial failures are tolerated — check the `failed` array in the response.',
   parameters: {
-    source: z
-      .string()
-      .describe(
-        'Absolute local file path (development only) or http(s):// URL of the image to upload.',
-      ),
-    alt: z
-      .string()
-      .describe(
-        'Concise description of the image content, e.g. "A mountain range at sunset with orange sky". Derive from what is visible — never copy the filename.',
-      ),
-    filename: z
-      .string()
-      .optional()
-      .describe(
-        'Override for the stored filename including extension, e.g. "mountain-sunset.jpg". Auto-derived from the source path or URL basename if omitted.',
-      ),
+    images: z
+      .array(
+        z.object({
+          source: z
+            .string()
+            .describe(
+              'Absolute local file path (development only) or http(s):// URL of the image to upload.',
+            ),
+          alt: z
+            .string()
+            .describe(
+              'Concise description of the image content. Derive from what is visible — never copy the filename.',
+            ),
+          filename: z
+            .string()
+            .optional()
+            .describe(
+              'Override for the stored filename including extension. Auto-derived from source if omitted.',
+            ),
+        }),
+      )
+      .min(1)
+      .describe('List of images to upload.'),
   } satisfies z.ZodRawShape,
-  handler: async ({ source, alt, filename: filenameOverride }: Args, req: PayloadRequest) => {
-    let buffer: Buffer
-    let mimeType: string
-    let filename: string
+  handler: async ({ images }: Args, req: PayloadRequest) => {
+    let running = 0
+    const uploadQueue: Array<() => void> = []
 
-    try {
-      ;({ buffer, mimeType, filename } = await resolveSource(source, filenameOverride))
-    } catch (e) {
-      return {
-        content: [
-          {
-            type: 'text',
-            text: JSON.stringify({ error: e instanceof Error ? e.message : String(e) }),
-          },
-        ],
-        isError: true,
-      }
-    }
-
-    const file = {
-      data: buffer,
-      mimetype: mimeType,
-      name: filename,
-      size: buffer.length,
-    }
-
-    try {
-      const result = await req.payload.create({
-        collection: 'media',
-        data: { alt },
-        file,
-        overrideAccess: true,
+    const subscribeToUpload = (): Promise<void> => {
+      return new Promise((resolve) => {
+        if (running < 3) {
+          running++
+          resolve()
+        } else {
+          uploadQueue.push(() => {
+            running++
+            resolve()
+          })
+        }
       })
+    }
 
-      return {
-        content: [
-          {
-            type: 'text',
-            text: JSON.stringify({
-              id: result.id,
-              url: result.url,
-              filename: result.filename,
-            }),
-          },
-        ],
-      }
-    } catch (e) {
-      return {
-        content: [
-          {
-            type: 'text',
-            text: JSON.stringify({ error: e instanceof Error ? e.message : String(e) }),
-          },
-        ],
-        isError: true,
-      }
+    const uploadNext = () => {
+      running--
+
+      const next = uploadQueue.shift()
+
+      next?.()
+    }
+
+    const uploaded: UploadedEntry[] = []
+    const failed: FailedEntry[] = []
+
+    await Promise.all(
+      images.map(async ({ source, alt, filename: filenameOverride }) => {
+        await subscribeToUpload()
+
+        try {
+          const { buffer, mimeType, filename } = await resolveSource(source, filenameOverride)
+
+          const file = {
+            data: buffer,
+            mimetype: mimeType,
+            name: filename,
+            size: buffer.length,
+          }
+
+          const result = await req.payload.create({
+            collection: 'media',
+            data: { alt },
+            file,
+            overrideAccess: true,
+          })
+
+          uploaded.push({
+            id: result.id,
+            url: result.url,
+            filename: result.filename,
+            source,
+          })
+        } catch (e) {
+          failed.push({
+            source,
+            error: e instanceof Error ? e.message : String(e),
+          })
+        } finally {
+          uploadNext()
+        }
+      }),
+    )
+
+    const allFailed = uploaded.length === 0 && failed.length > 0
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: JSON.stringify({ uploaded, failed }),
+        },
+      ],
+      ...(allFailed ? { isError: true } : null),
     }
   },
 }

@@ -1578,7 +1578,7 @@ export interface PayloadMcpApiKey {
      */
     getAllFooter?: boolean | null;
     /**
-     * Upload an image to the media library from a local file path (dev only) or a remote URL. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` as the value of that field in the subsequent create/update call. Always derive `alt` from the visible or described image content — never copy the filename.
+     * Upload one or more images to the media library from local file paths (dev only) or remote URLs. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` values as the value of those fields in subsequent create/update calls. Always derive `alt` from the visible or described image content — never copy the filename. Uploads are processed concurrently (up to 3 at a time). Partial failures are tolerated — check the `failed` array in the response.
      */
     uploadImage?: boolean | null;
   };
