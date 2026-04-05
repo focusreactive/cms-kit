@@ -1,18 +1,21 @@
-import type { SectionHero } from "@/generated/extracted-types";
-
 interface ISectionData {
   _key: string;
-  paddingX?: "none" | "base" | "large";
-  paddingY?: "none" | "base" | "large";
-  marginTop?: "none" | "base" | "large";
-  marginBottom?: "none" | "base" | "large";
-  maxWidth?: SectionHero["maxWidth"];
-  backgroundImage?: SectionHero["backgroundImage"];
-  theme?: SectionHero["theme"];
+  theme?: "light" | "dark" | "light-gray" | "dark-gray" | null;
+  paddingY?: "none" | "base" | "large" | null;
+  paddingX?: "none" | "base" | null;
+  maxWidth?: "none" | "base" | "full" | null;
+  background?: {
+    type?: "image" | "video";
+    image?: { asset?: { _ref: string } };
+    video?: { asset?: { _ref: string } };
+    overlay?: "black" | "white";
+    opacity?: number;
+  };
 }
 
 export interface ISectionContainerProps {
   children: React.ReactNode[] | React.ReactNode;
   className?: string;
+  containerClassName?: string;
   sectionData: ISectionData;
 }

@@ -10,14 +10,13 @@
   --color-primaryLightColor: var(--primary-light);
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
+  --spacing-containerBase: var(--container-padding-base);
 }
 
 :root {
-  --section-margin-base: 24px;
-  --section-margin-large: 72px;
-
-  --section-padding-base: 16px;
-  --section-padding-large: 72px;
+  --section-margin-base: 96px;
+  --section-margin-large: 120px;
+  --container-padding-base: 40px;
 }
 
 .light {

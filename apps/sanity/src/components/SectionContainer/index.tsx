@@ -1,74 +1,84 @@
 import { stegaClean } from "@sanity/client/stega";
-import imageUrlBuilder from "@sanity/image-url";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@shared/ui";
 
-import { client } from "@/lib/api/client";
+import { Media } from "@/components/Media";
+import Container from "@/components/Container";
 
 import type { ISectionContainerProps } from "./types";
 
-const builder = imageUrlBuilder(client);
+const sectionVariants = cva("overflow-clip relative z-1", {
+  variants: {
+    paddingY: {
+      none: "py-0",
+      base: "py-sectionBase",
+      large: "py-sectionLarge",
+    },
+  },
+  defaultVariants: {
+    paddingY: "base",
+  },
+});
 
 export default function SectionContainer({
   children,
   className,
+  containerClassName,
   sectionData,
 }: ISectionContainerProps) {
-  const {
-    _key,
-    marginTop,
-    marginBottom,
-    paddingX,
-    paddingY,
-    maxWidth,
-    theme,
-    backgroundImage,
-  } = sectionData;
+  const { _key, theme, paddingY, paddingX, maxWidth, background } =
+    sectionData;
 
-  const backgroundImageUrl = backgroundImage
-    ? builder.image(backgroundImage).auto("format").fit("max").url()
-    : null;
-  const style = backgroundImageUrl
-    ? {
-        background: `url(${backgroundImageUrl}) no-repeat center/cover`,
-      }
-    : {};
-
-  const cleanMarginTop = stegaClean(marginTop);
-  const cleanMarginBottom = stegaClean(marginBottom);
-  const cleanPaddingX = stegaClean(paddingX);
-  const cleanPaddingY = stegaClean(paddingY);
   const cleanTheme = stegaClean(theme);
-  const cleanMaxWidth = stegaClean(maxWidth);
+  const cleanPaddingY = stegaClean(paddingY);
+
+  const overlayOpacity =
+    background?.opacity != null ? background.opacity / 100 : undefined;
 
   return (
     <section
       id={_key}
-      className={cn("overflow-x-hidden", className, cleanTheme, {
-        "bg-bgColor": !!cleanTheme,
-        "mt-0": cleanMarginTop === "none",
-        "mb-0": cleanMarginBottom === "none",
-        "mt-sectionBase": cleanMarginTop === "base",
-        "mb-sectionBase": cleanMarginBottom === "base",
-        "mt-sectionLarge": cleanMarginTop === "large",
-        "mb-sectionLarge": cleanMarginBottom === "large",
-      })}
-      style={style}
+      className={cn(
+        sectionVariants({
+          paddingY: cleanPaddingY,
+        }),
+        className,
+      )}
+      {...(cleanTheme ? { "data-theme": cleanTheme } : {})}
     >
-      <div
-        className={cn("mx-auto px-4 py-8", {
-          "px-0": cleanPaddingX === "none",
-          "py-0": cleanPaddingY === "none",
-          "px-sectionBase": cleanPaddingX === "base",
-          "py-sectionBase": cleanPaddingY === "base",
-          "px-sectionLarge": cleanPaddingX === "large",
-          "py-sectionLarge": cleanPaddingY === "large",
-          "max-w-screen-xl": cleanMaxWidth === "base",
-          "max-w-screen-sm": cleanMaxWidth === "small",
-        })}
+      <Container
+        containerData={{
+          paddingX: stegaClean(paddingX),
+          maxWidth: stegaClean(maxWidth),
+        }}
+        className={containerClassName}
       >
         {children}
-      </div>
+      </Container>
+
+      {background && (
+        <>
+          <Media
+            background={background}
+            aria-hidden
+            className="absolute inset-0 size-full -z-2"
+            imgClassName="size-full object-cover pointer-events-none"
+            videoClassName="size-full object-cover pointer-events-none"
+            fill
+          />
+
+          {background.overlay && (
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-1 pointer-events-none"
+              style={{
+                backgroundColor: `rgba(${stegaClean(background.overlay) === "black" ? "0,0,0" : "255,255,255"},${overlayOpacity})`,
+              }}
+            />
+          )}
+        </>
+      )}
     </section>
   );
 }
