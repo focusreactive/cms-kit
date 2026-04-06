@@ -1,7 +1,7 @@
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import type { Pool } from 'pg'
 import type { Page } from '@/payload-types'
-import { extractPageText } from '@/search/extractText'
+import { extractPageText } from '@/collections/Page/extractPageText'
 import { generateEmbedding } from '@/search/generateEmbedding'
 import { upsertEmbedding, deleteEmbedding } from '@/search/dbOperations'
 import { buildUrl } from '@/core/utils/path/buildUrl'
@@ -70,7 +70,6 @@ export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc,
 export const deletePageEmbedding: CollectionAfterDeleteHook<Page> = async ({ doc, req }) => {
   try {
     const pool = (req.payload.db as unknown as { pool: Pool }).pool
-
     await deleteEmbedding({ pool, documentId: String(doc.id), collection: 'page' })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to delete page embedding')

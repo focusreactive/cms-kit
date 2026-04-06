@@ -1,7 +1,7 @@
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import type { Pool } from 'pg'
 import type { Post, Media } from '@/payload-types'
-import { extractPostText } from '@/search/extractText'
+import { extractPostText } from '@/collections/Posts/extractPostText'
 import { generateEmbedding } from '@/search/generateEmbedding'
 import { upsertEmbedding, deleteEmbedding } from '@/search/dbOperations'
 import { buildUrl } from '@/core/utils/path/buildUrl'
@@ -49,7 +49,6 @@ export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc,
 export const deletePostEmbedding: CollectionAfterDeleteHook<Post> = async ({ doc, req }) => {
   try {
     const pool = (req.payload.db as unknown as { pool: Pool }).pool
-
     await deleteEmbedding({ pool, documentId: String(doc.id), collection: 'post' })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to delete post embedding')
