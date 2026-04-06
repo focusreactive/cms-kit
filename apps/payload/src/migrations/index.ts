@@ -18,6 +18,7 @@ import * as migration_20260329_153412_add_presets_to_all_blocks from './20260329
 import * as migration_20260401_110755_sync_migra from './20260401_110755_sync_migra';
 import * as migration_20260406_083656_create_document_embeddings from './20260406_083656_create_document_embeddings';
 import * as migration_20260406_122500_add_document_embeddings_unique_constraint from './20260406_122500_add_document_embeddings_unique_constraint';
+import * as migration_20260406_210202_drop_fts_content from './20260406_210202_drop_fts_content';
 
 export const migrations = [
   {
@@ -113,11 +114,16 @@ export const migrations = [
   {
     up: migration_20260406_083656_create_document_embeddings.up,
     down: migration_20260406_083656_create_document_embeddings.down,
-    name: '20260406_083656_create_document_embeddings'
+    name: '20260406_083656_create_document_embeddings',
   },
   {
     up: migration_20260406_122500_add_document_embeddings_unique_constraint.up,
     down: migration_20260406_122500_add_document_embeddings_unique_constraint.down,
-    name: '20260406_122500_add_document_embeddings_unique_constraint'
+    name: '20260406_122500_add_document_embeddings_unique_constraint',
+  },
+  {
+    up: migration_20260406_210202_drop_fts_content.up,
+    down: migration_20260406_210202_drop_fts_content.down,
+    name: '20260406_210202_drop_fts_content'
   },
 ];

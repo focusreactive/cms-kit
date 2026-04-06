@@ -38,7 +38,7 @@ export async function search({ query, locale }: Params): Promise<Response> {
       getPayload({ config: configPromise }),
     ])
 
-    const pool = (payload.db as unknown as { pool: Pool }).pool
+    const pool = payload.db.pool as unknown as Pool
     const items = await runSemanticSearch({ pool, embedding, locale })
     const groups = groupResultsByCollection(items)
 
