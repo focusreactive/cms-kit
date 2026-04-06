@@ -34,7 +34,6 @@ export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc,
       url,
       imageUrl: null,
       imageAlt: null,
-      ftsContent: text,
     })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to index page embedding')

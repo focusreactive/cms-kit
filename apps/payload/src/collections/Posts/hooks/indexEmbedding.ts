@@ -38,7 +38,6 @@ export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc,
       url,
       imageUrl,
       imageAlt,
-      ftsContent: text,
     })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to index post embedding')

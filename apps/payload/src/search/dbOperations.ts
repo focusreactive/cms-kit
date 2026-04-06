@@ -17,7 +17,6 @@ interface UpsertParams {
   url: string
   imageUrl: string | null
   imageAlt: string | null
-  ftsContent: string
 }
 
 export async function upsertEmbedding({
@@ -31,7 +30,6 @@ export async function upsertEmbedding({
   url,
   imageUrl,
   imageAlt,
-  ftsContent,
 }: UpsertParams) {
   const vectorStr = `[${embedding.join(',')}]`
   const tsConfig = TS_CONFIG[locale] ?? 'english'
@@ -42,7 +40,12 @@ export async function upsertEmbedding({
         image_url, image_alt, fts_content, updated_at)
      VALUES
        ($1, $2, $3, $4::vector, $5, $6, $7, $8, $9,
-        to_tsvector($10, $11), NOW())
+        setweight(to_tsvector($10, $5), 'A')
+        || setweight(
+          to_tsvector('simple', regexp_replace($6, '[-_/]+', ' ', 'g')),
+          'B'
+        ),
+        NOW())
      ON CONFLICT (document_id, collection, locale)
      DO UPDATE SET
        embedding    = EXCLUDED.embedding,
@@ -64,7 +67,6 @@ export async function upsertEmbedding({
       imageUrl,
       imageAlt,
       tsConfig,
-      ftsContent,
     ],
   )
 }
