@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { createSharedSlugField } from '@/fields/slugField'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { indexPageEmbedding, deletePageEmbedding } from './hooks/indexEmbedding'
 import { validateReservedSlug, validateReservedPath } from './hooks/validateReservedSlug'
 import { fixBreadcrumbDocIds } from './hooks/fixBreadcrumbDocIds'
 import { generatePreviewPath } from '@/core/lib/generatePreviewPath'
@@ -105,8 +106,8 @@ export const Page: CollectionConfig<'page'> = {
   ],
   hooks: {
     beforeChange: [fixBreadcrumbDocIds, validateReservedSlug, validateReservedPath],
-    afterChange: [revalidatePage],
-    afterDelete: [revalidateDelete],
+    afterChange: [revalidatePage, indexPageEmbedding],
+    afterDelete: [revalidateDelete, deletePageEmbedding],
   },
   versions: {
     maxPerDoc: 50,

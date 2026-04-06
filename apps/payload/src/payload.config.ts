@@ -12,6 +12,7 @@ import { Posts } from '@/collections/Posts'
 import { Categories } from '@/collections/Categories'
 import { Authors } from '@/collections/Authors'
 import { Testimonials } from '@/collections/Testimonials'
+import { DocumentEmbeddings } from '@/collections/DocumentEmbeddings'
 import { plugins } from '@/plugins'
 import { en } from '@payloadcms/translations/languages/en'
 import { es } from '@payloadcms/translations/languages/es'
@@ -60,7 +61,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Page, Categories, Authors, Posts, Testimonials, Header, Footer],
+  collections: [Users, Media, Page, Categories, Authors, Posts, Testimonials, Header, Footer, DocumentEmbeddings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
