@@ -7,6 +7,30 @@ import { upsertEmbedding, deleteEmbedding } from '@/search/dbOperations'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { I18N_CONFIG } from '@/core/config/i18n'
 
+async function getFirstHeroImage(
+  blocks: Page['blocks'],
+  req: Parameters<CollectionAfterChangeHook<Page>>[0]['req'],
+): Promise<{
+  imageUrl: string | null
+  imageAlt: string | null
+}> {
+  const hero = blocks?.find((block) => block.blockType === 'hero')
+  if (!hero || hero.blockType !== 'hero') return { imageUrl: null, imageAlt: null }
+
+  const raw = hero.image?.image
+  if (!raw) return { imageUrl: null, imageAlt: null }
+
+  const media =
+    typeof raw === 'number'
+      ? await req.payload.findByID({ collection: 'media', id: raw, req })
+      : raw
+
+  return {
+    imageUrl: media.url ?? null,
+    imageAlt: media.alt,
+  }
+}
+
 export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc, req }) => {
   if (doc._status !== 'published') return doc
 
@@ -22,6 +46,7 @@ export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc,
       locale,
       absolute: false,
     })
+    const { imageUrl, imageAlt } = await getFirstHeroImage(doc.blocks, req)
 
     await upsertEmbedding({
       pool,
@@ -32,8 +57,8 @@ export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc,
       title: doc.title,
       slug: doc.slug ?? '',
       url,
-      imageUrl: null,
-      imageAlt: null,
+      imageUrl,
+      imageAlt,
     })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to index page embedding')
