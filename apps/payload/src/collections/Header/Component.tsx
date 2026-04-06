@@ -32,7 +32,7 @@ export async function Header({ data }: Props) {
         marginBottom: 'none',
         theme: undefined,
       }}
-      className="sticky left-0 top-0 z-50 rounded-t-none overflow-x-visible!"
+      className="sticky left-0 top-0 z-50 rounded-t-none overflow-x-visible! max-w-none w-full"
     >
       <SharedHeader links={links} image={image} alignVariant={AlignVariant.Right} />
     </SectionContainer>

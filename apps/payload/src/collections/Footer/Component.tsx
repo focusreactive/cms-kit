@@ -33,6 +33,7 @@ export async function Footer({ data }: Props) {
         marginBottom: 'none',
         theme: undefined,
       }}
+      className="max-w-none w-full"
     >
       <SharedFooter
         links={links}

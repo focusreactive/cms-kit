@@ -23,9 +23,9 @@ export default async function SearchPage({ params, searchParams }: Args) {
   const siteSettings = await getSiteSettings({ locale })
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <Header data={siteSettings.header as HeaderType} />
-      <main>
+      <main className="grow">
         <div className="mx-auto max-w-2xl px-4 py-8">
           <SearchInput defaultValue={query ?? ''} />
 
@@ -35,7 +35,7 @@ export default async function SearchPage({ params, searchParams }: Args) {
         </div>
       </main>
       <Footer data={siteSettings.footer as FooterType} />
-    </>
+    </div>
   )
 }
 
