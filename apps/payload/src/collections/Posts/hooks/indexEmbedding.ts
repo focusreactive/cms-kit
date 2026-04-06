@@ -1,18 +1,26 @@
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import type { Pool } from 'pg'
-import type { Post, Media } from '@/payload-types'
+import type { Post } from '@/payload-types'
 import { extractPostText } from '@/collections/Posts/extractPostText'
 import { generateEmbedding } from '@/search/generateEmbedding'
 import { upsertEmbedding, deleteEmbedding } from '@/search/dbOperations'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { I18N_CONFIG } from '@/core/config/i18n'
 
-function resolveImage(heroImage: Post['heroImage']): { url: string | null; alt: string | null } {
-  if (!heroImage || typeof heroImage === 'number') return { url: null, alt: null }
-  const media = heroImage as Media
+async function resolveImage(
+  heroImage: Post['heroImage'],
+  req: Parameters<CollectionAfterChangeHook<Post>>[0]['req'],
+): Promise<{ url: string | null; alt: string | null }> {
+  if (!heroImage) return { url: null, alt: null }
+
+  const media =
+    typeof heroImage === 'number'
+      ? await req.payload.findByID({ collection: 'media', id: heroImage, req })
+      : heroImage
+
   return {
     url: media.url ?? null,
-    alt: typeof media.alt === 'string' ? media.alt : null,
+    alt: media.alt,
   }
 }
 
@@ -23,7 +31,7 @@ export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc,
     const locale = (req.locale ?? I18N_CONFIG.defaultLocale) as string
     const text = extractPostText(doc)
     const [embedding] = await Promise.all([generateEmbedding(text)])
-    const { url: imageUrl, alt: imageAlt } = resolveImage(doc.heroImage)
+    const { url: imageUrl, alt: imageAlt } = await resolveImage(doc.heroImage, req)
     const pool = (req.payload.db as unknown as { pool: Pool }).pool
     const url = buildUrl({ collection: 'posts', slug: doc.slug ?? '', locale, absolute: false })
 
