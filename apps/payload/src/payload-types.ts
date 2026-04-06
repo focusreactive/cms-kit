@@ -76,6 +76,7 @@ export interface Config {
     testimonials: Testimonial;
     header: Header;
     footer: Footer;
+    'document-embeddings': DocumentEmbedding;
     redirects: Redirect;
     presets: Preset;
     comments: Comment;
@@ -101,6 +102,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'document-embeddings': DocumentEmbeddingsSelect<false> | DocumentEmbeddingsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
@@ -995,6 +997,23 @@ export interface LinksListBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-embeddings".
+ */
+export interface DocumentEmbedding {
+  id: number;
+  documentId: string;
+  collection: 'page' | 'post';
+  locale: string;
+  title: string;
+  slug: string;
+  url: string;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1575,6 +1594,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'footer';
         value: number | Footer;
+      } | null)
+    | ({
+        relationTo: 'document-embeddings';
+        value: number | DocumentEmbedding;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2214,6 +2237,22 @@ export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-embeddings_select".
+ */
+export interface DocumentEmbeddingsSelect<T extends boolean = true> {
+  documentId?: T;
+  collection?: T;
+  locale?: T;
+  title?: T;
+  slug?: T;
+  url?: T;
+  imageUrl?: T;
+  imageAlt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
