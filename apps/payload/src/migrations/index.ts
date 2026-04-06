@@ -19,6 +19,7 @@ import * as migration_20260401_110755_sync_migra from './20260401_110755_sync_mi
 import * as migration_20260406_083656_create_document_embeddings from './20260406_083656_create_document_embeddings';
 import * as migration_20260406_122500_add_document_embeddings_unique_constraint from './20260406_122500_add_document_embeddings_unique_constraint';
 import * as migration_20260406_210202_drop_fts_content from './20260406_210202_drop_fts_content';
+import * as migration_20260406_233113_add_search_to_custom_page from './20260406_233113_add_search_to_custom_page';
 
 export const migrations = [
   {
@@ -124,6 +125,11 @@ export const migrations = [
   {
     up: migration_20260406_210202_drop_fts_content.up,
     down: migration_20260406_210202_drop_fts_content.down,
-    name: '20260406_210202_drop_fts_content'
+    name: '20260406_210202_drop_fts_content',
+  },
+  {
+    up: migration_20260406_233113_add_search_to_custom_page.up,
+    down: migration_20260406_233113_add_search_to_custom_page.down,
+    name: '20260406_233113_add_search_to_custom_page'
   },
 ];

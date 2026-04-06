@@ -426,7 +426,7 @@ export interface Header {
                 value: number | Post;
               } | null);
           url?: string | null;
-          customPage?: 'blog' | null;
+          customPage?: ('blog' | 'search') | null;
           label: string;
         };
         id?: string | null;
@@ -551,7 +551,7 @@ export interface Footer {
                 value: number | Post;
               } | null);
           url?: string | null;
-          customPage?: 'blog' | null;
+          customPage?: ('blog' | 'search') | null;
           label: string;
         };
         id?: string | null;
@@ -618,7 +618,7 @@ export interface HeroBlock {
               value: number | Post;
             } | null);
         url?: string | null;
-        customPage?: 'blog' | null;
+        customPage?: ('blog' | 'search') | null;
         label: string;
         /**
          * Choose how the link should be rendered.
@@ -830,7 +830,7 @@ export interface CardsGridBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -935,7 +935,7 @@ export interface LogosBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
     };
     id?: string | null;
@@ -973,7 +973,7 @@ export interface LinksListBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
       /**
        * Choose how the link should be rendered.
@@ -1103,7 +1103,7 @@ export interface Preset {
                 value: number | Post;
               } | null);
           url?: string | null;
-          customPage?: 'blog' | null;
+          customPage?: ('blog' | 'search') | null;
           label: string;
           /**
            * Choose how the link should be rendered.
@@ -1265,7 +1265,7 @@ export interface Preset {
               value: number | Post;
             } | null);
         url?: string | null;
-        customPage?: 'blog' | null;
+        customPage?: ('blog' | 'search') | null;
         label?: string | null;
         /**
          * Choose how the link should be rendered.
@@ -1356,7 +1356,7 @@ export interface Preset {
               value: number | Post;
             } | null);
         url?: string | null;
-        customPage?: 'blog' | null;
+        customPage?: ('blog' | 'search') | null;
         label: string;
       };
       id?: string | null;
@@ -1387,7 +1387,7 @@ export interface Preset {
               value: number | Post;
             } | null);
         url?: string | null;
-        customPage?: 'blog' | null;
+        customPage?: ('blog' | 'search') | null;
         label: string;
         /**
          * Choose how the link should be rendered.
@@ -2871,7 +2871,7 @@ export interface CardsGridInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -2911,7 +2911,7 @@ export interface LogosInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
     };
     id?: string | null;
@@ -2940,7 +2940,7 @@ export interface LinksListInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
       /**
        * Choose how the link should be rendered.
