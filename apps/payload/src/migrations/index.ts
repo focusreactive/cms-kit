@@ -16,6 +16,7 @@ import * as migration_20260326_050306_remove_blog_section from './20260326_05030
 import * as migration_20260326_051511_add_custom_page_type_to from './20260326_051511_add_custom_page_type_to';
 import * as migration_20260329_153412_add_presets_to_all_blocks from './20260329_153412_add_presets_to_all_blocks';
 import * as migration_20260401_110755_sync_migra from './20260401_110755_sync_migra';
+import * as migration_20260406_083656_create_document_embeddings from './20260406_083656_create_document_embeddings';
 
 export const migrations = [
   {
@@ -106,6 +107,11 @@ export const migrations = [
   {
     up: migration_20260401_110755_sync_migra.up,
     down: migration_20260401_110755_sync_migra.down,
-    name: '20260401_110755_sync_migra'
+    name: '20260401_110755_sync_migra',
+  },
+  {
+    up: migration_20260406_083656_create_document_embeddings.up,
+    down: migration_20260406_083656_create_document_embeddings.down,
+    name: '20260406_083656_create_document_embeddings'
   },
 ];
