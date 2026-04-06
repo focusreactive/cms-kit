@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import { generateEmbedding } from './generateEmbedding'
 import { SearchResultGroup } from './types'
 import configPromise from '@payload-config'
-import { groupResultsByCollection, runHybridSearch } from './hybridSearch'
+import { groupResultsByCollection, runSemanticSearch } from './runSemanticSearch'
 import { Pool } from 'pg'
 
 type Response =
@@ -39,7 +39,7 @@ export async function search({ query, locale }: Params): Promise<Response> {
     ])
 
     const pool = (payload.db as unknown as { pool: Pool }).pool
-    const items = await runHybridSearch({ pool, query, embedding, locale })
+    const items = await runSemanticSearch({ pool, embedding, locale })
     const groups = groupResultsByCollection(items)
 
     return {
