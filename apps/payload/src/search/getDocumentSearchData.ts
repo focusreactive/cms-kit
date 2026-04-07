@@ -50,13 +50,14 @@ export async function getDocumentSearchData(
     return {
       title: doc.title,
       slug: doc.slug,
-      url: buildUrl({
-        collection: 'page',
-        slug: doc.slug,
-        breadcrumbs: doc.breadcrumbs,
-        locale,
-        absolute: false,
-      }),
+      url:
+        buildUrl({
+          collection: 'page',
+          slug: doc.slug,
+          breadcrumbs: doc.breadcrumbs,
+          locale,
+          absolute: false,
+        }) || '/',
       imageUrl,
       imageAlt,
     }
