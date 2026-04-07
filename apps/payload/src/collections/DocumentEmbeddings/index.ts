@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
 import { superAdmin } from '@/core/lib/access'
-import { isDev } from '@/core/utils/isDev'
 
 export const DocumentEmbeddings: CollectionConfig = {
   slug: 'document-embeddings',
@@ -15,14 +14,14 @@ export const DocumentEmbeddings: CollectionConfig = {
       es: 'Incrustaciones de Documentos',
     },
   },
+  admin: {
+    group: 'System',
+  },
   access: {
     create: superAdmin,
     read: superAdmin,
     update: superAdmin,
     delete: superAdmin,
-  },
-  admin: {
-    hidden: !isDev(),
   },
   fields: [
     {
