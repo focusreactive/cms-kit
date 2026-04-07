@@ -2,7 +2,7 @@
 
 import type { Payload } from 'payload'
 import type { SearchCollection } from './types'
-import type { Page, Post, Media } from '@/payload-types'
+import type { Page, Post } from '@/payload-types'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { Locale } from '@/core/types'
 

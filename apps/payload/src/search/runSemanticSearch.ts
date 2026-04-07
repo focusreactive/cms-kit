@@ -1,7 +1,7 @@
 'use server'
 
 import type { Pool } from 'pg'
-import type { SearchRawItem, SearchResultItem, SearchResultGroup, SearchCollection } from './types'
+import type { SearchRawItem, SearchCollection } from './types'
 
 interface DbRow {
   document_id: string
@@ -62,21 +62,4 @@ export async function runSemanticSearch({
     locale: row.locale,
     score: parseFloat(row.score),
   }))
-}
-
-export function groupResultsByCollection(items: SearchResultItem[]): SearchResultGroup[] {
-  const map = new Map<SearchCollection, SearchResultItem[]>()
-
-  for (const item of items) {
-    const existing = map.get(item.collection) ?? []
-    map.set(item.collection, [...existing, item])
-  }
-
-  return Array.from(map.entries())
-    .map(([collection, groupItems]) => ({
-      collection,
-      items: groupItems,
-      topScore: groupItems[0]?.score ?? 0,
-    }))
-    .sort((a, b) => b.topScore - a.topScore)
 }
