@@ -46,6 +46,7 @@
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-slot": "^1.2.4",
     "@shared/ui": "workspace:*",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vercel/edge-config": "^1.4.3",
     "ai": "^6.0.68",
     "babel-plugin-react-compiler": "^1.0.0",
