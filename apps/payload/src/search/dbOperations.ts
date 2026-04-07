@@ -1,3 +1,5 @@
+'use server'
+
 import type { Pool } from 'pg'
 import type { SearchCollection } from './types'
 
