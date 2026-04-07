@@ -39,13 +39,15 @@ export const indexPageEmbedding: CollectionAfterChangeHook<Page> = async ({ doc,
     const text = extractPageText(doc)
     const embedding = await generateEmbedding(text)
     const pool = (req.payload.db as unknown as { pool: Pool }).pool
-    const url = buildUrl({
-      collection: 'page',
-      slug: doc.slug ?? '',
-      breadcrumbs: doc.breadcrumbs,
-      locale,
-      absolute: false,
-    })
+    const url =
+      buildUrl({
+        collection: 'page',
+        slug: doc.slug ?? '',
+        breadcrumbs: doc.breadcrumbs,
+        locale,
+        absolute: false,
+      }) || '/'
+
     const { imageUrl, imageAlt } = await getFirstHeroImage(doc.blocks, req)
 
     await upsertEmbedding({
