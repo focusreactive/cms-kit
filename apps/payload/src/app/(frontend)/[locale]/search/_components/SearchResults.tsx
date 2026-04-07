@@ -1,6 +1,4 @@
 import { search } from '@/search/search'
-import { getTranslations } from 'next-intl/server'
-
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -14,13 +12,12 @@ interface SearchResultsProps {
 export async function SearchResults({ query, locale }: SearchResultsProps) {
   if (!query) return null
 
-  const t = await getTranslations('search')
   const result = await search({ query, locale })
 
   if (!result.success) {
     return (
       <div className="mt-6 space-y-2 text-sm text-gray-500">
-        <p>{t('searchUnavailable')}</p>
+        <p>Search unavailable, please try again.</p>
       </div>
     )
   }
@@ -28,7 +25,7 @@ export async function SearchResults({ query, locale }: SearchResultsProps) {
   if (!result.data.length) {
     return (
       <div className="mt-6 space-y-2 text-sm text-gray-500">
-        <p>{t('noResults')}</p>
+        <p>No results found.</p>
       </div>
     )
   }
@@ -38,7 +35,7 @@ export async function SearchResults({ query, locale }: SearchResultsProps) {
       {result.data.map((group) => (
         <section key={group.collection}>
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
-            {group.collection === 'post' ? t('postsGroup') : t('pagesGroup')}
+            {group.collection === 'post' ? 'Posts' : 'Pages'}
           </h2>
 
           <div className="space-y-2">

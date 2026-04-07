@@ -38,13 +38,5 @@
       "title": "Anuncios",
       "description": "{count, plural, =0 {No hay anuncios} =1 {1 anuncio} other {# anuncios}} para el tenant {tenant}"
     }
-  },
-  "search": {
-    "placeholder": "Escribe para buscar...",
-    "noResults": "No se encontraron resultados.",
-    "searchUnavailable": "Búsqueda no disponible, inténtalo de nuevo.",
-    "pagesGroup": "Páginas",
-    "postsGroup": "Publicaciones",
-    "pageTitle": "Buscar"
   }
 }

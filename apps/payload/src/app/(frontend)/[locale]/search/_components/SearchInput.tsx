@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 import { useDebounce } from '@uidotdev/usehooks'
 
 const DEBOUNCE_MS = 500
@@ -16,7 +15,6 @@ export function SearchInput({ defaultValue }: SearchInputProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const t = useTranslations('search')
   const [value, setValue] = useState(defaultValue)
   const debouncedValue = useDebounce(value, DEBOUNCE_MS)
   const isFirstRender = useRef(true)
@@ -55,7 +53,7 @@ export function SearchInput({ defaultValue }: SearchInputProps) {
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder={t('placeholder')}
+        placeholder="Type to search..."
         ref={inputRef}
         className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base outline-none focus:border-gray-500"
       />

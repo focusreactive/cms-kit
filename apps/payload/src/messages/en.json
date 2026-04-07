@@ -38,13 +38,5 @@
       "title": "Announcements",
       "description": "{count, plural, =0 {No announcements} =1 {1 announcement} other {# announcements}} for tenant {tenant}"
     }
-  },
-  "search": {
-    "placeholder": "Type to search...",
-    "noResults": "No results found.",
-    "searchUnavailable": "Search unavailable, please try again.",
-    "pagesGroup": "Pages",
-    "postsGroup": "Posts",
-    "pageTitle": "Search"
   }
 }

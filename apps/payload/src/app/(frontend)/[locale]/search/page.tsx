@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import type { Footer as FooterType, Header as HeaderType } from '@/payload-types'
 import type { Locale } from '@/core/types'
 
-import { getTranslations } from 'next-intl/server'
 import { getSiteSettings } from '@/core/lib/getSiteSettings'
 
 import { Suspense } from 'react'
@@ -37,11 +36,8 @@ export default async function SearchPage({ params, searchParams }: Args) {
   )
 }
 
-export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'search' })
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: t('pageTitle'),
+    title: 'Search',
   }
 }
