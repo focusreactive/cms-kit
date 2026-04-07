@@ -1,21 +1,11 @@
-interface LexicalNode {
-  text?: string
-  children?: LexicalNode[]
-}
+import type { LexicalNode, SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
 
 export function extractLexicalText(value: unknown): string {
   if (!value || typeof value !== 'object') return ''
+  if (!(value as { root?: LexicalNode }).root) return ''
 
-  const root = (value as { root?: LexicalNode }).root
-  if (!root) return ''
-
-  const visit = (node: LexicalNode): string => {
-    if (typeof node.text === 'string') return node.text
-    if (!node.children?.length) return ''
-    return joinText(node.children.map(visit))
-  }
-
-  return visit(root)
+  return convertLexicalToPlaintext({ data: value as SerializedEditorState })
 }
 
 export function joinText(parts: Array<string | null | undefined>): string {
@@ -23,6 +13,4 @@ export function joinText(parts: Array<string | null | undefined>): string {
     .filter((part): part is string => typeof part === 'string' && part.trim().length > 0)
     .map((part) => part.trim())
     .join(' ')
-    .replace(/\s{2,}/g, ' ')
-    .trim()
 }
