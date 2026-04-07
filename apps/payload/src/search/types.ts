@@ -1,5 +1,12 @@
 export type SearchCollection = 'page' | 'post'
 
+export interface SearchRawItem {
+  documentId: string
+  collection: SearchCollection
+  locale: string
+  score: number
+}
+
 export interface SearchResultItem {
   documentId: string
   collection: SearchCollection

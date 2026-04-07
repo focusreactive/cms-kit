@@ -43,31 +43,5 @@ export const DocumentEmbeddings: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-      defaultValue: '',
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      defaultValue: '',
-    },
-    {
-      name: 'url',
-      type: 'text',
-      required: true,
-      defaultValue: '',
-    },
-    {
-      name: 'imageUrl',
-      type: 'text',
-    },
-    {
-      name: 'imageAlt',
-      type: 'text',
-    },
   ],
 }

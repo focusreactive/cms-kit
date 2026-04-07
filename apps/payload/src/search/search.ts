@@ -5,6 +5,7 @@ import { generateEmbedding } from './generateEmbedding'
 import { SearchResultGroup } from './types'
 import configPromise from '@payload-config'
 import { groupResultsByCollection, runSemanticSearch } from './runSemanticSearch'
+import { getDocumentSearchData } from './getDocumentSearchData'
 import { Pool } from 'pg'
 
 type Response =
@@ -39,7 +40,24 @@ export async function search({ query, locale }: Params): Promise<Response> {
     ])
 
     const pool = payload.db.pool as unknown as Pool
-    const items = await runSemanticSearch({ pool, embedding, locale })
+    const rawItems = await runSemanticSearch({ pool, embedding, locale })
+
+    const enrichedItems = await Promise.all(
+      rawItems.map(async (item) => {
+        const displayData = await getDocumentSearchData(
+          payload,
+          item.documentId,
+          item.collection,
+          item.locale,
+        )
+
+        if (!displayData) return null
+
+        return { ...item, ...displayData }
+      }),
+    )
+
+    const items = enrichedItems.filter((item) => item !== null)
     const groups = groupResultsByCollection(items)
 
     return {

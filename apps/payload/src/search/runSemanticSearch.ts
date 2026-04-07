@@ -1,16 +1,12 @@
 'use server'
 
 import type { Pool } from 'pg'
-import type { SearchResultItem, SearchResultGroup, SearchCollection } from './types'
+import type { SearchRawItem, SearchResultItem, SearchResultGroup, SearchCollection } from './types'
 
 interface DbRow {
   document_id: string
   collection: SearchCollection
-  title: string
-  slug: string
-  url: string
-  image_url: string | null
-  image_alt: string | null
+  locale: string
   score: string
 }
 
@@ -30,7 +26,7 @@ export async function runSemanticSearch({
   limit = 20,
   maxPerCollection = 5,
   scoreThreshold = 0.75,
-}: RunSemanticSearchParams): Promise<SearchResultItem[]> {
+}: RunSemanticSearchParams): Promise<SearchRawItem[]> {
   const vectorStr = `[${embedding.join(',')}]`
 
   const { rows } = await pool.query<DbRow>(
@@ -38,14 +34,10 @@ export async function runSemanticSearch({
        SELECT
          document_id,
          collection,
-         title,
-         slug,
-         url,
-         image_url,
-         image_alt,
+         locale,
          embedding <=> $1::vector AS distance,
          ROW_NUMBER() OVER (
-           PARTITION BY collection 
+           PARTITION BY collection
            ORDER BY embedding <=> $1::vector
          ) AS collection_rank
        FROM document_embeddings
@@ -55,11 +47,7 @@ export async function runSemanticSearch({
      SELECT
        document_id,
        collection,
-       title,
-       slug,
-       url,
-       image_url,
-       image_alt,
+       locale,
        (1.0 / (1.0 + distance)) AS score
      FROM semantic
      WHERE collection_rank <= $4
@@ -71,11 +59,7 @@ export async function runSemanticSearch({
   return rows.map((row) => ({
     documentId: row.document_id,
     collection: row.collection,
-    title: row.title,
-    slug: row.slug,
-    url: row.url,
-    imageUrl: row.image_url,
-    imageAlt: row.image_alt,
+    locale: row.locale,
     score: parseFloat(row.score),
   }))
 }

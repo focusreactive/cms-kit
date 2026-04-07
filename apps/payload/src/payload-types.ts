@@ -1004,11 +1004,6 @@ export interface DocumentEmbedding {
   documentId: string;
   collection: 'page' | 'post';
   locale: string;
-  title: string;
-  slug: string;
-  url: string;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2246,11 +2241,6 @@ export interface DocumentEmbeddingsSelect<T extends boolean = true> {
   documentId?: T;
   collection?: T;
   locale?: T;
-  title?: T;
-  slug?: T;
-  url?: T;
-  imageUrl?: T;
-  imageAlt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

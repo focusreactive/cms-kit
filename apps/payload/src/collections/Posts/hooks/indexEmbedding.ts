@@ -4,25 +4,7 @@ import type { Post } from '@/payload-types'
 import { extractPostText } from '@/collections/Posts/extractPostText'
 import { generateEmbedding } from '@/search/generateEmbedding'
 import { upsertEmbedding, deleteEmbedding } from '@/search/dbOperations'
-import { buildUrl } from '@/core/utils/path/buildUrl'
 import { I18N_CONFIG } from '@/core/config/i18n'
-
-async function resolveImage(
-  heroImage: Post['heroImage'],
-  req: Parameters<CollectionAfterChangeHook<Post>>[0]['req'],
-): Promise<{ url: string | null; alt: string | null }> {
-  if (!heroImage) return { url: null, alt: null }
-
-  const media =
-    typeof heroImage === 'number'
-      ? await req.payload.findByID({ collection: 'media', id: heroImage, req })
-      : heroImage
-
-  return {
-    url: media.url ?? null,
-    alt: media.alt,
-  }
-}
 
 export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc, req }) => {
   if (doc._status !== 'published') return doc
@@ -30,10 +12,8 @@ export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc,
   try {
     const locale = (req.locale ?? I18N_CONFIG.defaultLocale) as string
     const text = extractPostText(doc)
-    const [embedding] = await Promise.all([generateEmbedding(text)])
-    const { url: imageUrl, alt: imageAlt } = await resolveImage(doc.heroImage, req)
+    const embedding = await generateEmbedding(text)
     const pool = (req.payload.db as unknown as { pool: Pool }).pool
-    const url = buildUrl({ collection: 'posts', slug: doc.slug ?? '', locale, absolute: false })
 
     await upsertEmbedding({
       pool,
@@ -41,11 +21,6 @@ export const indexPostEmbedding: CollectionAfterChangeHook<Post> = async ({ doc,
       collection: 'post',
       locale,
       embedding,
-      title: doc.title,
-      slug: doc.slug ?? '',
-      url,
-      imageUrl,
-      imageAlt,
     })
   } catch (err) {
     req.payload.logger.error({ err }, 'Failed to index post embedding')
