@@ -16101,13 +16101,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "page_find": {
-          "name": "page_find",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
         "page_create": {
           "name": "page_create",
           "type": "boolean",
@@ -16124,13 +16117,6 @@
         },
         "page_delete": {
           "name": "page_delete",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "posts_find": {
-          "name": "posts_find",
           "type": "boolean",
           "primaryKey": false,
           "notNull": false,
@@ -16156,6 +16142,153 @@
           "primaryKey": false,
           "notNull": false,
           "default": false
+        },
+        "header_create": {
+          "name": "header_create",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "header_update": {
+          "name": "header_update",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "header_delete": {
+          "name": "header_delete",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "footer_create": {
+          "name": "footer_create",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "footer_update": {
+          "name": "footer_update",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "footer_delete": {
+          "name": "footer_delete",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "payload_mcp_tool_get_page_content": {
+          "name": "payload_mcp_tool_get_page_content",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_page_field": {
+          "name": "payload_mcp_tool_get_page_field",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_all_page": {
+          "name": "payload_mcp_tool_get_all_page",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_posts_content": {
+          "name": "payload_mcp_tool_get_posts_content",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_posts_field": {
+          "name": "payload_mcp_tool_get_posts_field",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_all_posts": {
+          "name": "payload_mcp_tool_get_all_posts",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_header_content": {
+          "name": "payload_mcp_tool_get_header_content",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_header_field": {
+          "name": "payload_mcp_tool_get_header_field",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_all_header": {
+          "name": "payload_mcp_tool_get_all_header",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_footer_content": {
+          "name": "payload_mcp_tool_get_footer_content",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_footer_field": {
+          "name": "payload_mcp_tool_get_footer_field",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_all_footer": {
+          "name": "payload_mcp_tool_get_all_footer",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_upload_image": {
+          "name": "payload_mcp_tool_upload_image",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_site_settings_content": {
+          "name": "payload_mcp_tool_get_site_settings_content",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "payload_mcp_tool_get_site_settings_field": {
+          "name": "payload_mcp_tool_get_site_settings_field",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         },
         "updated_at": {
           "name": "updated_at",
@@ -21413,6 +21546,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "43704f3f-ed97-47d9-a139-34d956d5d473",
+  "id": "7c0f9612-127c-4c4f-b95b-93762217874f",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
