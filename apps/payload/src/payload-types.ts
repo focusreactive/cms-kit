@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    'payload-mcp-api-keys': PayloadMcpApiKeyAuthOperations;
   };
   blocks: {};
   collections: {
@@ -80,6 +81,7 @@ export interface Config {
     redirects: Redirect;
     presets: Preset;
     comments: Comment;
+    'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-folders': FolderInterface;
@@ -106,6 +108,7 @@ export interface Config {
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
+    'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
@@ -126,9 +129,13 @@ export interface Config {
     _abManifest: _AbManifestSelect<false> | _AbManifestSelect<true>;
   };
   locale: 'en' | 'es';
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (PayloadMcpApiKey & {
+        collection: 'payload-mcp-api-keys';
+      });
   jobs: {
     tasks: {
       schedulePublish: TaskSchedulePublish;
@@ -141,6 +148,24 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface PayloadMcpApiKeyAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -174,6 +199,9 @@ export interface User {
   role: 'admin' | 'author' | 'user';
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -1439,6 +1467,150 @@ export interface Comment {
   createdAt: string;
 }
 /**
+ * API keys control which collections, resources, tools, and prompts MCP clients can access
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys".
+ */
+export interface PayloadMcpApiKey {
+  id: number;
+  /**
+   * The user that the API key is associated with.
+   */
+  user: number | User;
+  /**
+   * A useful label for the API key.
+   */
+  label?: string | null;
+  /**
+   * The purpose of the API key.
+   */
+  description?: string | null;
+  page?: {
+    /**
+     * Allow clients to create page.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update page.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete page.
+     */
+    delete?: boolean | null;
+  };
+  posts?: {
+    /**
+     * Allow clients to create posts.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update posts.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete posts.
+     */
+    delete?: boolean | null;
+  };
+  header?: {
+    /**
+     * Allow clients to create header.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update header.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete header.
+     */
+    delete?: boolean | null;
+  };
+  footer?: {
+    /**
+     * Allow clients to create footer.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update footer.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete footer.
+     */
+    delete?: boolean | null;
+  };
+  'payload-mcp-tool'?: {
+    /**
+     * Fetch a page document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getPageField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     */
+    getPageContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a page document. Use this after `getPageContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getPageField?: boolean | null;
+    /**
+     * List page documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPageContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllPage?: boolean | null;
+    /**
+     * Fetch a posts document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getPostsField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     */
+    getPostsContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a posts document. Use this after `getPostsContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getPostsField?: boolean | null;
+    /**
+     * List posts documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, publishedAt, excerpt, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllPosts?: boolean | null;
+    /**
+     * Fetch a header document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getHeaderField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     */
+    getHeaderContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a header document. Use this after `getHeaderContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getHeaderField?: boolean | null;
+    /**
+     * List header documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getHeaderContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllHeader?: boolean | null;
+    /**
+     * Fetch a footer document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getFooterField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     */
+    getFooterContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a footer document. Use this after `getFooterContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getFooterField?: boolean | null;
+    /**
+     * List footer documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getFooterContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     */
+    getAllFooter?: boolean | null;
+    /**
+     * Upload one or more images to the media library from local file paths (dev only) or remote URLs. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` values as the value of those fields in subsequent create/update calls. Always derive `alt` from the visible or described image content — never copy the filename. Uploads are processed concurrently (up to 3 at a time). Partial failures are tolerated — check the `failed` array in the response.
+     */
+    uploadImage?: boolean | null;
+    /**
+     * Fetch the site-settings global. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the global structure, then call `getSiteSettingsField` to drill into specific fields. Also use before any update action to understand field structure and existing values. Pass raw: true to get the full raw JSON document (including all IDs and Lexical nodes) — required when you need data to reconstruct or pass back in an update. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
+     */
+    getSiteSettingsContent?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from the site-settings global. Use this after `getSiteSettingsContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getSiteSettingsField?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1607,14 +1779,23 @@ export interface PayloadLockedDocument {
         value: number | Comment;
       } | null)
     | ({
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      } | null)
+    | ({
         relationTo: 'payload-folders';
         value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -1624,10 +1805,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   key?: string | null;
   value?:
     | {
@@ -1661,6 +1847,9 @@ export interface UsersSelect<T extends boolean = true> {
   role?: T;
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
@@ -2559,6 +2748,67 @@ export interface CommentsSelect<T extends boolean = true> {
   resolvedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys_select".
+ */
+export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
+  user?: T;
+  label?: T;
+  description?: T;
+  page?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  posts?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  header?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  footer?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  'payload-mcp-tool'?:
+    | T
+    | {
+        getPageContent?: T;
+        getPageField?: T;
+        getAllPage?: T;
+        getPostsContent?: T;
+        getPostsField?: T;
+        getAllPosts?: T;
+        getHeaderContent?: T;
+        getHeaderField?: T;
+        getAllHeader?: T;
+        getFooterContent?: T;
+        getFooterField?: T;
+        getAllFooter?: T;
+        uploadImage?: T;
+        getSiteSettingsContent?: T;
+        getSiteSettingsField?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -31,6 +31,7 @@ export const Users: CollectionConfig<'users'> = {
 
     update: ({ req: { user } }) => {
       if (!user) return false
+      if (user.collection !== 'users') return true
       if (superAdmin({ req: { user } })) return true
 
       return onlySelf({ req: { user } } as { req: { user: typeof user } })
@@ -38,6 +39,7 @@ export const Users: CollectionConfig<'users'> = {
 
     delete: ({ req: { user }, id }) => {
       if (!user) return false
+      if (user.collection !== 'users') return true
 
       if (superAdmin({ req: { user } }) && id !== user.id) return true
 
@@ -48,7 +50,9 @@ export const Users: CollectionConfig<'users'> = {
       return false
     },
   },
-  auth: true,
+  auth: {
+    useAPIKey: true,
+  },
   fields: [
     {
       name: 'name',
@@ -109,6 +113,7 @@ export const Users: CollectionConfig<'users'> = {
       access: {
         update: ({ req: { user }, doc }) => {
           if (!user) return false
+          if (user.collection !== 'users') return false
           if (superAdmin({ req: { user } }) && user.id !== doc?.id) return true
           if (user?.role === 'admin' && user.id !== doc?.id) return true
 
