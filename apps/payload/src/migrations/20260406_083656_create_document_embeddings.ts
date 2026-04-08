@@ -33,13 +33,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
+  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT IF EXISTS "payload_locked_documents_rels_document_embeddings_fk";
+  DROP INDEX IF EXISTS "payload_locked_documents_rels_document_embeddings_id_idx";
+  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "document_embeddings_id";
   DROP INDEX IF EXISTS "document_embeddings_embedding_idx";
   DROP INDEX IF EXISTS "document_embeddings_fts_idx";
-  ALTER TABLE "document_embeddings" DISABLE ROW LEVEL SECURITY;
-  DROP TABLE "document_embeddings" CASCADE;
-  ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_document_embeddings_fk";
-  
-  DROP INDEX "payload_locked_documents_rels_document_embeddings_id_idx";
-  ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "document_embeddings_id";
-  DROP TYPE "public"."enum_document_embeddings_collection";`)
+  DROP TABLE IF EXISTS "document_embeddings" CASCADE;
+  DROP TYPE IF EXISTS "public"."enum_document_embeddings_collection";`)
 }
