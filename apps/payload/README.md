@@ -5,7 +5,7 @@ A production-ready content management system built with [Payload CMS 3](https://
 ## Quick start
 
 1. Create new repo using template and clone it locally
-2. Create new database - console.neon.com
+2. Create new database - [console.neon.tech](https://console.neon.tech/app)
 3. Run claude-code and paste [this prompt](https://github.com/focusreactive/cms-kit/blob/main/apps/payload/setup_payload_prompt.md)
 
 ## Tech Stack
