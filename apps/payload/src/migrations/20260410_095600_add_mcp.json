@@ -12971,6 +12971,89 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.document_embeddings": {
+      "name": "document_embeddings",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "document_id": {
+          "name": "document_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "collection": {
+          "name": "collection",
+          "type": "enum_document_embeddings_collection",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "locale": {
+          "name": "locale",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "document_embeddings_updated_at_idx": {
+          "name": "document_embeddings_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "document_embeddings_created_at_idx": {
+          "name": "document_embeddings_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.redirects": {
       "name": "redirects",
       "schema": "",
@@ -17162,6 +17245,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "document_embeddings_id": {
+          "name": "document_embeddings_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "redirects_id": {
           "name": "redirects_id",
           "type": "integer",
@@ -17374,6 +17463,21 @@
           "method": "btree",
           "with": {}
         },
+        "payload_locked_documents_rels_document_embeddings_id_idx": {
+          "name": "payload_locked_documents_rels_document_embeddings_id_idx",
+          "columns": [
+            {
+              "expression": "document_embeddings_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "payload_locked_documents_rels_redirects_id_idx": {
           "name": "payload_locked_documents_rels_redirects_id_idx",
           "columns": [
@@ -17574,6 +17678,19 @@
           "tableTo": "footer",
           "columnsFrom": [
             "footer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_document_embeddings_fk": {
+          "name": "payload_locked_documents_rels_document_embeddings_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "document_embeddings",
+          "columnsFrom": [
+            "document_embeddings_id"
           ],
           "columnsTo": [
             "id"
@@ -19065,7 +19182,8 @@
       "name": "enum_page_blocks_hero_actions_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_page_blocks_hero_actions_appearance": {
@@ -19410,7 +19528,8 @@
       "name": "enum_page_blocks_cards_grid_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_page_blocks_cards_grid_items_link_appearance": {
@@ -19615,7 +19734,8 @@
       "name": "enum_page_blocks_logos_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_page_blocks_logos_align_variant": {
@@ -19695,7 +19815,8 @@
       "name": "enum_page_blocks_links_list_links_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_page_blocks_links_list_links_link_appearance": {
@@ -19799,7 +19920,8 @@
       "name": "enum__page_v_blocks_hero_actions_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__page_v_blocks_hero_actions_appearance": {
@@ -20144,7 +20266,8 @@
       "name": "enum__page_v_blocks_cards_grid_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__page_v_blocks_cards_grid_items_link_appearance": {
@@ -20349,7 +20472,8 @@
       "name": "enum__page_v_blocks_logos_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__page_v_blocks_logos_align_variant": {
@@ -20429,7 +20553,8 @@
       "name": "enum__page_v_blocks_links_list_links_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__page_v_blocks_links_list_links_link_appearance": {
@@ -20581,7 +20706,8 @@
       "name": "enum_header_nav_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_header_status": {
@@ -20605,7 +20731,8 @@
       "name": "enum__header_v_version_nav_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__header_v_version_status": {
@@ -20637,7 +20764,8 @@
       "name": "enum_footer_links_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_footer_status": {
@@ -20661,7 +20789,8 @@
       "name": "enum__footer_v_version_links_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum__footer_v_version_status": {
@@ -20678,6 +20807,14 @@
       "values": [
         "en",
         "es"
+      ]
+    },
+    "public.enum_document_embeddings_collection": {
+      "name": "enum_document_embeddings_collection",
+      "schema": "public",
+      "values": [
+        "page",
+        "post"
       ]
     },
     "public.enum_redirects_to_type": {
@@ -20709,7 +20846,8 @@
       "name": "enum_presets_hero_actions_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_presets_hero_actions_appearance": {
@@ -20748,7 +20886,8 @@
       "name": "enum_presets_cards_grid_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_presets_cards_grid_items_link_appearance": {
@@ -20831,7 +20970,8 @@
       "name": "enum_presets_logos_items_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_presets_links_list_links_link_type": {
@@ -20847,7 +20987,8 @@
       "name": "enum_presets_links_list_links_link_custom_page",
       "schema": "public",
       "values": [
-        "blog"
+        "blog",
+        "search"
       ]
     },
     "public.enum_presets_links_list_links_link_appearance": {
@@ -21546,6 +21687,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "7c0f9612-127c-4c4f-b95b-93762217874f",
+  "id": "e38033c9-f526-49c4-aed5-fb595c6ac528",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
