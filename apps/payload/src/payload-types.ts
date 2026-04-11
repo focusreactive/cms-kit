@@ -199,9 +199,6 @@ export interface User {
   role: 'admin' | 'author' | 'user';
   updatedAt: string;
   createdAt: string;
-  enableAPIKey?: boolean | null;
-  apiKey?: string | null;
-  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -1847,9 +1844,6 @@ export interface UsersSelect<T extends boolean = true> {
   role?: T;
   updatedAt?: T;
   createdAt?: T;
-  enableAPIKey?: T;
-  apiKey?: T;
-  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;

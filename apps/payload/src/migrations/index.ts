@@ -22,6 +22,7 @@ import * as migration_20260406_210202_drop_fts_content from './20260406_210202_d
 import * as migration_20260406_233113_add_search_to_custom_page from './20260406_233113_add_search_to_custom_page';
 import * as migration_20260407_094009_slim_document_embeddings from './20260407_094009_slim_document_embeddings';
 import * as migration_20260410_095600_add_mcp from './20260410_095600_add_mcp';
+import * as migration_20260411_211125_remove_api_key_auth from './20260411_211125_remove_api_key_auth';
 
 export const migrations = [
   {
@@ -142,6 +143,11 @@ export const migrations = [
   {
     up: migration_20260410_095600_add_mcp.up,
     down: migration_20260410_095600_add_mcp.down,
-    name: '20260410_095600_add_mcp'
+    name: '20260410_095600_add_mcp',
+  },
+  {
+    up: migration_20260411_211125_remove_api_key_auth.up,
+    down: migration_20260411_211125_remove_api_key_auth.down,
+    name: '20260411_211125_remove_api_key_auth'
   },
 ];
