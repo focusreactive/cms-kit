@@ -51,6 +51,7 @@ const eslintConfig = [
   globalIgnores([
     // Default ignores of eslint-config-next:
     'src/migrations/**',
+    '.claude/**',
   ]),
 
 ]

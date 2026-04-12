@@ -30,11 +30,14 @@ export async function resolveSource(
     }
   }
 
-  if (process.env.NODE_ENV !== 'development') {
-    throw new Error('Local file paths are only supported in development mode')
+  let buffer: Buffer | null = null
+  try {
+    buffer = await readFile(source)
+  } catch (e) {
+    throw new Error(
+      `Failed to read local file "${source}": ${e instanceof Error ? e.message : String(e)}`,
+    )
   }
-
-  const buffer = await readFile(source)
 
   const detectedMimeType = detectMimeType(buffer)
   const filename = filenameOverride ?? path.basename(source)
