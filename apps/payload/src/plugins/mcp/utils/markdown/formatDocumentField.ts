@@ -1,10 +1,11 @@
 import { formatFieldValue } from './formatFieldValue'
 
 interface FormatDocumentFieldOpts {
-  collectionPascal: string
+  collectionSlug: string
+  documentId?: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
-  knownCollectionPascals?: Set<string>
+  fieldRelationTo?: Record<string, string>
 }
 
 export function formatDocumentField(

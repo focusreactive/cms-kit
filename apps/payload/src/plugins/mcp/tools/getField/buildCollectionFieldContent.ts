@@ -8,32 +8,31 @@ interface Props {
   fieldPath: string
   value: unknown
   collection: CollectionSlug
-  collectionPascal: string
+  documentId?: string
   payload: Payload
-  knownCollectionPascals?: Set<string>
   raw?: boolean
 }
 
-export function buildFieldContent({
+export function buildCollectionFieldContent({
   fieldPath,
   value,
   collection,
-  collectionPascal,
+  documentId,
   payload,
-  knownCollectionPascals,
   raw,
 }: Props): ContentBlock[] {
   if (raw) {
     return [{ type: 'text', text: JSON.stringify(value, null, 2) }]
   }
 
-  const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
+  const { fieldLabels, blockLabels, fieldRelationTo } = buildLabelMaps(collection, payload)
 
   const body = formatDocumentField(fieldPath, value, {
-    collectionPascal,
+    collectionSlug: String(collection),
+    documentId,
     fieldLabels,
     blockLabels,
-    knownCollectionPascals,
+    fieldRelationTo,
   })
 
   return [{ type: 'text', text: PRE_FORMATTED_CONTENT_INSTRUCTION + body }]

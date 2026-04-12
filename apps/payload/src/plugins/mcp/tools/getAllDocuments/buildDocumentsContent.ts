@@ -15,7 +15,6 @@ interface Props {
   page?: number
   limit: number
   collection: CollectionSlug
-  collectionPascal: string
   titleField?: string
   tableFields: string[]
   locale?: Locale
@@ -29,14 +28,13 @@ export function buildDocumentsContent({
   page,
   limit,
   collection,
-  collectionPascal,
   titleField,
   tableFields,
   locale,
   payload,
   buildUrl,
 }: Props): ContentBlock[] {
-  const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
+  const { fieldLabels, blockLabels, fieldRelationTo } = buildLabelMaps(collection, payload)
   const titleIsId = titleField === 'id' || !titleField
 
   const formattedDocs = docs.map((doc) => {
@@ -54,9 +52,10 @@ export function buildDocumentsContent({
       url,
       adminUrl,
       extractedDoc: buildSummaryFields(payload, collection, raw, tableFields, titleField),
-      collectionPascal,
+      collectionSlug: String(collection),
       fieldLabels,
       blockLabels,
+      fieldRelationTo,
     })
   })
 
@@ -65,7 +64,7 @@ export function buildDocumentsContent({
 
   const documents = formattedDocs.length === 0 ? 'No documents found.' : formattedDocs.join('\n\n')
   const pagination = `Showing ${start}-${end} of ${totalDocs} total. Use \`page\` and \`limit\` to paginate.`
-  const followUp = `To get full details for a document, call \`get${collectionPascal}Content\` with its ID.`
+  const followUp = `To get full details for a document, call [getDocument(collectionSlug: "${collection}", id: <id>)].`
 
   const body = [documents, pagination, followUp].join('\n\n')
 

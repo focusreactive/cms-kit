@@ -7,10 +7,10 @@ interface Props {
   url?: string | null
   adminUrl?: string | null
   extractedDoc: Record<string, unknown>
-  collectionPascal: string
+  collectionSlug: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
-  knownCollectionPascals?: Set<string>
+  fieldRelationTo?: Record<string, string>
   summarizeComplexValues?: boolean
 }
 
@@ -21,24 +21,27 @@ export function formatDocument({
   url,
   adminUrl,
   extractedDoc,
-  collectionPascal,
+  collectionSlug,
   fieldLabels,
   blockLabels,
-  knownCollectionPascals,
+  fieldRelationTo,
   summarizeComplexValues = true,
 }: Props) {
   const titleLine = titleIsId ? `# ${title}` : id ? `# ${title} | ${id}` : `# ${title}`
-  const urlLine = [adminUrl, url].filter(Boolean).join(' | ')
+  const urlLine = [adminUrl, url].filter(Boolean).join(' | ') + '\n'
   const fieldsTitleLine = `## Fields:`
+
+  const documentId = id !== undefined ? String(id) : undefined
 
   const fieldLines = Object.entries(extractedDoc).map(([name, value]) =>
     formatFieldLine(name, value, 0, {
-      collectionPascal,
+      collectionSlug,
+      documentId,
       fieldLabels,
       blockLabels,
+      fieldRelationTo,
       summarizeComplexValues,
       fieldPath: name,
-      knownCollectionPascals,
     }),
   )
 

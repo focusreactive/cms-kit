@@ -8,32 +8,28 @@ interface Props {
   fieldPath: string
   value: unknown
   slug: GlobalSlug
-  globalPascal: string
   payload: Payload
-  knownCollectionPascals?: Set<string>
   raw?: boolean
 }
 
-export function buildFieldContent({
+export function buildGlobalFieldContent({
   fieldPath,
   value,
   slug,
-  globalPascal,
   payload,
-  knownCollectionPascals,
   raw,
 }: Props): ContentBlock[] {
   if (raw) {
     return [{ type: 'text', text: JSON.stringify(value, null, 2) }]
   }
 
-  const { fieldLabels, blockLabels } = buildLabelMaps(slug, payload, 'global')
+  const { fieldLabels, blockLabels, fieldRelationTo } = buildLabelMaps(slug, payload, 'global')
 
   const body = formatDocumentField(fieldPath, value, {
-    collectionPascal: globalPascal,
+    collectionSlug: String(slug),
     fieldLabels,
     blockLabels,
-    knownCollectionPascals,
+    fieldRelationTo,
   })
 
   return [{ type: 'text', text: PRE_FORMATTED_CONTENT_INSTRUCTION + body }]

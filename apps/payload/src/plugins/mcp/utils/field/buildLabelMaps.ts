@@ -17,7 +17,11 @@ export function buildLabelMaps(
   slug: string,
   payload: Payload,
   type: 'collection' | 'global' = 'collection',
-): { fieldLabels: Record<string, string>; blockLabels: Record<string, string> } {
+): {
+  fieldLabels: Record<string, string>
+  blockLabels: Record<string, string>
+  fieldRelationTo: Record<string, string>
+} {
   const fields: Field[] =
     type === 'global'
       ? (payload.globals.config.find((g) => g.slug === slug)?.fields ?? [])
@@ -25,11 +29,16 @@ export function buildLabelMaps(
 
   const fieldLabels: Record<string, string> = {}
   const blockLabels: Record<string, string> = {}
+  const fieldRelationTo: Record<string, string> = {}
 
   for (const field of fields) {
     if (!('name' in field)) continue
 
     fieldLabels[field.name] = resolveLabel(field.label, field.name)
+
+    if (field.type === 'relationship' && typeof field.relationTo === 'string') {
+      fieldRelationTo[field.name] = field.relationTo
+    }
 
     if (field.type === 'blocks') {
       for (const block of field.blocks) {
@@ -40,5 +49,5 @@ export function buildLabelMaps(
     }
   }
 
-  return { fieldLabels, blockLabels }
+  return { fieldLabels, blockLabels, fieldRelationTo }
 }

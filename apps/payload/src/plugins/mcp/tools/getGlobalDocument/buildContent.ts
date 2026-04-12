@@ -1,9 +1,9 @@
-import type { CollectionSlug, Payload } from 'payload'
+import type { GlobalSlug, Payload } from 'payload'
 import { getServerSideURL } from '@/core/lib/getURL'
 import { formatDocument } from '../../utils/markdown/formatDocument'
-import { resolveTitleField } from '../../utils/resolveTitleField'
 import { extractFields } from '../../utils/field/extractFields'
 import { buildLabelMaps } from '../../utils/field/buildLabelMaps'
+import { resolvePath } from '../../utils/resolvePath'
 import { Locale } from '@/core/types'
 import { BaseDocument, ContentBlock } from '../../types'
 import { PRE_FORMATTED_CONTENT_INSTRUCTION } from '../../constants/instructions'
@@ -11,58 +11,59 @@ import { PRE_FORMATTED_CONTENT_INSTRUCTION } from '../../constants/instructions'
 interface Props {
   doc: BaseDocument
   skipKeys: Set<string>
-  collectionPascal: string
-  collection: CollectionSlug
+  slug: GlobalSlug
   titleField?: string
   payload: Payload
-  knownCollectionPascals?: Set<string>
   full?: boolean
   raw?: boolean
   locale?: Locale
-  buildUrl?: (doc: BaseDocument, locale?: Locale) => string | null
+}
+
+function resolveGlobalTitle(doc: BaseDocument, titleField: string | undefined, slug: GlobalSlug) {
+  if (titleField) {
+    const result = resolvePath(doc, titleField)
+
+    if (
+      !('error' in result) &&
+      result.value !== null &&
+      result.value !== undefined &&
+      typeof result.value !== 'object'
+    ) {
+      return String(result.value)
+    }
+  }
+
+  return String(slug)
 }
 
 export function buildContent({
   doc,
   skipKeys,
-  collectionPascal,
-  collection,
+  slug,
   titleField,
   payload,
-  knownCollectionPascals,
   full,
   raw,
   locale,
-  buildUrl,
 }: Props): ContentBlock[] {
   if (raw) {
     return [{ type: 'text', text: JSON.stringify(doc, null, 2) }]
   }
 
-  const title = resolveTitleField(doc, titleField)
-  const titleIsId = titleField === 'id' || !titleField
-
-  const url = buildUrl ? buildUrl(doc, locale) : null
-  const adminUrl =
-    doc.id && collection
-      ? `${getServerSideURL()}/admin/collections/${collection}/${doc.id}${locale ? `?locale=${locale}` : ''}`
-      : null
-
+  const title = resolveGlobalTitle(doc, titleField, slug)
+  const adminUrl = `${getServerSideURL()}/admin/globals/${slug}${locale ? `?locale=${locale}` : ''}`
   const extractedDoc = extractFields(doc, skipKeys)
-
-  const { fieldLabels, blockLabels } = buildLabelMaps(collection, payload)
+  const { fieldLabels, blockLabels, fieldRelationTo } = buildLabelMaps(slug, payload, 'global')
 
   const body = formatDocument({
-    id: doc.id as string,
     title,
-    titleIsId,
-    url,
+    titleIsId: false,
     adminUrl,
     extractedDoc,
-    collectionPascal,
+    collectionSlug: String(slug),
     fieldLabels,
     blockLabels,
-    knownCollectionPascals,
+    fieldRelationTo,
     summarizeComplexValues: !full,
   })
 

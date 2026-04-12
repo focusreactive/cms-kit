@@ -23,6 +23,7 @@ import * as migration_20260406_233113_add_search_to_custom_page from './20260406
 import * as migration_20260407_094009_slim_document_embeddings from './20260407_094009_slim_document_embeddings';
 import * as migration_20260410_095600_add_mcp from './20260410_095600_add_mcp';
 import * as migration_20260411_211125_remove_api_key_auth from './20260411_211125_remove_api_key_auth';
+import * as migration_20260412_192622_unite_get_tools_in_mcp_api_keys from './20260412_192622_unite_get_tools_in_mcp_api_keys';
 
 export const migrations = [
   {
@@ -148,6 +149,11 @@ export const migrations = [
   {
     up: migration_20260411_211125_remove_api_key_auth.up,
     down: migration_20260411_211125_remove_api_key_auth.down,
-    name: '20260411_211125_remove_api_key_auth'
+    name: '20260411_211125_remove_api_key_auth',
+  },
+  {
+    up: migration_20260412_192622_unite_get_tools_in_mcp_api_keys.up,
+    down: migration_20260412_192622_unite_get_tools_in_mcp_api_keys.down,
+    name: '20260412_192622_unite_get_tools_in_mcp_api_keys'
   },
 ];

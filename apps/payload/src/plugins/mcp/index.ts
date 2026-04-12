@@ -1,9 +1,8 @@
 import type { Page } from '@/payload-types'
-import type { CollectionSlug, PayloadRequest } from 'payload'
+import type { PayloadRequest } from 'payload'
 import { buildUrl } from '@/core/utils/path/buildUrl'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
-import { getDocumentFabric } from './tools/getDocumentFabric'
-import { getGlobalDocumentFabric } from './tools/getGlobalDocumentFabric'
+import { createMcpTools, type McpToolsRegistry } from './tools'
 import { uploadImage } from './tools/uploadImage'
 import { LOCAL_DEV_MCP_USER, LOCAL_HOSTS } from './constants/local'
 
@@ -33,63 +32,56 @@ function isLocalDevMcpRequest(req: PayloadRequest) {
   }
 }
 
-const KNOWN_COLLECTIONS: Set<CollectionSlug> = new Set(['page', 'posts', 'header', 'footer'])
-
-// Get tools
-const [getPageContent, getPageField, getAllPage] = getDocumentFabric({
-  collection: 'page',
-  tableFields: ['id', 'title', 'slug', '_status'],
-  titleField: 'title',
-  buildUrl: (doc, locale) =>
-    buildUrl({
-      collection: 'page',
-      breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
-      locale: locale ?? 'en',
-    }),
-  skipKeys: [
-    'id',
-    'generateSlug',
-    'parent',
-    'folder',
-    '_abPassPercentage',
-    '_abVariantOf',
-    '_abVariantPercentages',
-  ],
-  knownCollections: KNOWN_COLLECTIONS,
-})
-const [getPostsContent, getPostsField, getAllPosts] = getDocumentFabric({
-  collection: 'posts',
-  tableFields: ['id', 'title', 'slug', '_status', 'publishedAt', 'excerpt'],
-  titleField: 'title',
-  buildUrl: (doc, locale) =>
-    buildUrl({
-      collection: 'posts',
-      slug: doc?.slug as string,
-      absolute: false,
-      locale: locale ?? 'en',
-    }),
-  skipKeys: ['id'],
-  knownCollections: KNOWN_COLLECTIONS,
-})
-const [getHeaderContent, getHeaderField, getAllHeaders] = getDocumentFabric({
-  collection: 'header',
-  tableFields: [],
-  titleField: 'name',
-  skipKeys: ['id'],
-  knownCollections: KNOWN_COLLECTIONS,
-})
-const [getFooterContent, getFooterField, getAllFooters] = getDocumentFabric({
-  collection: 'footer',
-  tableFields: [],
-  titleField: 'name',
-  skipKeys: ['id'],
-  knownCollections: KNOWN_COLLECTIONS,
-})
-const [getSiteSettingsContent, getSiteSettingsField] = getGlobalDocumentFabric({
-  slug: 'site-settings',
-  titleField: 'siteName',
-  knownCollections: KNOWN_COLLECTIONS,
-})
+const registry: McpToolsRegistry = {
+  collections: {
+    page: {
+      tableFields: ['slug', '_status'],
+      titleField: 'title',
+      buildUrl: (doc, locale) =>
+        buildUrl({
+          collection: 'page',
+          breadcrumbs: doc.breadcrumbs as Page['breadcrumbs'],
+          locale: locale ?? 'en',
+        }),
+      skipKeys: [
+        'id',
+        'generateSlug',
+        'parent',
+        'folder',
+        '_abPassPercentage',
+        '_abVariantOf',
+        '_abVariantPercentages',
+      ],
+    },
+    posts: {
+      tableFields: ['slug', '_status', 'publishedAt', 'excerpt'],
+      titleField: 'title',
+      buildUrl: (doc, locale) =>
+        buildUrl({
+          collection: 'posts',
+          slug: doc?.slug as string,
+          absolute: false,
+          locale: locale ?? 'en',
+        }),
+      skipKeys: ['id'],
+    },
+    header: {
+      tableFields: [],
+      titleField: 'name',
+      skipKeys: ['id'],
+    },
+    footer: {
+      tableFields: [],
+      titleField: 'name',
+      skipKeys: ['id'],
+    },
+  },
+  globals: {
+    'site-settings': {
+      titleField: 'siteName',
+    },
+  },
+}
 
 export const mcpPluginConfig = mcpPlugin({
   collections: {
@@ -146,41 +138,18 @@ export const mcpPluginConfig = mcpPlugin({
       header: { create: true, delete: true, find: false, update: true },
       footer: { create: true, delete: true, find: false, update: true },
       'payload-mcp-tool': {
-        getPageContent: true,
-        getPageField: true,
-        getAllPage: true,
-        getPostsContent: true,
-        getPostsField: true,
-        getAllPosts: true,
-        getHeaderContent: true,
-        getHeaderField: true,
-        getAllHeaders: true,
-        getFooterContent: true,
-        getFooterField: true,
-        getAllFooters: true,
+        getDocument: true,
+        getAllDocuments: true,
+        getGlobalDocument: true,
+        getField: true,
         uploadImage: true,
-        getSiteSettingsContent: true,
-        getSiteSettingsField: true,
       },
     }
   },
   mcp: {
     tools: [
-      getPageContent,
-      getPageField,
-      getAllPage,
-      getPostsContent,
-      getPostsField,
-      getAllPosts,
-      getHeaderContent,
-      getHeaderField,
-      getAllHeaders,
-      getFooterContent,
-      getFooterField,
-      getAllFooters,
+      ...createMcpTools(registry),
       uploadImage,
-      getSiteSettingsContent,
-      getSiteSettingsField,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any,
   },

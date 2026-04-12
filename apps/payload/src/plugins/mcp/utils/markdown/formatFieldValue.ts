@@ -13,14 +13,15 @@ function formatEmptyValue(value: unknown): string {
 }
 
 interface FormatDocumentFieldOpts {
-  collectionPascal: string
+  collectionSlug: string
+  documentId?: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
-  knownCollectionPascals?: Set<string>
+  fieldRelationTo?: Record<string, string>
 }
 
 export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpts) {
-  const { blockLabels, knownCollectionPascals } = options
+  const { blockLabels } = options
 
   if (isLexicalField(value)) {
     return lexicalToMarkdown(value.root).trim() || 'null'
@@ -31,7 +32,7 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
   }
 
   if (isRelation(value)) {
-    return formatRelationValueClue(value, knownCollectionPascals)
+    return formatRelationValueClue(value)
   }
 
   if (Array.isArray(value)) {
@@ -46,7 +47,7 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
 
           const fields = Object.entries(block)
             .filter(([key]) => key !== 'blockType' && key !== 'blockName' && key !== 'id')
-            .map(([key, value]) => formatFieldLine(key, value, 2, options))
+            .map(([key, value]) => formatFieldLine(key, value, 1, options))
             .join('\n')
 
           return fields ? `${header}\n${fields}` : header
@@ -55,7 +56,7 @@ export function formatFieldValue(value: unknown, options: FormatDocumentFieldOpt
           const header = `- [${i}]:`
 
           const fields = Object.entries(item as Record<string, unknown>)
-            .map(([key, value]) => formatFieldLine(key, value, 2, options))
+            .map(([key, value]) => formatFieldLine(key, value, 1, options))
             .join('\n')
 
           return fields ? `${header}\n${fields}` : header

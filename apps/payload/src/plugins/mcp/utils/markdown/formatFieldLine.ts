@@ -25,12 +25,13 @@ function formatLexicalContent(value: unknown): string {
 }
 
 interface FormatFieldLineOpts {
-  collectionPascal: string
+  collectionSlug: string
+  documentId?: string
   fieldLabels: Record<string, string>
   blockLabels: Record<string, string>
+  fieldRelationTo?: Record<string, string>
   summarizeComplexValues?: boolean
   fieldPath?: string
-  knownCollectionPascals?: Set<string>
 }
 
 export function formatFieldLine(
@@ -44,8 +45,8 @@ export function formatFieldLine(
     blockLabels,
     fieldPath = key,
     summarizeComplexValues,
-    collectionPascal,
-    knownCollectionPascals,
+    collectionSlug,
+    documentId,
   } = options
 
   const indent = LIST_INDENT.repeat(depth)
@@ -58,7 +59,7 @@ export function formatFieldLine(
 
   if (isLexicalField(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, fieldPath, collectionSlug, documentId)}`
     }
 
     const indentedContent = formatLexicalContent(value)
@@ -81,12 +82,12 @@ export function formatFieldLine(
         ? `${indent}- **${label}**:\n${idLine}\n${fields}`
         : `${indent}- **${label}**:\n${idLine}`
     }
-    return `${indent}- **${label}**: ${formatRelationValueClue(value, knownCollectionPascals)}`
+    return `${indent}- **${label}**: ${formatRelationValueClue(value, options.fieldRelationTo?.[key])}`
   }
 
   if (isBlocksArray(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, fieldPath, collectionSlug, documentId)}`
     }
 
     const items = value
@@ -108,7 +109,7 @@ export function formatFieldLine(
 
   if (isObjectsArray(value)) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, fieldPath, collectionSlug, documentId)}`
     }
 
     const items = value
@@ -127,7 +128,7 @@ export function formatFieldLine(
 
   if (typeof value === 'object' && value !== null) {
     if (summarizeComplexValues) {
-      return `${indent}- **${label}**: ${formatFieldValueClue(value, collectionPascal, fieldPath, knownCollectionPascals)}`
+      return `${indent}- **${label}**: ${formatFieldValueClue(value, fieldPath, collectionSlug, documentId)}`
     }
 
     const fields = Object.entries(value as Record<string, unknown>)

@@ -2,31 +2,30 @@ import { isLexicalField } from '../lexical/isLexicalField'
 
 export function formatRelationValueClue(
   value: Record<string, unknown>,
-  knownCollectionPascals?: Set<string>,
+  knownCollectionSlug?: string,
 ): string {
   const title = value.title ?? value.name ?? value.id
-  const collName = String(value.name ?? value.id)
-  const hasCollectionTool = !knownCollectionPascals || knownCollectionPascals.has(collName)
+  const relationTo = (value.relationTo as string | undefined) || knownCollectionSlug
+  const id = String(value.id)
 
-  if (!hasCollectionTool) {
-    return `[${String(title)}] no MCP tool available to fetch full content`
+  if (relationTo) {
+    return `[${String(title)}] getDocument(collectionSlug: "${relationTo}", id: "${id}")`
   }
 
-  return `[${String(title)}] (id: ${String(value.id)}) -> call get${collName}Content for full content`
+  return `[${String(title)}] no MCP tool available to fetch full document`
 }
 
 export function formatFieldValueClue(
   value: unknown,
-  collectionPascal: string,
   fieldPath: string,
-  knownCollectionPascals?: Set<string>,
+  collectionSlug: string,
+  documentId?: string,
 ): string {
-  const detail = isLexicalField(value) ? 'rich text' : 'content'
-  const hasFieldTool = !knownCollectionPascals || knownCollectionPascals.has(collectionPascal)
-
-  if (!hasFieldTool) {
-    return `[${fieldPath}] no MCP tool available to fetch full ${detail}`
+  if (documentId) {
+    return `[${fieldPath}] getField(slug: "${collectionSlug}", id: "${documentId}", fieldPath: "${fieldPath}")`
   }
 
-  return `[${fieldPath}] (fieldPath: "${fieldPath}") -> call get${collectionPascal}Field for full ${detail}`
+  const detail = isLexicalField(value) ? 'rich text' : 'content'
+
+  return `[${fieldPath}] no MCP tool available to fetch full ${detail}`
 }

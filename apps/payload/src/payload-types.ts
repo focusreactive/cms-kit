@@ -1541,65 +1541,25 @@ export interface PayloadMcpApiKey {
   };
   'payload-mcp-tool'?: {
     /**
-     * Fetch a page document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getPageField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     * Fetch a collection document by ID. Specify collectionSlug (one of: page, posts, header, footer). Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count. Use getAllDocuments to list documents first, then this tool by ID. Use getField to drill into specific fields. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON — use this when you need structured data for analysis or to construct an update payload. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
      */
-    getPageContent?: boolean | null;
+    getDocument?: boolean | null;
     /**
-     * Fetch the full content of a specific field from a page document. Use this after `getPageContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     * List collection documents as a formatted summary. Specify collectionSlug (one of: page, posts, header, footer). Returns only scalar summary fields plus admin URL and public URL (where applicable). Objects, relations, arrays, and rich text are omitted from the list output. To get full details for a document, call getDocument with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
      */
-    getPageField?: boolean | null;
+    getAllDocuments?: boolean | null;
     /**
-     * List page documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPageContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
+     * Fetch a global document. Specify globalSlug (one of: site-settings). Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count. Use this to discover the global structure, then call getField to drill into specific fields. Also use before any update action to understand field structure and existing values. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document (including all IDs and Lexical nodes) — required when you need data to reconstruct or pass back in an update. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
      */
-    getAllPage?: boolean | null;
+    getGlobalDocument?: boolean | null;
     /**
-     * Fetch a posts document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getPostsField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
+     * Fetch the full content of a specific field from a collection document or global. slug accepts a collection (page, posts, header, footer) or a global (site-settings). For collections, id is required. For globals, id is ignored. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
      */
-    getPostsContent?: boolean | null;
-    /**
-     * Fetch the full content of a specific field from a posts document. Use this after `getPostsContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
-     */
-    getPostsField?: boolean | null;
-    /**
-     * List posts documents as a formatted summary list. The "title" field is the document title. Returns only the necessary scalar summary fields from id, title, slug, _status, publishedAt, excerpt, plus admin URL and public URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getPostsContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
-     */
-    getAllPosts?: boolean | null;
-    /**
-     * Fetch a header document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getHeaderField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
-     */
-    getHeaderContent?: boolean | null;
-    /**
-     * Fetch the full content of a specific field from a header document. Use this after `getHeaderContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
-     */
-    getHeaderField?: boolean | null;
-    /**
-     * List header documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getHeaderContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
-     */
-    getAllHeader?: boolean | null;
-    /**
-     * Fetch a footer document by ID. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the document structure, then call `getFooterField` to drill into specific fields. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document instead of Markdown — use this when you need structured data for analysis, reporting, or extracting values to pass back in an update call.
-     */
-    getFooterContent?: boolean | null;
-    /**
-     * Fetch the full content of a specific field from a footer document. Use this after `getFooterContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
-     */
-    getFooterField?: boolean | null;
-    /**
-     * List footer documents as a formatted summary list. The "name" field is the document title. Returns only the necessary scalar summary fields from , plus admin URL. Objects, relations, arrays and rich text are omitted from the list output. To get full details for a document, call `getFooterContent` with its ID. The response is pre-formatted Markdown - output it verbatim without reformatting or summarizing.
-     */
-    getAllFooter?: boolean | null;
+    getField?: boolean | null;
     /**
      * Upload one or more images to the media library from local file paths (dev only) or remote URLs. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` values as the value of those fields in subsequent create/update calls. Always derive `alt` from the visible or described image content — never copy the filename. Uploads are processed concurrently (up to 3 at a time). Partial failures are tolerated — check the `failed` array in the response.
      */
     uploadImage?: boolean | null;
-    /**
-     * Fetch the site-settings global. Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count rather than expanded. Use this to discover the global structure, then call `getSiteSettingsField` to drill into specific fields. Also use before any update action to understand field structure and existing values. Pass raw: true to get the full raw JSON document (including all IDs and Lexical nodes) — required when you need data to reconstruct or pass back in an update. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing. Do NOT pass full: true unless the user explicitly asks to extract the entire content.
-     */
-    getSiteSettingsContent?: boolean | null;
-    /**
-     * Fetch the full content of a specific field from the site-settings global. Use this after `getSiteSettingsContent` to drill into a particular field — especially for arrays, blocks, rich text, or relations that were summarized in the overview. Use dot-notation for nested paths (e.g. "siteName", "blog.blogTitle"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
-     */
-    getSiteSettingsField?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -2782,21 +2742,11 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
   'payload-mcp-tool'?:
     | T
     | {
-        getPageContent?: T;
-        getPageField?: T;
-        getAllPage?: T;
-        getPostsContent?: T;
-        getPostsField?: T;
-        getAllPosts?: T;
-        getHeaderContent?: T;
-        getHeaderField?: T;
-        getAllHeader?: T;
-        getFooterContent?: T;
-        getFooterField?: T;
-        getAllFooter?: T;
+        getDocument?: T;
+        getAllDocuments?: T;
+        getGlobalDocument?: T;
+        getField?: T;
         uploadImage?: T;
-        getSiteSettingsContent?: T;
-        getSiteSettingsField?: T;
       };
   updatedAt?: T;
   createdAt?: T;
