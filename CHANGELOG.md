@@ -1,3 +1,10 @@
+## [1.0.17](https://github.com/focusreactive/cms-kit/compare/v1.0.16...v1.0.17) (2026-04-14)
+
+
+### Bug Fixes
+
+* **payload:** reduce scheduled-publish cron to once per hour ([b51443a](https://github.com/focusreactive/cms-kit/commit/b51443a8d408446d37ca9961dfc1812212aa71eb))
+
 ## [1.0.16](https://github.com/focusreactive/cms-kit/compare/v1.0.15...v1.0.16) (2026-04-14)
 
 
