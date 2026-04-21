@@ -1067,7 +1067,7 @@ export interface Redirect {
   createdAt: string;
 }
 /**
- * One preset = one type. After choosing type, fill the matching section below.
+ * One preset = one block type. Add one block to store its field values.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "presets".
@@ -1079,353 +1079,369 @@ export interface Preset {
    * The preview image for the preset
    */
   preview?: (number | null) | Media;
-  /**
-   * Choose type — only the matching section below will be shown.
-   */
-  type:
-    | 'hero'
-    | 'textSection'
-    | 'content'
-    | 'faq'
-    | 'testimonialsList'
-    | 'cardsGrid'
-    | 'carousel'
-    | 'logos'
-    | 'linksList';
-  hero?: {
-    title?: string | null;
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    actions?:
-      | {
-          type?: ('reference' | 'custom' | 'customPage') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'page';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          customPage?: ('blog' | 'search') | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-          id?: string | null;
-        }[]
-      | null;
-    image: {
-      image: number | Media;
-      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-    };
-    enabled?: boolean | null;
-    color?: ('black' | 'white') | null;
-    /**
-     * Overlay opacity (0-100)
-     */
-    opacity?: number | null;
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  textSection?: {
-    text: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  content?: {
-    heading?: string | null;
-    layout: 'image-text' | 'text-image';
-    image: number | Media;
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  faq?: {
-    heading: string;
-    items: {
-      question: string;
-      answer: {
-        root: {
-          type: string;
-          children: {
-            type: any;
+  presetBlock: (
+    | {
+        title?: string | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
             version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  testimonialsList?: {
-    heading?: string | null;
-    subheading?: string | null;
-    testimonialItems?:
-      | {
-          testimonial: number | Testimonial;
-          id?: string | null;
-        }[]
-      | null;
-    /**
-     * The duration of the animation in seconds. Default is 60 seconds.
-     */
-    duration?: number | null;
-    showRating?: boolean | null;
-    showAvatar?: boolean | null;
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  cardsGrid?: {
-    columns?: number | null;
-    items: {
-      title: string;
-      description?: string | null;
-      image?: {
-        image?: (number | null) | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      link?: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: ('blog' | 'search') | null;
-        label?: string | null;
-        /**
-         * Choose how the link should be rendered.
-         */
-        appearance?: ('default' | 'outline') | null;
-      };
-      alignVariant?: ('left' | 'center' | 'right') | null;
-      rounded?: ('none' | 'large') | null;
-      backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  carousel?: {
-    text?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
+          };
           [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
-    slides: {
-      image: {
-        image: number | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      text?: {
-        root: {
-          type: string;
-          children: {
-            type: any;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
+        } | null;
+        actions?:
+          | {
+              type?: ('reference' | 'custom' | 'customPage') | null;
+              newTab?: boolean | null;
+              reference?:
+                | ({
+                    relationTo: 'page';
+                    value: number | Page;
+                  } | null)
+                | ({
+                    relationTo: 'posts';
+                    value: number | Post;
+                  } | null);
+              url?: string | null;
+              customPage?: ('blog' | 'search') | null;
+              label: string;
+              /**
+               * Choose how the link should be rendered.
+               */
+              appearance?: ('default' | 'outline') | null;
+              id?: string | null;
+            }[]
+          | null;
+        image: {
+          image: number | Media;
+          aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
         };
-        [k: string]: unknown;
-      } | null;
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  logos?: {
-    alignVariant?: ('left' | 'center' | 'right') | null;
-    items: {
-      image: {
-        image: number | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      link: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: ('blog' | 'search') | null;
-        label: string;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
-  linksList?: {
-    alignVariant?: ('left' | 'center' | 'right') | null;
-    links: {
-      link: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: ('blog' | 'search') | null;
-        label: string;
+        enabled?: boolean | null;
+        color?: ('black' | 'white') | null;
         /**
-         * Choose how the link should be rendered.
+         * Overlay opacity (0-100)
          */
-        appearance?: ('default' | 'outline') | null;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      marginTop?: ('none' | 'base' | 'large') | null;
-      marginBottom?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base' | 'large') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      maxWidth?: ('none' | 'base' | 'small') | null;
-      backgroundImage?: (number | null) | Media;
-    };
-  };
+        opacity?: number | null;
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'textSection';
+      }
+    | {
+        heading?: string | null;
+        layout: 'image-text' | 'text-image';
+        image: number | Media;
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content';
+      }
+    | {
+        heading: string;
+        items: {
+          question: string;
+          answer: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | {
+        heading?: string | null;
+        subheading?: string | null;
+        testimonialItems?:
+          | {
+              testimonial: number | Testimonial;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * The duration of the animation in seconds. Default is 60 seconds.
+         */
+        duration?: number | null;
+        showRating?: boolean | null;
+        showAvatar?: boolean | null;
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonialsList';
+      }
+    | {
+        columns?: number | null;
+        items: {
+          title: string;
+          description?: string | null;
+          image?: {
+            image?: (number | null) | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          link?: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label?: string | null;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          alignVariant?: ('left' | 'center' | 'right') | null;
+          rounded?: ('none' | 'large') | null;
+          backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardsGrid';
+      }
+    | {
+        text?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
+        slides: {
+          image: {
+            image: number | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          text?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'carousel';
+      }
+    | {
+        alignVariant?: ('left' | 'center' | 'right') | null;
+        items: {
+          image: {
+            image: number | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          link: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label: string;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logos';
+      }
+    | {
+        alignVariant?: ('left' | 'center' | 'right') | null;
+        links: {
+          link: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          marginTop?: ('none' | 'base' | 'large') | null;
+          marginBottom?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base' | 'large') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          maxWidth?: ('none' | 'base' | 'small') | null;
+          backgroundImage?: (number | null) | Media;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'linksList';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
 }
@@ -2412,145 +2428,15 @@ export interface RedirectsSelect<T extends boolean = true> {
 export interface PresetsSelect<T extends boolean = true> {
   name?: T;
   preview?: T;
-  type?: T;
-  hero?:
+  presetBlock?:
     | T
     | {
-        title?: T;
-        richText?: T;
-        actions?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              customPage?: T;
-              label?: T;
-              appearance?: T;
-              id?: T;
-            };
-        image?:
-          | T
-          | {
-              image?: T;
-              aspectRatio?: T;
-            };
-        enabled?: T;
-        color?: T;
-        opacity?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  textSection?:
-    | T
-    | {
-        text?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  content?:
-    | T
-    | {
-        heading?: T;
-        layout?: T;
-        image?: T;
-        content?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  faq?:
-    | T
-    | {
-        heading?: T;
-        items?:
-          | T
-          | {
-              question?: T;
-              answer?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  testimonialsList?:
-    | T
-    | {
-        heading?: T;
-        subheading?: T;
-        testimonialItems?:
-          | T
-          | {
-              testimonial?: T;
-              id?: T;
-            };
-        duration?: T;
-        showRating?: T;
-        showAvatar?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  cardsGrid?:
-    | T
-    | {
-        columns?: T;
-        items?:
+        hero?:
           | T
           | {
               title?: T;
-              description?: T;
-              image?:
-                | T
-                | {
-                    image?: T;
-                    aspectRatio?: T;
-                  };
-              link?:
+              richText?: T;
+              actions?:
                 | T
                 | {
                     type?: T;
@@ -2560,120 +2446,271 @@ export interface PresetsSelect<T extends boolean = true> {
                     customPage?: T;
                     label?: T;
                     appearance?: T;
+                    id?: T;
                   };
-              alignVariant?: T;
-              rounded?: T;
-              backgroundColor?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  carousel?:
-    | T
-    | {
-        text?: T;
-        effect?: T;
-        slides?:
-          | T
-          | {
               image?:
                 | T
                 | {
                     image?: T;
                     aspectRatio?: T;
                   };
+              enabled?: T;
+              color?: T;
+              opacity?: T;
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textSection?:
+          | T
+          | {
               text?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  logos?:
-    | T
-    | {
-        alignVariant?: T;
-        items?:
-          | T
-          | {
-              image?:
+              section?:
                 | T
                 | {
-                    image?: T;
-                    aspectRatio?: T;
-                  };
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    customPage?: T;
-                    label?: T;
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
                   };
               id?: T;
+              blockName?: T;
             };
-        section?:
+        content?:
           | T
           | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
-            };
-      };
-  linksList?:
-    | T
-    | {
-        alignVariant?: T;
-        links?:
-          | T
-          | {
-              link?:
+              heading?: T;
+              layout?: T;
+              image?: T;
+              content?: T;
+              section?:
                 | T
                 | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    customPage?: T;
-                    label?: T;
-                    appearance?: T;
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
                   };
               id?: T;
+              blockName?: T;
             };
-        section?:
+        faq?:
           | T
           | {
-              theme?: T;
-              marginTop?: T;
-              marginBottom?: T;
-              paddingX?: T;
-              paddingY?: T;
-              maxWidth?: T;
-              backgroundImage?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonialsList?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              testimonialItems?:
+                | T
+                | {
+                    testimonial?: T;
+                    id?: T;
+                  };
+              duration?: T;
+              showRating?: T;
+              showAvatar?: T;
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardsGrid?:
+          | T
+          | {
+              columns?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    alignVariant?: T;
+                    rounded?: T;
+                    backgroundColor?: T;
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        carousel?:
+          | T
+          | {
+              text?: T;
+              effect?: T;
+              slides?:
+                | T
+                | {
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    text?: T;
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logos?:
+          | T
+          | {
+              alignVariant?: T;
+              items?:
+                | T
+                | {
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        linksList?:
+          | T
+          | {
+              alignVariant?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    marginTop?: T;
+                    marginBottom?: T;
+                    paddingX?: T;
+                    paddingY?: T;
+                    maxWidth?: T;
+                    backgroundImage?: T;
+                  };
+              id?: T;
+              blockName?: T;
             };
       };
   updatedAt?: T;
