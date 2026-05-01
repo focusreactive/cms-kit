@@ -212,13 +212,16 @@ export const plugins: Plugin[] = [
         loadingComments: 'Cargando comentarios...',
       },
     },
-  }) as unknown as Plugin,
+  }),
 
   schedulePublicationPlugin({
     collections: ['page', 'posts'],
     globals: ['site-settings'],
     secret: process.env.CRON_SECRET!,
-  }) as unknown as Plugin,
+    schedulePublish: {
+      timeIntervals: 60
+    }
+  }),
 
   translatorPlugin({
     collections: [PageCollection, Posts, Categories, Authors, Testimonials, Header, Footer].map(
