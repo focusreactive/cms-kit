@@ -1,110 +1,73 @@
-import { storyblokEditable } from "@storyblok/react/rsc";
-
 import { cn, cva } from "@shared/ui";
+
+import Container from "@/components/Container";
+import { Media } from "@/components/Media";
 
 import type { ISectionContainerProps } from "./types";
 
-export default function SectionContainer({
-  children,
-  blok,
-  className,
-}: ISectionContainerProps) {
-  const {
-    _uid,
-    paddingX,
-    paddingY,
-    marginTop,
-    marginBottom,
-    maxWidth,
-    theme,
-    backgroundImage,
-    backgroundGradient,
-  } = blok;
-
-  const style = backgroundImage?.filename
-    ? {
-        background: `url(${backgroundImage.filename}) no-repeat center/cover`,
-      }
-    : {};
-
-  return (
-    <section
-      {...storyblokEditable(blok)}
-      className={cn(
-        "mx-auto max-w-screen-xl overflow-x-hidden rounded-2xl",
-        className,
-        theme,
-        outerVariants({
-          marginTop,
-          marginBottom,
-          backgroundGradient,
-        }),
-        {
-          "bg-bgColor": !!theme && !backgroundGradient,
-        },
-      )}
-      id={_uid}
-      style={style}
-    >
-      <div
-        className={cn(
-          "mx-auto px-4 py-8",
-          innerVariants({
-            paddingX,
-            paddingY,
-            maxWidth,
-          }),
-        )}
-      >
-        {children}
-      </div>
-    </section>
-  );
-}
-
-const outerVariants = cva("", {
+const sectionVariants = cva("overflow-clip relative z-1", {
   variants: {
-    marginTop: {
-      none: "mt-0",
-      base: "mt-sectionBase",
-      large: "mt-sectionLarge",
-    },
-    marginBottom: {
-      none: "mb-0",
-      base: "mb-sectionBase",
-      large: "mb-sectionLarge",
-    },
-    backgroundGradient: {
-      "gradient-1": "bg-gradient-to-br from-white to-primaryLightColor",
-    },
-  },
-  defaultVariants: {
-    marginTop: "base",
-    marginBottom: "base",
-  },
-});
-
-const innerVariants = cva("", {
-  variants: {
-    paddingX: {
-      none: "px-0",
-      base: "px-sectionBase",
-      large: "px-sectionLarge",
-    },
     paddingY: {
       none: "py-0",
       base: "py-sectionBase",
       large: "py-sectionLarge",
     },
-    maxWidth: {
-      base: "max-w-screen-xl",
-      small: "max-w-screen-sm",
-      none: "max-w-none",
-    },
   },
   defaultVariants: {
-    paddingX: "base",
     paddingY: "base",
-    maxWidth: "base",
   },
 });
+
+export default function SectionContainer({
+  children,
+  className,
+  containerClassName,
+  sectionData,
+  id,
+  editableAttrs,
+}: ISectionContainerProps) {
+  const { theme, paddingY, paddingX, maxWidth, media, overlay, opacity } =
+    sectionData ?? {};
+
+  const overlayOpacity = opacity ? Number(opacity) / 100 : undefined;
+  const hasMedia = !!media?.filename;
+
+  return (
+    <section
+      id={id}
+      className={cn(sectionVariants({ paddingY: paddingY || undefined }), className)}
+      {...(theme ? { "data-theme": theme } : {})}
+      {...(editableAttrs ?? {})}
+    >
+      <Container
+        containerData={{ paddingX, maxWidth }}
+        className={containerClassName}
+      >
+        {children}
+      </Container>
+
+      {hasMedia && (
+        <>
+          <Media
+            resource={media}
+            className="absolute inset-0 size-full -z-2"
+            imgClassName="size-full object-cover pointer-events-none"
+            videoClassName="size-full object-cover pointer-events-none"
+            fill
+            aria-hidden
+          />
+
+          {overlay && (
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-1 pointer-events-none"
+              style={{
+                backgroundColor: `rgba(${overlay === "black" ? "0,0,0" : "255,255,255"},${overlayOpacity})`,
+              }}
+            />
+          )}
+        </>
+      )}
+    </section>
+  );
+}

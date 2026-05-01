@@ -639,7 +639,7 @@ export interface HeroBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -680,7 +680,7 @@ export interface TextSectionBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -724,7 +724,7 @@ export interface ContentBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -770,7 +770,7 @@ export interface FaqBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -810,7 +810,7 @@ export interface TestimonialsListBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -884,7 +884,7 @@ export interface CardsGridBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -948,7 +948,7 @@ export interface CarouselBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -998,7 +998,7 @@ export interface LogosBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -1048,7 +1048,7 @@ export interface LinksListBlock {
     theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
     paddingY?: ('none' | 'base' | 'large') | null;
     paddingX?: ('none' | 'base') | null;
-    maxWidth?: ('none' | 'base' | 'full') | null;
+    maxWidth?: ('none' | 'base') | null;
     background?: {
       /**
        * Upload an image or video. Use the "Background" folder.
@@ -1179,7 +1179,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1213,7 +1213,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1250,7 +1250,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1289,7 +1289,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1322,7 +1322,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1374,7 +1374,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1431,7 +1431,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1474,7 +1474,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.
@@ -1517,7 +1517,7 @@ export interface Preset {
       theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
       paddingY?: ('none' | 'base' | 'large') | null;
       paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base' | 'full') | null;
+      maxWidth?: ('none' | 'base') | null;
       background?: {
         /**
          * Upload an image or video. Use the "Background" folder.

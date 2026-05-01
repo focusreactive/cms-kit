@@ -34,7 +34,7 @@ export type SectionHero = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -75,7 +75,7 @@ export type SectionCarousel = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -115,7 +115,7 @@ export type SectionBlog = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -154,7 +154,7 @@ export type SectionCardsGrid = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -193,7 +193,7 @@ export type SectionLinksList = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -232,7 +232,7 @@ export type SectionLogos = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -271,7 +271,7 @@ export type SectionCopy = {
   theme?: "light" | "dark" | "light-gray" | "dark-gray";
   paddingY: "none" | "base" | "large";
   paddingX: "none" | "base";
-  maxWidth: "none" | "base" | "full";
+  maxWidth: "none" | "base";
   background?: {
     type?: "image" | "video";
     image?: {
@@ -423,7 +423,7 @@ export type Page = {
     theme?: "light" | "dark" | "light-gray" | "dark-gray";
     paddingY: "none" | "base" | "large";
     paddingX: "none" | "base";
-    maxWidth: "none" | "base" | "full";
+    maxWidth: "none" | "base";
     background?: {
       type?: "image" | "video";
       image?: {

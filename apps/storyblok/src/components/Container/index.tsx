@@ -1,8 +1,6 @@
-import { cva } from "class-variance-authority";
+import { cn, cva } from "@shared/ui";
 
-import { cn } from "@shared/ui";
-
-import type { ISectionContainerProps } from "../SectionContainer/types";
+import type { ISectionData } from "../SectionContainer/types";
 
 const containerVariants = cva("mx-auto w-full", {
   variants: {
@@ -23,10 +21,7 @@ const containerVariants = cva("mx-auto w-full", {
 
 type ContainerProps = {
   children: React.ReactNode;
-  containerData: Pick<
-    ISectionContainerProps["sectionData"],
-    "paddingX" | "maxWidth"
-  >;
+  containerData: Pick<ISectionData, "paddingX" | "maxWidth">;
   className?: string;
 };
 
@@ -35,13 +30,12 @@ export default function Container({
   containerData,
   className,
 }: ContainerProps) {
-  const { paddingX, maxWidth } = containerData;
   return (
     <div
       className={cn(
         containerVariants({
-          paddingX,
-          maxWidth,
+          paddingX: containerData.paddingX || undefined,
+          maxWidth: containerData.maxWidth || undefined,
         }),
         className,
       )}

@@ -7,7 +7,6 @@ import { Footer as FooterUI } from "@shared/ui";
 import { prepareImageProps } from "@/lib/adapters/prepareImageProps";
 import { prepareLinkProps } from "@/lib/adapters/prepareLinkProps";
 import { prepareRichTextProps } from "@/lib/adapters/prepareRichTextProps";
-import SectionContainer from "@/components/SectionContainer";
 
 import type { IFooterProps } from "./types";
 
@@ -23,16 +22,11 @@ export default function Footer({ blok }: IFooterProps) {
     return <EmptyBlock name={blok.component as string} />;
 
   return (
-    <SectionContainer
-      blok={{ ...blok, theme: "dark", marginBottom: "none" }}
-      className="rounded-b-none"
-    >
-      <FooterUI
-        image={prepareImageProps(image?.[0])}
-        copywriteText={copywriteText}
-        links={links?.map(prepareLinkProps) || []}
-        text={prepareRichTextProps(text?.[0])}
-      />
-    </SectionContainer>
+    <FooterUI
+      image={prepareImageProps(image?.[0])}
+      copywriteText={copywriteText}
+      links={links?.map(prepareLinkProps) || []}
+      text={prepareRichTextProps(text?.[0])}
+    />
   );
 }

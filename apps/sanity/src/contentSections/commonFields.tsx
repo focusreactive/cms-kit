@@ -74,7 +74,6 @@ export const sectionCommonFields = [
       list: [
         { title: "None", value: "none" },
         { title: "Base", value: "base" },
-        { title: "Full", value: "full" },
       ],
       layout: "dropdown",
     },

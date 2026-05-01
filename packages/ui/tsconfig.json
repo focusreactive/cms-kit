@@ -1,5 +1,5 @@
 {
   "extends": "@shared/ts-config/react-library.json",
-  "include": ["."],
+  "include": [".", "../../apps/storyblok/src/components/Container"],
   "exclude": ["node_modules", "dist"]
 }

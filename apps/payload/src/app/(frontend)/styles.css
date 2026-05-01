@@ -2,6 +2,9 @@
 
 @source "../..";
 
+@variant light (&:where([data-theme="light"], [data-theme="light"] *):not(:is([data-theme="dark"], [data-theme="dark"] *)));
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *):not(:is([data-theme="light"], [data-theme="light"] *)));
+
 @theme {
   --color-bgColor: #fff;
   --color-textColor: #222222;
@@ -13,58 +16,23 @@
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
   --spacing-containerBase: var(--container-padding-base);
+  --spacing-containerMaxW: var(--container-max-width);
+  --color-error: oklch(0.577 0.245 27.325);
+  --color-success: oklch(0.6 0.15 145);
+  --color-warning: oklch(0.75 0.15 85);
 }
 
 :root {
   --section-margin-base: 96px;
   --section-margin-large: 120px;
-  --container-padding-base: 40px;
+  --container-padding-base: 24px;
+  --container-max-width: 1440px;
 }
 
-.light {
-  --color-bgColor: #fff;
-  --color-textColor: #222222;
-  --color-textSecondaryColor: #666666;
-  --color-primaryColor: #4f46e5;
-  --color-primaryLightColor: #e4e1ff;
-  --color-primary2Color: #ff0765;
-  --color-primary2LightColor: #ffe6f0;
-}
-
-.dark {
-  --color-bgColor: #222222;
-  --color-textColor: #f6f6f6;
-  --color-textSecondaryColor: #999999;
-  --color-primaryColor: #4f46e5;
-  --color-primaryLightColor: #e4e1ff;
-  --color-primary2Color: #ff0765;
-  --color-primary2LightColor: #ffe6f0;
-}
-
-.light-gray {
-  --color-bgColor: #f6f6f6;
-  --color-textColor: #222222;
-  --color-textSecondaryColor: #666666;
-  --color-primaryColor: #4f46e5;
-  --color-primaryLightColor: #e4e1ff;
-  --color-primary2Color: #ff0765;
-  --color-primary2LightColor: #ffe6f0;
-}
-
-.dark-gray {
-  --color-bgColor: #5b5b5b;
-  --color-textColor: #f6f6f6;
-  --color-textSecondaryColor: #bababa;
-  --color-primaryColor: #4f46e5;
-  --color-primaryLightColor: #e4e1ff;
-  --color-primary2Color: #ff0765;
-  --color-primary2LightColor: #ffe6f0;
-}
-
-@theme {
-  --color-error: oklch(0.577 0.245 27.325);
-  --color-success: oklch(0.6 0.15 145);
-  --color-warning: oklch(0.75 0.15 85);
+@media (min-width: 768px) {
+  :root {
+    --container-padding-base: 40px;
+  }
 }
 
 .prose {

@@ -1,60 +1,30 @@
 @import "@shared/tailwind-config/base.css";
 @source "..";
 
-/* App-specific theme tokens (was in tailwind.config.ts theme.extend) */
+@variant light (&:where([data-theme="light"], [data-theme="light"] *):not(:is([data-theme="dark"], [data-theme="dark"] *)));
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *):not(:is([data-theme="light"], [data-theme="light"] *)));
+
 @theme {
-  --color-bgColor: var(--bg);
-  --color-textColor: var(--text);
-  --color-textSecondaryColor: var(--text-secondary);
-  --color-primaryColor: var(--primary);
-  --color-primaryLightColor: var(--primary-light);
+  --color-bgColor: #fff;
+  --color-textColor: #222222;
+  --color-textSecondaryColor: #666666;
+  --color-primaryColor: #4f46e5;
+  --color-primaryLightColor: #e4e1ff;
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
   --spacing-containerBase: var(--container-padding-base);
+  --spacing-containerMaxW: var(--container-max-width);
 }
 
 :root {
   --section-margin-base: 96px;
   --section-margin-large: 120px;
-  --container-padding-base: 40px;
+  --container-padding-base: 24px;
+  --container-max-width: 1440px;
 }
 
-.light {
-  --bg: #fff;
-  --text: #222222;
-  --text-secondary: #666666;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #39ff14;
-  --primary-2-light: #ccffcc;
-}
-
-.dark {
-  --bg: #222222;
-  --text: #f6f6f6;
-  --text-secondary: #999999;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #39ff14;
-  --primary-2-light: #ccffcc;
-}
-
-.light-gray {
-  --bg: #f6f6f6;
-  --text: #222222;
-  --text-secondary: #666666;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #39ff14;
-  --primary-2-light: #ccffcc;
-}
-
-.dark-gray {
-  --bg: #5b5b5b;
-  --text: #f6f6f6;
-  --text-secondary: #bababa;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #39ff14;
-  --primary-2-light: #ccffcc;
+@media (min-width: 768px) {
+  :root {
+    --container-padding-base: 40px;
+  }
 }

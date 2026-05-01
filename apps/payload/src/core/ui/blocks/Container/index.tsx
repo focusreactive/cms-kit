@@ -11,8 +11,7 @@ const containerVariants = cva('mx-auto w-full', {
 
     maxWidth: {
       none: 'max-w-none',
-      base: 'max-w-380',
-      full: 'max-w-full',
+      base: 'max-w-containerMaxW',
     },
   },
   defaultVariants: {

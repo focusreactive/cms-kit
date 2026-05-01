@@ -45,7 +45,6 @@ export const sectionFields: GroupField = {
       options: [
         { label: { en: 'None', es: 'Ninguno' }, value: 'none' },
         { label: { en: 'Base', es: 'Base' }, value: 'base' },
-        { label: { en: 'Full', es: 'Completo' }, value: 'full' },
       ],
     },
     {

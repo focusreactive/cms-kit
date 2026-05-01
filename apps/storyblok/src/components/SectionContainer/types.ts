@@ -1,19 +1,12 @@
-import type { AssetStoryblok } from "@/generated/extracted-types";
-import type { SbBlokData } from "@storyblok/react/rsc";
+import type { SectionSettingsStoryblok } from "@/generated/extracted-types";
 
-export interface ISectionContainer extends SbBlokData {
-  maxWidth?: "none" | "base" | "small";
-  marginTop?: "none" | "base" | "large";
-  marginBottom?: "none" | "base" | "large";
-  paddingX?: "none" | "base" | "large";
-  paddingY?: "none" | "base" | "large";
-  theme?: "light" | "dark" | "light-gray" | "dark-gray" | "none";
-  backgroundImage?: AssetStoryblok;
-  backgroundGradient?: "gradient-1";
-}
+export type ISectionData = SectionSettingsStoryblok;
 
 export interface ISectionContainerProps {
   children: React.ReactNode;
-  blok: ISectionContainer;
+  sectionData?: ISectionData;
   className?: string;
+  containerClassName?: string;
+  id?: string;
+  editableAttrs?: Record<string, unknown>;
 }

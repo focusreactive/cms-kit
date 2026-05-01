@@ -3,7 +3,7 @@ interface ISectionData {
   theme?: "light" | "dark" | "light-gray" | "dark-gray" | null;
   paddingY?: "none" | "base" | "large" | null;
   paddingX?: "none" | "base" | null;
-  maxWidth?: "none" | "base" | "full" | null;
+  maxWidth?: "none" | "base" | null;
   background?: {
     type?: "image" | "video";
     image?: { asset?: { _ref: string } };

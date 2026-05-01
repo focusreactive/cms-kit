@@ -9,6 +9,16 @@ import { Image } from "@shared/ui";
 
 import { prepareImageProps } from "./adapters/prepareImageProps";
 
+const richTextSectionOverride = [
+  {
+    _uid: "richtext-section",
+    component: "sectionSettings" as const,
+    paddingX: "none",
+    paddingY: "none",
+    maxWidth: "none",
+  },
+];
+
 export default function renderRichText(data: ISbRichtext) {
   return render(data, {
     markResolvers: {},
@@ -37,7 +47,7 @@ export default function renderRichText(data: ISbRichtext) {
             blok={{
               ...props,
               component: "cardsGrid",
-              paddingX: "none",
+              section: richTextSectionOverride,
             }}
           />
         );
@@ -49,7 +59,7 @@ export default function renderRichText(data: ISbRichtext) {
             blok={{
               ...props,
               component: "linksList",
-              paddingX: "none",
+              section: richTextSectionOverride,
             }}
           />
         );
@@ -61,7 +71,7 @@ export default function renderRichText(data: ISbRichtext) {
             blok={{
               ...props,
               component: "logos",
-              paddingX: "none",
+              section: richTextSectionOverride,
             }}
           />
         );
@@ -70,7 +80,11 @@ export default function renderRichText(data: ISbRichtext) {
       carousel: (props) => {
         return (
           <StoryblokServerComponent
-            blok={{ ...props, component: "carousel", paddingX: "none" }}
+            blok={{
+              ...props,
+              component: "carousel",
+              section: richTextSectionOverride,
+            }}
           />
         );
       },
