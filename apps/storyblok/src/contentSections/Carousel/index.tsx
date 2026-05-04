@@ -1,3 +1,5 @@
+import { storyblokEditable } from "@storyblok/react/rsc";
+
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
 
 import { Carousel as CarouselUI } from "@shared/ui";
@@ -9,15 +11,17 @@ import SectionContainer from "@/components/SectionContainer";
 import type { ICarouselProps } from "./types";
 
 export default function Carousel({ blok }: ICarouselProps) {
-  const { slides, effect, fullWidth, loop, slidesPerView } = blok;
+  const { slides, effect, loop, slidesPerView, section, _uid } = blok;
 
   if (!slides || slides.length === 0)
     return <EmptyBlock name={blok.component as string} />;
 
+  const resolvedEffect = (effect || "slide") as Exclude<typeof effect, "">;
+
   const carouselSlides = slides.map((slide) => ({
     image: prepareImageProps(slide.image[0]),
     text: prepareRichTextProps(slide.text?.[0]),
-    effect,
+    effect: resolvedEffect,
   }));
 
   const carouselParams = {
@@ -28,15 +32,13 @@ export default function Carousel({ blok }: ICarouselProps) {
 
   return (
     <SectionContainer
-      blok={{
-        ...blok,
-        paddingX: "none",
-        noMaxWidth: fullWidth,
-      }}
+      sectionData={section?.[0]}
+      id={_uid}
+      editableAttrs={storyblokEditable(blok)}
     >
       <CarouselUI
         slides={carouselSlides}
-        effect={effect}
+        effect={resolvedEffect}
         params={carouselParams}
       />
     </SectionContainer>
