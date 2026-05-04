@@ -26,8 +26,7 @@ export default function SectionContainer({
   id,
   editableAttrs,
 }: ISectionContainerProps) {
-  const { theme, paddingY, paddingX, maxWidth, media, overlay, opacity } =
-    sectionData ?? {};
+  const { theme, paddingY, media, overlay, opacity } = sectionData ?? {};
 
   const overlayOpacity = opacity ? Number(opacity) / 100 : undefined;
   const hasMedia = !!media?.filename;
@@ -40,7 +39,7 @@ export default function SectionContainer({
       {...(editableAttrs ?? {})}
     >
       <Container
-        containerData={{ paddingX, maxWidth }}
+        containerData={sectionData}
         className={containerClassName}
       >
         {children}
@@ -50,9 +49,9 @@ export default function SectionContainer({
         <>
           <Media
             resource={media}
-            className="absolute inset-0 size-full -z-2"
-            imgClassName="size-full object-cover pointer-events-none"
-            videoClassName="size-full object-cover pointer-events-none"
+            className="absolute inset-0 size-full -z-2 pointer-events-none"
+            imgClassName="size-full object-cover "
+            videoClassName="size-full object-cover "
             fill
             aria-hidden
           />

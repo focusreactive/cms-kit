@@ -8,7 +8,7 @@ import type { MediaProps } from "..";
 
 export function VideoMedia({ background, videoClassName }: MediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const video = background.video;
+  const video = background?.video;
 
   useEffect(() => {
     const el = videoRef.current;

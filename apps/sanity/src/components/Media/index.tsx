@@ -5,13 +5,7 @@ import { VideoMedia } from "./VideoMedia";
 
 import type { ElementType } from "react";
 
-export interface BackgroundData {
-  type?: "image" | "video";
-  image?: { asset?: { _ref: string } };
-  video?: { asset?: { _ref: string } };
-  overlay?: "black" | "white";
-  opacity?: number;
-}
+import type { IBackgroundData } from "@/components/SectionContainer/types";
 
 export interface MediaProps {
   className?: string;
@@ -23,15 +17,15 @@ export interface MediaProps {
   priority?: boolean;
   loading?: "lazy" | "eager";
   sizes?: string;
-  background: BackgroundData;
+  background?: IBackgroundData;
 }
 
 export function Media(props: MediaProps) {
   const { className, htmlElement, background } = props;
 
-  const type = stegaClean(background.type);
-  const isVideo = type === "video" && !!background.video?.asset;
-  const isImage = type === "image" && !!background.image?.asset;
+  const type = stegaClean(background?.type);
+  const isVideo = type === "video" && !!background?.video?.asset;
+  const isImage = type === "image" && !!background?.image?.asset;
 
   if (!isVideo && !isImage) return null;
 

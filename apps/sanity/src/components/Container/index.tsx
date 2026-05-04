@@ -1,8 +1,9 @@
+import { stegaClean } from "@sanity/client/stega";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@shared/ui";
 
-import type { ISectionContainerProps } from "../SectionContainer/types";
+import type { ISectionData } from "../SectionContainer/types";
 
 const containerVariants = cva("mx-auto w-full", {
   variants: {
@@ -22,20 +23,18 @@ const containerVariants = cva("mx-auto w-full", {
 });
 
 type ContainerProps = {
-  children: React.ReactNode;
-  containerData: Pick<
-    ISectionContainerProps["sectionData"],
-    "paddingX" | "maxWidth"
-  >;
-  className?: string;
-};
+  children: React.ReactNode
+  containerData: Pick<ISectionData, 'paddingX' | 'maxWidth'>
+  className?: string
+}
 
 export default function Container({
   children,
   containerData,
   className,
 }: ContainerProps) {
-  const { paddingX, maxWidth } = containerData;
+  const paddingX = stegaClean(containerData.paddingX);
+  const maxWidth = stegaClean(containerData.maxWidth);
   return (
     <div
       className={cn(

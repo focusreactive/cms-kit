@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority'
-import { SectionData } from '../SectionContainer'
+import { ISectionData } from '../SectionContainer/types'
 import { cn } from '@/core/lib/utils'
 
 const containerVariants = cva('mx-auto w-full', {
@@ -22,7 +22,7 @@ const containerVariants = cva('mx-auto w-full', {
 
 type ContainerProps = {
   children: React.ReactNode
-  containerData: Pick<SectionData, 'paddingX' | 'maxWidth'>
+  containerData: Pick<ISectionData, 'paddingX' | 'maxWidth'>
   className?: string
 }
 

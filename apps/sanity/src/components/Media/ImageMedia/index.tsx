@@ -18,7 +18,7 @@ export function ImageMedia({
   loading: loadingFromProps,
   sizes,
 }: MediaProps) {
-  const image = background.image;
+  const image = background?.image;
   if (!image?.asset) return null;
 
   const url = builder.image(image).auto("format").fit("max").url();

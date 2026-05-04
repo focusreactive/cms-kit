@@ -27,53 +27,43 @@ export default function SectionContainer({
   containerClassName,
   sectionData,
 }: ISectionContainerProps) {
-  const { _key, theme, paddingY, paddingX, maxWidth, background } =
-    sectionData;
+  const { _key, theme, paddingY, background } = sectionData;
 
   const cleanTheme = stegaClean(theme);
   const cleanPaddingY = stegaClean(paddingY);
+  const cleanOverlay = stegaClean(background?.overlay);
 
   const overlayOpacity =
     background?.opacity != null ? background.opacity / 100 : undefined;
+  const hasMedia = !!(background?.image?.asset || background?.video?.asset);
 
   return (
     <section
       id={_key}
-      className={cn(
-        sectionVariants({
-          paddingY: cleanPaddingY,
-        }),
-        className,
-      )}
+      className={cn(sectionVariants({ paddingY: cleanPaddingY }), className)}
       {...(cleanTheme ? { "data-theme": cleanTheme } : {})}
     >
-      <Container
-        containerData={{
-          paddingX: stegaClean(paddingX),
-          maxWidth: stegaClean(maxWidth),
-        }}
-        className={containerClassName}
-      >
+      <Container containerData={sectionData} className={containerClassName}>
         {children}
       </Container>
 
-      {background && (
+      {hasMedia && (
         <>
           <Media
             background={background}
-            aria-hidden
-            className="absolute inset-0 size-full -z-2"
-            imgClassName="size-full object-cover pointer-events-none"
-            videoClassName="size-full object-cover pointer-events-none"
+            className="absolute inset-0 size-full -z-2 pointer-events-none"
+            imgClassName="size-full object-cover "
+            videoClassName="size-full object-cover "
             fill
+            aria-hidden
           />
 
-          {background.overlay && (
+          {cleanOverlay && (
             <div
               aria-hidden
               className="absolute inset-0 -z-1 pointer-events-none"
               style={{
-                backgroundColor: `rgba(${stegaClean(background.overlay) === "black" ? "0,0,0" : "255,255,255"},${overlayOpacity})`,
+                backgroundColor: `rgba(${cleanOverlay === "black" ? "0,0,0" : "255,255,255"},${overlayOpacity})`,
               }}
             />
           )}

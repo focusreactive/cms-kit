@@ -21,7 +21,7 @@ const containerVariants = cva("mx-auto w-full", {
 
 type ContainerProps = {
   children: React.ReactNode;
-  containerData: Pick<ISectionData, "paddingX" | "maxWidth">;
+  containerData?: Pick<ISectionData, "paddingX" | "maxWidth">;
   className?: string;
 };
 
@@ -34,8 +34,8 @@ export default function Container({
     <div
       className={cn(
         containerVariants({
-          paddingX: containerData.paddingX || undefined,
-          maxWidth: containerData.maxWidth || undefined,
+          paddingX: containerData?.paddingX || undefined,
+          maxWidth: containerData?.maxWidth || undefined,
         }),
         className,
       )}
