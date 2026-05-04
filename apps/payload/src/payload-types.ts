@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    'payload-mcp-api-keys': PayloadMcpApiKeyAuthOperations;
   };
   blocks: {};
   collections: {
@@ -76,9 +77,11 @@ export interface Config {
     testimonials: Testimonial;
     header: Header;
     footer: Footer;
+    'document-embeddings': DocumentEmbedding;
     redirects: Redirect;
     presets: Preset;
     comments: Comment;
+    'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-folders': FolderInterface;
@@ -101,9 +104,11 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'document-embeddings': DocumentEmbeddingsSelect<false> | DocumentEmbeddingsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
+    'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
@@ -124,9 +129,13 @@ export interface Config {
     _abManifest: _AbManifestSelect<false> | _AbManifestSelect<true>;
   };
   locale: 'en' | 'es';
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (PayloadMcpApiKey & {
+        collection: 'payload-mcp-api-keys';
+      });
   jobs: {
     tasks: {
       schedulePublish: TaskSchedulePublish;
@@ -139,6 +148,24 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface PayloadMcpApiKeyAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -424,7 +451,7 @@ export interface Header {
                 value: number | Post;
               } | null);
           url?: string | null;
-          customPage?: 'blog' | null;
+          customPage?: ('blog' | 'search') | null;
           label: string;
         };
         id?: string | null;
@@ -549,7 +576,7 @@ export interface Footer {
                 value: number | Post;
               } | null);
           url?: string | null;
-          customPage?: 'blog' | null;
+          customPage?: ('blog' | 'search') | null;
           label: string;
         };
         id?: string | null;
@@ -616,7 +643,7 @@ export interface HeroBlock {
               value: number | Post;
             } | null);
         url?: string | null;
-        customPage?: 'blog' | null;
+        customPage?: ('blog' | 'search') | null;
         label: string;
         /**
          * Choose how the link should be rendered.
@@ -868,7 +895,7 @@ export interface CardsGridBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -989,7 +1016,7 @@ export interface LogosBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
     };
     id?: string | null;
@@ -1035,7 +1062,7 @@ export interface LinksListBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
       /**
        * Choose how the link should be rendered.
@@ -1064,6 +1091,18 @@ export interface LinksListBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'linksList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-embeddings".
+ */
+export interface DocumentEmbedding {
+  id: number;
+  documentId: string;
+  collection: 'page' | 'post';
+  locale: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1100,7 +1139,7 @@ export interface Redirect {
   createdAt: string;
 }
 /**
- * One preset = one type. After choosing type, fill the matching section below.
+ * One preset = one block type. Add one block to store its field values.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "presets".
@@ -1112,425 +1151,441 @@ export interface Preset {
    * The preview image for the preset
    */
   preview?: (number | null) | Media;
-  /**
-   * Choose type — only the matching section below will be shown.
-   */
-  type:
-    | 'hero'
-    | 'textSection'
-    | 'content'
-    | 'faq'
-    | 'testimonialsList'
-    | 'cardsGrid'
-    | 'carousel'
-    | 'logos'
-    | 'linksList';
-  hero?: {
-    title?: string | null;
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    actions?:
-      | {
-          type?: ('reference' | 'custom' | 'customPage') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'page';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          customPage?: 'blog' | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-          id?: string | null;
-        }[]
-      | null;
-    image: {
-      image: number | Media;
-      aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-    };
-    enabled?: boolean | null;
-    color?: ('black' | 'white') | null;
-    /**
-     * Overlay opacity (0-100)
-     */
-    opacity?: number | null;
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  textSection?: {
-    text: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  content?: {
-    heading?: string | null;
-    layout: 'image-text' | 'text-image';
-    image: number | Media;
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  faq?: {
-    heading: string;
-    items: {
-      question: string;
-      answer: {
-        root: {
-          type: string;
-          children: {
-            type: any;
+  presetBlock: (
+    | {
+        title?: string | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
             version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  testimonialsList?: {
-    heading?: string | null;
-    subheading?: string | null;
-    testimonialItems?:
-      | {
-          testimonial: number | Testimonial;
-          id?: string | null;
-        }[]
-      | null;
-    /**
-     * The duration of the animation in seconds. Default is 60 seconds.
-     */
-    duration?: number | null;
-    showRating?: boolean | null;
-    showAvatar?: boolean | null;
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  cardsGrid?: {
-    columns?: number | null;
-    items: {
-      title: string;
-      description?: string | null;
-      image?: {
-        image?: (number | null) | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      link?: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: 'blog' | null;
-        label?: string | null;
-        /**
-         * Choose how the link should be rendered.
-         */
-        appearance?: ('default' | 'outline') | null;
-      };
-      alignVariant?: ('left' | 'center' | 'right') | null;
-      rounded?: ('none' | 'large') | null;
-      backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  carousel?: {
-    text?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
+          };
           [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
-    slides: {
-      image: {
-        image: number | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      text?: {
-        root: {
-          type: string;
-          children: {
-            type: any;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
+        } | null;
+        actions?:
+          | {
+              type?: ('reference' | 'custom' | 'customPage') | null;
+              newTab?: boolean | null;
+              reference?:
+                | ({
+                    relationTo: 'page';
+                    value: number | Page;
+                  } | null)
+                | ({
+                    relationTo: 'posts';
+                    value: number | Post;
+                  } | null);
+              url?: string | null;
+              customPage?: ('blog' | 'search') | null;
+              label: string;
+              /**
+               * Choose how the link should be rendered.
+               */
+              appearance?: ('default' | 'outline') | null;
+              id?: string | null;
+            }[]
+          | null;
+        image: {
+          image: number | Media;
+          aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
         };
-        [k: string]: unknown;
-      } | null;
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
+        enabled?: boolean | null;
+        color?: ('black' | 'white') | null;
         /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
+         * Overlay opacity (0-100)
          */
         opacity?: number | null;
-      };
-    };
-  };
-  logos?: {
-    alignVariant?: ('left' | 'center' | 'right') | null;
-    items: {
-      image: {
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'textSection';
+      }
+    | {
+        heading?: string | null;
+        layout: 'image-text' | 'text-image';
         image: number | Media;
-        aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
-      };
-      link: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: 'blog' | null;
-        label: string;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content';
+      }
+    | {
+        heading: string;
+        items: {
+          question: string;
+          answer: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | {
+        heading?: string | null;
+        subheading?: string | null;
+        testimonialItems?:
+          | {
+              testimonial: number | Testimonial;
+              id?: string | null;
+            }[]
+          | null;
         /**
-         * Upload an image or video. Use the "Background" folder.
+         * The duration of the animation in seconds. Default is 60 seconds.
          */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
-  linksList?: {
-    alignVariant?: ('left' | 'center' | 'right') | null;
-    links: {
-      link: {
-        type?: ('reference' | 'custom' | 'customPage') | null;
-        newTab?: boolean | null;
-        reference?:
-          | ({
-              relationTo: 'page';
-              value: number | Page;
-            } | null)
-          | ({
-              relationTo: 'posts';
-              value: number | Post;
-            } | null);
-        url?: string | null;
-        customPage?: 'blog' | null;
-        label: string;
-        /**
-         * Choose how the link should be rendered.
-         */
-        appearance?: ('default' | 'outline') | null;
-      };
-      id?: string | null;
-    }[];
-    section?: {
-      theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
-      paddingY?: ('none' | 'base' | 'large') | null;
-      paddingX?: ('none' | 'base') | null;
-      maxWidth?: ('none' | 'base') | null;
-      background?: {
-        /**
-         * Upload an image or video. Use the "Background" folder.
-         */
-        media?: (number | null) | Media;
-        overlay?: ('black' | 'white') | null;
-        /**
-         * 0 = transparent, 100 = fully opaque
-         */
-        opacity?: number | null;
-      };
-    };
-  };
+        duration?: number | null;
+        showRating?: boolean | null;
+        showAvatar?: boolean | null;
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonialsList';
+      }
+    | {
+        columns?: number | null;
+        items: {
+          title: string;
+          description?: string | null;
+          image?: {
+            image?: (number | null) | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          link?: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label?: string | null;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          alignVariant?: ('left' | 'center' | 'right') | null;
+          rounded?: ('none' | 'large') | null;
+          backgroundColor?: ('none' | 'light' | 'dark' | 'light-gray' | 'dark-gray' | 'gradient-2') | null;
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardsGrid';
+      }
+    | {
+        text?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        effect?: ('slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards') | null;
+        slides: {
+          image: {
+            image: number | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          text?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'carousel';
+      }
+    | {
+        alignVariant?: ('left' | 'center' | 'right') | null;
+        items: {
+          image: {
+            image: number | Media;
+            aspectRatio?: ('16/9' | '3/2' | '4/3' | '1/1' | '9/16' | '1/2' | '4/1' | '3/1' | 'auto') | null;
+          };
+          link: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label: string;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logos';
+      }
+    | {
+        alignVariant?: ('left' | 'center' | 'right') | null;
+        links: {
+          link: {
+            type?: ('reference' | 'custom' | 'customPage') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'page';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            customPage?: ('blog' | 'search') | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[];
+        section?: {
+          theme?: ('light' | 'dark' | 'light-gray' | 'dark-gray') | null;
+          paddingY?: ('none' | 'base' | 'large') | null;
+          paddingX?: ('none' | 'base') | null;
+          maxWidth?: ('none' | 'base') | null;
+          background?: {
+            /**
+             * Upload an image or video. Use the "Background" folder.
+             */
+            media?: (number | null) | Media;
+            overlay?: ('black' | 'white') | null;
+            /**
+             * 0 = transparent, 100 = fully opaque
+             */
+            opacity?: number | null;
+          };
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'linksList';
+      }
+  )[];
   updatedAt: string;
   createdAt: string;
 }
@@ -1567,6 +1622,110 @@ export interface Comment {
   resolvedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * API keys control which collections, resources, tools, and prompts MCP clients can access
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys".
+ */
+export interface PayloadMcpApiKey {
+  id: number;
+  /**
+   * The user that the API key is associated with.
+   */
+  user: number | User;
+  /**
+   * A useful label for the API key.
+   */
+  label?: string | null;
+  /**
+   * The purpose of the API key.
+   */
+  description?: string | null;
+  page?: {
+    /**
+     * Allow clients to create page.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update page.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete page.
+     */
+    delete?: boolean | null;
+  };
+  posts?: {
+    /**
+     * Allow clients to create posts.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update posts.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete posts.
+     */
+    delete?: boolean | null;
+  };
+  header?: {
+    /**
+     * Allow clients to create header.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update header.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete header.
+     */
+    delete?: boolean | null;
+  };
+  footer?: {
+    /**
+     * Allow clients to create footer.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update footer.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete footer.
+     */
+    delete?: boolean | null;
+  };
+  'payload-mcp-tool'?: {
+    /**
+     * Fetch a collection document by ID. Specify collectionSlug (one of: page, posts, header, footer). Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count. Use getAllDocuments to list documents first, then this tool by ID. Use getField to drill into specific fields. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON — use this when you need structured data for analysis or to construct an update payload. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getDocument?: boolean | null;
+    /**
+     * List collection documents as a formatted summary. Specify collectionSlug (one of: page, posts, header, footer). Returns only scalar summary fields plus admin URL and public URL (where applicable). Objects, relations, arrays, and rich text are omitted from the list output. To get full details for a document, call getDocument with its ID. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getAllDocuments?: boolean | null;
+    /**
+     * Fetch a global document. Specify globalSlug (one of: site-settings). Returns all top-level fields as a structured overview — complex fields (arrays, blocks, relations, rich text) are summarized with their type and item count. Use this to discover the global structure, then call getField to drill into specific fields. Also use before any update action to understand field structure and existing values. Do NOT pass full: true unless the user explicitly asks to extract the entire content. Pass raw: true to get the full raw JSON document (including all IDs and Lexical nodes) — required when you need data to reconstruct or pass back in an update. The response is pre-formatted Markdown — output it verbatim without reformatting or summarizing.
+     */
+    getGlobalDocument?: boolean | null;
+    /**
+     * Fetch the full content of a specific field from a collection document or global. slug accepts a collection (page, posts, header, footer) or a global (site-settings). For collections, id is required. For globals, id is ignored. Use dot-notation for nested paths (e.g. "content", "blocks.0", "meta.description"). Rich text fields are returned as Markdown by default. IMPORTANT: You MUST call this with raw: true before any create/update action targeting this field — the raw JSON (block IDs, Lexical nodes, existing array items) is required to construct a valid update payload. Never attempt an update without first reading the field with raw: true.
+     */
+    getField?: boolean | null;
+    /**
+     * Upload one or more images to the media library from local file paths (dev only) or remote URLs. Call this tool BEFORE any create/update operation that requires a media relationship field. Pass the returned `id` values as the value of those fields in subsequent create/update calls. Always derive `alt` from the visible or described image content — never copy the filename. Uploads are processed concurrently (up to 3 at a time). Partial failures are tolerated — check the `failed` array in the response.
+     */
+    uploadImage?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1721,6 +1880,10 @@ export interface PayloadLockedDocument {
         value: number | Footer;
       } | null)
     | ({
+        relationTo: 'document-embeddings';
+        value: number | DocumentEmbedding;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1733,14 +1896,23 @@ export interface PayloadLockedDocument {
         value: number | Comment;
       } | null)
     | ({
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      } | null)
+    | ({
         relationTo: 'payload-folders';
         value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -1750,10 +1922,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'payload-mcp-api-keys';
+        value: number | PayloadMcpApiKey;
+      };
   key?: string | null;
   value?:
     | {
@@ -2397,6 +2574,17 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-embeddings_select".
+ */
+export interface DocumentEmbeddingsSelect<T extends boolean = true> {
+  documentId?: T;
+  collection?: T;
+  locale?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -2420,165 +2608,15 @@ export interface RedirectsSelect<T extends boolean = true> {
 export interface PresetsSelect<T extends boolean = true> {
   name?: T;
   preview?: T;
-  type?: T;
-  hero?:
+  presetBlock?:
     | T
     | {
-        title?: T;
-        richText?: T;
-        actions?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              customPage?: T;
-              label?: T;
-              appearance?: T;
-              id?: T;
-            };
-        image?:
-          | T
-          | {
-              image?: T;
-              aspectRatio?: T;
-            };
-        enabled?: T;
-        color?: T;
-        opacity?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  textSection?:
-    | T
-    | {
-        text?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  content?:
-    | T
-    | {
-        heading?: T;
-        layout?: T;
-        image?: T;
-        content?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  faq?:
-    | T
-    | {
-        heading?: T;
-        items?:
-          | T
-          | {
-              question?: T;
-              answer?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  testimonialsList?:
-    | T
-    | {
-        heading?: T;
-        subheading?: T;
-        testimonialItems?:
-          | T
-          | {
-              testimonial?: T;
-              id?: T;
-            };
-        duration?: T;
-        showRating?: T;
-        showAvatar?: T;
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  cardsGrid?:
-    | T
-    | {
-        columns?: T;
-        items?:
+        hero?:
           | T
           | {
               title?: T;
-              description?: T;
-              image?:
-                | T
-                | {
-                    image?: T;
-                    aspectRatio?: T;
-                  };
-              link?:
+              richText?: T;
+              actions?:
                 | T
                 | {
                     type?: T;
@@ -2588,136 +2626,307 @@ export interface PresetsSelect<T extends boolean = true> {
                     customPage?: T;
                     label?: T;
                     appearance?: T;
+                    id?: T;
                   };
-              alignVariant?: T;
-              rounded?: T;
-              backgroundColor?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
-                | T
-                | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  carousel?:
-    | T
-    | {
-        text?: T;
-        effect?: T;
-        slides?:
-          | T
-          | {
               image?:
                 | T
                 | {
                     image?: T;
                     aspectRatio?: T;
                   };
+              enabled?: T;
+              color?: T;
+              opacity?: T;
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textSection?:
+          | T
+          | {
               text?: T;
-              id?: T;
-            };
-        section?:
-          | T
-          | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
+              section?:
                 | T
                 | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  logos?:
-    | T
-    | {
-        alignVariant?: T;
-        items?:
-          | T
-          | {
-              image?:
-                | T
-                | {
-                    image?: T;
-                    aspectRatio?: T;
-                  };
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    customPage?: T;
-                    label?: T;
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
                   };
               id?: T;
+              blockName?: T;
             };
-        section?:
+        content?:
           | T
           | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
+              heading?: T;
+              layout?: T;
+              image?: T;
+              content?: T;
+              section?:
                 | T
                 | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
-                  };
-            };
-      };
-  linksList?:
-    | T
-    | {
-        alignVariant?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    customPage?: T;
-                    label?: T;
-                    appearance?: T;
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
                   };
               id?: T;
+              blockName?: T;
             };
-        section?:
+        faq?:
           | T
           | {
-              theme?: T;
-              paddingY?: T;
-              paddingX?: T;
-              maxWidth?: T;
-              background?:
+              heading?: T;
+              items?:
                 | T
                 | {
-                    media?: T;
-                    overlay?: T;
-                    opacity?: T;
+                    question?: T;
+                    answer?: T;
+                    id?: T;
                   };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonialsList?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              testimonialItems?:
+                | T
+                | {
+                    testimonial?: T;
+                    id?: T;
+                  };
+              duration?: T;
+              showRating?: T;
+              showAvatar?: T;
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cardsGrid?:
+          | T
+          | {
+              columns?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    alignVariant?: T;
+                    rounded?: T;
+                    backgroundColor?: T;
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        carousel?:
+          | T
+          | {
+              text?: T;
+              effect?: T;
+              slides?:
+                | T
+                | {
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    text?: T;
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logos?:
+          | T
+          | {
+              alignVariant?: T;
+              items?:
+                | T
+                | {
+                    image?:
+                      | T
+                      | {
+                          image?: T;
+                          aspectRatio?: T;
+                        };
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        linksList?:
+          | T
+          | {
+              alignVariant?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          customPage?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              section?:
+                | T
+                | {
+                    theme?: T;
+                    paddingY?: T;
+                    paddingX?: T;
+                    maxWidth?: T;
+                    background?:
+                      | T
+                      | {
+                          media?: T;
+                          overlay?: T;
+                          opacity?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
             };
       };
   updatedAt?: T;
@@ -2746,6 +2955,57 @@ export interface CommentsSelect<T extends boolean = true> {
   resolvedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-mcp-api-keys_select".
+ */
+export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
+  user?: T;
+  label?: T;
+  description?: T;
+  page?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  posts?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  header?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  footer?:
+    | T
+    | {
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  'payload-mcp-tool'?:
+    | T
+    | {
+        getDocument?: T;
+        getAllDocuments?: T;
+        getGlobalDocument?: T;
+        getField?: T;
+        uploadImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3048,7 +3308,7 @@ export interface CardsGridInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label?: string | null;
       /**
        * Choose how the link should be rendered.
@@ -3088,7 +3348,7 @@ export interface LogosInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
     };
     id?: string | null;
@@ -3117,7 +3377,7 @@ export interface LinksListInlineBlock {
             value: number | Post;
           } | null);
       url?: string | null;
-      customPage?: 'blog' | null;
+      customPage?: ('blog' | 'search') | null;
       label: string;
       /**
        * Choose how the link should be rendered.

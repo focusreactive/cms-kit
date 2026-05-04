@@ -2,6 +2,12 @@
 
 A production-ready content management system built with [Payload CMS 3](https://payloadcms.com/) and [Next.js 15](https://nextjs.org/), featuring multi-tenancy, internationalization, A/B testing, and a modular block-based page builder.
 
+## Quick start
+
+1. Create new repo using template and clone it locally
+2. Create new database - [console.neon.tech](https://console.neon.tech/app)
+3. Run claude-code and paste [this prompt](https://github.com/focusreactive/cms-kit/blob/main/apps/payload/setup_payload_prompt.md)
+
 ## Tech Stack
 
 | Layer | Technology |

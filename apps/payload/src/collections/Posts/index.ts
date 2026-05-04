@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import { indexPostEmbedding, deletePostEmbedding } from './hooks/indexEmbedding'
 
 import { createSharedSlugField } from '@/fields/slugField'
 import { anyone, author, or, user, superAdmin } from '@/core/lib/access'
@@ -225,8 +226,8 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   ],
   hooks: {
-    afterChange: [revalidatePost],
-    afterDelete: [revalidateDelete],
+    afterChange: [revalidatePost, indexPostEmbedding],
+    afterDelete: [revalidateDelete, deletePostEmbedding],
   },
   versions: {
     drafts: true,

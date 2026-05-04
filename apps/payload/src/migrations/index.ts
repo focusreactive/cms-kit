@@ -17,6 +17,15 @@ import * as migration_20260326_051511_add_custom_page_type_to from './20260326_0
 import * as migration_20260329_153412_add_presets_to_all_blocks from './20260329_153412_add_presets_to_all_blocks';
 import * as migration_20260401_110755_sync_migra from './20260401_110755_sync_migra';
 import * as migration_20260405_071430_refactor_section_fields from './20260405_071430_refactor_section_fields';
+import * as migration_20260406_083656_create_document_embeddings from './20260406_083656_create_document_embeddings';
+import * as migration_20260406_122500_add_document_embeddings_unique_constraint from './20260406_122500_add_document_embeddings_unique_constraint';
+import * as migration_20260406_210202_drop_fts_content from './20260406_210202_drop_fts_content';
+import * as migration_20260406_233113_add_search_to_custom_page from './20260406_233113_add_search_to_custom_page';
+import * as migration_20260407_094009_slim_document_embeddings from './20260407_094009_slim_document_embeddings';
+import * as migration_20260410_095600_add_mcp from './20260410_095600_add_mcp';
+import * as migration_20260411_211125_remove_api_key_auth from './20260411_211125_remove_api_key_auth';
+import * as migration_20260412_192622_unite_get_tools_in_mcp_api_keys from './20260412_192622_unite_get_tools_in_mcp_api_keys';
+import * as migration_20260421_071046_create_preset_tables_per_blocks from './20260421_071046_create_preset_tables_per_blocks';
 
 export const migrations = [
   {
@@ -113,5 +122,50 @@ export const migrations = [
     up: migration_20260405_071430_refactor_section_fields.up,
     down: migration_20260405_071430_refactor_section_fields.down,
     name: '20260405_071430_refactor_section_fields',
+  },
+  {
+    up: migration_20260406_083656_create_document_embeddings.up,
+    down: migration_20260406_083656_create_document_embeddings.down,
+    name: '20260406_083656_create_document_embeddings',
+  },
+  {
+    up: migration_20260406_122500_add_document_embeddings_unique_constraint.up,
+    down: migration_20260406_122500_add_document_embeddings_unique_constraint.down,
+    name: '20260406_122500_add_document_embeddings_unique_constraint',
+  },
+  {
+    up: migration_20260406_210202_drop_fts_content.up,
+    down: migration_20260406_210202_drop_fts_content.down,
+    name: '20260406_210202_drop_fts_content',
+  },
+  {
+    up: migration_20260406_233113_add_search_to_custom_page.up,
+    down: migration_20260406_233113_add_search_to_custom_page.down,
+    name: '20260406_233113_add_search_to_custom_page',
+  },
+  {
+    up: migration_20260407_094009_slim_document_embeddings.up,
+    down: migration_20260407_094009_slim_document_embeddings.down,
+    name: '20260407_094009_slim_document_embeddings',
+  },
+  {
+    up: migration_20260410_095600_add_mcp.up,
+    down: migration_20260410_095600_add_mcp.down,
+    name: '20260410_095600_add_mcp',
+  },
+  {
+    up: migration_20260411_211125_remove_api_key_auth.up,
+    down: migration_20260411_211125_remove_api_key_auth.down,
+    name: '20260411_211125_remove_api_key_auth',
+  },
+  {
+    up: migration_20260412_192622_unite_get_tools_in_mcp_api_keys.up,
+    down: migration_20260412_192622_unite_get_tools_in_mcp_api_keys.down,
+    name: '20260412_192622_unite_get_tools_in_mcp_api_keys',
+  },
+  {
+    up: migration_20260421_071046_create_preset_tables_per_blocks.up,
+    down: migration_20260421_071046_create_preset_tables_per_blocks.down,
+    name: '20260421_071046_create_preset_tables_per_blocks',
   },
 ];
