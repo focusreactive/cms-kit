@@ -1,3 +1,5 @@
+## [1.0.23](https://github.com/focusreactive/cms-kit/compare/v1.0.22...v1.0.23) (2026-05-08)
+
 ## [1.0.22](https://github.com/focusreactive/cms-kit/compare/v1.0.21...v1.0.22) (2026-05-08)
 
 ## [1.0.21](https://github.com/focusreactive/cms-kit/compare/v1.0.20...v1.0.21) (2026-05-04)
