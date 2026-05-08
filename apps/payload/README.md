@@ -12,7 +12,7 @@ Production-ready, open-source headless CMS built on [Payload CMS 3](https://payl
 - **Locale-Scoped Semantic Search** — pgvector search that respects the visitor's active locale.
 - **SSO** — OIDC support for Auth0, Keycloak, Okta, and any OIDC-compliant identity provider.
 - **Modular Page Builder** — composable, localizable blocks with preset and A/B-experiment hooks.
-- **AI Development Ready** — `CLAUDE.md`, `AGENTS.md`, and `.cursor/rules` ship in-repo so Claude Code, Cursor, and other agents are productive on day one.
+- **AI Development Ready** — `CLAUDE.md`, `AGENTS.md`, `.claude/`, and `.cursor/rules` ship in-repo so Claude Code, Cursor, and other agents are productive on day one.
 
 ## Quick Start
 
@@ -43,7 +43,7 @@ Every plugin works independently in any Payload project. For new projects, we re
 | Authentication | JWT + OIDC/SSO (Auth0, Keycloak, Okta) |
 | Storage | Vercel Blob · S3 · Supabase Storage |
 | Deployment | Optimized for [Vercel](https://vercel.com/), Docker-ready |
-| AI Development | Claude Code · Cursor · agent-ready (`CLAUDE.md`, `AGENTS.md`, `.cursor/rules`) |
+| AI Development | Claude Code · Cursor · agent-ready (`CLAUDE.md`, `AGENTS.md`, `.claude/`, `.cursor/rules`) |
 
 ## Plugins
 
