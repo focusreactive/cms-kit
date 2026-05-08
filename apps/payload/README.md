@@ -45,6 +45,21 @@ Every plugin works independently in any Payload project. For new projects, we re
 | Deployment | Optimized for [Vercel](https://vercel.com/), Docker-ready |
 | AI Development | Claude Code · Cursor · agent-ready (`CLAUDE.md`, `AGENTS.md`, `.claude/`, `.cursor/rules`) |
 
+## AI Development
+
+Ideal CMS ships a curated set of [Claude Code skills](https://docs.claude.com/en/docs/claude-code/skills) under `.claude/skills/`. These auto-activate when you describe a task that matches their domain, so an AI agent (Claude Code, or any other tool that reads the same skill format) gets project-grounded guidance the moment you say "design a new collection" or "audit this page for performance."
+
+Highlights:
+
+- **`payload`** — design Payload schemas the right way: collections, fields, hooks, access control, validation, drafts/versioning, virtual fields, and Local API patterns. Triggers on anything touching `payload.config.ts`, collections, fields, or hooks.
+- **`payload-block-extractor`** — when you add a new page block, this skill wires it into the semantic search pipeline (text extraction + indexing) so search stays accurate without manual plumbing.
+- **`vercel-react-best-practices`** — Vercel Engineering's 45-rule playbook for React and Next.js performance. Use it to audit pages, refactor components, and tune data fetching.
+- **`cache-components`** — proactive guidance for Next.js Cache Components and Partial Prerendering — `'use cache'`, `cacheLife`, `cacheTag`, `updateTag`.
+- **`upload-local-image`** — fallback flow for staging local images into Payload's media library through Vercel Blob when the agent can't reach the local filesystem directly.
+- **`nextjs-best-practices`**, **`tailwindcss-development`**, **`typescript`** — the everyday craft skills: App Router patterns, Tailwind v4 utilities, and TypeScript style.
+
+Drop a new skill into `.claude/skills/<name>/SKILL.md` and it picks up on the next conversation — no rebuild, no config.
+
 ## Plugins
 
 Ideal CMS bundles the [FocusReactive Payload plugins](https://github.com/focusreactive/payload-plugins) — every plugin works standalone in any Payload project, and together they cover the features we believe should be in the box from day one.
