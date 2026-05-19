@@ -81,6 +81,7 @@ export interface Config {
     redirects: Redirect;
     presets: Preset;
     comments: Comment;
+    'comment-reads': CommentRead;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -108,6 +109,7 @@ export interface Config {
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     presets: PresetsSelect<false> | PresetsSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
+    'comment-reads': CommentReadsSelect<false> | CommentReadsSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -1468,7 +1470,15 @@ export interface Comment {
   text: string;
   mentions?:
     | {
-        user: number | User;
+        user?: (number | null) | User;
+        /**
+         * Original user id captured at mention time.
+         */
+        userIdSnapshot?: number | null;
+        /**
+         * Display name captured at mention time; used after the user is deleted.
+         */
+        displayNameSnapshot?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1476,6 +1486,18 @@ export interface Comment {
   isResolved?: boolean | null;
   resolvedBy?: (number | null) | User;
   resolvedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comment-reads".
+ */
+export interface CommentRead {
+  id: number;
+  comment: number | Comment;
+  user: number | User;
+  readAt: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1750,6 +1772,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'comments';
         value: number | Comment;
+      } | null)
+    | ({
+        relationTo: 'comment-reads';
+        value: number | CommentRead;
       } | null)
     | ({
         relationTo: 'payload-mcp-api-keys';
@@ -2731,12 +2757,25 @@ export interface CommentsSelect<T extends boolean = true> {
     | T
     | {
         user?: T;
+        userIdSnapshot?: T;
+        displayNameSnapshot?: T;
         id?: T;
       };
   author?: T;
   isResolved?: T;
   resolvedBy?: T;
   resolvedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comment-reads_select".
+ */
+export interface CommentReadsSelect<T extends boolean = true> {
+  comment?: T;
+  user?: T;
+  readAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

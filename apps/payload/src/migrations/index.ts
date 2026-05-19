@@ -25,6 +25,8 @@ import * as migration_20260410_095600_add_mcp from './20260410_095600_add_mcp';
 import * as migration_20260411_211125_remove_api_key_auth from './20260411_211125_remove_api_key_auth';
 import * as migration_20260412_192622_unite_get_tools_in_mcp_api_keys from './20260412_192622_unite_get_tools_in_mcp_api_keys';
 import * as migration_20260421_071046_create_preset_tables_per_blocks from './20260421_071046_create_preset_tables_per_blocks';
+import * as migration_20260519_070452_add_user_id_snapshot_to_comments_mentions from './20260519_070452_add_user_id_snapshot_to_comments_mentions';
+import * as migration_20260519_113005_update_plugin_tables from './20260519_113005_update_plugin_tables';
 
 export const migrations = [
   {
@@ -160,6 +162,16 @@ export const migrations = [
   {
     up: migration_20260421_071046_create_preset_tables_per_blocks.up,
     down: migration_20260421_071046_create_preset_tables_per_blocks.down,
-    name: '20260421_071046_create_preset_tables_per_blocks'
+    name: '20260421_071046_create_preset_tables_per_blocks',
+  },
+  {
+    up: migration_20260519_070452_add_user_id_snapshot_to_comments_mentions.up,
+    down: migration_20260519_070452_add_user_id_snapshot_to_comments_mentions.down,
+    name: '20260519_070452_add_user_id_snapshot_to_comments_mentions',
+  },
+  {
+    up: migration_20260519_113005_update_plugin_tables.up,
+    down: migration_20260519_113005_update_plugin_tables.down,
+    name: '20260519_113005_update_plugin_tables'
   },
 ];
