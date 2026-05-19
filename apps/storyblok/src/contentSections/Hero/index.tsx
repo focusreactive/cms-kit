@@ -1,5 +1,7 @@
 "use client";
 
+import { storyblokEditable } from "@storyblok/react/rsc";
+
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
 
 import { Hero as HeroUI } from "@shared/ui";
@@ -13,7 +15,7 @@ import SectionContainer from "@/components/SectionContainer";
 import type { IHeroProps } from "./types";
 
 export default function Hero({ blok }: IHeroProps) {
-  const { title, text, image, links, globalData } = blok;
+  const { title, text, image, links, globalData, section, _uid } = blok;
   const globalBlok = useGlobalComponentData(globalData as string);
 
   if (image.length === 0 && links.length === 0 && text?.length === 0 && !title)
@@ -28,7 +30,11 @@ export default function Hero({ blok }: IHeroProps) {
     } = globalBlok.content;
 
     return (
-      <SectionContainer blok={{ blok: globalBlok }}>
+      <SectionContainer
+        sectionData={section?.[0]}
+        id={_uid}
+        editableAttrs={storyblokEditable(blok)}
+      >
         <HeroUI
           title={globalTitle || ""}
           text={prepareRichTextProps(globalText?.[0])}
@@ -40,7 +46,11 @@ export default function Hero({ blok }: IHeroProps) {
   }
 
   return (
-    <SectionContainer blok={blok}>
+    <SectionContainer
+      sectionData={section?.[0]}
+      id={_uid}
+      editableAttrs={storyblokEditable(blok)}
+    >
       <HeroUI
         title={title || ""}
         text={prepareRichTextProps(text?.[0])}

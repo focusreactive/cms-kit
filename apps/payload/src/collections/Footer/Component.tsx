@@ -6,7 +6,6 @@ import { prepareLinkProps } from '@/lib/adapters/prepareLinkProps'
 import { resolveLocale } from '@/core/lib/resolveLocale'
 import { prepareImageProps } from '@/lib/adapters/prepareImageProps'
 import { prepareRichTextProps } from '@/lib/adapters/prepareRichTextProps'
-import { SectionContainer } from '@/core/ui'
 import { ImageAspectRatio } from '@shared/ui/components/ui/image/types'
 
 type Props = {
@@ -25,22 +24,11 @@ export async function Footer({ data }: Props) {
   const text = prepareRichTextProps(data.text ?? null)
 
   return (
-    <SectionContainer
-      sectionData={{
-        paddingY: 'base',
-        paddingX: 'base',
-        marginTop: 'base',
-        marginBottom: 'none',
-        theme: undefined,
-      }}
-      className="max-w-none w-full"
-    >
-      <SharedFooter
-        links={links}
-        image={image}
-        text={text}
-        copywriteText={data.copywriteText ?? undefined}
-      />
-    </SectionContainer>
+    <SharedFooter
+      links={links}
+      image={image}
+      text={text}
+      copywriteText={data.copywriteText ?? undefined}
+    />
   )
 }

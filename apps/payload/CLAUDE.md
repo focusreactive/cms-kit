@@ -1,114 +1,106 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (and other AI agents) working in this Payload + Next.js app.
 
 ## Commands
 
 ```bash
-pnpm dev                    # Development server
-pnpm devsafe                # Clean dev (removes .next cache first)
+pnpm dev                    # Dev server (Turbopack, port 3333)
+pnpm devsafe                # Dev with .next cache cleared
 pnpm build                  # Production build (8GB memory limit)
-pnpm start                  # Production server
 pnpm lint                   # ESLint
-pnpm test                   # Run all tests (integration + e2e)
-pnpm test:int               # Vitest integration tests only
-pnpm test:e2e               # Playwright E2E tests only (Chromium)
-pnpm generate:types         # Regenerate Payload TypeScript types (run after schema changes)
-pnpm generate:importmap     # Regenerate Payload import map (run after adding/modifying admin components)
-pnpm generate:experiments   # Generate A/B experiment manifest
-pnpm payload migrate:create # Create new database migration
-pnpm payload migrate        # Run pending migrations
+pnpm test:int               # Vitest integration tests
+pnpm test:e2e               # Playwright E2E tests (Chromium)
+pnpm generate:types         # Regenerate Payload TypeScript types — run after schema changes
+pnpm generate:importmap     # Regenerate Payload import map — run after adding/editing admin components
+pnpm payload migrate:create # Create a new database migration
+pnpm payload migrate        # Apply pending migrations
 ```
 
-Validate changes with: `tsc --noEmit && pnpm lint`
+Validate changes with: `tsc --noEmit && pnpm lint`.
 
 ## Tech Stack
 
-Next.js 15 + React 19 with Payload CMS 3, PostgreSQL, Tailwind CSS 4, next-intl 4 for i18n, Vitest + Playwright for testing. React Compiler is enabled — do **not** use `useMemo` or `useCallback`.
+Next.js 15 + React 19 with Payload CMS 3, PostgreSQL, Tailwind CSS 4, next-intl 4. **React Compiler is enabled — do not use `useMemo` or `useCallback`.**
 
 ## Architecture
 
 ```
 src/
-├── app/(frontend)/[locale]/[domain]/  # Public routes (locale + tenant prefixed)
-├── app/(payload)/admin/               # Payload admin panel
-├── app/(payload)/api/                 # REST + custom API endpoints
-├── blocks/                            # Page builder blocks (Hero, Content, Faq, etc.)
-├── collections/                       # Payload collection configs
-├── entities/                          # Domain components (BlogPostsGrid, Testimonials)
-├── features/                          # Feature components (ExperimentTracker, LocaleSelector)
-├── fields/                            # Reusable Payload field definitions
-├── hooks/                             # Payload lifecycle hooks
-├── i18n/                              # next-intl integration
-├── messages/                          # Translation files (en.json, es.json)
-├── middleware.ts                      # Locale routing, tenant detection, visitor ID cookies
-├── migrations/                        # Database migrations
-├── plugins/                           # Custom Payload plugins (aiSeo, presets, seo, multiTenant)
-├── providers/                         # React context providers
-├── shared/
-│   ├── config/                        # App config (i18n, tenant, blog)
-│   ├── constants/                     # Constants (defaults, experiments, presets)
-│   ├── lib/access/                    # Access control helpers
-│   ├── lib/experiment/                # A/B testing utilities
-│   ├── seo/                           # SEO components & JSON-LD schemas
-│   ├── types/                         # Shared TypeScript types
-│   └── ui/                            # Shared UI components (shadcn-based)
-└── widgets/                           # Admin panel widgets
+├── app/(frontend)/[locale]/   # Public, locale-prefixed routes
+├── app/(payload)/             # Admin panel + REST/custom API
+├── auth/                      # OIDC SSO
+├── blocks/                    # Page builder blocks (Hero, Content, Faq, …)
+├── collections/               # Payload collection configs
+├── core/
+│   ├── config/                # i18n, blog, customPages
+│   ├── lib/access/            # Access control helpers
+│   ├── lib/abTesting/         # A/B middleware adapter, cookies, variant data
+│   └── seo/                   # SEO components & JSON-LD schemas
+├── globals/                   # Payload globals (SiteSettings)
+├── hooks/                     # Payload lifecycle hooks
+├── i18n/                      # next-intl integration
+├── middleware.ts              # Locale routing + A/B rewrite resolution
+├── plugins/                   # Plugin wiring (`plugins/index.ts`, MCP, custom SEO)
+└── search/                    # pgvector semantic search
 ```
 
-**Path alias:** `@/*` maps to `./src/*`
+**Path alias:** `@/*` → `./src/*`.
+
+## Wired Plugins
+
+`src/plugins/index.ts` is the single source of truth for plugin wiring. Currently active:
+
+- `vercelBlobStorage` — production media uploads
+- `redirectsPlugin` — 307/308 redirects, custom field overrides
+- Custom `seoPlugin` — meta + JSON-LD
+- `nestedDocsPlugin` — nested page hierarchy + breadcrumbs
+- `@focus-reactive/payload-plugin-presets` — reusable block configurations
+- `@focus-reactive/payload-plugin-comments` — inline field comments
+- `@focus-reactive/payload-plugin-scheduling` — scheduled publishing on serverless
+- `@focus-reactive/payload-plugin-translator` — AI translation (OpenAI provider)
+- `@focus-reactive/payload-plugin-ab` — A/B testing with middleware-driven variant rewrites
+- MCP plugin — exposes content tools to AI agents
 
 ## Key Patterns
 
-### Collections
-
-All tenant-aware collections must include `tenantFields()`, the `beforeChangeTenant` hook, and `createValidateSlugTenantUnique('slug')` for uniqueness validation. Labels should be localized (en/es).
-
-### Multi-Tenancy
-
-Configured in `src/shared/config/tenant.ts`. Middleware maps subdomains to tenants. Default tenant resolved in `onInit` hook and cached in `globalThis.__defaultTenantId`. All filtered queries use `getTenantFilter(tenantId)`.
-
 ### Localization
 
-Locales defined in `src/shared/config/i18n.ts` (currently `en`, `es`). URLs always include locale prefix (`/en/`, `/es/`). Use `localized: true` on fields and `createLocalizedDefault(value)` for defaults.
+Locales live in `src/core/config/i18n.ts` (`en`, `es`). URLs always include the locale prefix (`/en/`, `/es/`). Mark fields `localized: true` and use `createLocalizedDefault({ en: '…', es: '…' })` for defaults.
 
 ### Blocks & Presets
 
-Blocks live in `src/blocks/BlockName/config.ts`. They support presets (reusable saved configurations) and A/B experiment fields. Use `getBlockPreviewImage('BlockName')` for admin previews.
+Each block lives in `src/blocks/<BlockName>/config.ts`, supports presets and A/B-experiment fields, and uses `getBlockPreviewImage('BlockName')` for the admin preview thumbnail.
 
 ### A/B Testing
 
-Experiments collection defines variants with weights (must sum to 100%). Variants reference Presets. Visitor ID cookie (`ab_visitor_id`, 365 days) ensures stable assignment. Variant cached in `exp_{slug}` cookie (90 days). `ExperimentTracker` component logs events.
+The plugin owns the experiment/variant data model. Middleware (`src/middleware.ts`) calls `resolveAbRewrite` to pick a variant and rewrite the request. Visitor identity is cookie-based (`ab_visitor_id`); variant choice is cached per slug.
 
 ### Access Control
 
-Helpers in `src/shared/lib/access/`: `superAdmin`, `tenantAdmin`, `author`, `user`, `authenticated`, `anyone`. Combine with `or()`, `and()`. Roles: `super-admin`, `tenant-admin`, `author`, `user`.
+Composable helpers exported from `src/core/lib/access/`: `superAdmin`, `admin`, `author`, `user`, `authenticated`, `anyone`, `nobody`, `onlySelf`, `createdBy`. Combine with `or()` and `and()`.
 
 ### Custom Admin Components
 
-Register via file paths (not imports): `'/components/MyComponent'`. Named exports: `'/components/MyComponent#Named'`. Run `pnpm generate:importmap` after changes. Default is Server Components; add `'use client'` for client components.
-
-## MCP Tools
-
-When Payload MCP tools (e.g. `getPageContent`, `getPostsContent`) return content, output it **verbatim** — do not reformat, paraphrase, or summarize. The response is already pre-formatted Markdown.
+Register by **file path string**, not import: `'/components/MyComponent'`. Named exports use `'#'`: `'/components/MyComponent#Named'`. Default is a Server Component — add `'use client'` for client components. Run `pnpm generate:importmap` after adding or moving any registered component.
 
 ## Critical Rules
 
-1. **Local API access control:** Always set `overrideAccess: false` when passing a `user` to Payload's Local API, otherwise access control is bypassed.
+1. **Local API access control:** When passing `user` to Payload's Local API, always set `overrideAccess: false`. Otherwise access control is bypassed.
+2. **Hook transactions:** Always pass `req` to nested Payload operations inside hooks so they share the surrounding transaction.
+3. **Hook recursion:** Use a `context` flag (e.g., `context.skipHooks`) to break infinite hook loops.
+4. **Schema workflow:** Edit collection/field config → `pnpm generate:types` → `pnpm payload migrate:create` → `pnpm payload migrate`.
+5. **Migrations are explicit:** `push: false` is set — never rely on auto-push.
 
-2. **Transaction safety in hooks:** Always pass `req` to nested Payload operations inside hooks to maintain database transaction atomicity.
+## MCP Output
 
-3. **Hook loop prevention:** Use `context` flags (e.g., `context.skipHooks`) to prevent infinite hook recursion.
+When Payload MCP tools (`getPageContent`, `getPostsContent`, etc.) return content, output it **verbatim** — do not reformat, paraphrase, or summarize. The response is already pre-formatted Markdown.
 
-4. **Schema changes workflow:** Modify collection/field config → `pnpm generate:types` → `pnpm payload migrate:create` → `pnpm payload migrate`
+## Tests
 
-5. **Database migrations:** `push: false` is set — migrations are explicit, never auto-pushed.
+- Integration: `tests/int/**/*.int.spec.ts` (Vitest, jsdom)
+- E2E: `tests/e2e/` (Playwright, Chromium only)
 
-## Testing
+## See Also
 
-- **Integration tests:** `tests/int/**/*.int.spec.ts` (Vitest, jsdom)
-- **E2E tests:** `tests/e2e/` (Playwright, Chromium only)
-
-## Additional References
-
-See `AGENTS.md` for comprehensive Payload CMS development rules. See `.cursor/rules/` for detailed guides on collections, fields, hooks, access control, plugins, and components.
+`AGENTS.md` for comprehensive Payload conventions. `.cursor/rules/` for detailed guides on collections, fields, hooks, access control, plugins, and components.

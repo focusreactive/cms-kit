@@ -1,3 +1,5 @@
+import { storyblokEditable } from "@storyblok/react/rsc";
+
 import EmptyBlock from "@shared/ui/components/EmptyBlock";
 import type { BlogStyle } from "@shared/ui/components/sections/blog/types";
 
@@ -11,7 +13,7 @@ import SectionContainer from "@/components/SectionContainer";
 import type { IBlogProps } from "./types";
 
 export default function Blog({ blok }: IBlogProps) {
-  const { text, posts, style } = blok;
+  const { text, posts, style, section, _uid } = blok;
 
   if (posts.length === 0 && text.length === 0)
     return <EmptyBlock name={blok.component as string} />;
@@ -24,7 +26,11 @@ export default function Blog({ blok }: IBlogProps) {
   }));
 
   return (
-    <SectionContainer blok={blok}>
+    <SectionContainer
+      sectionData={section?.[0]}
+      id={_uid}
+      editableAttrs={storyblokEditable(blok)}
+    >
       <BlogSectionUI
         text={prepareRichTextProps(text[0])}
         posts={formattedPosts}

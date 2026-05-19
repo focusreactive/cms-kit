@@ -1,6 +1,11 @@
 @import "@shared/tailwind-config/base.css";
 @source "..";
 
+
+@variant light (&:where([data-theme="light"], [data-theme="light"] *):not(:is([data-theme="dark"], [data-theme="dark"] *)));
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *):not(:is([data-theme="light"], [data-theme="light"] *)));
+
+
 /* App-specific theme tokens (was in tailwind.config.ts theme.extend) */
 @theme {
   --color-bgColor: var(--bg);
@@ -12,52 +17,22 @@
   --color-primary2LightColor: var(--primary-2-light);
   --spacing-sectionBase: var(--section-margin-base);
   --spacing-sectionLarge: var(--section-margin-large);
+  --spacing-containerBase: var(--container-padding-base);
+  --spacing-containerMaxW: var(--container-max-width);
 }
 
 :root {
-  --section-margin-base: 24px;
-  --section-margin-large: 72px;
-
-  --section-padding-base: 16px;
-  --section-padding-large: 72px;
+  --section-margin-base: 96px;
+  --section-margin-large: 120px;
+  --container-padding-base: 24px;
+  --container-max-width: 1440px;
 }
 
-.light {
-  --bg: #fff;
-  --text: #222222;
-  --text-secondary: #666666;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #ff0765;
-  --primary-2-light: #ffe6f0;
+@media (min-width: 768px) {
+  :root {
+    --container-padding-base: 40px;
+  }
 }
 
-.dark {
-  --bg: #222222;
-  --text: #f6f6f6;
-  --text-secondary: #999999;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #ff0765;
-  --primary-2-light: #ffe6f0;
-}
 
-.light-gray {
-  --bg: #f6f6f6;
-  --text: #222222;
-  --text-secondary: #666666;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #ff0765;
-  --primary-2-light: #ffe6f0;
-}
 
-.dark-gray {
-  --bg: #5b5b5b;
-  --text: #f6f6f6;
-  --text-secondary: #bababa;
-  --primary: #4f46e5;
-  --primary-light: #e4e1ff;
-  --primary-2: #ff0765;
-  --primary-2-light: #ffe6f0;
-}

@@ -319,6 +319,9 @@ importers:
       '@tinloof/sanity-studio':
         specifier: 0.0.0-20250507100413
         version: 0.0.0-20250507100413(@emotion/is-prop-valid@1.2.2)(@types/node@22.19.13)(@types/react@19.2.1)(immer@10.1.1)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.1(react@19.2.1))(react-is@18.3.1)(react@19.2.1)(rxjs@7.8.2)(sanity@3.90.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.19.13)(@types/react@19.2.1)(immer@10.1.1)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4)(styled-components@6.1.14(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(terser@5.34.0)(tsx@4.21.0)(typescript@5.7.3)(yaml@2.7.0))(sass@1.77.4)(styled-components@6.1.14(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(terser@5.34.0)(tsx@4.21.0)(typescript@5.7.3)(yaml@2.7.0)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
       next:
         specifier: 15.5.9
         version: 15.5.9(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.77.4)

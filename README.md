@@ -24,7 +24,7 @@ This production ready boilerplate accumulating the experience and best practices
 
 - [Sanity](https://turbo-cms-kit-sanity.vercel.app/)
 - [Storyblok](https://turbo-cms-kit-storyblok.vercel.app/)
-- Payload (self-hosted, requires PostgreSQL)
+- [Payload](https://turbo-cms-kit-payload.vercel.app/)
 
 **Editing experience**
 - Sanity

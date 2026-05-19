@@ -1,3 +1,32 @@
+## [1.0.28](https://github.com/focusreactive/cms-kit/compare/v1.0.27...v1.0.28) (2026-05-08)
+
+## [1.0.27](https://github.com/focusreactive/cms-kit/compare/v1.0.26...v1.0.27) (2026-05-08)
+
+## [1.0.26](https://github.com/focusreactive/cms-kit/compare/v1.0.25...v1.0.26) (2026-05-08)
+
+## [1.0.25](https://github.com/focusreactive/cms-kit/compare/v1.0.24...v1.0.25) (2026-05-08)
+
+## [1.0.24](https://github.com/focusreactive/cms-kit/compare/v1.0.23...v1.0.24) (2026-05-08)
+
+## [1.0.23](https://github.com/focusreactive/cms-kit/compare/v1.0.22...v1.0.23) (2026-05-08)
+
+## [1.0.22](https://github.com/focusreactive/cms-kit/compare/v1.0.21...v1.0.22) (2026-05-08)
+
+## [1.0.21](https://github.com/focusreactive/cms-kit/compare/v1.0.20...v1.0.21) (2026-05-04)
+
+
+### Bug Fixes
+
+* **payload:** fix section fields migration and remove stale marginTop/marginBottom usage ([7992527](https://github.com/focusreactive/cms-kit/commit/79925278550184475742781dd60d5aef601824a3))
+* **payload:** migrate existing data before changing enum types in section fields migration ([4b66451](https://github.com/focusreactive/cms-kit/commit/4b6645155b3c5fcc8cad02e595791e44303ea429))
+
+
+### Features
+
+* **payload:** refactor section fields with background media and overlay support ([f68e668](https://github.com/focusreactive/cms-kit/commit/f68e668e3bad8247cb65ff3151d0be84cd2e497f))
+
+## [1.0.20](https://github.com/focusreactive/cms-kit/compare/v1.0.19...v1.0.20) (2026-05-01)
+
 ## [1.0.19](https://github.com/focusreactive/cms-kit/compare/v1.0.18...v1.0.19) (2026-04-22)
 
 ## [1.0.18](https://github.com/focusreactive/cms-kit/compare/v1.0.17...v1.0.18) (2026-04-21)
