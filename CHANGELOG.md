@@ -1,3 +1,10 @@
+## [1.0.29](https://github.com/focusreactive/cms-kit/compare/v1.0.28...v1.0.29) (2026-05-19)
+
+
+### Features
+
+* **payload:** update all plugins to the latest versions ([c8d68f1](https://github.com/focusreactive/cms-kit/commit/c8d68f1f07ccce2636d63d5ea3e519a8f68c324d))
+
 ## [1.0.28](https://github.com/focusreactive/cms-kit/compare/v1.0.27...v1.0.28) (2026-05-08)
 
 ## [1.0.27](https://github.com/focusreactive/cms-kit/compare/v1.0.26...v1.0.27) (2026-05-08)
