@@ -24,7 +24,7 @@ This production ready boilerplate accumulating the experience and best practices
 
 - [Sanity](https://turbo-cms-kit-sanity.vercel.app/)
 - [Storyblok](https://turbo-cms-kit-storyblok.vercel.app/)
-- Payload — moved to [focusreactive/payload-plugins](https://github.com/focusreactive/payload-plugins/tree/main/apps/cms)
+- Payload — moved to [focusreactive/payload-plugins](https://github.com/focusreactive/payload-plugins#quick-start)
 
 **Editing experience**
 - Sanity
@@ -143,7 +143,7 @@ This process ensures that global component updates are displayed on all pages.
 
 ### Payload
 
-The Payload app has moved to [focusreactive/payload-plugins](https://github.com/focusreactive/payload-plugins/tree/main/apps/cms).
+The Payload app has moved to [focusreactive/payload-plugins](https://github.com/focusreactive/payload-plugins#quick-start).
 
 ---
 
