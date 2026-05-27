@@ -1,6 +1,0 @@
-export { SectionHeader } from './SectionHeader'
-export { RichText } from './RichText'
-export { Media } from './Media'
-export { CMSLink } from './CMSLink'
-export { HeroOverlay } from './HeroOverlay'
-export { SectionContainer } from './SectionContainer'
