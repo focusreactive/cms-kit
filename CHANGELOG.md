@@ -1,3 +1,15 @@
+## [1.0.30](https://github.com/focusreactive/cms-kit/compare/v1.0.29...v1.0.30) (2026-09-21)
+
+
+### Bug Fixes
+
+* **storyblok:** pass the locale through to the live preview ([479702e](https://github.com/focusreactive/cms-kit/commit/479702eab60c7534f6e57cc0e674a2dd48cae04f))
+
+
+### Features
+
+* **storyblok:** read the preview language list from Storyblok ([1db22f5](https://github.com/focusreactive/cms-kit/commit/1db22f5c481255e5b939b99a4a8af7d49ece4c7b))
+
 ## [1.0.29](https://github.com/focusreactive/cms-kit/compare/v1.0.28...v1.0.29) (2026-05-19)
 
 

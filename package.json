@@ -1,6 +1,6 @@
 {
   "name": "cms-kit",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "private": true,
   "workspaces": [
     "apps/*",
