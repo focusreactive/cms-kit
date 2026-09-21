@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
 
+import { SB_CACHE_VERSION_TAG } from "@/constants/cacheTags";
 import { COMPONENTS } from "@/constants/sbComponents";
 
 import { fetcher, getNextCachingParams } from "./utils";
+
+const LANGUAGE_CODES_REVALIDATE_SECONDS = 3600;
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -14,6 +17,7 @@ export const getStoryblokApi = storyblokInit({
 export async function fetchStory(
   version: "draft" | "published",
   slug?: string[],
+  language?: string,
 ) {
   getStoryblokApi();
   const correctSlug = `/${slug ? slug.join("/") : "home"}`;
@@ -22,6 +26,10 @@ export async function fetchStory(
     version,
     token: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN || "",
   });
+
+  if (language) {
+    searchParams.set("language", language);
+  }
 
   const data = await fetcher(
     `${process.env.NEXT_PUBLIC_STORYBLOK_API_GATE}/stories${correctSlug}?${searchParams.toString()}`,
@@ -57,13 +65,44 @@ export async function fetchStories(
   return data;
 }
 
+// Empty means "could not determine" as well as "no languages", and the caller must
+// strip nothing in either case. A hardcoded fallback would instead serve the wrong
+// story under a 200 — the failure nobody notices.
+export async function fetchLanguageCodes(): Promise<string[]> {
+  const searchParams = new URLSearchParams({
+    token: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN || "",
+  });
+
+  try {
+    const { data } = await fetcher(
+      `${process.env.NEXT_PUBLIC_STORYBLOK_API_GATE}/spaces/me?${searchParams.toString()}`,
+      {
+        method: "GET",
+        next: {
+          revalidate: LANGUAGE_CODES_REVALIDATE_SECONDS,
+          tags: [SB_CACHE_VERSION_TAG],
+        },
+      },
+    );
+
+    // `fetcher` does not check `response.ok`, so a 401 arrives here as a parsed body
+    // with no `space` key rather than as a thrown error.
+    return Array.isArray(data?.space?.language_codes)
+      ? data.space.language_codes
+      : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchStoryMetadata(
   version: "draft" | "published",
   slug?: string[],
+  language?: string,
 ) {
   const {
     data: { story },
-  } = await fetchStory(version, slug);
+  } = await fetchStory(version, slug, language);
 
   if (!story) {
     console.log(`missing metadata for story: ${slug?.join("/")}`);
