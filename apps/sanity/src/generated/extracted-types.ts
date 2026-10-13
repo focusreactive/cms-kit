@@ -13,6 +13,84 @@
  */
 
 // Source: schema.json
+export type SectionProcessSteps = {
+  _type: "section.processSteps";
+  heading: Heading;
+  steps: Array<{
+    _key: string;
+  } & ProcessStep>;
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  paddingY: "none" | "base" | "large";
+  paddingX: "none" | "base";
+  maxWidth: "none" | "base";
+  background?: {
+    type?: "image" | "video";
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    video?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    overlay?: "black" | "white";
+    opacity?: number;
+  };
+};
+
+export type SectionFeatureColumns = {
+  _type: "section.featureColumns";
+  heading: Heading;
+  items: Array<{
+    _key: string;
+  } & FeatureColumn>;
+  theme?: "light" | "dark" | "light-gray" | "dark-gray";
+  paddingY: "none" | "base" | "large";
+  paddingX: "none" | "base";
+  maxWidth: "none" | "base";
+  background?: {
+    type?: "image" | "video";
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    video?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    overlay?: "black" | "white";
+    opacity?: number;
+  };
+};
+
 export type SectionHero = {
   _id: string;
   _type: "section.hero";
@@ -301,6 +379,19 @@ export type SectionCopy = {
   };
 };
 
+export type ProcessStep = {
+  _type: "processStep";
+  title: string;
+  description?: string;
+};
+
+export type FeatureColumn = {
+  _type: "featureColumn";
+  icon?: CustomImage;
+  title: string;
+  description?: string;
+};
+
 export type CarouselCard = {
   _type: "carouselCard";
   text?: CustomRichText;
@@ -362,6 +453,12 @@ export type LogoItem = {
   type?: "logo" | "clickableLogo";
   image?: CustomImage;
   link?: CustomLink;
+};
+
+export type Heading = {
+  _type: "heading";
+  title: string;
+  description?: string;
 };
 
 export type CustomLink = {
@@ -453,7 +550,11 @@ export type Page = {
     };
     _type: "section.hero";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & SectionFeatureColumns | {
+    _key: string;
+  } & SectionProcessSteps>;
   footer: {
     _ref: string;
     _type: "reference";
@@ -697,7 +798,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = SectionHero | SectionCarousel | SectionBlog | SectionCardsGrid | SectionLinksList | SectionLogos | SectionCopy | CarouselCard | BlogSectionPost | BasicRichText | Break | DefaultCard | LogoItem | CustomLink | Page | Footer | CustomRichText | Header | CustomImage | HighlightColor | TextColor | SimplerColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = SectionProcessSteps | SectionFeatureColumns | SectionHero | SectionCarousel | SectionBlog | SectionCardsGrid | SectionLinksList | SectionLogos | SectionCopy | ProcessStep | FeatureColumn | CarouselCard | BlogSectionPost | BasicRichText | Break | DefaultCard | LogoItem | Heading | CustomLink | Page | Footer | CustomRichText | Header | CustomImage | HighlightColor | TextColor | SimplerColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/lib/api/queries.ts
 // Variable: PAGE_BY_SLUG_QUERY
@@ -783,7 +884,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -854,7 +955,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -894,7 +995,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -932,7 +1033,45 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
+    background?: {
+      type?: "image" | "video";
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      video?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+        };
+        media?: unknown;
+        _type: "file";
+      };
+      overlay?: "black" | "white";
+      opacity?: number;
+    };
+  } | {
+    _key: string;
+    _type: "section.featureColumns";
+    heading: Heading;
+    items: Array<{
+      _key: string;
+    } & FeatureColumn>;
+    theme?: "dark-gray" | "dark" | "light-gray" | "light";
+    paddingY: "base" | "large" | "none";
+    paddingX: "base" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -1007,7 +1146,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
       theme?: "dark-gray" | "dark" | "light-gray" | "light";
       paddingY: "base" | "large" | "none";
       paddingX: "base" | "none";
-      maxWidth: "base" | "full" | "none";
+      maxWidth: "base" | "none";
       background?: {
         type?: "image" | "video";
         image?: {
@@ -1070,7 +1209,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -1135,7 +1274,7 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {
@@ -1202,7 +1341,45 @@ export type PAGE_BY_SLUG_QUERYResult = {
     theme?: "dark-gray" | "dark" | "light-gray" | "light";
     paddingY: "base" | "large" | "none";
     paddingX: "base" | "none";
-    maxWidth: "base" | "full" | "none";
+    maxWidth: "base" | "none";
+    background?: {
+      type?: "image" | "video";
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      video?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+        };
+        media?: unknown;
+        _type: "file";
+      };
+      overlay?: "black" | "white";
+      opacity?: number;
+    };
+  } | {
+    _key: string;
+    _type: "section.processSteps";
+    heading: Heading;
+    steps: Array<{
+      _key: string;
+    } & ProcessStep>;
+    theme?: "dark-gray" | "dark" | "light-gray" | "light";
+    paddingY: "base" | "large" | "none";
+    paddingX: "base" | "none";
+    maxWidth: "base" | "none";
     background?: {
       type?: "image" | "video";
       image?: {

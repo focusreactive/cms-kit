@@ -28,6 +28,13 @@ function ArrayFunctions(props: InputFieldProps) {
         }
         padding={2}
         placement="top"
+        // The browser is a two-column grid that grows with the number of
+        // registered presets, so past a handful it runs off the bottom of the
+        // viewport and the last rows cannot be reached. `constrainSize` caps it
+        // to the available space (flipping or resizing as needed) and
+        // `overflow` makes what no longer fits scrollable.
+        constrainSize
+        overflow="auto"
         portal
         open={isOpen}
       >

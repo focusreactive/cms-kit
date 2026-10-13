@@ -3,9 +3,11 @@ import Blog from "./Blog";
 import CardsGrid from "./CardsGrid";
 import Carousel from "./Carousel";
 import Copy from "./Copy";
+import FeatureColumns from "./FeatureColumns";
 import Hero from "./Hero";
 import LinksList from "./LinksList";
 import Logos from "./Logos";
+import ProcessSteps from "./ProcessSteps";
 
 // end of section imports
 
@@ -18,6 +20,8 @@ export const sections: Record<string, any> = {
   "section.blog": Blog,
   "section.carousel": Carousel,
   "section.hero": Hero,
+  "section.featureColumns": FeatureColumns,
+  "section.processSteps": ProcessSteps,
   // end of section object
 };
 

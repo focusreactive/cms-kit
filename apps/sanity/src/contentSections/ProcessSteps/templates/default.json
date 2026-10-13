@@ -1,0 +1,34 @@
+{
+  "_type": "section.processSteps",
+  "theme": "light",
+  "paddingY": "base",
+  "paddingX": "base",
+  "maxWidth": "base",
+  "heading": {
+    "_type": "heading",
+    "title": "From program setup to verified remediation",
+    "description": "A managed, continuous process that connects your organisation with skilled security researchers and turns valid findings into measurable security improvements."
+  },
+  "steps": [
+    {
+      "_type": "processStep",
+      "title": "Define and launch the program",
+      "description": "Set the scope, qualifying vulnerabilities, reward ranges and program rules. Launch privately with selected researchers or publicly to the wider community."
+    },
+    {
+      "_type": "processStep",
+      "title": "Discover and report",
+      "description": "Security researchers test your defined scope and submit detailed reports supported by reproducible evidence."
+    },
+    {
+      "_type": "processStep",
+      "title": "Triage and prioritise",
+      "description": "Our in-house triage team removes duplicates, reproduces findings, validates their impact, assigns severity and provides remediation guidance."
+    },
+    {
+      "_type": "processStep",
+      "title": "Reward, remediate and verify",
+      "description": "Reward valid reports based on severity, remediate the vulnerability and have the fix verified before closing the report."
+    }
+  ]
+}

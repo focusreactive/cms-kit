@@ -1,0 +1,28 @@
+{
+  "_type": "section.featureColumns",
+  "theme": "light",
+  "paddingY": "base",
+  "paddingX": "base",
+  "maxWidth": "base",
+  "heading": {
+    "_type": "heading",
+    "title": "Turn security testing gaps into real-world coverage."
+  },
+  "items": [
+    {
+      "_type": "featureColumn",
+      "title": "Find critical gaps faster",
+      "description": "Adapt testing to your workflows and accelerate vulnerability detection and remediation."
+    },
+    {
+      "_type": "featureColumn",
+      "title": "Build security ownership",
+      "description": "Connect security, IT, developers, and researchers around one continuous process."
+    },
+    {
+      "_type": "featureColumn",
+      "title": "Get more value from every test",
+      "description": "Pay only for validated, actionable findings — not testing hours."
+    }
+  ]
+}
