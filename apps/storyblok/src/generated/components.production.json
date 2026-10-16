@@ -1920,8 +1920,7 @@
               "value": "white"
             }
           ],
-          "id": "ZRM5OC_WRCq6qw_icFJO-Q",
-          "exclude_empty_option": true
+          "id": "ZRM5OC_WRCq6qw_icFJO-Q"
         },
         "opacity": {
           "type": "number",
