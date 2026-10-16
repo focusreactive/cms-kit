@@ -6,6 +6,7 @@ import { Carousel as CarouselUI } from "@shared/ui";
 
 import { prepareImageProps } from "@/lib/adapters/prepareImageProps";
 import { prepareRichTextProps } from "@/lib/adapters/prepareRichTextProps";
+import { prepareSectionData } from "@/lib/adapters/prepareSectionData";
 import SectionContainer from "@/components/SectionContainer";
 
 import type { ICarouselProps } from "./types";
@@ -32,8 +33,7 @@ export default function Carousel({ blok }: ICarouselProps) {
 
   return (
     <SectionContainer
-      sectionData={section?.[0]}
-      id={_uid}
+      sectionData={prepareSectionData(section?.[0], _uid)}
       editableAttrs={storyblokEditable(blok)}
     >
       <CarouselUI

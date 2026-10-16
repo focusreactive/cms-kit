@@ -23,25 +23,22 @@ export default function SectionContainer({
   className,
   containerClassName,
   sectionData,
-  id,
   editableAttrs,
 }: ISectionContainerProps) {
-  const { theme, paddingY, media, overlay, opacity } = sectionData ?? {};
+  const { theme, paddingY, background } = sectionData ?? {};
+  const { media, overlay, opacity } = background ?? {};
 
-  const overlayOpacity = opacity ? Number(opacity) / 100 : undefined;
+  const overlayOpacity = opacity != null ? opacity / 100 : undefined;
   const hasMedia = !!media?.filename;
 
   return (
     <section
-      id={id}
+      id={sectionData?.id ?? undefined}
       className={cn(sectionVariants({ paddingY: paddingY || undefined }), className)}
       {...(theme ? { "data-theme": theme } : {})}
       {...(editableAttrs ?? {})}
     >
-      <Container
-        containerData={sectionData}
-        className={containerClassName}
-      >
+      <Container containerData={sectionData} className={containerClassName}>
         {children}
       </Container>
 
@@ -50,8 +47,8 @@ export default function SectionContainer({
           <Media
             resource={media}
             className="absolute inset-0 size-full -z-2 pointer-events-none"
-            imgClassName="size-full object-cover "
-            videoClassName="size-full object-cover "
+            imgClassName="size-full object-cover"
+            videoClassName="size-full object-cover"
             fill
             aria-hidden
           />

@@ -300,7 +300,7 @@ export interface SectionSettingsStoryblok {
   paddingX?: "none" | "base";
   maxWidth?: "none" | "base";
   media?: AssetStoryblok;
-  overlay?: "" | "black" | "white";
+  overlay?: "black" | "white";
   opacity?: string;
   component: "sectionSettings";
   _uid: string;

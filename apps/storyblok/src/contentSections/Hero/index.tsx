@@ -10,6 +10,7 @@ import { prepareImageProps } from "@/lib/adapters/prepareImageProps";
 import { prepareLinkProps } from "@/lib/adapters/prepareLinkProps";
 import { prepareRichTextProps } from "@/lib/adapters/prepareRichTextProps";
 import { useGlobalComponentData } from "@/lib/hooks/useGlobalComponentData";
+import { prepareSectionData } from "@/lib/adapters/prepareSectionData";
 import SectionContainer from "@/components/SectionContainer";
 
 import type { IHeroProps } from "./types";
@@ -31,8 +32,7 @@ export default function Hero({ blok }: IHeroProps) {
 
     return (
       <SectionContainer
-        sectionData={section?.[0]}
-        id={_uid}
+        sectionData={prepareSectionData(section?.[0], _uid)}
         editableAttrs={storyblokEditable(blok)}
       >
         <HeroUI
@@ -47,8 +47,7 @@ export default function Hero({ blok }: IHeroProps) {
 
   return (
     <SectionContainer
-      sectionData={section?.[0]}
-      id={_uid}
+      sectionData={prepareSectionData(section?.[0], _uid)}
       editableAttrs={storyblokEditable(blok)}
     >
       <HeroUI

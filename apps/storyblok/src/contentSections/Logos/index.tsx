@@ -7,6 +7,7 @@ import { Logos as LogosUI } from "@shared/ui";
 
 import { prepareImageProps } from "@/lib/adapters/prepareImageProps";
 import { prepareLinkProps } from "@/lib/adapters/prepareLinkProps";
+import { prepareSectionData } from "@/lib/adapters/prepareSectionData";
 import SectionContainer from "@/components/SectionContainer";
 
 import type { ILogosProps } from "./types";
@@ -27,8 +28,7 @@ export default function Logos({ blok }: ILogosProps) {
 
   return (
     <SectionContainer
-      sectionData={section?.[0]}
-      id={_uid}
+      sectionData={prepareSectionData(section?.[0], _uid)}
       editableAttrs={storyblokEditable(blok)}
     >
       <LogosUI
