@@ -7,6 +7,7 @@ import type { IDefaultCardProps } from "@shared/ui/components/sections/cardsGrid
 
 import { prepareImageProps } from "@/lib/adapters/prepareImageProps";
 import { prepareLinkProps } from "@/lib/adapters/prepareLinkProps";
+import { prepareSectionData } from "@/lib/adapters/prepareSectionData";
 import SectionContainer from "@/components/SectionContainer";
 
 import type { ICardsGridProps } from "./types";
@@ -28,8 +29,7 @@ export default function CardsGrid({ blok }: ICardsGridProps) {
 
   return (
     <SectionContainer
-      sectionData={section?.[0]}
-      id={_uid}
+      sectionData={prepareSectionData(section?.[0], _uid)}
       editableAttrs={storyblokEditable(blok)}
     >
       <CardsGridUI items={formattedItems} columns={parseInt(columns || "3")} />

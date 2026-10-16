@@ -1896,10 +1896,20 @@
           ],
           "id": "Gb6ZsYdTTPGVX8iJD8m0ww"
         },
+        "background_section": {
+          "type": "section",
+          "display_name": "Background",
+          "keys": [
+            "media",
+            "overlay",
+            "opacity"
+          ],
+          "pos": 4
+        },
         "media": {
           "type": "asset",
           "display_name": "Background Media",
-          "pos": 4,
+          "pos": 5,
           "filetypes": [
             "images",
             "videos"
@@ -1909,7 +1919,7 @@
         "overlay": {
           "type": "option",
           "display_name": "Overlay",
-          "pos": 5,
+          "pos": 6,
           "options": [
             {
               "name": "black",
@@ -1920,12 +1930,13 @@
               "value": "white"
             }
           ],
-          "id": "ZRM5OC_WRCq6qw_icFJO-Q"
+          "id": "ZRM5OC_WRCq6qw_icFJO-Q",
+          "exclude_empty_option": true
         },
         "opacity": {
           "type": "number",
           "display_name": "Opacity (0-100)",
-          "pos": 6,
+          "pos": 7,
           "default_value": "35",
           "id": "p6ZVf9FLQ6CDZlGne53sVg"
         }

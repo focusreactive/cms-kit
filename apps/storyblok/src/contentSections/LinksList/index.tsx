@@ -6,6 +6,7 @@ import type { AlignVariant } from "@shared/ui/components/sections/linksList/type
 import { LinksList as LinksListUI } from "@shared/ui";
 
 import { prepareLinkProps } from "@/lib/adapters/prepareLinkProps";
+import { prepareSectionData } from "@/lib/adapters/prepareSectionData";
 import SectionContainer from "@/components/SectionContainer";
 
 import type { ILinksLinkProps } from "./types";
@@ -17,8 +18,7 @@ export default function LinksList({ blok }: ILinksLinkProps) {
 
   return (
     <SectionContainer
-      sectionData={section?.[0]}
-      id={_uid}
+      sectionData={prepareSectionData(section?.[0], _uid)}
       editableAttrs={storyblokEditable(blok)}
     >
       <LinksListUI
